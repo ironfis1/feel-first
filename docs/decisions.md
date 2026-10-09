@@ -53,6 +53,14 @@ Question: Q-002.
 Decision: At the start of Milestone 4, Claude Code builds two contrasting static directions for the Threshold and Room. Scott picks one. The chosen direction is then iterated with Scott, round by round, until he declares the design settled. No other screen is styled until then, and each round's changes are recorded in docs/design-log.md.
 Spec reference: none; the spec sets no visual design.
 
+### D-005: Hosting moves to Upsun
+Date: 2026-10-08
+Decided by: Scott
+Question: Use Upsun instead of Vercel?
+Decision: Upsun hosts Feel First, in a new project under Scott's existing Upsun organization (which already runs the Learner's Permit demo). Deploys go by git push through the GitHub integration, configured in .upsun/config.yaml. For the cost line, hosting spend counts only what this project adds (project fee, compute, storage), not the existing user license.
+Why: One platform Scott already runs and knows. The user license is already paid, so the marginal cost is the project fee plus compute.
+Spec reference: Res #59, which overrides RB66 and Res #1 and refines Res #40. Spec v2 Sections 1.4, 8.1 and 9 are updated.
+
 ---
 
 ## Open questions

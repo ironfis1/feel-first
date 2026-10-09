@@ -14,7 +14,7 @@ The order puts the risky, slow work first: getting real images, then getting rea
 - `src/lib/catalog.ts` as the single data module, reading a small fixture file for now (`data/fixtures/catalog.fixture.json`, 12 works per lane, clearly marked as fixture).
 - Routes for all seven screens as plain stubs, with the concept bar on every one.
 - `build-log.md` started on the first commit.
-- Deployed to Vercel and served at art.reasinger.net.
+- Deployed to Upsun and served at art.reasinger.net.
 
 **Exit**
 - art.reasinger.net loads.

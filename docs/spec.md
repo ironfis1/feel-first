@@ -1,6 +1,6 @@
 # Build Spec: Trends International Prototype (Feel First)
 
-LOCKED v2, 2026-10-08. Regenerated from the amended brief; supersedes v1. All 58 ambiguity items and gaps G1 to G33 are resolved. Gap G1 to G20 resolutions live in specs/spec-v1.md Section 9; G21 to G33 resolutions are in Section 10 below. All gap resolutions are binding and cited as [Gap Gn].
+LOCKED v2, 2026-10-08 (hosting updated to Upsun by Res #59). Regenerated from the amended brief; supersedes v1. All 59 ambiguity items and gaps G1 to G33 are resolved. Gap G1 to G20 resolutions live in specs/spec-v1.md Section 9; G21 to G33 resolutions are in Section 10 below. All gap resolutions are binding and cited as [Gap Gn].
 
 This spec is the build reference for Claude Code. Every requirement traces to a rule-base entry [RBn], an ambiguity resolution [Res #n], or a spec v1 gap resolution [Gap Gn]. Where a later resolution overrides an earlier rule or resolution, both are cited, for example [RB45, Res #16, overridden by Res #37]. Anything a builder needs that these sources do not supply is listed in Section 10 and must not be decided during the build without a resolution.
 
@@ -72,7 +72,7 @@ Follow-up conversation:
 
 ### 1.4 Hosting
 
-- Vercel hosts the Next.js app [RB66, Res #1].
+- Upsun hosts the Next.js app as a Node.js application, deployed by git push through Upsun's GitHub integration, with configuration in .upsun/config.yaml [RB66, Res #1, overridden by Res #59].
 - The app is served at the subdomain art.reasinger.net [RB13, Res #1].
 - The existing reasinger.net site is not restructured [Res #1].
 - No analytics or tracking script of any kind is included on art.reasinger.net, accepting that Scott will not know whether the link was opened [RB127, Res #36].
@@ -660,7 +660,7 @@ Gap G18 sets this as a minimum list ("at least") [Gap G18]. Other tunable values
 - The line is hidden until the end of the build [Res #40].
 - N and X are filled from actual build time and actual spend at the end of the build, and are never estimated in advance [RB107].
 - N is calendar days with at least one commit [Res #40].
-- X is Anthropic API spend plus Vercel hosting plus the Claude subscription prorated to build days [Res #40].
+- X is Anthropic API spend plus the hosting cost this project adds on Upsun (its project fee plus compute and storage; Scott's existing Upsun user license is excluded) plus the Claude subscription prorated to build days [Res #40, refined by Res #59].
 - The tracked days and spend are the source for N and X [RB118].
 
 ### 8.2 build-log.md
@@ -676,7 +676,7 @@ Gap G18 sets this as a minimum list ("at least") [Gap G18]. Other tunable values
 - Code lives in a new private GitHub repository and is built with Claude Code [RB59, Res #30].
 - Plain Claude Code builds from this spec [RB64].
 - GitHub Spec Kit is not used [RB65].
-- The stack is Next.js deployed to Vercel, with J1 output precomputed into JSON [RB66, RB50].
+- The stack is Next.js deployed to Upsun, with J1 output precomputed into JSON [RB66, RB50, Res #59].
 - The first version uses no database and no storage service [RB67, Res #8].
 - All catalog data access goes through a single module [Res #28].
 - Scott works with a mix of milestone prompts, a context folder, and his own direct prompting [RB60].
@@ -688,7 +688,7 @@ Gap G18 sets this as a minimum list ("at least") [Gap G18]. Other tunable values
 - This spec lands in the repository at docs/spec.md [Res #30].
 - build-log.md tracks days and spend from the first commit [RB116, RB117, Res #40].
 - Pipeline order: extract-rules-and-flag-ambiguity first, write-spec-from-resolutions second [RB2].
-- Gate: write-spec-from-resolutions runs only after all ambiguity items are resolved [Res #32]. All items #1 to #58 carry resolutions [Res #32].
+- Gate: write-spec-from-resolutions runs only after all ambiguity items are resolved [Res #32]. All items #1 to #59 carry resolutions [Res #32].
 
 ---
 

@@ -31,11 +31,11 @@ Its audience is one person, the Trends CEO. He will read a short note, watch a 9
 - wall segmentation
 - any database or storage service
 - a working retailer service
-- analytics or tracking scripts of any kind (including Vercel Analytics)
+- analytics or tracking scripts of any kind (including any analytics add-on from the hosting platform)
 - artist, title or category pages
 - GitHub Spec Kit
 
-**Keep it boring and cheap.** Use Next.js on Vercel and precomputed JSON for all catalog data, with the fewest dependencies that do the job. Before adding a package, check whether the platform or a few lines of code already cover it. Cost control is one of the three things this prototype has to prove about Scott, and the build itself is the evidence.
+**Keep it boring and cheap.** Use Next.js on Upsun and precomputed JSON for all catalog data, with the fewest dependencies that do the job. Before adding a package, check whether the platform or a few lines of code already cover it. Cost control is one of the three things this prototype has to prove about Scott, and the build itself is the evidence.
 
 **One config file for tunable values.** Every value in spec Section 7 lives in `src/config/feel.ts`. Components import from there. Nothing else in the codebase hard-codes page sizes, nudge steps, timeouts, prices, shipping, bucket cut points, frame and mat widths, rate limits, wall colors, contact details or the cost line.
 
@@ -81,5 +81,5 @@ This log is the only source for the cost line "Built in N days for $X in AI and 
 2. The relevant quality-bar checks pass.
 3. Lint and type checks pass with no new warnings.
 4. It works at phone width (390px) and desktop width (1440px).
-5. Scott has seen it running, locally or on a Vercel preview URL.
+5. Scott has seen it running, locally or on an Upsun preview environment URL.
 6. `build-log.md` has today's row.

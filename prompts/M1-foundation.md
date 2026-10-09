@@ -6,7 +6,7 @@
 2. Copy this kit into the repo root: `CLAUDE.md`, `build-log.md`, `docs/`, `prompts/`.
 3. Make the first commit: `M1: add spec and context folder`. This starts the clock for N.
 4. Open Claude Code in the repo folder.
-5. Have your Vercel account and your reasinger.net DNS settings open. You will add one DNS record when Claude Code tells you to.
+5. Have your Upsun account (the one running the Learner's Permit demo) and your reasinger.net DNS settings open. You will create one new Upsun project, connect it to the `feel-first` GitHub repo, and add one DNS record when Claude Code tells you to.
 
 Then paste everything below the line.
 
@@ -43,7 +43,13 @@ This comes from `docs/milestones.md`. Do only this.
    - Each stub shows the screen name and nothing else.
    - The persistent concept bar appears on every screen (spec Section 1.5). Its text names this as a concept by Scott Reasinger, not affiliated with Trends International or art.com. Write that text, show it to me, and wait for my approval before committing it.
 
-5. **Deploy.** Deploy to Vercel, then walk me through serving it at `art.reasinger.net`. Tell me exactly which DNS record to add, using the value Vercel shows. Confirm the site loads over HTTPS at that address.
+5. **Deploy.** Deploy to Upsun (spec Section 1.4, Res #59).
+   - Write `.upsun/config.yaml` for a Node.js app: install, `next build` in the build hook, and `next start` bound to the port Upsun provides.
+   - Before writing the config, read Upsun's current Next.js documentation. Use the smallest resource allocation that serves the site well, because hosting cost feeds the cost line.
+   - Walk me through creating a new Upsun project in my existing organization and connecting it to the GitHub repo, so a push to the main branch deploys.
+   - Walk me through adding `art.reasinger.net` as the project's custom domain. Tell me exactly which DNS record to add, using the target value Upsun shows.
+   - Confirm the site loads over HTTPS at that address.
+   - Do not add any analytics or monitoring add-on.
 
 6. **Build log.** Add today's row to `build-log.md` at the end of the session.
 

@@ -135,5 +135,5 @@ Every number shown must be true or clearly labeled.
 
 ## 11. Cheap to run
 
-- Pass: the app runs on Vercel's hobby or lowest paid tier with no database or storage service. Claude spend stays inside the console cap Scott sets. `build-log.md` has a row for every working day.
+- Pass: the app runs on the smallest Upsun resource allocation that meets the speed standards, with no database or storage service. Claude spend stays inside the console cap Scott sets. `build-log.md` has a row for every working day.
 - Fail: a new paid service with no entry in `decisions.md`; per-visitor API calls the pre-warm cache should have absorbed.
