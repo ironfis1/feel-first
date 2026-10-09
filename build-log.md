@@ -11,3 +11,4 @@ Record actual figures only, never estimates.
 |---|---|---|---|---|
 | 2026-10-08 | 1.0 | 0.00 | 0.63 | M1 session 1: spec and context folder, Upsun hosting decision, scaffold, feel.ts, catalog module, Upsun config. Other spend is Claude prorated ($100 x 1.0 / 160); Upsun cost to be added from the invoice. |
 | 2026-10-09 | 0.5 | 0.00 | 0.31 | M1 session 2: stub routes with concept bar, first Upsun deploy, app resized to 0.1 CPU, art.reasinger.net live. Other spend is Claude prorated ($100 x 0.5 / 160); Upsun cost to be added from the invoice. |
+| 2026-10-09 | 0.5 | 0.00 | 0.31 | M2 session 1 (Part A): kit update merged, test tools installed, M1 code triaged and tested (156 tests), Stryker 90.21% on schemas.ts. No cash spend. Other spend is Claude prorated ($100 x 0.5 / 160) [D-012]. |
