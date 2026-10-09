@@ -61,6 +61,38 @@ Decision: Upsun hosts Feel First, in a new project under Scott's existing Upsun 
 Why: One platform Scott already runs and knows. The user license is already paid, so the marginal cost is the project fee plus compute.
 Spec reference: Res #59, which overrides RB66 and Res #1 and refines Res #40. Spec v2 Sections 1.4, 8.1 and 9 are updated.
 
+### D-006: Model for the AI jobs
+Date: 2026-10-08
+Decided by: Scott
+Question: Which Claude model do J1, J2, J4 and J8 use? The spec says only that it is a config value.
+Decision: claude-opus-5-5, stored in src/config/feel.ts.
+Why: Best available quality for J1 vision tagging and the curator copy. Spend is still bounded by the console cap and the J2 cache.
+Spec reference: Section 4; docs/ai-jobs.md.
+
+### D-007: Route paths
+Date: 2026-10-08
+Decided by: Scott
+Question: The spec names the seven screens but not their URLs.
+Decision: Threshold `/`, Room `/room`, Piece `/piece/[id]`, Wall `/wall`, Bag `/bag`, Close `/close`, Signals `/signals`.
+Why: Short and literal, one path per screen.
+Spec reference: Section 5.
+
+### D-008: Catalog field formats
+Date: 2026-10-08
+Decided by: Scott
+Question: Section 3.2 gives field names and types but not the formats of several fields.
+Decision: `lane` is "fine-art" or "poster". `id` is a zero-padded string (fixtures use "fx-0001") so ascending string sort equals catalog order. `orientation` is "portrait", "landscape" or "square". `license` is a plain string.
+Why: Simple values that sort and compare without parsing.
+Spec reference: Section 3.2, Gap G2, Res #23.
+
+### D-009: Wall colors stored by name only
+Date: 2026-10-08
+Decided by: Scott
+Question: Gap G14 names five wall colors but gives no color values.
+Decision: Config holds the five names only for now. Color values are set during Milestone 4 design work.
+Why: Color values are a visual design choice, which D-004 places in Milestone 4.
+Spec reference: Gap G14, D-004.
+
 ---
 
 ## Open questions
