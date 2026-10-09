@@ -1,0 +1,4309 @@
+{
+  "sourceKey": "met",
+  "source": "The Metropolitan Museum of Art",
+  "fetchedAt": "2026-10-09T17:23:11.128Z",
+  "works": [
+    {
+      "sourceId": "435600",
+      "title": "Saint John on Patmos",
+      "artist": "Hans Baldung (called Hans Baldung Grien)",
+      "date": "ca. 1511",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP164867.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP164867.jpg",
+      "width": 1635,
+      "height": 1900,
+      "license": "Public domain (CC0). Purchase, Rogers and Fletcher Funds; The Vincent Astor Foundation, The Dillon Fund, The Charles Engelhard Foundation, Lawrence A. Fleischman, Mrs. Henry J. Heinz II, The Willard T. C. Johnson Foundation Inc., Reliance Group Holdings Inc., Baron H. H. Thyssen-Bornemisza, and Mr. and Mrs. Charles Wrightsman Gifts; Joseph Pulitzer Bequest; special funds; and other gifts and bequests, by exchange, 1983",
+      "rank": 0,
+      "group": "figure"
+    },
+    {
+      "sourceId": "333813",
+      "title": "Édouard Manet, Seated, Holding His Hat",
+      "artist": "Edgar Degas",
+      "date": "ca. 1868",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP805813.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP805813.jpg",
+      "width": 2680,
+      "height": 3864,
+      "license": "Public domain (CC0). Rogers Fund, 1918",
+      "rank": 1,
+      "group": "figure"
+    },
+    {
+      "sourceId": "36029",
+      "title": "Water-moon Avalokiteshvara",
+      "artist": "Unidentified artist",
+      "date": "first half of the 14th century",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-15580-002.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-15580-002.jpg",
+      "width": 2050,
+      "height": 4000,
+      "license": "Public domain (CC0). Charles Stewart Smith Collection, Gift of Mrs. Charles Stewart Smith, Charles Stewart Smith Jr., and Howard Caswell Smith, in memory of Charles Stewart Smith, 1914",
+      "rank": 3,
+      "group": "other"
+    },
+    {
+      "sourceId": "435621",
+      "title": "Joan of Arc",
+      "artist": "Jules Bastien-Lepage",
+      "date": "1879",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-14201-049.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14201-049.jpg",
+      "width": 4000,
+      "height": 3622,
+      "license": "Public domain (CC0). Gift of Erwin Davis, 1889",
+      "rank": 5,
+      "group": "other"
+    },
+    {
+      "sourceId": "435641",
+      "title": "Madonna and Child",
+      "artist": "Giovanni Bellini",
+      "date": "late 1480s",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DT375.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DT375.jpg",
+      "width": 3019,
+      "height": 3718,
+      "license": "Public domain (CC0). Rogers Fund, 1908",
+      "rank": 10,
+      "group": "figure"
+    },
+    {
+      "sourceId": "333990",
+      "title": "Moulin Rouge: La Goulue",
+      "artist": "Henri de Toulouse-Lautrec",
+      "date": "1891",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP-42747-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP-42747-001.jpg",
+      "width": 2527,
+      "height": 4000,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1932",
+      "rank": 11,
+      "group": "figure"
+    },
+    {
+      "sourceId": "36451",
+      "title": "Illustrated manuscript of the Lotus Sutra, Volume 2",
+      "artist": "Unidentified artist",
+      "date": "ca. 1340",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP270185.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP270185.jpg",
+      "width": 1870,
+      "height": 1024,
+      "license": "Public domain (CC0). Purchase, Lila Acheson Wallace Gift, 1994",
+      "rank": 13,
+      "group": "other"
+    },
+    {
+      "sourceId": "435702",
+      "title": "The Horse Fair",
+      "artist": "Rosa Bonheur",
+      "date": "1852–55",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-23550-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-23550-001.jpg",
+      "width": 4000,
+      "height": 2043,
+      "license": "Public domain (CC0). Gift of Cornelius Vanderbilt, 1887",
+      "rank": 15,
+      "group": "animal"
+    },
+    {
+      "sourceId": "36457",
+      "title": "Grapevine in the Wind",
+      "artist": "Unidentified artist",
+      "date": "16th century",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DT3769.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DT3769.jpg",
+      "width": 2153,
+      "height": 4000,
+      "license": "Public domain (CC0). Purchase, The Dillon Fund Gift and Friends of Asian Art Gifts, 1994",
+      "rank": 18,
+      "group": "other"
+    },
+    {
+      "sourceId": "334004",
+      "title": "Self-Portrait",
+      "artist": "Goya (Francisco de Goya y Lucientes)",
+      "date": "ca. 1796",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP800139.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP800139.jpg",
+      "width": 2134,
+      "height": 3595,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1935",
+      "rank": 21,
+      "group": "figure"
+    },
+    {
+      "sourceId": "37145",
+      "title": "Night Rain at the Double-Shelf Stand, from the series Eight Parlor Views (Zashiki hakkei)",
+      "artist": "Suzuki Harunobu",
+      "date": "ca. 1766",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP119525.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP119525.jpg",
+      "width": 2840,
+      "height": 3939,
+      "license": "Public domain (CC0). The Francis Lathrop Collection, Purchase, Frederick C. Hewitt Fund, 1911",
+      "rank": 23,
+      "group": "figure"
+    },
+    {
+      "sourceId": "334050",
+      "title": "God save us from such a bitter fate; a bandit threatening a woman and a child with a knife, page 41 from the \"Black Border Album\" (E)",
+      "artist": "Goya (Francisco de Goya y Lucientes)",
+      "date": "ca. 1816–20",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP800230.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP800230.jpg",
+      "width": 2599,
+      "height": 3693,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1935",
+      "rank": 26,
+      "group": "figure"
+    },
+    {
+      "sourceId": "435802",
+      "title": "Portrait of a Young Man",
+      "artist": "Bronzino (Agnolo di Cosimo di Mariano)",
+      "date": "1530s",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-14286-011.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14286-011.jpg",
+      "width": 3120,
+      "height": 3973,
+      "license": "Public domain (CC0). H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929",
+      "rank": 30,
+      "group": "figure"
+    },
+    {
+      "sourceId": "334710",
+      "title": "The Kaunitz Sisters (Leopoldine, Caroline, and Ferdinandine)",
+      "artist": "Jean Auguste Dominique Ingres",
+      "date": "1818",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DT632.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DT632.jpg",
+      "width": 2792,
+      "height": 3722,
+      "license": "Public domain (CC0). Gift of Mrs. Charles Wrightsman, in honor of Philippe de Montebello, 1998",
+      "rank": 31,
+      "group": "figure"
+    },
+    {
+      "sourceId": "435809",
+      "title": "The Harvesters",
+      "artist": "Pieter Bruegel the Elder",
+      "date": "1565",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP119115.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP119115.jpg",
+      "width": 3811,
+      "height": 2809,
+      "license": "Public domain (CC0). Rogers Fund, 1919",
+      "rank": 35,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "334816",
+      "title": "Music-Making Angels",
+      "artist": "Albrecht Dürer",
+      "date": "1521",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP802950.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP802950.jpg",
+      "width": 3828,
+      "height": 2884,
+      "license": "Public domain (CC0). Gift of Mrs. William H. Osborn, 1961",
+      "rank": 36,
+      "group": "other"
+    },
+    {
+      "sourceId": "435826",
+      "title": "The Love Song",
+      "artist": "Sir Edward Burne-Jones",
+      "date": "1868–77",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP323394.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP323394.jpg",
+      "width": 4000,
+      "height": 2948,
+      "license": "Public domain (CC0). The Alfred N. Punnett Endowment Fund, 1947",
+      "rank": 45,
+      "group": "figure"
+    },
+    {
+      "sourceId": "335240",
+      "title": "Bacchanal",
+      "artist": "Nicolas Poussin",
+      "date": "ca. 1635–36",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP807962.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP807962.jpg",
+      "width": 3895,
+      "height": 2519,
+      "license": "Public domain (CC0). Purchase, David T. Schiff Gift, 1998",
+      "rank": 46,
+      "group": "figure"
+    },
+    {
+      "sourceId": "435839",
+      "title": "Piazza San Marco",
+      "artist": "Canaletto (Giovanni Antonio Canal)",
+      "date": "late 1720s",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-14286-009.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14286-009.jpg",
+      "width": 3971,
+      "height": 2448,
+      "license": "Public domain (CC0). Purchase, Mrs. Charles Wrightsman Gift, 1988",
+      "rank": 50,
+      "group": "other"
+    },
+    {
+      "sourceId": "335287",
+      "title": "Imaginary View of Venice, houses at left with figures on terraces, a domed church at center in the background, boats and boat-sheds below, and a seated man observing from a wall at right in the foreground, from \"Views\" (Vedute altre prese da i luoghi altre ideate da Antonio Canal)",
+      "artist": "Canaletto (Giovanni Antonio Canal)",
+      "date": "1741",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP232853.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP232853.jpg",
+      "width": 3909,
+      "height": 2731,
+      "license": "Public domain (CC0). Purchase, Gift of Mary V.T. Eberstadt and Bequest of Gertrude Moira Flanagan, by exchange, 1973",
+      "rank": 51,
+      "group": "seascape"
+    },
+    {
+      "sourceId": "435844",
+      "title": "The Musicians",
+      "artist": "Caravaggio (Michelangelo Merisi)",
+      "date": "1597",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-687-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-687-001.jpg",
+      "width": 4000,
+      "height": 3105,
+      "license": "Public domain (CC0). Rogers Fund, 1952",
+      "rank": 55,
+      "group": "figure"
+    },
+    {
+      "sourceId": "335663",
+      "title": "Youth Playing a Pipe for a Satyr",
+      "artist": "Giovanni Benedetto Castiglione (Il Grechetto)",
+      "date": "1645–50",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP820249.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP820249.jpg",
+      "width": 3760,
+      "height": 2849,
+      "license": "Public domain (CC0). Gustavus A. Pfeiffer Fund, 1962",
+      "rank": 56,
+      "group": "figure"
+    },
+    {
+      "sourceId": "335668",
+      "title": "The Genius of Castiglione",
+      "artist": "Giovanni Benedetto Castiglione (Il Grechetto)",
+      "date": "ca. 1645–47 (published 1648)",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP816518.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP816518.jpg",
+      "width": 2658,
+      "height": 3776,
+      "license": "Public domain (CC0). Purchase, Joseph Pulitzer Bequest, 1917",
+      "rank": 61,
+      "group": "animal"
+    },
+    {
+      "sourceId": "37788",
+      "title": "Devananda's Fourteen Auspicious Dreams Foretelling the Birth of Mahavira: Folio from a Kalpasutra Manuscript",
+      "artist": "Master of the Jaunpur Kalpasutra",
+      "date": "ca. 1465",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DT6940.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DT6940.jpg",
+      "width": 3811,
+      "height": 1526,
+      "license": "Public domain (CC0). Purchase, Cynthia Hazen Polsky Gift, 1992",
+      "rank": 63,
+      "group": "figure"
+    },
+    {
+      "sourceId": "435853",
+      "title": "The Coronation of the Virgin",
+      "artist": "Annibale Carracci",
+      "date": "after 1595",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-27033-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-27033-001.jpg",
+      "width": 4000,
+      "height": 3421,
+      "license": "Public domain (CC0). Purchase, Bequest of Miss Adelaide Milton de Groot (1876-1967), by exchange, and Dr. and Mrs. Manuel Porter and sons Gift, in honor of Mrs. Sarah Porter, 1971",
+      "rank": 65,
+      "group": "other"
+    },
+    {
+      "sourceId": "336046",
+      "title": "Saada, the Wife of Abraham Ben-Chimol, and Préciada, One of Their Daughters",
+      "artist": "Eugène Delacroix",
+      "date": "1832",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP837212.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP837212.jpg",
+      "width": 2489,
+      "height": 3387,
+      "license": "Public domain (CC0). Bequest of Walter C. Baker, 1971",
+      "rank": 66,
+      "group": "figure"
+    },
+    {
+      "sourceId": "37789",
+      "title": "Ritual Crown with the Five Transcendent Buddhas",
+      "artist": "Unknown artist",
+      "date": "late 14th–early 15th century",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-14528-010.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-14528-010.jpg",
+      "width": 4000,
+      "height": 3002,
+      "license": "Public domain (CC0). Gift of Jeffrey Kossak, The Kronos Collections, 1985",
+      "rank": 68,
+      "group": "other"
+    },
+    {
+      "sourceId": "435868",
+      "title": "The Card Players",
+      "artist": "Paul Cézanne",
+      "date": "1890–92",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP231550.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP231550.jpg",
+      "width": 3909,
+      "height": 3112,
+      "license": "Public domain (CC0). Bequest of Stephen C. Clark, 1960",
+      "rank": 70,
+      "group": "figure"
+    },
+    {
+      "sourceId": "336162",
+      "title": "Christ Carrying the Cross",
+      "artist": "Martin Schongauer",
+      "date": "ca. 1475–80",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP820028.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP820028.jpg",
+      "width": 3734,
+      "height": 2488,
+      "license": "Public domain (CC0). Purchase, The Sylmaris Collection, Gift of George Coe Graves, by exchange, 1935",
+      "rank": 71,
+      "group": "animal"
+    },
+    {
+      "sourceId": "37799",
+      "title": "Thousand-Armed Chenresi, a Cosmic Form of the Bodhisattva Avalokiteshvara",
+      "artist": "Unknown artist",
+      "date": "14th century",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-30186-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-30186-001.jpg",
+      "width": 3343,
+      "height": 4000,
+      "license": "Public domain (CC0). Purchase, Lita Annenberg Hazen Charitable Trust Gift, 1989",
+      "rank": 73,
+      "group": "other"
+    },
+    {
+      "sourceId": "435876",
+      "title": "Madame Cézanne (Hortense Fiquet, 1850–1922) in a Red Dress",
+      "artist": "Paul Cézanne",
+      "date": "1888–90",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP320128.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP320128.jpg",
+      "width": 2977,
+      "height": 3877,
+      "license": "Public domain (CC0). The Mr. and Mrs. Henry Ittleson Jr. Purchase Fund, 1962",
+      "rank": 75,
+      "group": "figure"
+    },
+    {
+      "sourceId": "336167",
+      "title": "The Censer",
+      "artist": "Martin Schongauer",
+      "date": "1470–1491",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP-41178-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP-41178-001.jpg",
+      "width": 3058,
+      "height": 4000,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1926",
+      "rank": 76,
+      "group": "cityscape"
+    },
+    {
+      "sourceId": "37800",
+      "title": "Sadaksari-Lokeshvara Surrounded by Manifestations and Monks",
+      "artist": "Unknown artist",
+      "date": "late 15th century",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DT5231.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DT5231.jpg",
+      "width": 2978,
+      "height": 3722,
+      "license": "Public domain (CC0). Gift of Margery and Harry Kahn, 1985",
+      "rank": 78,
+      "group": "other"
+    },
+    {
+      "sourceId": "435882",
+      "title": "Still Life with Apples and a Pot of Primroses",
+      "artist": "Paul Cézanne",
+      "date": "ca. 1890",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DT47.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DT47.jpg",
+      "width": 3807,
+      "height": 3021,
+      "license": "Public domain (CC0). Bequest of Sam A. Lewisohn, 1951",
+      "rank": 80,
+      "group": "still life"
+    },
+    {
+      "sourceId": "336222",
+      "title": "Adam and Eve",
+      "artist": "Albrecht Dürer",
+      "date": "1504",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP816026.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP816026.jpg",
+      "width": 2881,
+      "height": 3646,
+      "license": "Public domain (CC0). Fletcher Fund, 1919",
+      "rank": 81,
+      "group": "animal"
+    },
+    {
+      "sourceId": "37801",
+      "title": "Mahasiddha Jnanatapa",
+      "artist": "Unknown artist",
+      "date": "ca. 1350",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-15583-020.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-15583-020.jpg",
+      "width": 3211,
+      "height": 4000,
+      "license": "Public domain (CC0). Purchase, Friends of Asian Art Gifts, 1987",
+      "rank": 83,
+      "group": "animal"
+    },
+    {
+      "sourceId": "435888",
+      "title": "Soap Bubbles",
+      "artist": "Jean Siméon Chardin",
+      "date": "ca. 1733–34",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP356133.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP356133.jpg",
+      "width": 3901,
+      "height": 3771,
+      "license": "Public domain (CC0). Wentworth Fund, 1949",
+      "rank": 85,
+      "group": "figure"
+    },
+    {
+      "sourceId": "336228",
+      "title": "Melencolia I",
+      "artist": "Albrecht Dürer",
+      "date": "1514",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP820348.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP820348.jpg",
+      "width": 2820,
+      "height": 3561,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1943",
+      "rank": 86,
+      "group": "animal"
+    },
+    {
+      "sourceId": "37802",
+      "title": "Mandala of Jnanadakini",
+      "artist": "Unknown artist",
+      "date": "late 14th century",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-30187-002.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-30187-002.jpg",
+      "width": 2802,
+      "height": 3311,
+      "license": "Public domain (CC0). Purchase, Lita Annenberg Hazen Charitable Trust Gift, 1987",
+      "rank": 88,
+      "group": "other"
+    },
+    {
+      "sourceId": "435896",
+      "title": "Portrait of a Carthusian",
+      "artist": "Petrus Christus",
+      "date": "1446",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-44361-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-44361-001.jpg",
+      "width": 2916,
+      "height": 4000,
+      "license": "Public domain (CC0). The Jules Bache Collection, 1949",
+      "rank": 90,
+      "group": "figure"
+    },
+    {
+      "sourceId": "336256",
+      "title": "The Entrance Hall of the Regensburg Synagogue",
+      "artist": "Albrecht Altdorfer",
+      "date": "1519",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP822166.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP822166.jpg",
+      "width": 2545,
+      "height": 3630,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1926",
+      "rank": 91,
+      "group": "figure"
+    },
+    {
+      "sourceId": "37813",
+      "title": "Amitayus, the Buddha of Eternal Life",
+      "artist": "Unknown artist",
+      "date": "11th or early 12th century",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/23ar4_61B.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/23ar4_61B.jpg",
+      "width": 2947,
+      "height": 3944,
+      "license": "Public domain (CC0). Rogers Fund, 1989",
+      "rank": 93,
+      "group": "other"
+    },
+    {
+      "sourceId": "435908",
+      "title": "The Trojan Women Setting Fire to Their Fleet",
+      "artist": "Claude Lorrain (Claude Gellée)",
+      "date": "ca. 1643",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP226145.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP226145.jpg",
+      "width": 3915,
+      "height": 2719,
+      "license": "Public domain (CC0). Fletcher Fund, 1955",
+      "rank": 95,
+      "group": "seascape"
+    },
+    {
+      "sourceId": "336259",
+      "title": "Landscape with a Double Spruce",
+      "artist": "Albrecht Altdorfer",
+      "date": "ca. 1521–22",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP822181.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP822181.jpg",
+      "width": 3327,
+      "height": 2276,
+      "license": "Public domain (CC0). Purchase, Gift of Halston, by exchange, The Elisha Whittelsey Collection, The Elisha Whittelsey Fund, and Pfeiffer Fund, 1993",
+      "rank": 96,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "37854",
+      "title": "Vilaval Ragini: Folio from a ragamala series (Garland of Musical Modes)",
+      "artist": "Unknown artist",
+      "date": "ca. 1680",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP259541.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP259541.jpg",
+      "width": 1235,
+      "height": 1706,
+      "license": "Public domain (CC0). Gift of Cynthia Hazen Polsky, 1985",
+      "rank": 98,
+      "group": "figure"
+    },
+    {
+      "sourceId": "435962",
+      "title": "Hagar in the Wilderness",
+      "artist": "Camille Corot",
+      "date": "1835",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DT2013.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DT2013.jpg",
+      "width": 3811,
+      "height": 2817,
+      "license": "Public domain (CC0). Rogers Fund, 1938",
+      "rank": 100,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "37886",
+      "title": "Krishna and Balarama Fight the Evil King Kamsa’s Wrestlers: Page from a Dispersed Bhagavata Purana",
+      "artist": "Unknown artist",
+      "date": "ca. 1650",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP152283.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP152283.jpg",
+      "width": 3752,
+      "height": 3340,
+      "license": "Public domain (CC0). Gift of Mr. and Mrs. Alvin N. Haas, 1973",
+      "rank": 103,
+      "group": "figure"
+    },
+    {
+      "sourceId": "435984",
+      "title": "Sibylle",
+      "artist": "Camille Corot",
+      "date": "ca. 1870",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-16592-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-16592-001.jpg",
+      "width": 3187,
+      "height": 4000,
+      "license": "Public domain (CC0). H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929",
+      "rank": 105,
+      "group": "figure"
+    },
+    {
+      "sourceId": "336327",
+      "title": "Corridor in the Asylum",
+      "artist": "Vincent van Gogh",
+      "date": "September 1889",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DT365509.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DT365509.jpg",
+      "width": 3140,
+      "height": 4000,
+      "license": "Public domain (CC0). Bequest of Abby Aldrich Rockefeller, 1948",
+      "rank": 106,
+      "group": "interior"
+    },
+    {
+      "sourceId": "37942",
+      "title": "Shiva and Parvati Playing Chaupar: Folio from a Rasamanjari Series",
+      "artist": "Devidasa of Nurpur",
+      "date": "dated 1694–95",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DT5245.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DT5245.jpg",
+      "width": 2000,
+      "height": 1305,
+      "license": "Public domain (CC0). Gift of Dr. J. C. Burnett, 1957",
+      "rank": 108,
+      "group": "other"
+    },
+    {
+      "sourceId": "336461",
+      "title": "Portrait of Charlotte Duchesne",
+      "artist": "Philippe de Champaigne",
+      "date": "ca. 1628",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DT9142.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DT9142.jpg",
+      "width": 3184,
+      "height": 3703,
+      "license": "Public domain (CC0). Purchase, Lila Acheson Wallace Gift; Gifts in memory of Jacob Bean, Lawrence Turcic, and Howard J. Barnet; and The Schiff Foundation, David L. Klein Jr. Memorial Foundation Inc. and Harry Liebovitz Gifts, 1994",
+      "rank": 111,
+      "group": "figure"
+    },
+    {
+      "sourceId": "37947",
+      "title": "Rama Releases the Demon Spies Shuka and Sarana: Folio from the Siege of Lanka series",
+      "artist": "Manaku",
+      "date": "ca. 1725",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP278165.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP278165.jpg",
+      "width": 3915,
+      "height": 2879,
+      "license": "Public domain (CC0). Rogers Fund, 1919",
+      "rank": 113,
+      "group": "cityscape"
+    },
+    {
+      "sourceId": "336489",
+      "title": "Queen Esther Approaching the Palace of Ahasuerus",
+      "artist": "Claude Lorrain (Claude Gellée)",
+      "date": "1658",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP832663.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP832663.jpg",
+      "width": 1927,
+      "height": 1322,
+      "license": "Public domain (CC0). Purchase, The Annenberg Foundation Gift, 1997",
+      "rank": 116,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "37962",
+      "title": "The Gopis Plead with Krishna to Return Their Clothing: Folio from \"Isarda\" Bhagavata Purana",
+      "artist": "Master of the \"Isarda\" Bhagavata Purana",
+      "date": "ca. 1560–65",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP153157.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP153157.jpg",
+      "width": 3855,
+      "height": 2874,
+      "license": "Public domain (CC0). Gift of The H. Rubin Foundation Inc., 1972",
+      "rank": 118,
+      "group": "animal"
+    },
+    {
+      "sourceId": "436095",
+      "title": "The Third-Class Carriage",
+      "artist": "Honoré Daumier",
+      "date": "1864",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-21027-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-21027-001.jpg",
+      "width": 4000,
+      "height": 2915,
+      "license": "Public domain (CC0). H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929",
+      "rank": 120,
+      "group": "figure"
+    },
+    {
+      "sourceId": "37966",
+      "title": "Buddha Amoghasiddhi with Eight Bodhisattvas",
+      "artist": "Unknown artist",
+      "date": "ca. 1200–50",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DT6641.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DT6641.jpg",
+      "width": 3071,
+      "height": 3704,
+      "license": "Public domain (CC0). Purchase, Miriam and Ira D. Wallach Philanthropic Fund Gift, 1991",
+      "rank": 123,
+      "group": "other"
+    },
+    {
+      "sourceId": "436101",
+      "title": "The Rest on the Flight into Egypt",
+      "artist": "Gerard David",
+      "date": "ca. 1512–15",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-14936-023.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14936-023.jpg",
+      "width": 3078,
+      "height": 4000,
+      "license": "Public domain (CC0). The Jules Bache Collection, 1949",
+      "rank": 125,
+      "group": "figure"
+    },
+    {
+      "sourceId": "37971",
+      "title": "Lineage Portrait of an Abbot",
+      "artist": "Unknown artist",
+      "date": "ca. 1350",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DT6724.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DT6724.jpg",
+      "width": 2905,
+      "height": 3722,
+      "license": "Public domain (CC0). Purchase, Miriam and Ira D. Wallach Philanthropic Fund Gift, 1991",
+      "rank": 128,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337058",
+      "title": "The Judgment of Paris: he is sitting at left with Venus, Juno and Pallas Athena, a winged victory above. In the upper section the Sun in his chariot preceeded by Castor and Pollux on horseback, at lower right two river gods and a naiad above whom Jupiter, an eagle, Ganymede, Diana and another goddess",
+      "artist": "Marcantonio Raimondi",
+      "date": "ca. 1510–20",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP-18212-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP-18212-001.jpg",
+      "width": 3758,
+      "height": 2545,
+      "license": "Public domain (CC0). Rogers Fund, 1919",
+      "rank": 131,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "38006",
+      "title": "Portrait of the Indian Monk Atisha",
+      "artist": "Unknown artist",
+      "date": "early to mid-12th century",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-42256-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-42256-001.jpg",
+      "width": 2503,
+      "height": 3460,
+      "license": "Public domain (CC0). Gift of Steven Kossak, The Kronos Collections, 1993",
+      "rank": 133,
+      "group": "figure"
+    },
+    {
+      "sourceId": "436106",
+      "title": "Antoine Laurent Lavoisier (1743–1794) and Marie Anne Lavoisier (Marie Anne Pierrette Paulze, 1758–1836)",
+      "artist": "Jacques Louis David",
+      "date": "1788",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-19709-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-19709-001.jpg",
+      "width": 3038,
+      "height": 4000,
+      "license": "Public domain (CC0). Purchase, Mr. and Mrs. Charles Wrightsman Gift, in honor of Everett Fahy, 1977",
+      "rank": 135,
+      "group": "figure"
+    },
+    {
+      "sourceId": "38011",
+      "title": "Acala, The Buddhist Protector",
+      "artist": "Unknown artist",
+      "date": "equivalent to February / March 1322",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-46684-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-46684-001.jpg",
+      "width": 3000,
+      "height": 4000,
+      "license": "Public domain (CC0). Gift of Perry J. Lewis, 1994",
+      "rank": 138,
+      "group": "other"
+    },
+    {
+      "sourceId": "436121",
+      "title": "A Woman Seated beside a Vase of Flowers (Madame Paul Valpinçon?)",
+      "artist": "Edgar Degas",
+      "date": "1865",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-25460-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-25460-001.jpg",
+      "width": 4000,
+      "height": 3256,
+      "license": "Public domain (CC0). H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929",
+      "rank": 140,
+      "group": "still life"
+    },
+    {
+      "sourceId": "337062",
+      "title": "Self-Portrait, from \"The Iconography\"",
+      "artist": "Anthony van Dyck",
+      "date": "ca. 1640",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP802956.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP802956.jpg",
+      "width": 2432,
+      "height": 3746,
+      "license": "Public domain (CC0). Bequest of Mary Stillman Harkness, 1950",
+      "rank": 141,
+      "group": "figure"
+    },
+    {
+      "sourceId": "38021",
+      "title": "Chakrasamvara Mandala",
+      "artist": "Unknown artist",
+      "date": "ca. 1100",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-15583-014.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-15583-014.jpg",
+      "width": 2992,
+      "height": 4000,
+      "license": "Public domain (CC0). Rogers Fund, 1995",
+      "rank": 143,
+      "group": "other"
+    },
+    {
+      "sourceId": "38038",
+      "title": "A Lady Playing the Tanpura",
+      "artist": "Unknown artist",
+      "date": "ca. 1735",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DT243.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DT243.jpg",
+      "width": 1263,
+      "height": 2000,
+      "license": "Public domain (CC0). Fletcher Fund, 1996",
+      "rank": 148,
+      "group": "figure"
+    },
+    {
+      "sourceId": "38039",
+      "title": "Mahadevi, the Great Goddess",
+      "artist": "Unknown artist",
+      "date": "ca. 1725",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DT4003.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DT4003.jpg",
+      "width": 2043,
+      "height": 3722,
+      "license": "Public domain (CC0). Fletcher Fund, 1996",
+      "rank": 153,
+      "group": "other"
+    },
+    {
+      "sourceId": "436253",
+      "title": "Lucas van Uffel (died 1637)",
+      "artist": "Anthony van Dyck",
+      "date": "ca. 1622",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-27908-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-27908-001.jpg",
+      "width": 3316,
+      "height": 4000,
+      "license": "Public domain (CC0). Bequest of Benjamin Altman, 1913",
+      "rank": 155,
+      "group": "figure"
+    },
+    {
+      "sourceId": "436323",
+      "title": "Marie Emilie Coignet de Courson (1716–1806) with a Dog",
+      "artist": "Jean Honoré Fragonard",
+      "date": "ca. 1769",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-1019-01.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-1019-01.jpg",
+      "width": 3201,
+      "height": 4000,
+      "license": "Public domain (CC0). Fletcher Fund, 1937",
+      "rank": 165,
+      "group": "animal"
+    },
+    {
+      "sourceId": "436440",
+      "title": "Cottage Children (The Wood Gatherers)",
+      "artist": "Thomas Gainsborough",
+      "date": "1787",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP169640.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP169640.jpg",
+      "width": 3152,
+      "height": 3857,
+      "license": "Public domain (CC0). Bequest of Mary Stillman Harkness, 1950",
+      "rank": 170,
+      "group": "figure"
+    },
+    {
+      "sourceId": "436504",
+      "title": "The Adoration of the Magi",
+      "artist": "Giotto di Bondone",
+      "date": "possibly ca. 1320",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-31416-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-31416-001.jpg",
+      "width": 3885,
+      "height": 4000,
+      "license": "Public domain (CC0). John Stewart Kennedy Fund, 1911",
+      "rank": 175,
+      "group": "animal"
+    },
+    {
+      "sourceId": "337075",
+      "title": "Lucretia",
+      "artist": "Raphael (Raffaello Sanzio or Santi)",
+      "date": "1508–10",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP862672.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP862672.jpg",
+      "width": 2704,
+      "height": 3703,
+      "license": "Public domain (CC0). Purchase, Lila Acheson Wallace Gift, 1997",
+      "rank": 176,
+      "group": "figure"
+    },
+    {
+      "sourceId": "436516",
+      "title": "The Triumph of Fame; (reverse) Impresa of the Medici Family and Arms of the Medici and Tornabuoni Families",
+      "artist": "Giovanni di ser Giovanni Guidi (called Scheggia)",
+      "date": "ca. 1449",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP164870.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP164870.jpg",
+      "width": 3885,
+      "height": 3803,
+      "license": "Public domain (CC0). Purchase in memory of Sir John Pope-Hennessy: Rogers Fund, The Annenberg Foundation, Drue Heinz Foundation, Annette de la Renta, Mr. and Mrs. Frank E. Richardson, and The Vincent Astor Foundation Gifts, Wrightsman and Gwynne Andrews Funds, special funds, and Gift of the children of Mrs. Harry Payne Whitney, Gift of Mr. and Mrs. Joshua Logan, and other gifts and bequests, by exchange, 1995",
+      "rank": 180,
+      "group": "animal"
+    },
+    {
+      "sourceId": "337088",
+      "title": "Portrait of Alain de Coëtivy (1407–1474)",
+      "artist": "Jean Fouquet",
+      "date": "ca. 1451–55",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP832656_ff.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP832656_ff.jpg",
+      "width": 1231,
+      "height": 1779,
+      "license": "Public domain (CC0). Purchase, Rogers Fund and Gift of Mrs. Benjamin Knower, Bequest of Ogden Mills, and Bequest of Collis P. Huntington, by exchange, 1949",
+      "rank": 181,
+      "group": "figure"
+    },
+    {
+      "sourceId": "436528",
+      "title": "Irises",
+      "artist": "Vincent van Gogh",
+      "date": "1890",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP346474.jpg",
+      "width": 4000,
+      "height": 3172,
+      "license": "Public domain (CC0). Gift of Adele R. Levy, 1958",
+      "rank": 185,
+      "group": "still life"
+    },
+    {
+      "sourceId": "337172",
+      "title": "Tahitian Faces (Frontal View and Profiles)",
+      "artist": "Paul Gauguin",
+      "date": "ca. 1899",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DT641.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DT641.jpg",
+      "width": 2643,
+      "height": 3722,
+      "license": "Public domain (CC0). Purchase, The Annenberg Foundation Gift, 1996",
+      "rank": 186,
+      "group": "figure"
+    },
+    {
+      "sourceId": "436532",
+      "title": "Self-Portrait with a Straw Hat (obverse: The Potato Peeler)",
+      "artist": "Vincent van Gogh",
+      "date": "1887",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DT1502_cropped2.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1502_cropped2.jpg",
+      "width": 2829,
+      "height": 3520,
+      "license": "Public domain (CC0). Bequest of Miss Adelaide Milton de Groot (1876-1967), 1967",
+      "rank": 190,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337192",
+      "title": "Two Draft Horses with a Sleeping Driver",
+      "artist": "Théodore Géricault",
+      "date": "1820–22",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP806426.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP806426.jpg",
+      "width": 3873,
+      "height": 2984,
+      "license": "Public domain (CC0). Purchase, Joseph Pulitzer Bequest and Harry G. Sperling Fund, 1996",
+      "rank": 191,
+      "group": "animal"
+    },
+    {
+      "sourceId": "337487",
+      "title": "Otto, Count of Nassau and his Wife Adelheid van Vianen",
+      "artist": "Bernard van Orley",
+      "date": "1530–35",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DT614.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DT614.jpg",
+      "width": 3811,
+      "height": 2859,
+      "license": "Public domain (CC0). Purchase, Lila Acheson Wallace Gift, 1995",
+      "rank": 196,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "436545",
+      "title": "Manuel Osorio Manrique de Zuñiga (1784–1792)",
+      "artist": "Goya (Francisco de Goya y Lucientes)",
+      "date": "1787–88",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP287624.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP287624.jpg",
+      "width": 2855,
+      "height": 3873,
+      "license": "Public domain (CC0). The Jules Bache Collection, 1949",
+      "rank": 200,
+      "group": "animal"
+    },
+    {
+      "sourceId": "337489",
+      "title": "View of Heidelberg",
+      "artist": "Jan Brueghel the Elder",
+      "date": "ca. 1588–89",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP801180.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP801180.jpg",
+      "width": 3887,
+      "height": 2587,
+      "license": "Public domain (CC0). Purchase, David T. Schiff Gift and Harris Brisbane Dick Fund, 1995",
+      "rank": 201,
+      "group": "seascape"
+    },
+    {
+      "sourceId": "436573",
+      "title": "Cardinal Fernando Niño de Guevara (1541–1609)",
+      "artist": "El Greco (Domenikos Theotokopoulos)",
+      "date": "ca. 1600",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-17777-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-17777-001.jpg",
+      "width": 3000,
+      "height": 4000,
+      "license": "Public domain (CC0). H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929",
+      "rank": 205,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337490",
+      "title": "Diana and Actaeon",
+      "artist": "Bartholomeus Spranger",
+      "date": "ca. 1580–85",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP228698.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP228698.jpg",
+      "width": 2936,
+      "height": 3760,
+      "license": "Public domain (CC0). Purchase, Lila Acheson Wallace Gift, 1997",
+      "rank": 206,
+      "group": "other"
+    },
+    {
+      "sourceId": "436575",
+      "title": "View of Toledo",
+      "artist": "El Greco (Domenikos Theotokopoulos)",
+      "date": "ca. 1599–1600",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP349564.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP349564.jpg",
+      "width": 3496,
+      "height": 3934,
+      "license": "Public domain (CC0). H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929",
+      "rank": 210,
+      "group": "cityscape"
+    },
+    {
+      "sourceId": "337491",
+      "title": "Cottage among Trees",
+      "artist": "Rembrandt (Rembrandt van Rijn)",
+      "date": "ca. 1650",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP832659.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP832659.jpg",
+      "width": 2000,
+      "height": 1261,
+      "license": "Public domain (CC0). H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929",
+      "rank": 211,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "436579",
+      "title": "Broken Eggs",
+      "artist": "Jean-Baptiste Greuze",
+      "date": "1756",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-12952-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-12952-001.jpg",
+      "width": 3919,
+      "height": 3045,
+      "license": "Public domain (CC0). Bequest of William K. Vanderbilt, 1920",
+      "rank": 215,
+      "group": "interior"
+    },
+    {
+      "sourceId": "337493",
+      "title": "Dune Landscape with Oak Tree",
+      "artist": "Jacob van Ruisdael",
+      "date": "1650–55",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP800672.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP800672.jpg",
+      "width": 2819,
+      "height": 3115,
+      "license": "Public domain (CC0). Fletcher Fund, 1995",
+      "rank": 216,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "436603",
+      "title": "Samson Captured by the Philistines",
+      "artist": "Guercino (Giovanni Francesco Barbieri)",
+      "date": "1619",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DT503.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DT503.jpg",
+      "width": 3809,
+      "height": 3084,
+      "license": "Public domain (CC0). Gift of Mr. and Mrs. Charles Wrightsman, 1984",
+      "rank": 220,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337494",
+      "title": "Compositional Sketches for the Virgin Adoring the Christ Child, with and without the Infant St. John the Baptist; Diagram of a Perspectival Projection (recto); Slight Doodles (verso)",
+      "artist": "Leonardo da Vinci",
+      "date": "1480–85",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP832657.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP832657.jpg",
+      "width": 1430,
+      "height": 1692,
+      "license": "Public domain (CC0). Rogers Fund, 1917",
+      "rank": 221,
+      "group": "figure"
+    },
+    {
+      "sourceId": "436622",
+      "title": "Merrymakers at Shrovetide",
+      "artist": "Frans Hals",
+      "date": "ca. 1616–17",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP145901.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP145901.jpg",
+      "width": 2856,
+      "height": 3722,
+      "license": "Public domain (CC0). Bequest of Benjamin Altman, 1913",
+      "rank": 225,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337496",
+      "title": "The Head of the Virgin in Three-Quarter View Facing Right",
+      "artist": "Leonardo da Vinci",
+      "date": "1510–13",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP102382.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP102382.jpg",
+      "width": 2972,
+      "height": 3822,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1951",
+      "rank": 226,
+      "group": "figure"
+    },
+    {
+      "sourceId": "436658",
+      "title": "Hermann von Wedigh III (died 1560)",
+      "artist": "Hans Holbein the Younger",
+      "date": "1532",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP164836.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP164836.jpg",
+      "width": 2929,
+      "height": 3813,
+      "license": "Public domain (CC0). Bequest of Edward S. Harkness, 1940",
+      "rank": 230,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337497",
+      "title": "Studies for the Libyan Sibyl (recto); Studies for the Libyan Sibyl and a small Sketch for a Seated Figure (verso)",
+      "artist": "Michelangelo Buonarroti",
+      "date": "ca. 1510–11",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP826907.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP826907.jpg",
+      "width": 2661,
+      "height": 3609,
+      "license": "Public domain (CC0). Purchase, Joseph Pulitzer Bequest, 1924",
+      "rank": 231,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337498",
+      "title": "Scalinata della Trinità dei Monti",
+      "artist": "Giovanni Paolo Panini",
+      "date": "ca. 1756–58",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP801488.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP801488.jpg",
+      "width": 2816,
+      "height": 3349,
+      "license": "Public domain (CC0). Rogers Fund, 1971",
+      "rank": 236,
+      "group": "cityscape"
+    },
+    {
+      "sourceId": "436819",
+      "title": "Mäda Primavesi (1903–2000)",
+      "artist": "Gustav Klimt",
+      "date": "1912–13",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP243354.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP243354.jpg",
+      "width": 2876,
+      "height": 3877,
+      "license": "Public domain (CC0). Gift of André and Clara Mertens, in memory of her mother, Jenny Pulitzer Steiner, 1964",
+      "rank": 240,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337499",
+      "title": "The Lake of Zug",
+      "artist": "Joseph Mallord William Turner",
+      "date": "1843",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP821057.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP821057.jpg",
+      "width": 3960,
+      "height": 2579,
+      "license": "Public domain (CC0). Marquand Fund, 1959",
+      "rank": 241,
+      "group": "seascape"
+    },
+    {
+      "sourceId": "436838",
+      "title": "The Fortune-Teller",
+      "artist": "Georges de La Tour",
+      "date": "probably 1630s",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-14286-015.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14286-015.jpg",
+      "width": 3970,
+      "height": 3283,
+      "license": "Public domain (CC0). Rogers Fund, 1960",
+      "rank": 245,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337500",
+      "title": "Lady Lilith",
+      "artist": "Dante Gabriel Rossetti",
+      "date": "1867",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP289717.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP289717.jpg",
+      "width": 1648,
+      "height": 1925,
+      "license": "Public domain (CC0). Rogers Fund, 1908",
+      "rank": 246,
+      "group": "botanical"
+    },
+    {
+      "sourceId": "337632",
+      "title": "Reading the News at the Weavers' Cottage",
+      "artist": "Adriaen van Ostade",
+      "date": "1673",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP800544.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP800544.jpg",
+      "width": 2788,
+      "height": 3401,
+      "license": "Public domain (CC0). Bequest of Lore Heinemann, in memory of her husband, Dr. Rudolf J. Heinemann, 1996",
+      "rank": 251,
+      "group": "interior"
+    },
+    {
+      "sourceId": "436840",
+      "title": "Self-Portrait with Two Pupils, Marie Gabrielle Capet (1761–1818) and Marie Marguerite Carraux de Rosemond (1765–1788)",
+      "artist": "Adélaïde Labille-Guiard",
+      "date": "1785",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP320103.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP320103.jpg",
+      "width": 2884,
+      "height": 3894,
+      "license": "Public domain (CC0). Gift of Julia A. Berwind, 1953",
+      "rank": 255,
+      "group": "figure"
+    },
+    {
+      "sourceId": "436851",
+      "title": "Elizabeth Farren (born about 1759, died 1829), Later Countess of Derby",
+      "artist": "Sir Thomas Lawrence",
+      "date": "1790",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP169218.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP169218.jpg",
+      "width": 2377,
+      "height": 3875,
+      "license": "Public domain (CC0). Bequest of Edward S. Harkness, 1940",
+      "rank": 260,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337702",
+      "title": "Nocturne (Nocturne: The Thames at Battersea)",
+      "artist": "James McNeill Whistler",
+      "date": "1878",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP813769.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP813769.jpg",
+      "width": 3806,
+      "height": 2541,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1917",
+      "rank": 261,
+      "group": "seascape"
+    },
+    {
+      "sourceId": "436892",
+      "title": "Madonna and Child",
+      "artist": "Filippino Lippi",
+      "date": "ca. 1483–84",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP243637.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP243637.jpg",
+      "width": 2871,
+      "height": 3859,
+      "license": "Public domain (CC0). The Jules Bache Collection, 1949",
+      "rank": 265,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337725",
+      "title": "The Round Tower, from \"Carceri d'invenzione\" (Imaginary Prisons)",
+      "artist": "Giovanni Battista Piranesi",
+      "date": "ca. 1749–50",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP828191.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP828191.jpg",
+      "width": 2883,
+      "height": 3750,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1937",
+      "rank": 266,
+      "group": "other"
+    },
+    {
+      "sourceId": "436896",
+      "title": "Portrait of a Woman with a Man at a Casement",
+      "artist": "Fra Filippo Lippi",
+      "date": "ca. 1440",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP159891.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP159891.jpg",
+      "width": 2568,
+      "height": 3875,
+      "license": "Public domain (CC0). Marquand Collection, Gift of Henry G. Marquand, 1889",
+      "rank": 270,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337844",
+      "title": "Portrait of Nicolas Trigault in Chinese Costume",
+      "artist": "Peter Paul Rubens",
+      "date": "1617",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP820062.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP820062.jpg",
+      "width": 1090,
+      "height": 1864,
+      "license": "Public domain (CC0). Purchase, Carl Selden Trust, several members of The Chairman's Council, Gail and Parker Gilbert, and Lila Acheson Wallace Gifts, 1999",
+      "rank": 271,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337864",
+      "title": "A Woman Seated at a Bench on the Avenue du Bois",
+      "artist": "Berthe Morisot",
+      "date": "1885",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP807732.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP807732.jpg",
+      "width": 3193,
+      "height": 2943,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1948",
+      "rank": 276,
+      "group": "figure"
+    },
+    {
+      "sourceId": "436944",
+      "title": "The Spanish Singer",
+      "artist": "Edouard Manet",
+      "date": "1860",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/dp130799.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/dp130799.jpg",
+      "width": 2994,
+      "height": 3811,
+      "license": "Public domain (CC0). Gift of William Church Osborn, 1949",
+      "rank": 280,
+      "group": "figure"
+    },
+    {
+      "sourceId": "337894",
+      "title": "Three Standing Figures (recto); Seated Woman and a Male Hermit in Half-length (verso)",
+      "artist": "Stefano da Verona (Stefano di Giovanni d'Arbosio di Francia)",
+      "date": "1435–38",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP-26913-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP-26913-001.jpg",
+      "width": 3053,
+      "height": 4000,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1996",
+      "rank": 281,
+      "group": "figure"
+    },
+    {
+      "sourceId": "436947",
+      "title": "Boating",
+      "artist": "Edouard Manet",
+      "date": "1874",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-25466-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-25466-001.jpg",
+      "width": 4000,
+      "height": 3052,
+      "license": "Public domain (CC0). H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929",
+      "rank": 285,
+      "group": "seascape"
+    },
+    {
+      "sourceId": "339671",
+      "title": "Armor",
+      "artist": "Odilon Redon",
+      "date": "1891",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP139626.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP139626.jpg",
+      "width": 2831,
+      "height": 3858,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1948",
+      "rank": 286,
+      "group": "figure"
+    },
+    {
+      "sourceId": "436964",
+      "title": "Young Lady in 1866",
+      "artist": "Edouard Manet",
+      "date": "1866",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP273977.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP273977.jpg",
+      "width": 2607,
+      "height": 3795,
+      "license": "Public domain (CC0). Gift of Erwin Davis, 1889",
+      "rank": 290,
+      "group": "figure"
+    },
+    {
+      "sourceId": "339743",
+      "title": "Germain-Augustin and Rose de Saint-Aubin, Drawn by Their Uncle",
+      "artist": "Gabriel de Saint-Aubin",
+      "date": "1766",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP808115.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP808115.jpg",
+      "width": 2739,
+      "height": 3794,
+      "license": "Public domain (CC0). Bequest of Walter C. Baker, 1971",
+      "rank": 291,
+      "group": "botanical"
+    },
+    {
+      "sourceId": "436966",
+      "title": "The Adoration of the Shepherds",
+      "artist": "Andrea Mantegna",
+      "date": "shortly after 1450",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP213831.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP213831.jpg",
+      "width": 3911,
+      "height": 2879,
+      "license": "Public domain (CC0). Purchase, Anonymous Gift, 1932",
+      "rank": 295,
+      "group": "other"
+    },
+    {
+      "sourceId": "339751",
+      "title": "Aman-Jean (Portrait of Edmond François Aman-Jean)",
+      "artist": "Georges Seurat",
+      "date": "1882–83",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP158522.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP158522.jpg",
+      "width": 2975,
+      "height": 3885,
+      "license": "Public domain (CC0). Bequest of Stephen C. Clark, 1960",
+      "rank": 296,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437053",
+      "title": "The Afternoon Meal (La Merienda)",
+      "artist": "Luis Meléndez",
+      "date": "ca. 1772",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DT1570.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1570.jpg",
+      "width": 3807,
+      "height": 2625,
+      "license": "Public domain (CC0). The Jack and Belle Linsky Collection, 1982",
+      "rank": 300,
+      "group": "still life"
+    },
+    {
+      "sourceId": "340852",
+      "title": "Angel of the Revelation (Book of Revelation, chapter 10)",
+      "artist": "William Blake",
+      "date": "ca. 1803–5",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP805380.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP805380.jpg",
+      "width": 2429,
+      "height": 3625,
+      "license": "Public domain (CC0). Rogers Fund, 1914",
+      "rank": 301,
+      "group": "animal"
+    },
+    {
+      "sourceId": "437056",
+      "title": "Tommaso di Folco Portinari (1428–1501); Maria Portinari (Maria Maddalena Baroncelli, born 1456)",
+      "artist": "Hans Memling",
+      "date": "ca. 1470",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-44362-005.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-44362-005.jpg",
+      "width": 4000,
+      "height": 2619,
+      "license": "Public domain (CC0). Bequest of Benjamin Altman, 1913",
+      "rank": 305,
+      "group": "figure"
+    },
+    {
+      "sourceId": "340952",
+      "title": "The Entombment",
+      "artist": "Sir Edward Burne-Jones",
+      "date": "1879",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP805384.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP805384.jpg",
+      "width": 3699,
+      "height": 2398,
+      "license": "Public domain (CC0). Gift of Mrs. Darwin S. Morse, 1963",
+      "rank": 306,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437097",
+      "title": "Haystacks: Autumn",
+      "artist": "Jean-François Millet",
+      "date": "ca. 1874",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP124093.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP124093.jpg",
+      "width": 3867,
+      "height": 3020,
+      "license": "Public domain (CC0). Bequest of Lillian S. Timken, 1959",
+      "rank": 310,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "341793",
+      "title": "Lindisfarne Castle, Holy Island, Northumberland",
+      "artist": "Thomas Girtin",
+      "date": "1796–97",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP821127.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP821127.jpg",
+      "width": 1863,
+      "height": 1371,
+      "license": "Public domain (CC0). Rogers Fund, 1906",
+      "rank": 311,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "342383",
+      "title": "Loggia of the Ducal Palace, Venice",
+      "artist": "John Ruskin",
+      "date": "1849–50",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP806040.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP806040.jpg",
+      "width": 2462,
+      "height": 3883,
+      "license": "Public domain (CC0). Rogers Fund, 1908",
+      "rank": 316,
+      "group": "cityscape"
+    },
+    {
+      "sourceId": "342992",
+      "title": "Sunset",
+      "artist": "Eugène Delacroix",
+      "date": "ca. 1850",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP167200.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP167200.jpg",
+      "width": 3644,
+      "height": 2919,
+      "license": "Public domain (CC0). Gift from the Karen B. Cohen Collection of Eugène Delacroix, in honor of Philippe de Montebello, 2014",
+      "rank": 321,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "343314",
+      "title": "Amya Petitioning Faustus for the Custody of Saint Mamas",
+      "artist": "Jean Cousin the Elder",
+      "date": "ca. 1543",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP805774.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP805774.jpg",
+      "width": 3729,
+      "height": 2786,
+      "license": "Public domain (CC0). Rogers Fund, 2001",
+      "rank": 326,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437153",
+      "title": "Oedipus and the Sphinx",
+      "artist": "Gustave Moreau",
+      "date": "1864",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-14201-023.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14201-023.jpg",
+      "width": 2072,
+      "height": 4000,
+      "license": "Public domain (CC0). Bequest of William H. Herriman, 1920",
+      "rank": 330,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437175",
+      "title": "Virgin and Child",
+      "artist": "Bartolomé Estebán Murillo",
+      "date": "1670s",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-14936-010.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14936-010.jpg",
+      "width": 2826,
+      "height": 4000,
+      "license": "Public domain (CC0). Rogers Fund, 1943",
+      "rank": 340,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437261",
+      "title": "The Penitence of Saint Jerome",
+      "artist": "Joachim Patinir",
+      "date": "ca. 1515",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DT5549.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DT5549.jpg",
+      "width": 3811,
+      "height": 2818,
+      "license": "Public domain (CC0). Fletcher Fund, 1936",
+      "rank": 345,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "437283",
+      "title": "A Hunting Scene",
+      "artist": "Piero di Cosimo (Piero di Lorenzo di Piero d'Antonio)",
+      "date": "ca. 1494–1500",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-19296-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-19296-001.jpg",
+      "width": 4000,
+      "height": 1798,
+      "license": "Public domain (CC0). Gift of Robert Gordon, 1875",
+      "rank": 350,
+      "group": "animal"
+    },
+    {
+      "sourceId": "437299",
+      "title": "Jalais Hill, Pontoise",
+      "artist": "Camille Pissarro",
+      "date": "1867",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DT1859.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1859.jpg",
+      "width": 3811,
+      "height": 2907,
+      "license": "Public domain (CC0). Bequest of William Church Osborn, 1951",
+      "rank": 355,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "437326",
+      "title": "Blind Orion Searching for the Rising Sun",
+      "artist": "Nicolas Poussin",
+      "date": "1658",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP148490.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP148490.jpg",
+      "width": 3656,
+      "height": 2389,
+      "license": "Public domain (CC0). Fletcher Fund, 1924",
+      "rank": 360,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "437329",
+      "title": "The Abduction of the Sabine Women",
+      "artist": "Nicolas Poussin",
+      "date": "probably 1633–34",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-29324-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-29324-001.jpg",
+      "width": 4000,
+      "height": 2973,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1946",
+      "rank": 365,
+      "group": "animal"
+    },
+    {
+      "sourceId": "437344",
+      "title": "The Shepherd's Song",
+      "artist": "Pierre Puvis de Chavannes",
+      "date": "1891",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-14201-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14201-001.jpg",
+      "width": 4000,
+      "height": 3836,
+      "license": "Public domain (CC0). Rogers Fund, 1906",
+      "rank": 370,
+      "group": "figure"
+    },
+    {
+      "sourceId": "359320",
+      "title": "Nocturne: Palaces",
+      "artist": "James McNeill Whistler",
+      "date": "1879–80",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP813628.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP813628.jpg",
+      "width": 2532,
+      "height": 3683,
+      "license": "Public domain (CC0). Gift of Harold K. Hochschild, 1940",
+      "rank": 371,
+      "group": "cityscape"
+    },
+    {
+      "sourceId": "437372",
+      "title": "Madonna and Child Enthroned with Saints",
+      "artist": "Raphael (Raffaello Sanzio or Santi)",
+      "date": "ca. 1504",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-43051-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-43051-001.jpg",
+      "width": 3067,
+      "height": 4000,
+      "license": "Public domain (CC0). Gift of J. Pierpont Morgan, 1916",
+      "rank": 375,
+      "group": "figure"
+    },
+    {
+      "sourceId": "359362",
+      "title": "Landscape",
+      "artist": "Edgar Degas",
+      "date": "1892",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP815958.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP815958.jpg",
+      "width": 3869,
+      "height": 2896,
+      "license": "Public domain (CC0). Purchase, Mr. and Mrs. Richard J. Bernhard Gift, 1972",
+      "rank": 376,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "437394",
+      "title": "Aristotle with a Bust of Homer",
+      "artist": "Rembrandt (Rembrandt van Rijn)",
+      "date": "1653",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-30758-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-30758-001.jpg",
+      "width": 3792,
+      "height": 4000,
+      "license": "Public domain (CC0). Purchase, special contributions and funds given or bequeathed by friends of the Museum, 1961",
+      "rank": 380,
+      "group": "figure"
+    },
+    {
+      "sourceId": "359453",
+      "title": "Portrait of Emma Hamilton",
+      "artist": "Angelica Kauffmann",
+      "date": "1791",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP819694.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP819694.jpg",
+      "width": 3682,
+      "height": 3114,
+      "license": "Public domain (CC0). Purchase, several members of The Chairman's Council Gifts, 2003",
+      "rank": 381,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437397",
+      "title": "Self-Portrait",
+      "artist": "Rembrandt (Rembrandt van Rijn)",
+      "date": "1660",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-16323-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-16323-001.jpg",
+      "width": 3298,
+      "height": 4000,
+      "license": "Public domain (CC0). Bequest of Benjamin Altman, 1913",
+      "rank": 385,
+      "group": "figure"
+    },
+    {
+      "sourceId": "359882",
+      "title": "Mountain Valley with a Plateau",
+      "artist": "Hercules Segers",
+      "date": "ca. 1625–30",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP819998.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP819998.jpg",
+      "width": 2302,
+      "height": 1793,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1923",
+      "rank": 386,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "437423",
+      "title": "The Immaculate Conception",
+      "artist": "Guido Reni",
+      "date": "1627",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DT1138.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1138.jpg",
+      "width": 2597,
+      "height": 3722,
+      "license": "Public domain (CC0). Victor Wilbour Memorial Fund, 1959",
+      "rank": 390,
+      "group": "other"
+    },
+    {
+      "sourceId": "437430",
+      "title": "By the Seashore",
+      "artist": "Auguste Renoir",
+      "date": "1883",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-14936-039.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14936-039.jpg",
+      "width": 3162,
+      "height": 4000,
+      "license": "Public domain (CC0). H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929",
+      "rank": 395,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437447",
+      "title": "Captain George K. H. Coussmaker (1759–1801)",
+      "artist": "Sir Joshua Reynolds",
+      "date": "1782",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP169215.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP169215.jpg",
+      "width": 2394,
+      "height": 3866,
+      "license": "Public domain (CC0). Bequest of William K. Vanderbilt, 1920",
+      "rank": 400,
+      "group": "animal"
+    },
+    {
+      "sourceId": "437455",
+      "title": "The Holy Family with Saints Anne and Catherine of Alexandria",
+      "artist": "Jusepe de Ribera (called Lo Spagnoletto)",
+      "date": "1648",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DT16.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DT16.jpg",
+      "width": 2763,
+      "height": 3722,
+      "license": "Public domain (CC0). Samuel D. Lee Fund, 1934",
+      "rank": 405,
+      "group": "other"
+    },
+    {
+      "sourceId": "437487",
+      "title": "Francesco d'Este (born ca. 1429, died after 1486)",
+      "artist": "Rogier van der Weyden",
+      "date": "ca. 1460",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-26278-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-26278-001.jpg",
+      "width": 3100,
+      "height": 4000,
+      "license": "Public domain (CC0). The Friedsam Collection, Bequest of Michael Friedsam, 1931",
+      "rank": 410,
+      "group": "figure"
+    },
+    {
+      "sourceId": "371145",
+      "title": "Study of Eleven Heads",
+      "artist": "Jacques de Gheyn II",
+      "date": "late 16th–early 17th century",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP801085.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP801085.jpg",
+      "width": 2847,
+      "height": 3856,
+      "license": "Public domain (CC0). Purchase, Harris Brisbane Dick Fund, Frits and Rita Markus Fund, and Charles and Jessie Price Gift, 2006",
+      "rank": 411,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437490",
+      "title": "The Annunciation",
+      "artist": "Hans Memling",
+      "date": "ca. 1465–70",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP240360.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP240360.jpg",
+      "width": 2425,
+      "height": 3878,
+      "license": "Public domain (CC0). Gift of J. Pierpont Morgan, 1917",
+      "rank": 415,
+      "group": "figure"
+    },
+    {
+      "sourceId": "371418",
+      "title": "The Lictors Bringing Brutus the Bodies of his Sons",
+      "artist": "Jacques Louis David",
+      "date": "1787",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP213752.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP213752.jpg",
+      "width": 3811,
+      "height": 3014,
+      "license": "Public domain (CC0). Purchase, Lila Acheson Wallace Gift, 2006",
+      "rank": 416,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437532",
+      "title": "Rubens, Helena Fourment (1614–1673), and Their Son Frans (1633–1678)",
+      "artist": "Peter Paul Rubens",
+      "date": "ca. 1635",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-14286-003.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14286-003.jpg",
+      "width": 3090,
+      "height": 3973,
+      "license": "Public domain (CC0). Gift of Mr. and Mrs. Charles Wrightsman, in honor of Sir John Pope-Hennessy, 1981",
+      "rank": 420,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437549",
+      "title": "Wheat Fields",
+      "artist": "Jacob van Ruisdael",
+      "date": "ca. 1670",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP145911.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP145911.jpg",
+      "width": 3811,
+      "height": 2951,
+      "license": "Public domain (CC0). Bequest of Benjamin Altman, 1913",
+      "rank": 425,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "437609",
+      "title": "The Holy Family with the Young Saint John the Baptist",
+      "artist": "Andrea del Sarto (Andrea d'Agnolo)",
+      "date": "ca. 1528",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP295025.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP295025.jpg",
+      "width": 2875,
+      "height": 3872,
+      "license": "Public domain (CC0). Maria DeWitt Jesup Fund, 1922",
+      "rank": 430,
+      "group": "other"
+    },
+    {
+      "sourceId": "437654",
+      "title": "Circus Sideshow (Parade de cirque)",
+      "artist": "Georges Seurat",
+      "date": "1887–88",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP375450_cropped.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP375450_cropped.jpg",
+      "width": 3920,
+      "height": 2621,
+      "license": "Public domain (CC0). Bequest of Stephen C. Clark, 1960",
+      "rank": 435,
+      "group": "figure"
+    },
+    {
+      "sourceId": "382608",
+      "title": "Still Life with Flowers, a Snail and Insects",
+      "artist": "Joris Hoefnagel",
+      "date": "1589",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP158476.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP158476.jpg",
+      "width": 2861,
+      "height": 3505,
+      "license": "Public domain (CC0). Purchase, Charles and Jessie Price, Jean A. Bonna, and Annette de la Renta Gifts, and The Elisha Whittelsey Collection, The Elisha Whittelsey Fund, 2008",
+      "rank": 436,
+      "group": "still life"
+    },
+    {
+      "sourceId": "437658",
+      "title": "Study for \"A Sunday on La Grande Jatte\"",
+      "artist": "Georges Seurat",
+      "date": "1884",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP259921.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP259921.jpg",
+      "width": 1959,
+      "height": 1332,
+      "license": "Public domain (CC0). Bequest of Sam A. Lewisohn, 1951",
+      "rank": 440,
+      "group": "animal"
+    },
+    {
+      "sourceId": "437675",
+      "title": "Saint Andrew",
+      "artist": "Simone Martini",
+      "date": "ca. 1326",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP343101.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP343101.jpg",
+      "width": 2768,
+      "height": 3883,
+      "license": "Public domain (CC0). Gift of George Blumenthal, 1941",
+      "rank": 445,
+      "group": "figure"
+    },
+    {
+      "sourceId": "383862",
+      "title": "Study of a Seated Woman Seen from Behind (Marie-Gabrielle Capet)",
+      "artist": "Adélaïde Labille-Guiard",
+      "date": "1789",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP167476.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP167476.jpg",
+      "width": 2678,
+      "height": 3373,
+      "license": "Public domain (CC0). Gift of Mrs. Charles Wrightsman, 2008",
+      "rank": 446,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437749",
+      "title": "Merry Company on a Terrace",
+      "artist": "Jan Steen",
+      "date": "ca. 1670",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP146455.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP146455.jpg",
+      "width": 3556,
+      "height": 3829,
+      "license": "Public domain (CC0). Fletcher Fund, 1958",
+      "rank": 450,
+      "group": "animal"
+    },
+    {
+      "sourceId": "393723",
+      "title": "Samson and the Lion, from \"The Story of Samson\"",
+      "artist": "Anonymous, French, 16th century",
+      "date": "ca. 1560–80",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP838012.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP838012.jpg",
+      "width": 3723,
+      "height": 2867,
+      "license": "Public domain (CC0). Purchase, Bequest of W. Gedney Beatty, by exchange; and A. Hyatt Mayor Purchase Fund, Marjorie Phelps Starr Bequest, 2010",
+      "rank": 456,
+      "group": "other"
+    },
+    {
+      "sourceId": "395485",
+      "title": "Jupiter and Juno: Study for the \"Furti di Giove\" Tapestries",
+      "artist": "Perino del Vaga (Pietro Buonaccorsi)",
+      "date": "ca. 1532–35",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP245484.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP245484.jpg",
+      "width": 3396,
+      "height": 3843,
+      "license": "Public domain (CC0). Purchase, Acquisitions Fund and Annette and Oscar de la Renta Gift, 2011",
+      "rank": 461,
+      "group": "other"
+    },
+    {
+      "sourceId": "437826",
+      "title": "Venus and Adonis",
+      "artist": "Titian (Tiziano Vecellio)",
+      "date": "1550s",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-19299-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-19299-001.jpg",
+      "width": 4000,
+      "height": 3234,
+      "license": "Public domain (CC0). The Jules Bache Collection, 1949",
+      "rank": 465,
+      "group": "animal"
+    },
+    {
+      "sourceId": "400924",
+      "title": "Souvenir of a Castle in Vosges",
+      "artist": "Victor Hugo",
+      "date": "1857",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP820419.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP820419.jpg",
+      "width": 1254,
+      "height": 1873,
+      "license": "Public domain (CC0). Purchase, Harris Brisbane Dick Fund, Donald Young Foundation Gift, Harry G. Sperling Fund, and Mr. and Mrs. David M. Tobey Gift, 2012",
+      "rank": 466,
+      "group": "other"
+    },
+    {
+      "sourceId": "437835",
+      "title": "The Englishman (William Tom Warrener, 1861–1934) at the Moulin Rouge",
+      "artist": "Henri de Toulouse-Lautrec",
+      "date": "1892",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DT1500.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1500.jpg",
+      "width": 2796,
+      "height": 3719,
+      "license": "Public domain (CC0). Bequest of Miss Adelaide Milton de Groot (1876-1967), 1967",
+      "rank": 470,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437854",
+      "title": "Whalers",
+      "artist": "Joseph Mallord William Turner",
+      "date": "ca. 1845",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-13360-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-13360-001.jpg",
+      "width": 3958,
+      "height": 2967,
+      "license": "Public domain (CC0). Catharine Lorillard Wolfe Collection, Wolfe Fund, 1896",
+      "rank": 475,
+      "group": "seascape"
+    },
+    {
+      "sourceId": "627326",
+      "title": "Portrait of Cosimo de' Medici in full armor, his left hand resting on a staff",
+      "artist": "Niccolò della Casa",
+      "date": "1544",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP834407.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP834407.jpg",
+      "width": 2679,
+      "height": 3737,
+      "license": "Public domain (CC0). Gift of M. Feltenstein, 2013",
+      "rank": 476,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437869",
+      "title": "Juan de Pareja (ca. 1608–1670)",
+      "artist": "Velázquez (Diego Rodríguez de Silva y Velázquez)",
+      "date": "1650",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-14286-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14286-001.jpg",
+      "width": 3427,
+      "height": 3968,
+      "license": "Public domain (CC0). Purchase, Fletcher and Rogers Funds, and Bequest of Miss Adelaide Milton de Groot (1876-1967), by exchange, supplemented by gifts from friends of the Museum, 1971",
+      "rank": 480,
+      "group": "figure"
+    },
+    {
+      "sourceId": "654264",
+      "title": "Presentation Drawing of \"The Statue of Liberty Illuminating the World\"",
+      "artist": "Frédéric-Auguste Bartholdi",
+      "date": "1875",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP-19731-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP-19731-001.jpg",
+      "width": 4000,
+      "height": 2679,
+      "license": "Public domain (CC0). Harry G. Sperling Fund, 2014",
+      "rank": 481,
+      "group": "cityscape"
+    },
+    {
+      "sourceId": "437879",
+      "title": "Study of a Young Woman",
+      "artist": "Johannes Vermeer",
+      "date": "ca. 1665–67",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP353256.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP353256.jpg",
+      "width": 3454,
+      "height": 3866,
+      "license": "Public domain (CC0). Gift of Mr. and Mrs. Charles Wrightsman, in memory of Theodore Rousseau Jr., 1979",
+      "rank": 485,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437881",
+      "title": "Young Woman with a Water Pitcher",
+      "artist": "Johannes Vermeer",
+      "date": "ca. 1662",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP353257.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP353257.jpg",
+      "width": 3437,
+      "height": 3866,
+      "license": "Public domain (CC0). Marquand Collection, Gift of Henry G. Marquand, 1889",
+      "rank": 490,
+      "group": "interior"
+    },
+    {
+      "sourceId": "437891",
+      "title": "Mars and Venus United by Love",
+      "artist": "Paolo Veronese (Paolo Caliari)",
+      "date": "1570s",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP167124.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP167124.jpg",
+      "width": 3114,
+      "height": 4000,
+      "license": "Public domain (CC0). John Stewart Kennedy Fund, 1910",
+      "rank": 495,
+      "group": "animal"
+    },
+    {
+      "sourceId": "682931",
+      "title": "Weymouth Bay",
+      "artist": "David Lucas",
+      "date": "1830",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP875019.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP875019.jpg",
+      "width": 2563,
+      "height": 2036,
+      "license": "Public domain (CC0). Harris Brisbane Dick Fund, 1939",
+      "rank": 496,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "437900",
+      "title": "Comtesse de la Châtre (Marie Charlotte Louise Perrette Aglaé Bontemps, 1762–1848)",
+      "artist": "Elisabeth Louise Vigée Le Brun",
+      "date": "1789",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP320086.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP320086.jpg",
+      "width": 3127,
+      "height": 4000,
+      "license": "Public domain (CC0). Gift of Jessie Woolworth Donahue, 1954",
+      "rank": 500,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437926",
+      "title": "Mezzetin",
+      "artist": "Antoine Watteau",
+      "date": "ca. 1718–20",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP170811.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP170811.jpg",
+      "width": 1520,
+      "height": 1932,
+      "license": "Public domain (CC0). Munsey Fund, 1934",
+      "rank": 505,
+      "group": "figure"
+    },
+    {
+      "sourceId": "729644",
+      "title": "In proof of true love, a watercarrier skeleton arguing with a woman (Posada); two skeleton angels in upper corners (Manilla)",
+      "artist": "José Guadalupe Posada",
+      "date": "ca. 1890–96",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP865112.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP865112.jpg",
+      "width": 2778,
+      "height": 3653,
+      "license": "Public domain (CC0). The Elisha Whittelsey Collection, The Elisha Whittelsey Fund, 1946",
+      "rank": 506,
+      "group": "figure"
+    },
+    {
+      "sourceId": "437971",
+      "title": "The Young Virgin",
+      "artist": "Francisco de Zurbarán",
+      "date": "ca. 1632–33",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-26971-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-26971-001.jpg",
+      "width": 3263,
+      "height": 4000,
+      "license": "Public domain (CC0). Fletcher Fund, 1927",
+      "rank": 510,
+      "group": "botanical"
+    },
+    {
+      "sourceId": "39664",
+      "title": "Irises at Yatsuhashi (Eight Bridges)",
+      "artist": "Ogata Kōrin",
+      "date": "after 1709",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DT231.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DT231.jpg",
+      "width": 2000,
+      "height": 970,
+      "license": "Public domain (CC0). Purchase, Louisa Eldridge McBurney Gift, 1953",
+      "rank": 513,
+      "group": "botanical"
+    },
+    {
+      "sourceId": "438112",
+      "title": "Queen Henrietta Maria",
+      "artist": "Anthony van Dyck",
+      "date": "1636",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-18371-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-18371-001.jpg",
+      "width": 3409,
+      "height": 4000,
+      "license": "Public domain (CC0). Bequest of Mrs. Charles Wrightsman in honor of Annette de la Renta, 2019",
+      "rank": 515,
+      "group": "figure"
+    },
+    {
+      "sourceId": "747611",
+      "title": "Sabrina",
+      "artist": "Samuel Palmer",
+      "date": "1856",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP-13136-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP-13136-001.jpg",
+      "width": 4000,
+      "height": 2884,
+      "license": "Public domain (CC0). Purchase, Acquisitions Fund and David T. Schiff Gift, 2017",
+      "rank": 516,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "438417",
+      "title": "Two Men Contemplating the Moon",
+      "artist": "Caspar David Friedrich",
+      "date": "ca. 1825–30",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-31997-001-NEW.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-31997-001-NEW.jpg",
+      "width": 4000,
+      "height": 3237,
+      "license": "Public domain (CC0). Wrightsman Fund, 2000",
+      "rank": 520,
+      "group": "figure"
+    },
+    {
+      "sourceId": "39668",
+      "title": "Old Trees, Level Distance",
+      "artist": "Guo Xi",
+      "date": "ca. 1080",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP167812_CRD.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP167812_CRD.jpg",
+      "width": 3508,
+      "height": 1872,
+      "license": "Public domain (CC0). Gift of John M. Crawford Jr., in honor of Douglas Dillon, 1981",
+      "rank": 523,
+      "group": "landscape"
+    },
+    {
+      "sourceId": "438754",
+      "title": "Madonna and Child",
+      "artist": "Duccio di Buoninsegna",
+      "date": "ca. 1290–1300",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP142735.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP142735.jpg",
+      "width": 2697,
+      "height": 3542,
+      "license": "Public domain (CC0). Purchase, Rogers Fund, Walter and Leonore Annenberg and The Annenberg Foundation Gift, Lila Acheson Wallace Gift, Annette de la Renta Gift, Harris Brisbane Dick, Fletcher, Louis V. Bell, and Dodge Funds, Joseph Pulitzer Bequest, several members of The Chairman's Council Gifts, Elaine L. Rosenberg and Stephenson Family Foundation Gifts, 2003 Benefit Fund, and other gifts and funds from various donors, 2004",
+      "rank": 530,
+      "group": "figure"
+    },
+    {
+      "sourceId": "438814",
+      "title": "The Abduction of Rebecca",
+      "artist": "Eugène Delacroix",
+      "date": "1846",
+      "lane": "fine-art",
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ep/original/DP-14344-001.jpg",
+      "thumbSourceUrl": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14344-001.jpg",
+      "width": 3263,
+      "height": 4000,
+      "license": "Public domain (CC0). Catharine Lorillard Wolfe Collection, Wolfe Fund, 1903",
+      "rank": 535,
+      "group": "animal"
+    }
+  ],
+  "skips": [
+    {
+      "sourceId": "10065",
+      "title": "Repose",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "481545",
+      "title": "\"History of Navigation\" Mural",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "333915",
+      "title": "The Connoisseur",
+      "reason": "image too small: 1017px on the long edge, needs 1200"
+    },
+    {
+      "sourceId": "10127",
+      "title": "Ernesta (Child with Nurse)",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "36131",
+      "title": "Landscapes with poems",
+      "reason": "image too small: 1000px on the long edge, needs 1200"
+    },
+    {
+      "sourceId": "481727",
+      "title": "Untitled #87b",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "10154",
+      "title": "The Rocky Mountains, Lander's Peak",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "481891",
+      "title": "The Block",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "334002",
+      "title": "Seated Giant",
+      "reason": "nudity: matched \"nudes\""
+    },
+    {
+      "sourceId": "10159",
+      "title": "Fur Traders Descending the Missouri",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "482399",
+      "title": "Cauliflower and Pumpkin",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "435728",
+      "title": "The Last Communion of Saint Jerome",
+      "reason": "violence: matched \"crucifixion\""
+    },
+    {
+      "sourceId": "1029",
+      "title": "The Bryant Vase",
+      "reason": "not wall art: Vase"
+    },
+    {
+      "sourceId": "482413",
+      "title": "Edison Mazda",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "435739",
+      "title": "The Toilette of Venus",
+      "reason": "nudity: matched \"nudes\""
+    },
+    {
+      "sourceId": "10393",
+      "title": "Lydia Crocheting in the Garden at Marly",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "37397",
+      "title": "Ganesha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "482605",
+      "title": "Self-Portrait II",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "10405",
+      "title": "Nurse and Child",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "37450",
+      "title": "Bottle with Waves and Auspicious Emblems",
+      "reason": "not wall art: Ceramics"
+    },
+    {
+      "sourceId": "482672",
+      "title": "Rising Green",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "10464",
+      "title": "At the Seaside",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "37557",
+      "title": "Bottle with Birds and Peony Scroll",
+      "reason": "not wall art: Ceramics"
+    },
+    {
+      "sourceId": "482740",
+      "title": "The Street",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "435817",
+      "title": "The Crucifixion with the Virgin and Saint John",
+      "reason": "violence: matched \"crucifixion\""
+    },
+    {
+      "sourceId": "335000",
+      "title": "Costume Study for Vaslav Nijinsky in the Role of Iksender in the Ballet \"La Péri\" (The Flower of Immortality), first performed in Paris, 1912",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "10481",
+      "title": "Heart of the Andes",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "37558",
+      "title": "Ewer in the Form of a Phoenix",
+      "reason": "not wall art: Ceramics"
+    },
+    {
+      "sourceId": "482746",
+      "title": "White Rectangles, Number 3",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "10497",
+      "title": "View from Mount Holyoke, Northampton, Massachusetts, after a Thunderstorm—The Oxbow",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "37614",
+      "title": "Vajrabhairava mandala",
+      "reason": "not wall art: Textiles-Tapestries"
+    },
+    {
+      "sourceId": "482766",
+      "title": "Amategram Series – The Vivification of the Flesh",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "10522",
+      "title": "Daniel Crommelin Verplanck",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "37743",
+      "title": "Ceremonial Object in the Shape of an Ax",
+      "reason": "not wall art: Metalwork"
+    },
+    {
+      "sourceId": "483000",
+      "title": "Attorney Street (Handball Court with Autobiographical Poem by Piñero)",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "10819",
+      "title": "The Champion Single Sculls (Max Schmitt in a Single Scull)",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "37747",
+      "title": "Box for Betel Leaves",
+      "reason": "not wall art: Metalwork"
+    },
+    {
+      "sourceId": "483246",
+      "title": "Self-Portrait as a Photographer",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "435851",
+      "title": "The Meditation on the Passion",
+      "reason": "violence: matched \"skulls\""
+    },
+    {
+      "sourceId": "10821",
+      "title": "The Dancing Lesson",
+      "reason": "not wall art: Watercolor"
+    },
+    {
+      "sourceId": "483438",
+      "title": "Self-Portrait",
+      "reason": "nudity: matched \"nudes\""
+    },
+    {
+      "sourceId": "1083",
+      "title": "Cabinet",
+      "reason": "not wall art: Cabinet"
+    },
+    {
+      "sourceId": "483830",
+      "title": "Dans Le Train",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "10830",
+      "title": "Elijah Boardman",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "484216",
+      "title": "Mrs. N's Palace",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "10997",
+      "title": "Still Life—Violin and Music",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "484362",
+      "title": "No. 13 (White, Red on Yellow)",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "11050",
+      "title": "Approaching Thunder Storm",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "484650",
+      "title": "Self-Portrait Looking at The Last Supper",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "11122",
+      "title": "The Gulf Stream",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "484686",
+      "title": "Untitled",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "11125",
+      "title": "Inside the Bar",
+      "reason": "not wall art: Watercolor"
+    },
+    {
+      "sourceId": "484829",
+      "title": "Elenka",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "11145",
+      "title": "The Veteran in a New Field",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "484848",
+      "title": "Alquimia 13 (Alchemy 13)",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "336315",
+      "title": "The Raising of Lazarus",
+      "reason": "nudity: matched \"nudes\""
+    },
+    {
+      "sourceId": "11311",
+      "title": "Lake George",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "484878",
+      "title": "The Man Under the Pear Tree",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "11380",
+      "title": "Nocturne",
+      "reason": "not wall art: Watercolor"
+    },
+    {
+      "sourceId": "484887",
+      "title": "Cabinet on Base",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "436002",
+      "title": "Woman with a Parrot",
+      "reason": "nudity: matched \"nudes\""
+    },
+    {
+      "sourceId": "11417",
+      "title": "Washington Crossing the Delaware",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "484955",
+      "title": "\"Tube\" Chair",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "436037",
+      "title": "The Judgment of Paris",
+      "reason": "nudity: matched \"nudes\""
+    },
+    {
+      "sourceId": "11476",
+      "title": "Bacchante and Infant Faun",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "485067",
+      "title": "\"Wassily\" Armchair",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "336773",
+      "title": "Usuyuki",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "11764",
+      "title": "Mrs. Mayer and Daughter",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "485302",
+      "title": "Large Interior, Los Angeles",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "337057",
+      "title": "Bacchanal with a Wine Vat",
+      "reason": "nudity: matched \"nudes\""
+    },
+    {
+      "sourceId": "11859",
+      "title": "The Broncho Buster",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "485308",
+      "title": "Sunflower",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "436105",
+      "title": "The Death of Socrates",
+      "reason": "violence: matched \"death\""
+    },
+    {
+      "sourceId": "11985",
+      "title": "Osage Warrior",
+      "reason": "not wall art: Watercolor"
+    },
+    {
+      "sourceId": "485416",
+      "title": "Street Story Quilt",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "337061",
+      "title": "Astronomicum Caesareum",
+      "reason": "not wall art: Books"
+    },
+    {
+      "sourceId": "12019",
+      "title": "Victory",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "485518",
+      "title": "Antigraceful",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "12116",
+      "title": "In the Generalife",
+      "reason": "not wall art: Watercolor"
+    },
+    {
+      "sourceId": "485901",
+      "title": "Untitled",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "436173",
+      "title": "Woman Having Her Hair Combed",
+      "reason": "nudity: matched \"nudes\""
+    },
+    {
+      "sourceId": "337063",
+      "title": "Reclining Female Nude",
+      "reason": "nudity: matched \"nude\""
+    },
+    {
+      "sourceId": "12127",
+      "title": "Madame X (Virginie Amélie Avegno Gautreau)",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "485934",
+      "title": "The Businessman Max Roesberg, Dresden",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "337064",
+      "title": "Woman Bathing (La Toilette)",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "13084",
+      "title": "A Young Mother",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "486014",
+      "title": "Americana",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "337068",
+      "title": "The Frugal Repast",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "13606",
+      "title": "Phebe Warner Coverlet",
+      "reason": "not wall art: Coverlet"
+    },
+    {
+      "sourceId": "38124",
+      "title": "Manjuvajra Mandala",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "486026",
+      "title": "All That Rises Must Converge",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "436282",
+      "title": "The Crucifixion; The Last Judgment",
+      "reason": "violence: matched \"crucifixion\""
+    },
+    {
+      "sourceId": "337069",
+      "title": "Icarus, plate VIII from the illustrated book \"Jazz\"",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "13747",
+      "title": "Embroidered Picture",
+      "reason": "not wall art: Embroidered picture"
+    },
+    {
+      "sourceId": "38127",
+      "title": "Shiva as Mrityunjaya, the Conquerer of Death",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "486049",
+      "title": "Stationary Figure",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "337070",
+      "title": "Frank Johnson, Leader of the Brass Band of the 128th Regiment in Saratoga, with his wife, Helen",
+      "reason": "not wall art: Cut Paper"
+    },
+    {
+      "sourceId": "14521",
+      "title": "Beauty Revealed",
+      "reason": "not wall art: Painting, miniature"
+    },
+    {
+      "sourceId": "38133",
+      "title": "Enthroned Vishnu",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "486209",
+      "title": "Woman Fixing Her Hair",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "337071",
+      "title": "Pink and Rose",
+      "reason": "not wall art: Wallpaper"
+    },
+    {
+      "sourceId": "15026",
+      "title": "Self-portrait",
+      "reason": "not wall art: Painting, miniature"
+    },
+    {
+      "sourceId": "38146",
+      "title": "Vishnu",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "486316",
+      "title": "Naked Man, Back View",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "1524",
+      "title": "Century Vase",
+      "reason": "not wall art: Vase"
+    },
+    {
+      "sourceId": "38152",
+      "title": "Chamunda, the Horrific Destroyer of Evil",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "486391",
+      "title": "Parting",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "15387",
+      "title": "Card table",
+      "reason": "not wall art: Card table"
+    },
+    {
+      "sourceId": "38158",
+      "title": "Shiva",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "486392",
+      "title": "Mountain and Sky",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "15391",
+      "title": "Quilt, Tumbling Blocks with Signatures pattern",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "38159",
+      "title": "Standing Ganesha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "486395",
+      "title": "Crimson and Green Leaves",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "15971",
+      "title": "Tulips panel",
+      "reason": "not wall art: Panel"
+    },
+    {
+      "sourceId": "38160",
+      "title": "Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "486636",
+      "title": "Inkwell",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "16584",
+      "title": "George Washington",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "38162",
+      "title": "Harihara",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "486757",
+      "title": "Bird in Space",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "1662",
+      "title": "Side Chair",
+      "reason": "not wall art: Side Chair"
+    },
+    {
+      "sourceId": "38177",
+      "title": "Bodhisattva  Avalokiteshvara",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "486837",
+      "title": "Woman's Head",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "16947",
+      "title": "Flight Into Egypt",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "38198",
+      "title": "Standing Buddha Offering Protection",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "486989",
+      "title": "\"Carlton\" Room Divider",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "16953",
+      "title": "Wine cup",
+      "reason": "not wall art: Cup"
+    },
+    {
+      "sourceId": "38228",
+      "title": "Head of Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "486996",
+      "title": "Böhmen liegt am Meer (Bohemia Lies by the Sea)",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "19255",
+      "title": "Two Men Walking",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "38237",
+      "title": "Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "487065",
+      "title": "White Flag",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "19265",
+      "title": "Shop Girls",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "38239",
+      "title": "Drum panel with scenes of the Great Departure and Temptation of the Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488043",
+      "title": "Pool Parlor",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "19434",
+      "title": "Necklace",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "38265",
+      "title": "Brahma",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488221",
+      "title": "Gertrude Stein",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "19948",
+      "title": "Vase",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "38267",
+      "title": "Head of a Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488315",
+      "title": "I Saw the Figure 5 in Gold",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "436792",
+      "title": "The Crucifixion with Saints and a Donor",
+      "reason": "violence: matched \"crucifixion\""
+    },
+    {
+      "sourceId": "200",
+      "title": "Spindle-back armchair",
+      "reason": "not wall art: Armchair"
+    },
+    {
+      "sourceId": "38304",
+      "title": "Bust of Hevajra",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488319",
+      "title": "Improvisation 27 (Garden of Love II)",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "20121",
+      "title": "Chocolate Pot",
+      "reason": "not wall art: Chocolate Pot"
+    },
+    {
+      "sourceId": "38314",
+      "title": "Standing Shiva or Temple Guardian (Dvarapala)",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488486",
+      "title": "Portrait of a German Officer",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "20144",
+      "title": "Teapot",
+      "reason": "not wall art: Teapot"
+    },
+    {
+      "sourceId": "38318",
+      "title": "Crowned Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488496",
+      "title": "The Café Terrace",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "436839",
+      "title": "The Penitent Magdalen",
+      "reason": "violence: matched \"skulls\""
+    },
+    {
+      "sourceId": "20325",
+      "title": "Bowl and Stand",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "38326",
+      "title": "Vishnu",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488660",
+      "title": "Painting",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "337700",
+      "title": "Hercules chasing Avarice from the Temple of the Muses",
+      "reason": "nudity: matched \"nudes\""
+    },
+    {
+      "sourceId": "20415",
+      "title": "Architectural woodwork and paneling",
+      "reason": "not wall art: Woodwork, Panels"
+    },
+    {
+      "sourceId": "38327",
+      "title": "Bodhisattva, probably Padmapani Lokeshvara",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488694",
+      "title": "Cow's Skull: Red, White, and Blue",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "2046",
+      "title": "Hair Ornament",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "38328",
+      "title": "The Bodhisattva Maitreya, the Buddha of the Future",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488730",
+      "title": "Office in a Small City",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "20615",
+      "title": "Sampler",
+      "reason": "not wall art: Sampler"
+    },
+    {
+      "sourceId": "38330",
+      "title": "The Bodhisattva Manjushri as a Ferocious Destroyer of Ignorance",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488732",
+      "title": "The Cathedrals of Art",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "21126",
+      "title": "Young Husband: First Marketing",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "38332",
+      "title": "Seated Avalokiteshvara, the Buddha of Infinite Compassion",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488755",
+      "title": "Kouros",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "436918",
+      "title": "Venus and Cupid",
+      "reason": "nudity: matched \"nudes\""
+    },
+    {
+      "sourceId": "21185",
+      "title": "Abraham Lincoln: The Man (Standing Lincoln)",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "38335",
+      "title": "The Bodhisattva Padmapani Lokeshvara",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488915",
+      "title": "Water of the Flowery Mill",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "21197",
+      "title": "Necklace",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "38341",
+      "title": "Durga as Slayer of the Buffalo Demon Mahishasura",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "488916",
+      "title": "Easter Monday",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "21209",
+      "title": "Self Portrait",
+      "reason": "not wall art: Watercolor, miniature"
+    },
+    {
+      "sourceId": "38361",
+      "title": "Manuscript Cover with Prajnaparamita Attended by Sadakshari Lokeshvara and a Tara",
+      "reason": "not wall art: Woodwork"
+    },
+    {
+      "sourceId": "488978",
+      "title": "Autumn Rhythm: Number 30, 1950",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "21355",
+      "title": "Vase",
+      "reason": "not wall art: Vase"
+    },
+    {
+      "sourceId": "38379",
+      "title": "Tree Spirit Deity (Yakshi)",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "489307",
+      "title": "Blue Green Red",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "21586",
+      "title": "Pitcher",
+      "reason": "not wall art: Pitcher"
+    },
+    {
+      "sourceId": "38435",
+      "title": "Diadem with Kinnaris (Half-Bird, Half-Female Creatures)",
+      "reason": "not wall art: Jewelry"
+    },
+    {
+      "sourceId": "489321",
+      "title": "Third Avenue El",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "21698",
+      "title": "Crown of the Virgin of the Immaculate Conception, known as the Crown of the Andes",
+      "reason": "not wall art: Crown"
+    },
+    {
+      "sourceId": "38451",
+      "title": "Buddha Protected by a Seven-headed Naga",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "489625",
+      "title": "The Beginning",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "2276",
+      "title": "Corsage Piece",
+      "reason": "not wall art: Brooch"
+    },
+    {
+      "sourceId": "38468",
+      "title": "Patravahaka yaksha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "489674",
+      "title": "Grape Wine",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "2390",
+      "title": "Covered goblet",
+      "reason": "not wall art: Goblet"
+    },
+    {
+      "sourceId": "38498",
+      "title": "Door Guardian (Dvarapala)",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "489972",
+      "title": "The Jewish Angel",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "437127",
+      "title": "Bridge over a Pond of Water Lilies",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "3141",
+      "title": "Desk and bookcase",
+      "reason": "not wall art: Desk and bookcase"
+    },
+    {
+      "sourceId": "38515",
+      "title": "Vaikuntha Vishnu",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "489994",
+      "title": "Young Sailor II",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "437131",
+      "title": "The Bodmer Oak, Fontainebleau Forest",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "3152",
+      "title": "Desk and Bookcase",
+      "reason": "not wall art: Desk and bookcase"
+    },
+    {
+      "sourceId": "38517",
+      "title": "Standing Vishnu as Keshava",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "490004",
+      "title": "Potato",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "437133",
+      "title": "Garden at Sainte-Adresse",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "364",
+      "title": "Basket",
+      "reason": "not wall art: Basket"
+    },
+    {
+      "sourceId": "38518",
+      "title": "Goddess who bestows riches, probably Sri Lakshmi",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "490012",
+      "title": "Tableau",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "343581",
+      "title": "Phaeton, from \"The Four Disgracers\"",
+      "reason": "nudity: matched \"nudes\""
+    },
+    {
+      "sourceId": "4285",
+      "title": "High chest of drawers",
+      "reason": "not wall art: High chest of drawers"
+    },
+    {
+      "sourceId": "38559",
+      "title": "The Bodhisattva Vajrapani",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "490036",
+      "title": "The Accommodations of Desire",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "437160",
+      "title": "Young Woman Seated on a Sofa",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "4715",
+      "title": "Lamp",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "38574",
+      "title": "Jain Svetambara Tirthankara in Meditation",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "490064",
+      "title": "Delirious Hem",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "347780",
+      "title": "Scrapbook of Drawings and Prints",
+      "reason": "not wall art: Albums"
+    },
+    {
+      "sourceId": "4785",
+      "title": "Library Table",
+      "reason": "not wall art: Library table"
+    },
+    {
+      "sourceId": "38582",
+      "title": "Twenty-One Emanations of the Goddess Tara",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "490117",
+      "title": "Before and After I",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "352328",
+      "title": "Marilyn",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "4923",
+      "title": "The Magnolia Vase",
+      "reason": "not wall art: Vase"
+    },
+    {
+      "sourceId": "38583",
+      "title": "The Goddess Durga Slaying the Demon Buffalo Mahisha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "490127",
+      "title": "Ethel Scull 36 Times",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "353031",
+      "title": "Strata",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "5582",
+      "title": "Peonies Blown in the Wind",
+      "reason": "not wall art: Stained glass window"
+    },
+    {
+      "sourceId": "38634",
+      "title": "Crowned  Bodhisattva",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "490184",
+      "title": "Take Off",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "354631",
+      "title": "Christ Crucified between the Two Thieves: The Three Crosses",
+      "reason": "violence: matched \"crucifixion\""
+    },
+    {
+      "sourceId": "6000",
+      "title": "Plate",
+      "reason": "not wall art: Plate"
+    },
+    {
+      "sourceId": "38648",
+      "title": "Torso of a Bodhisattva",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "490910",
+      "title": "\"Air Line\" Armchair",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "354644",
+      "title": "Eastern Coast of Rügen with Shepherd",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "632",
+      "title": "Bottle",
+      "reason": "not wall art: Bottle"
+    },
+    {
+      "sourceId": "38788",
+      "title": "Standing Bodisattva Maitreya (Buddha of the Future)",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "491299",
+      "title": "Tea Infuser and Strainer",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "355281",
+      "title": "Mascarade à la Grecque; Suite des Vases; and [Cheminées]",
+      "reason": "not wall art: Books"
+    },
+    {
+      "sourceId": "635401",
+      "title": "The Virgin of Guadalupe with the Four Apparitions",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "38905",
+      "title": "Head of Shiva (lingakosha)",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "491666",
+      "title": "\"Model No. 41\" Lounge Chair",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "644324",
+      "title": "Woman’s Dress and Accessories",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "38926",
+      "title": "Reliquary in the Shape of a Stupa",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "491720",
+      "title": "Tea service",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "662163",
+      "title": "Covered jar",
+      "reason": "not wall art: Covered jar"
+    },
+    {
+      "sourceId": "38945",
+      "title": "Hanuman Conversing",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "492697",
+      "title": "Self-Portrait",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "6635",
+      "title": "Pocket bottle",
+      "reason": "not wall art: Pocket bottle"
+    },
+    {
+      "sourceId": "38952",
+      "title": "Bodhisattva Avalokiteshvara",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "492777",
+      "title": "Goddess with Foliage",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "674",
+      "title": "Basin",
+      "reason": "not wall art: Basin"
+    },
+    {
+      "sourceId": "38954",
+      "title": "Standing Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "492826",
+      "title": "Tall Figure",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "360255",
+      "title": "The Bearer of the Banner of the Canton Glarus",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "6779",
+      "title": "Presentation Vase",
+      "reason": "not wall art: Vase"
+    },
+    {
+      "sourceId": "38965",
+      "title": "Buddha Offering Protection",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "493210",
+      "title": "Being With (Être Avec)",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "364588",
+      "title": "'Rear Guard' (or 'On the Road'): men and women carrying rifles and children",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "677910",
+      "title": "Untitled (Cracked Watermelon)",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "38994",
+      "title": "Buddha Attended by Bodhisattvas Avalokiteshvara and Maitreya",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "493597",
+      "title": "The Ming Sisters",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "365313",
+      "title": "Hypnerotomachia Poliphili",
+      "reason": "not wall art: Books"
+    },
+    {
+      "sourceId": "6861",
+      "title": "Revolving Chair",
+      "reason": "not wall art: Revolving chair"
+    },
+    {
+      "sourceId": "39020",
+      "title": "Seated Transcendent Buddha Vairochana",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "494509",
+      "title": "Winter Pool",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "365807",
+      "title": "Snake Man",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "687670",
+      "title": "Hiawatha",
+      "reason": "not wall art: Bust"
+    },
+    {
+      "sourceId": "39021",
+      "title": "The Transcendent Buddha Vairochana (?) Seated in Western Fashion",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "494826",
+      "title": "Head I",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "687677",
+      "title": "Minnehaha",
+      "reason": "not wall art: Bust"
+    },
+    {
+      "sourceId": "39107",
+      "title": "Seated Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "495248",
+      "title": "August Encampment",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "6887",
+      "title": "Room from the Hart House, Ipswich, Massachusetts",
+      "reason": "not wall art: Room"
+    },
+    {
+      "sourceId": "39111",
+      "title": "Seated Ganesha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "495553",
+      "title": "Dusasa II",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "373803",
+      "title": "Accident",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "698529",
+      "title": "Dance in a Subterranean Roundhouse at Clear Lake, California",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "39112",
+      "title": "Seated Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "495554",
+      "title": "Wallowa Mountains Memory, Variation",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "373894",
+      "title": "Self-Portrait, turned slightly to the left",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "701639",
+      "title": "Figure of a Lion",
+      "reason": "not wall art: Figure"
+    },
+    {
+      "sourceId": "39116",
+      "title": "Seated Amitāyus, the Buddha of Eternal Life",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "497143",
+      "title": "Fair of Face, Full of Woe",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "377670",
+      "title": "Liverpool Shipping",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "701989",
+      "title": "Emma Van Name",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "39175",
+      "title": "Standing Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "497874",
+      "title": "AIDSGATE",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "702563",
+      "title": "Brooch",
+      "reason": "not wall art: Brooch"
+    },
+    {
+      "sourceId": "39181",
+      "title": "Seated Amitayus",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "499032",
+      "title": "Untitled",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "383125",
+      "title": "The Archangel Gabriel announcing the birth of Christ",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "707486",
+      "title": "Gray and Brass",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "39186",
+      "title": "Standing Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "499035",
+      "title": "Night Journey",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "717548",
+      "title": "The Battle of the Little Bighorn",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "39189",
+      "title": "Crowned Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "499559",
+      "title": "America Today",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "717554",
+      "title": "Man's coat",
+      "reason": "not wall art: Coat"
+    },
+    {
+      "sourceId": "39200",
+      "title": "Buddhist Shrine",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "499568",
+      "title": "Love Letter I",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "437769",
+      "title": "Clothing the Naked",
+      "reason": "nudity: matched \"naked\""
+    },
+    {
+      "sourceId": "717558",
+      "title": "Comb",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "39325",
+      "title": "Standing Parvati",
+      "reason": "not wall art: Metalwork"
+    },
+    {
+      "sourceId": "499717",
+      "title": "The Refusal of Time",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "437790",
+      "title": "Allegory of the Planets and Continents",
+      "reason": "nudity: matched \"nudes\""
+    },
+    {
+      "sourceId": "717562",
+      "title": "Women's Acoma Cape or Dress",
+      "reason": "not wall art: Cape or dress"
+    },
+    {
+      "sourceId": "39326",
+      "title": "Standing Vishnu",
+      "reason": "not wall art: Metalwork"
+    },
+    {
+      "sourceId": "499720",
+      "title": "Home is a Foreign Place",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "717566",
+      "title": "Basket bowl",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "39328",
+      "title": "Shiva as Lord of Dance (Nataraja)",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "500194",
+      "title": "Woman in a Chemise in an Armchair",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "413556",
+      "title": "Honus Wagner, Pittsburgh, National League, from the White Border series (T206) for the American Tobacco Company",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "717587",
+      "title": "Headdress frontlet",
+      "reason": "not wall art: Frontlet"
+    },
+    {
+      "sourceId": "39331",
+      "title": "Yashoda with the Infant Krishna",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "500396",
+      "title": "Bottle, Glass, and Pipe (Violette de Parme)",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "7212",
+      "title": "Sauceboat",
+      "reason": "not wall art: Sauceboat"
+    },
+    {
+      "sourceId": "39345",
+      "title": "Crowned  Buddha",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "500488",
+      "title": "The Village",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "736324",
+      "title": "Black-on-Black Jar",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "39346",
+      "title": "Avalokiteshvara Padmapani",
+      "reason": "not wall art: Metalwork"
+    },
+    {
+      "sourceId": "629168",
+      "title": "Provenance",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "656904",
+      "title": "Emiliano Zapata",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "744107",
+      "title": "Brooch",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "39413",
+      "title": "Karaikkal Ammaiyar, Shaiva Saint",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "632918",
+      "title": "Red Roses Sonata",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "678896",
+      "title": "Intimacy",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "747045",
+      "title": "",
+      "reason": "not wall art: Storage jar"
+    },
+    {
+      "sourceId": "39426",
+      "title": "Arm Band with Man's Head",
+      "reason": "not wall art: Metalwork"
+    },
+    {
+      "sourceId": "651079",
+      "title": "Crack Between the Floorboards",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "751507",
+      "title": "Shoulder bag (missing strap)",
+      "reason": "not wall art: Bag"
+    },
+    {
+      "sourceId": "39496",
+      "title": "Bird-shaped vessel",
+      "reason": "not wall art: Ceramics"
+    },
+    {
+      "sourceId": "653727",
+      "title": "History Refused to Die",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "713375",
+      "title": "Poster advertising an exhibition of work by young Mexican artists 'of the revolution' held at the Casa de Vacas in Retiro Park, Madrid, June 1929",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "751539",
+      "title": "Mask",
+      "reason": "not wall art: Mask"
+    },
+    {
+      "sourceId": "39637",
+      "title": "Knotted dragon ring",
+      "reason": "not wall art: Jade"
+    },
+    {
+      "sourceId": "655833",
+      "title": "Mountain Devil Lizard Dreaming-Sand-Hill Country (after Hailstorm)",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "7586",
+      "title": "Sofa",
+      "reason": "not wall art: Sofa"
+    },
+    {
+      "sourceId": "39649",
+      "title": "Bowl with dragons amid waves",
+      "reason": "not wall art: Ceramics"
+    },
+    {
+      "sourceId": "661423",
+      "title": "Untitled",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "744097",
+      "title": "Night",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "760942",
+      "title": "The Yellow Room",
+      "reason": "not wall art: Watercolor"
+    },
+    {
+      "sourceId": "669451",
+      "title": "Untitled (Studio)",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "764091",
+      "title": "Our Lady of Valvanera",
+      "reason": "not wall art: Painting"
+    },
+    {
+      "sourceId": "39666",
+      "title": "Jar with dragon",
+      "reason": "not wall art: Ceramics"
+    },
+    {
+      "sourceId": "675873",
+      "title": "The Card Players",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "768307",
+      "title": "Junkernboden",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "777786",
+      "title": "Teapot",
+      "reason": "not wall art: Teapot"
+    },
+    {
+      "sourceId": "676458",
+      "title": "Let My People Go",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "438605",
+      "title": "The Crucifixion",
+      "reason": "violence: matched \"crucifixion\""
+    },
+    {
+      "sourceId": "769166",
+      "title": "Resurrection Story with Patrons",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "7873",
+      "title": "Living Room from the Francis W. Little House: Windows and paneling",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "39707",
+      "title": "Zaō Gongen",
+      "reason": "not wall art: Sculpture"
+    },
+    {
+      "sourceId": "684796",
+      "title": "Untitled (Human Mask)",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "785564",
+      "title": "Elevation of Furnishings, Living Room,  Little House Wayzata, MN",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "7874",
+      "title": "Jubal and Miriam",
+      "reason": "not wall art: Stained glass window"
+    },
+    {
+      "sourceId": "39733",
+      "title": "Tapestry with Dragons and Flowers",
+      "reason": "not wall art: Textiles-Tapestries"
+    },
+    {
+      "sourceId": "701475",
+      "title": "Highrise of Homes",
+      "reason": "not public domain"
+    },
+    {
+      "sourceId": "436244",
+      "title": "Virgin and Child with Saint Anne",
+      "reason": "artist limit: already 3 works by Albrecht Dürer"
+    },
+    {
+      "sourceId": "436535",
+      "title": "Wheat Field with Cypresses",
+      "reason": "artist limit: already 3 works by Vincent van Gogh"
+    },
+    {
+      "sourceId": "343735",
+      "title": "Still-Life with a Watermelon and Pomegranates",
+      "reason": "artist limit: already 3 works by Paul Cézanne"
+    },
+    {
+      "sourceId": "388376",
+      "title": "Embroidery Pattern with Seven Six-pointed Stars and Four Corner Pieces",
+      "reason": "artist limit: already 3 works by Albrecht Dürer"
+    }
+  ]
+}

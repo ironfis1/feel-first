@@ -170,6 +170,12 @@ Decision: These findings were checked against official documentation on 2026-10-
 - Rijksmuseum (data.rijksmuseum.nl/docs): the current official service is Rijksmuseum Data Services, with no API key. The old key-based REST API is superseded. Search is `https://data.rijksmuseum.nl/search/collection` (filters include `type` and `imageAvailable=true`, 100 per page, `pageToken` paging). Each object is read as Linked Art JSON-LD from `https://id.rijksmuseum.nl/{id}?_profile=la-framed&_mediatype=application/ld+json`. Images are IIIF at `iiif.micr.io`, reached through the object's visual item and digital object, so one work takes about three requests. Rights appear as Linked Art `subject_to` with a license URI (CC0 seen on a sample). The policy page says public-domain and CC0 material is free to use and asks for credit to the Rijksmuseum. No rate limit is published, so the script throttles to one request per second.
 - NASA JPL Visions of the Future: no API. The series is the gallery page https://www.jpl.nasa.gov/galleries/visions-of-the-future/ with full-size files linked from each poster's page. The page text says 14 posters, but the gallery shows 19 entries. The JPL Image Use Policy says images "may be used for any purpose without prior permission", except that no endorsement by NASA, JPL or Caltech may be implied and their logos need approval. The policy's default credit is "Courtesy NASA/JPL-Caltech". No rate limit is published; the script throttles to one request per second.
 - Library of Congress WPA posters: differs. The JSON API is limited to 20 requests per minute, and exceeding it blocks the client for an hour (the countdown restarts on any request during the block). Image downloads are limited to 150 per minute. The collection has 947 items, not about 900. Rights appear in `rights_advisory` (for example "No known restrictions on publication."). Listing results only link images up to 1024px, so each candidate needs an item request to find a file of at least 1,200px on the long edge.
+Findings while running the scripts on 2026-10-09:
+- The Met: its firewall (Incapsula) blocked requests at about 8 a second, well under the published 80. The script now makes one request a second and stops if a firewall page comes back.
+- NASA JPL: www.jpl.nasa.gov refuses a user agent that does not start with "Mozilla/5.0", and after a handful of requests answers with a bot challenge. The script sends "Mozilla/5.0 (compatible) Feel First prototype (scott@reasinger.net)", makes a single request for the gallery page, can read a saved copy of it instead, and never tries to get past a challenge. Full-size files come from JPL's CDN, which does not challenge.
+- Library of Congress: item and resource JSON endpoints answered 503 for a period while the collection listing worked.
+- AIC: only 140 public-domain paintings, prints and drawings carry AIC's boost rank. After those, works are ordered by AIC's "viewed often" flag, AIC's own popularity signal.
+- To keep one series from crowding a lane (for example Hokusai's Fifty-three Stations), each museum contributes at most 3 works per named artist. Extra works are logged as skips. This applies D-020's spread.
 Why: docs/asset-sources.md asks that each source be checked before an ingest script is written, and that differences are logged.
 Spec reference: Section 2.2, Section 2.4, D-001, D-002.
 
@@ -212,6 +218,22 @@ Question: Some source titles contain em dashes (AIC: "A Sunday on La Grande Jatt
 Decision: Keep the source text. Credit fields copied from an institution (title, artist, date, license) keep any em dash exactly as the source wrote it. This is the only exception to the em-dash rule. Every word the project writes itself still never uses one.
 Why: Credits must match the source record.
 Spec reference: quality bar 7 and 8, Gap G33, CLAUDE.md writing rules.
+
+### D-023: Thumbnail width and format
+Date: 2026-10-09
+Decided by: Scott
+Question: What width and format do the thumbnails in public/thumbs/ use [D-001]?
+Decision: 640px wide WebP, resized to width and never cropped. A sample of 12 real source images averaged about 50 KB each, which is about 29 MB for 600 works.
+Why: A Room tile is about 300 CSS pixels wide on desktop and 190 on a phone, so 640 device pixels stays sharp on retina screens. WebP is about a third smaller than JPEG and works in every current browser.
+Spec reference: D-001, D-002, quality bar 4.
+
+### D-024: Rijksmuseum full-size image width
+Date: 2026-10-09
+Decided by: Scott
+Question: The Rijksmuseum IIIF full scan can be 6000px and several megabytes. Which size does imageUrl link?
+Decision: 1686px wide, the same as AIC (D-019), or the scan's own width if smaller.
+Why: Consistent with AIC, and fast enough for the Piece screen.
+Spec reference: Gap G2 (imageUrl), D-001, D-019.
 
 ---
 
