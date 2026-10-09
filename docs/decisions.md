@@ -205,6 +205,14 @@ Decision: Two passes. First, the scripts skip any work whose title, subjects or 
 Why: A word list alone misses images whose metadata is bland; a visual pass in session costs nothing extra.
 Spec reference: D-002.
 
+### D-022: Source credits keep their own em dashes
+Date: 2026-10-09
+Decided by: Scott
+Question: Some source titles contain em dashes (AIC: "A Sunday on La Grande Jatte" followed by an em dash and "1884"). The repository bans the em dash, but credits must match the source record (quality bar 8). Replace, skip, or keep?
+Decision: Keep the source text. Credit fields copied from an institution (title, artist, date, license) keep any em dash exactly as the source wrote it. This is the only exception to the em-dash rule. Every word the project writes itself still never uses one.
+Why: Credits must match the source record.
+Spec reference: quality bar 7 and 8, Gap G33, CLAUDE.md writing rules.
+
 ---
 
 ## Open questions
@@ -225,3 +233,8 @@ Options: (a) bedroom uses bed, office uses desk, all others use sofa; (b) Scott 
 Raised: 2026-10-09
 Question: The cost line reads "Built in N days for $X in AI and hosting." If X has cents, how is it written? Today costLineText prints the number as given, so 340.5 becomes "$340.5". A test pins this until it is decided.
 Options: (a) round to whole dollars; (b) always two decimals; (c) Scott enters X already formatted.
+
+### Q-008: Em-dash checks versus source credits (Milestones 4 and 6)
+Raised: 2026-10-09
+Question: Under D-022, credits in data/catalog.json and data/raw may contain em dashes, and the Piece screen shows credits. The live smoke check m1.copy-discipline fails on any em dash in rendered pages, and the M6 exit string search expects none. How should those checks treat source credits?
+Options: (a) the checks skip credit text (for example, the smoke check strips the credits block before searching, and the M6 search excludes data files); (b) Scott specifies.
