@@ -144,6 +144,22 @@ Why: Coverage numbers reward trivial tests. Risk tiers plus mutation testing put
 Spec reference: none; this is build process. Details in docs/testing.md.
 Note: the kit drafted this as D-006, but D-006 was already used in M1 for the AI model. Scott chose to number it D-014 on 2026-10-09.
 
+### D-015: Catalog IDs must be unique
+Date: 2026-10-09
+Decided by: Scott
+Question: Spec Section 3.2 says the catalog ID is sortable ascending but does not say IDs are unique. Should the catalog file schema reject duplicate IDs?
+Decision: Yes. The catalog file schema rejects any file with a duplicate id.
+Why: A duplicate id would make a lookup by id silently return the wrong work.
+Spec reference: Section 3.2, Gap G2, Res #23, D-008.
+
+### D-016: Catalog record schema is strict
+Date: 2026-10-09
+Decided by: Scott
+Question: The test-evaluator found four places where the catalog record schema accepts plausible bad data. Pin that behavior in tests, or tighten the schema?
+Decision: Tighten it. (1) A record with a field not in the Section 3.2 list is an error, not silently dropped. (2) Tags must be unique. (3) Orientation must match the dimensions: width greater than height is landscape, height greater than width is portrait, equal is square. (4) thumbUrl must be a local path starting with "/".
+Why: A test that pins a loophole guards nothing. These catch ingest and J1 mistakes at build time.
+Spec reference: Section 3.2, Gap G2, D-001, D-008.
+
 ---
 
 ## Open questions
@@ -159,3 +175,8 @@ Options: (a) the listed width, so the price is the same for both orientations; (
 Raised: 2026-10-09
 Question: Gap G7 says room types without a scene use the sofa, but does not state which room types map to the bed and desk scenes.
 Options: (a) bedroom uses bed, office uses desk, all others use sofa; (b) Scott specifies.
+
+### Q-007: Cost line dollar format (Milestone 7)
+Raised: 2026-10-09
+Question: The cost line reads "Built in N days for $X in AI and hosting." If X has cents, how is it written? Today costLineText prints the number as given, so 340.5 becomes "$340.5". A test pins this until it is decided.
+Options: (a) round to whole dollars; (b) always two decimals; (c) Scott enters X already formatted.

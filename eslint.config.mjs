@@ -12,6 +12,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated test output (docs/testing.md).
+    "coverage/**",
+    "reports/**",
+    ".stryker-tmp/**",
+    "test-results/**",
+    "playwright-report/**",
   ]),
 ]);
 

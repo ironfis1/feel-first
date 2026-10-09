@@ -3,7 +3,7 @@
   "routes": {
     "threshold": "/",
     "room": "/room",
-    "piece": "/piece/REPLACE-WITH-A-FIXTURE-ID",
+    "piece": "/piece/fx-0001",
     "wall": "/wall",
     "bag": "/bag",
     "close": "/close",
