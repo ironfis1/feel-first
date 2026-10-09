@@ -1,0 +1,722 @@
+[
+  {
+    "id": "fx-0001",
+    "title": "Harbor at Dusk",
+    "artist": "Fixture Artist 1",
+    "date": "1883",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-1",
+    "lane": "fine-art",
+    "imageUrl": "https://fixture.invalid/fx-0001.jpg",
+    "thumbUrl": "/fixture/fx-0001.jpg",
+    "width": 2000,
+    "height": 1500,
+    "orientation": "landscape",
+    "valence": -0.8,
+    "arousal": -0.6,
+    "tags": [
+      "serene",
+      "wistful",
+      "contemplative"
+    ],
+    "palette": [
+      "#52796f",
+      "#e9c46a",
+      "#264653",
+      "#d90429",
+      "#bc6c25"
+    ],
+    "subject": "seascape",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0002",
+    "title": "Orchard in Late Light",
+    "artist": "Fixture Artist 2",
+    "date": "1886",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-2",
+    "lane": "fine-art",
+    "imageUrl": "https://fixture.invalid/fx-0002.jpg",
+    "thumbUrl": "/fixture/fx-0002.jpg",
+    "width": 2000,
+    "height": 1500,
+    "orientation": "landscape",
+    "valence": -0.5,
+    "arousal": 0.1,
+    "tags": [
+      "tender",
+      "nostalgic",
+      "serene"
+    ],
+    "palette": [
+      "#84a98c",
+      "#f4a261",
+      "#8d99ae",
+      "#1b263b",
+      "#606c38"
+    ],
+    "subject": "landscape",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0003",
+    "title": "Woman Reading by a Window",
+    "artist": "Fixture Artist 3",
+    "date": "1889",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-3",
+    "lane": "fine-art",
+    "imageUrl": "https://fixture.invalid/fx-0003.jpg",
+    "thumbUrl": "/fixture/fx-0003.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": -0.3,
+    "arousal": -0.8,
+    "tags": [
+      "contemplative",
+      "tender",
+      "serene"
+    ],
+    "palette": [
+      "#cad2c5",
+      "#e76f51",
+      "#edf2f4",
+      "#fefae0",
+      "#283618"
+    ],
+    "subject": "figure",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0004",
+    "title": "Still Life with Lemons",
+    "artist": "Fixture Artist 4",
+    "date": "1892",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-4",
+    "lane": "fine-art",
+    "imageUrl": "https://fixture.invalid/fx-0004.jpg",
+    "thumbUrl": "/fixture/fx-0004.jpg",
+    "width": 2000,
+    "height": 1500,
+    "orientation": "landscape",
+    "valence": 0,
+    "arousal": 0,
+    "tags": [
+      "joyful",
+      "playful",
+      "tender"
+    ],
+    "palette": [
+      "#e9c46a",
+      "#264653",
+      "#d90429",
+      "#bc6c25",
+      "#2f3e46"
+    ],
+    "subject": "still life",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0005",
+    "title": "Storm over the Dunes",
+    "artist": "Fixture Artist 5",
+    "date": "1895",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-5",
+    "lane": "fine-art",
+    "imageUrl": "https://fixture.invalid/fx-0005.jpg",
+    "thumbUrl": "/fixture/fx-0005.jpg",
+    "width": 2000,
+    "height": 1500,
+    "orientation": "landscape",
+    "valence": 0.2,
+    "arousal": 0.7,
+    "tags": [
+      "tense",
+      "awe",
+      "defiant"
+    ],
+    "palette": [
+      "#f4a261",
+      "#8d99ae",
+      "#1b263b",
+      "#606c38",
+      "#52796f"
+    ],
+    "subject": "landscape",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0006",
+    "title": "Peonies in a Blue Jar",
+    "artist": "Fixture Artist 6",
+    "date": "1898",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-6",
+    "lane": "fine-art",
+    "imageUrl": "https://fixture.invalid/fx-0006.jpg",
+    "thumbUrl": "/fixture/fx-0006.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": 0.5,
+    "arousal": -0.4,
+    "tags": [
+      "joyful",
+      "tender",
+      "serene"
+    ],
+    "palette": [
+      "#e76f51",
+      "#edf2f4",
+      "#fefae0",
+      "#283618",
+      "#84a98c"
+    ],
+    "subject": "botanical",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0007",
+    "title": "The Quiet Interior",
+    "artist": "Fixture Artist 7",
+    "date": "1901",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-7",
+    "lane": "fine-art",
+    "imageUrl": "https://fixture.invalid/fx-0007.jpg",
+    "thumbUrl": "/fixture/fx-0007.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": 0.8,
+    "arousal": 0.3,
+    "tags": [
+      "melancholy",
+      "contemplative",
+      "wistful"
+    ],
+    "palette": [
+      "#264653",
+      "#d90429",
+      "#bc6c25",
+      "#2f3e46",
+      "#cad2c5"
+    ],
+    "subject": "interior",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0008",
+    "title": "Horses in a Field",
+    "artist": "Fixture Artist 8",
+    "date": "1904",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-8",
+    "lane": "fine-art",
+    "imageUrl": "https://fixture.invalid/fx-0008.jpg",
+    "thumbUrl": "/fixture/fx-0008.jpg",
+    "width": 2000,
+    "height": 1500,
+    "orientation": "landscape",
+    "valence": 0.6,
+    "arousal": 0.8,
+    "tags": [
+      "energized",
+      "joyful",
+      "playful"
+    ],
+    "palette": [
+      "#8d99ae",
+      "#1b263b",
+      "#606c38",
+      "#52796f",
+      "#e9c46a"
+    ],
+    "subject": "animal",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0009",
+    "title": "Canal in Winter",
+    "artist": "Fixture Artist 9",
+    "date": "1907",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-9",
+    "lane": "fine-art",
+    "imageUrl": "https://fixture.invalid/fx-0009.jpg",
+    "thumbUrl": "/fixture/fx-0009.jpg",
+    "width": 2000,
+    "height": 1500,
+    "orientation": "landscape",
+    "valence": -0.7,
+    "arousal": 0.6,
+    "tags": [
+      "melancholy",
+      "wistful",
+      "serene"
+    ],
+    "palette": [
+      "#edf2f4",
+      "#fefae0",
+      "#283618",
+      "#84a98c",
+      "#f4a261"
+    ],
+    "subject": "cityscape",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0010",
+    "title": "Study in Red and Black",
+    "artist": "Fixture Artist 10",
+    "date": "1910",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-10",
+    "lane": "fine-art",
+    "imageUrl": "https://fixture.invalid/fx-0010.jpg",
+    "thumbUrl": "/fixture/fx-0010.jpg",
+    "width": 1800,
+    "height": 1800,
+    "orientation": "square",
+    "valence": -0.2,
+    "arousal": 0.4,
+    "tags": [
+      "tense",
+      "defiant",
+      "energized"
+    ],
+    "palette": [
+      "#d90429",
+      "#bc6c25",
+      "#2f3e46",
+      "#cad2c5",
+      "#e76f51"
+    ],
+    "subject": "abstract",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0011",
+    "title": "Mountain Lake at Noon",
+    "artist": "Fixture Artist 11",
+    "date": "1913",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-11",
+    "lane": "fine-art",
+    "imageUrl": "https://fixture.invalid/fx-0011.jpg",
+    "thumbUrl": "/fixture/fx-0011.jpg",
+    "width": 2000,
+    "height": 1500,
+    "orientation": "landscape",
+    "valence": 0.4,
+    "arousal": -0.1,
+    "tags": [
+      "awe",
+      "serene",
+      "joyful"
+    ],
+    "palette": [
+      "#1b263b",
+      "#606c38",
+      "#52796f",
+      "#e9c46a",
+      "#264653"
+    ],
+    "subject": "landscape",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0012",
+    "title": "Portrait of a Young Man",
+    "artist": "Fixture Artist 12",
+    "date": "1916",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-12",
+    "lane": "fine-art",
+    "imageUrl": "https://fixture.invalid/fx-0012.jpg",
+    "thumbUrl": "/fixture/fx-0012.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": 0.1,
+    "arousal": -0.6,
+    "tags": [
+      "contemplative",
+      "melancholy",
+      "tense"
+    ],
+    "palette": [
+      "#fefae0",
+      "#283618",
+      "#84a98c",
+      "#f4a261",
+      "#8d99ae"
+    ],
+    "subject": "figure",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0013",
+    "title": "Visit the Ringed Planet",
+    "artist": "Fixture Artist 13",
+    "date": "1919",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-13",
+    "lane": "poster",
+    "imageUrl": "https://fixture.invalid/fx-0013.jpg",
+    "thumbUrl": "/fixture/fx-0013.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": 0.8,
+    "arousal": -0.6,
+    "tags": [
+      "awe",
+      "playful",
+      "energized"
+    ],
+    "palette": [
+      "#bc6c25",
+      "#2f3e46",
+      "#cad2c5",
+      "#e76f51",
+      "#edf2f4"
+    ],
+    "subject": "space",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0014",
+    "title": "See the National Parks",
+    "artist": "Fixture Artist 14",
+    "date": "1922",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-14",
+    "lane": "poster",
+    "imageUrl": "https://fixture.invalid/fx-0014.jpg",
+    "thumbUrl": "/fixture/fx-0014.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": 0.5,
+    "arousal": 0.1,
+    "tags": [
+      "joyful",
+      "awe",
+      "serene"
+    ],
+    "palette": [
+      "#606c38",
+      "#52796f",
+      "#e9c46a",
+      "#264653",
+      "#d90429"
+    ],
+    "subject": "place",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0015",
+    "title": "Summer Theater Season",
+    "artist": "Fixture Artist 15",
+    "date": "1925",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-15",
+    "lane": "poster",
+    "imageUrl": "https://fixture.invalid/fx-0015.jpg",
+    "thumbUrl": "/fixture/fx-0015.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": 0.3,
+    "arousal": -0.8,
+    "tags": [
+      "playful",
+      "energized",
+      "joyful"
+    ],
+    "palette": [
+      "#283618",
+      "#84a98c",
+      "#f4a261",
+      "#8d99ae",
+      "#1b263b"
+    ],
+    "subject": "graphic",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0016",
+    "title": "Grand Tour of the Outer Worlds",
+    "artist": "Fixture Artist 16",
+    "date": "1928",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-16",
+    "lane": "poster",
+    "imageUrl": "https://fixture.invalid/fx-0016.jpg",
+    "thumbUrl": "/fixture/fx-0016.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": 0,
+    "arousal": 0,
+    "tags": [
+      "awe",
+      "nostalgic",
+      "energized"
+    ],
+    "palette": [
+      "#2f3e46",
+      "#cad2c5",
+      "#e76f51",
+      "#edf2f4",
+      "#fefae0"
+    ],
+    "subject": "space",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0017",
+    "title": "Learn to Swim",
+    "artist": "Fixture Artist 17",
+    "date": "1931",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-17",
+    "lane": "poster",
+    "imageUrl": "https://fixture.invalid/fx-0017.jpg",
+    "thumbUrl": "/fixture/fx-0017.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": -0.2,
+    "arousal": 0.7,
+    "tags": [
+      "playful",
+      "joyful",
+      "tender"
+    ],
+    "palette": [
+      "#52796f",
+      "#e9c46a",
+      "#264653",
+      "#d90429",
+      "#bc6c25"
+    ],
+    "subject": "graphic",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0018",
+    "title": "Night Sky Over the Desert",
+    "artist": "Fixture Artist 18",
+    "date": "1934",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-18",
+    "lane": "poster",
+    "imageUrl": "https://fixture.invalid/fx-0018.jpg",
+    "thumbUrl": "/fixture/fx-0018.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": -0.5,
+    "arousal": -0.4,
+    "tags": [
+      "contemplative",
+      "awe",
+      "serene"
+    ],
+    "palette": [
+      "#84a98c",
+      "#f4a261",
+      "#8d99ae",
+      "#1b263b",
+      "#606c38"
+    ],
+    "subject": "space",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0019",
+    "title": "Work Pays America",
+    "artist": "Fixture Artist 19",
+    "date": "1937",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-19",
+    "lane": "poster",
+    "imageUrl": "https://fixture.invalid/fx-0019.jpg",
+    "thumbUrl": "/fixture/fx-0019.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": -0.8,
+    "arousal": 0.3,
+    "tags": [
+      "defiant",
+      "energized",
+      "tense"
+    ],
+    "palette": [
+      "#cad2c5",
+      "#e76f51",
+      "#edf2f4",
+      "#fefae0",
+      "#283618"
+    ],
+    "subject": "graphic",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0020",
+    "title": "Lake Country Holidays",
+    "artist": "Fixture Artist 20",
+    "date": "1940",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-20",
+    "lane": "poster",
+    "imageUrl": "https://fixture.invalid/fx-0020.jpg",
+    "thumbUrl": "/fixture/fx-0020.jpg",
+    "width": 2000,
+    "height": 1500,
+    "orientation": "landscape",
+    "valence": -0.6,
+    "arousal": 0.8,
+    "tags": [
+      "serene",
+      "nostalgic",
+      "tender"
+    ],
+    "palette": [
+      "#e9c46a",
+      "#264653",
+      "#d90429",
+      "#bc6c25",
+      "#2f3e46"
+    ],
+    "subject": "place",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0021",
+    "title": "Fire Prevention Week",
+    "artist": "Fixture Artist 21",
+    "date": "1943",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-21",
+    "lane": "poster",
+    "imageUrl": "https://fixture.invalid/fx-0021.jpg",
+    "thumbUrl": "/fixture/fx-0021.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": 0.7,
+    "arousal": 0.6,
+    "tags": [
+      "tense",
+      "defiant",
+      "energized"
+    ],
+    "palette": [
+      "#f4a261",
+      "#8d99ae",
+      "#1b263b",
+      "#606c38",
+      "#52796f"
+    ],
+    "subject": "graphic",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0022",
+    "title": "Harvest Festival",
+    "artist": "Fixture Artist 22",
+    "date": "1946",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-22",
+    "lane": "poster",
+    "imageUrl": "https://fixture.invalid/fx-0022.jpg",
+    "thumbUrl": "/fixture/fx-0022.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": 0.2,
+    "arousal": 0.4,
+    "tags": [
+      "joyful",
+      "nostalgic",
+      "playful"
+    ],
+    "palette": [
+      "#e76f51",
+      "#edf2f4",
+      "#fefae0",
+      "#283618",
+      "#84a98c"
+    ],
+    "subject": "place",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0023",
+    "title": "The Long Winter Evenings",
+    "artist": "Fixture Artist 23",
+    "date": "1949",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-23",
+    "lane": "poster",
+    "imageUrl": "https://fixture.invalid/fx-0023.jpg",
+    "thumbUrl": "/fixture/fx-0023.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": -0.4,
+    "arousal": -0.1,
+    "tags": [
+      "melancholy",
+      "wistful",
+      "contemplative"
+    ],
+    "palette": [
+      "#264653",
+      "#d90429",
+      "#bc6c25",
+      "#2f3e46",
+      "#cad2c5"
+    ],
+    "subject": "graphic",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  },
+  {
+    "id": "fx-0024",
+    "title": "Planet Hunters Wanted",
+    "artist": "Fixture Artist 24",
+    "date": "1952",
+    "source": "FIXTURE",
+    "sourceId": "FIXTURE-24",
+    "lane": "poster",
+    "imageUrl": "https://fixture.invalid/fx-0024.jpg",
+    "thumbUrl": "/fixture/fx-0024.jpg",
+    "width": 1600,
+    "height": 2000,
+    "orientation": "portrait",
+    "valence": -0.1,
+    "arousal": -0.6,
+    "tags": [
+      "energized",
+      "playful",
+      "defiant"
+    ],
+    "palette": [
+      "#8d99ae",
+      "#1b263b",
+      "#606c38",
+      "#52796f",
+      "#e9c46a"
+    ],
+    "subject": "space",
+    "license": "FIXTURE: placeholder record, not a real work or license"
+  }
+]
