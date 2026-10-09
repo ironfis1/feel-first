@@ -28,7 +28,8 @@ const isStartOfFrame = (marker: number) =>
 
 function jpegSize(b: Uint8Array): Size | null {
   let i = 2;
-  while (i + 9 < b.length) {
+  // A frame header needs 9 bytes from its marker: FF, marker, length (2), precision, height (2), width (2).
+  while (i + 8 < b.length) {
     if (b[i] !== 0xff) return null;
     const marker = b[i + 1];
     if (marker === 0xff) {

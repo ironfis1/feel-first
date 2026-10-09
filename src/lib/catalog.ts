@@ -1,9 +1,10 @@
 // The only code that reads catalog data [Res #28]. Swapping in a database later changes this file alone.
-// Milestone 1 reads the fixture file. Milestone 2 switches it to data/catalog.json.
+// It reads data/catalog.json, the metadata stage from Milestone 2. Tests swap in tests/fixtures/catalog.metadata.json.
+// Milestone 3 adds J1's emotional fields and switches the schema to the full catalogFileSchema.
 
 import type { z } from "zod";
-import fixture from "../../data/fixtures/catalog.fixture.json";
-import { catalogFileSchema, emotionTags, lanes, orientations, subjects, workSchema } from "./schemas";
+import data from "../../data/catalog.json";
+import { emotionTags, lanes, metadataCatalogFileSchema, metadataWorkSchema, orientations, subjects } from "./schemas";
 
 export { emotionTags, lanes, subjects };
 
@@ -12,8 +13,8 @@ export type EmotionTag = (typeof emotionTags)[number];
 export type Subject = (typeof subjects)[number];
 export type Orientation = (typeof orientations)[number];
 
-/** One catalog work, matching the catalog.json field list [spec Section 3.2, Gap G2, D-008]. */
-export type Work = z.infer<typeof workSchema>;
+/** One catalog work: the Section 3.2 fields without J1's emotional fields until Milestone 3 [Gap G2, D-008]. */
+export type Work = z.infer<typeof metadataWorkSchema>;
 
 /** Sorts works by plain string comparison of id, which is catalog order [Res #23, D-008]. */
 export function sortById(list: readonly Work[]): Work[] {
@@ -21,7 +22,7 @@ export function sortById(list: readonly Work[]): Work[] {
 }
 
 // Validated on load, so a malformed file fails the build rather than the demo.
-const works: readonly Work[] = Object.freeze(sortById(catalogFileSchema.parse(fixture)));
+const works: readonly Work[] = Object.freeze(sortById(metadataCatalogFileSchema.parse(data)));
 
 const byId = new Map(works.map((w) => [w.id, w]));
 

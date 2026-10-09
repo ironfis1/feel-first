@@ -1,7 +1,11 @@
-import type { Work } from "@/lib/catalog";
+import type { z } from "zod";
+import type { workSchema } from "@/lib/schemas";
+
+/** Every Section 3.2 field, including J1's (the full M3 contract). */
+type FullWork = z.infer<typeof workSchema>;
 
 /** A complete, valid catalog work for schema tests. Override fields per test. */
-export function validWork(overrides: Partial<Record<keyof Work, unknown>> = {}): Record<string, unknown> {
+export function validWork(overrides: Partial<Record<keyof FullWork, unknown>> = {}): Record<string, unknown> {
   return {
     id: "w-0001",
     title: "Test Work",

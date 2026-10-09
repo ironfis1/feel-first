@@ -26,6 +26,8 @@ export interface ClientOptions {
   stopOn429?: boolean;
   /** Headers that replace the defaults for this source. */
   headers?: Record<string, string>;
+  /** Give up on one request after this long (default 30 seconds). */
+  timeoutMs?: number;
   fetchImpl?: Fetch;
   sleep?: Sleep;
   now?: () => number;
@@ -39,18 +41,34 @@ export function createClient(options: ClientOptions) {
   const retries = options.retries ?? 3;
   let last = -Infinity;
 
+  /**
+   * One request, spaced from the last. A 429 is retried (or stops the run with stopOn429).
+   * A 5xx or timeout is retried; if it persists, the 5xx response is returned (or the timeout thrown)
+   * so the caller can skip that one record and carry on.
+   */
   async function request(url: string, init: RequestInit = {}): Promise<Response> {
     for (let attempt = 0; ; attempt++) {
       const wait = last + options.minIntervalMs - now();
       if (wait > 0) await sleep(wait);
       last = now();
-      const response = await fetchImpl(url, { ...init, headers: { ...identifyingHeaders, ...options.headers, ...init.headers } });
-      const retryable = response.status === 429 || response.status >= 500;
-      if (!retryable) return response;
-      if (response.status === 429 && options.stopOn429) {
-        throw new SourceRefused(`${url} returned 429; stopping so the source does not extend its block`);
+      let response: Response;
+      try {
+        response = await fetchImpl(url, {
+          ...init,
+          headers: { ...identifyingHeaders, ...options.headers, ...init.headers },
+          signal: AbortSignal.timeout(options.timeoutMs ?? 30_000),
+        });
+      } catch (error) {
+        if (attempt >= retries) throw error;
+        await sleep(options.minIntervalMs * 2 ** (attempt + 1));
+        continue;
       }
-      if (attempt >= retries) throw new SourceRefused(`${url} returned ${response.status} after ${retries} retries`);
+      if (response.status === 429) {
+        if (options.stopOn429) throw new SourceRefused(`${url} returned 429; stopping so the source does not extend its block`);
+        if (attempt >= retries) throw new SourceRefused(`${url} still returned 429 after ${retries} retries`);
+      } else if (response.status < 500 || attempt >= retries) {
+        return response;
+      }
       const retryAfter = Number(response.headers.get("retry-after"));
       await sleep(Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : options.minIntervalMs * 2 ** (attempt + 1));
     }

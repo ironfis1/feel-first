@@ -79,23 +79,41 @@ const workFields = {
   license: z.string().min(1),
 };
 
-/** One catalog work. Unknown fields are errors, and orientation must match the dimensions [D-016]. */
-export const workSchema = z.strictObject(workFields).superRefine((work, ctx) => {
+const orientationMatches = (
+  work: { width: number; height: number; orientation: string },
+  ctx: z.RefinementCtx,
+) => {
   if (work.orientation !== orientationFor(work.width, work.height)) {
     ctx.addIssue({ code: "custom", message: "orientation does not match width and height", path: ["orientation"] });
   }
-});
+};
 
-/** A whole catalog file: an array of works with unique ids [Gap G2, D-015]. */
-export const catalogFileSchema = z.array(workSchema).superRefine((works, ctx) => {
-  const seen = new Set<string>();
-  works.forEach((work, index) => {
-    if (seen.has(work.id)) {
-      ctx.addIssue({ code: "custom", message: `duplicate id ${work.id}`, path: [index, "id"] });
-    }
-    seen.add(work.id);
+/** An array of works with unique ids [Gap G2, D-015]. */
+const catalogOf = <T extends z.ZodType<{ id: string }>>(work: T) =>
+  z.array(work).superRefine((works, ctx) => {
+    const seen = new Set<string>();
+    works.forEach((w, index) => {
+      if (seen.has(w.id)) {
+        ctx.addIssue({ code: "custom", message: `duplicate id ${w.id}`, path: [index, "id"] });
+      }
+      seen.add(w.id);
+    });
   });
-});
+
+/** One catalog work. Unknown fields are errors, and orientation must match the dimensions [D-016]. */
+export const workSchema = z.strictObject(workFields).superRefine(orientationMatches);
+
+/** A whole catalog file with J1's emotional fields: the M3 contract. */
+export const catalogFileSchema = catalogOf(workSchema);
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- the J1 fields are left out on purpose
+const { valence, arousal, tags, palette, subject, ...metadataFields } = workFields;
+
+/** One work before J1 runs: every Section 3.2 field except valence, arousal, tags, palette and subject (M2). */
+export const metadataWorkSchema = z.strictObject(metadataFields).superRefine(orientationMatches);
+
+/** The M2 catalog file: metadata and credits, no emotional fields yet. */
+export const metadataCatalogFileSchema = catalogOf(metadataWorkSchema);
 
 /** True when the text contains an em dash, which no copy may use (CLAUDE.md writing rules). */
 const emDash = String.fromCharCode(0x2014);

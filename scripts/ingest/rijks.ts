@@ -1,7 +1,8 @@
 // Rijksmuseum ingest through Rijksmuseum Data Services (docs/asset-sources.md, D-017, D-020).
 // Run by hand: node scripts/ingest/rijks.ts
 
-import { capPerArtist, contentProblem, fineArtGroup, sizeProblem } from "./lib/curation.ts";
+import { capPerArtist, contentProblem, interleave, sizeProblem } from "./lib/curation.ts";
+import { fineArtGroup } from "./lib/groups.ts";
 import { type Client, createClient, SourceRefused } from "./lib/http.ts";
 import { type RawWork, type Skip, writeRaw } from "./lib/raw.ts";
 
@@ -96,14 +97,19 @@ export function dateOf(object: RijksObject): string {
   return (names.find(isEnglish) ?? names[0])?.content?.trim() || "Undated";
 }
 
-/** The public-domain license label for a visual item, or null if it is not public domain. */
+/** License and rights-statement vocabularies; any of these that is not public domain is restrictive. */
+const licenseUri = /^https?:\/\/(creativecommons\.org|rightsstatements\.org)\//;
+
+/**
+ * The public-domain license label for a visual item, or null if it is not public domain.
+ * A work that also carries any other license or rights statement is rejected.
+ */
 export function licenseOf(visual: RijksVisualItem): string | null {
-  for (const right of asArray(visual.subject_to)) {
-    for (const type of asArray(right.classified_as)) {
-      if (publicDomainRights[type.id]) return publicDomainRights[type.id];
-    }
-  }
-  return null;
+  const ids = asArray(visual.subject_to).flatMap((right) => asArray(right.classified_as).map((type) => type.id));
+  const licenses = ids.filter((id) => licenseUri.test(id));
+  if (licenses.some((id) => !publicDomainRights[id])) return null;
+  const label = licenses.map((id) => publicDomainRights[id]).find(Boolean);
+  return label ?? null;
 }
 
 /** The IIIF base (https://iiif.micr.io/{id}) from a digital object's access point. */
@@ -139,14 +145,6 @@ export function toRawWork(
     rank,
     group: fineArtGroup([title]),
   };
-}
-
-/** Takes one item from each list in turn. */
-export function interleave<T>(lists: readonly (readonly T[])[]): T[] {
-  const out: T[] = [];
-  const longest = Math.max(0, ...lists.map((l) => l.length));
-  for (let i = 0; i < longest; i++) for (const list of lists) if (i < list.length) out.push(list[i]);
-  return out;
 }
 
 interface SearchPage {

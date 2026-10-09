@@ -99,6 +99,28 @@ function scriptSrcHosts(html) {
   return hosts;
 }
 
+/** How the project identifies itself to sources (D-017). JPL's CDN accepts it as is. */
+const sourceHeaders = {
+  'User-Agent': 'Feel First prototype (scott@reasinger.net)',
+  'AIC-User-Agent': 'Feel First prototype (scott@reasinger.net)',
+};
+
+const catalog = JSON.parse(await readFile(path.join(here, '../../data/catalog.json'), 'utf8'));
+
+/**
+ * A small fixed sample, so each run makes the same few requests: the first fine-art work, the first
+ * poster and the middle work; or, with onePerSource, the first work from each institution.
+ */
+function catalogSample({ onePerSource = false } = {}) {
+  if (onePerSource) {
+    const seen = new Map();
+    for (const work of catalog) if (!seen.has(work.source)) seen.set(work.source, work);
+    return [...seen.values()];
+  }
+  const picks = [catalog.find((w) => w.lane === 'fine-art'), catalog.find((w) => w.lane === 'poster'), catalog[Math.floor(catalog.length / 2)]];
+  return [...new Set(picks.filter(Boolean))];
+}
+
 const pass = (detail) => ({ status: 'PASS', detail });
 const fail = (detail) => ({ status: 'FAIL', detail });
 const warn = (detail) => ({ status: 'WARN', detail });
@@ -210,10 +232,75 @@ const CHECKS = [
     },
   },
 
+  // ---------- M2 assets ----------
+  {
+    id: 'm2.museum-apis',
+    description: 'AIC, Met, Rijksmuseum, LOC and JPL sources reachable with one request each',
+    async run() {
+      // JPL's gallery page challenges scripts (D-017), so JPL is checked at the CDN that serves its posters.
+      const sources = [
+        ['AIC', 'https://api.artic.edu/api/v1/artworks/search?limit=1&fields=id', 'json'],
+        ['Met', 'https://collectionapi.metmuseum.org/public/collection/v1/objects/436535', 'json'],
+        ['Rijksmuseum', 'https://data.rijksmuseum.nl/search/collection?type=painting&imageAvailable=true', 'json'],
+        ['LOC', 'https://www.loc.gov/collections/works-progress-administration-posters/?fo=json&c=1', 'json'],
+        ['JPL', 'https://d2pn8kiwq2w21t.cloudfront.net/original_images/mars.jpg', 'image'],
+      ];
+      const problems = [];
+      for (const [name, url, kind] of sources) {
+        try {
+          const { res } = await get(url, { headers: { ...sourceHeaders, ...(kind === 'image' ? { Range: 'bytes=0-0' } : {}) } });
+          const type = res.headers.get('content-type') ?? '';
+          await res.body?.cancel();
+          if (!res.ok) problems.push(`${name} ${res.status}`);
+          else if (kind === 'json' && !type.includes('json')) problems.push(`${name} answered ${type || 'no content type'}, not JSON`);
+          else if (kind === 'image' && !type.startsWith('image/')) problems.push(`${name} answered ${type || 'no content type'}, not an image`);
+        } catch (err) {
+          problems.push(`${name}: ${err.message}`);
+        }
+      }
+      return problems.length ? fail(problems.join('; ')) : pass(`${sources.length}/${sources.length} sources answered`);
+    },
+  },
+  {
+    id: 'm2.thumbnails',
+    description: 'A sample of catalog thumbnails is served from the app',
+    async run() {
+      const sample = catalogSample();
+      const problems = [];
+      for (const work of sample) {
+        try {
+          const { res } = await get(baseUrl + work.thumbUrl);
+          const type = res.headers.get('content-type') ?? '';
+          await res.body?.cancel();
+          if (res.status !== 200 || type !== 'image/webp') problems.push(`${work.thumbUrl} -> ${res.status} ${type}`);
+        } catch (err) {
+          problems.push(`${work.thumbUrl}: ${err.message}`);
+        }
+      }
+      return problems.length ? fail(problems.join('; ')) : pass(`${sample.length}/${sample.length} thumbnails served as WebP`);
+    },
+  },
+  {
+    id: 'm2.full-images',
+    description: 'A sample of full-size image URLs resolve at the source institutions',
+    async run() {
+      const sample = catalogSample({ onePerSource: true });
+      const problems = [];
+      for (const work of sample) {
+        try {
+          const { res } = await get(work.imageUrl, { headers: { ...sourceHeaders, Range: 'bytes=0-0' } });
+          const type = res.headers.get('content-type') ?? '';
+          await res.body?.cancel();
+          if (!res.ok || !type.startsWith('image/')) problems.push(`${work.source}: ${res.status} ${type}`);
+        } catch (err) {
+          problems.push(`${work.source}: ${err.message}`);
+        }
+      }
+      return problems.length ? fail(problems.join('; ')) : pass(`${sample.length}/${sample.length} institutions served the full-size image`);
+    },
+  },
+
   // ---------- planned for later milestones ----------
-  { id: 'm2.museum-apis', pending: 'M2', description: 'AIC, Met, Rijksmuseum, LOC and JPL sources reachable with one request each' },
-  { id: 'm2.thumbnails', pending: 'M2', description: 'A sample of catalog thumbnails is served from the app' },
-  { id: 'm2.full-images', pending: 'M2', description: 'A sample of full-size image URLs resolve at the source institutions' },
   { id: 'm3.anthropic-key', pending: 'M3', costly: true, description: 'One minimal Anthropic API call succeeds with the build key' },
   { id: 'm5.j2-cache', pending: 'M5', description: 'J2 answers a pre-warmed phrase from the cache' },
   { id: 'm5.j2-live', pending: 'M5', costly: true, description: 'J2 answers a novel phrase from a live call within 4 seconds' },

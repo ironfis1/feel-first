@@ -1,7 +1,8 @@
 // The Metropolitan Museum of Art ingest (docs/asset-sources.md, D-017, D-020).
 // Run by hand: node scripts/ingest/met.ts
 
-import { capPerArtist, contentProblem, fineArtGroup, sizeProblem } from "./lib/curation.ts";
+import { capPerArtist, contentProblem, interleave, sizeProblem } from "./lib/curation.ts";
+import { fineArtGroup } from "./lib/groups.ts";
 import { createClient, SourceRefused } from "./lib/http.ts";
 import { imageSize, type Size } from "./lib/imageSize.ts";
 import { type RawWork, type Skip, writeRaw } from "./lib/raw.ts";
@@ -19,7 +20,7 @@ export const departmentIds = [11, 9, 1, 6, 21];
 export const classifications = ["Paintings", "Prints", "Drawings"];
 
 /** Some departments leave classification blank and name the object instead (American Wing: "Painting"). */
-const wallArtObjectName = /(painting|print|drawing|watercolou?r|woodcut|etching|engraving|lithograph)s?/i;
+const wallArtObjectName = /\b(painting|print|drawing|watercolou?r|woodcut|etching|engraving|lithograph)s?\b/i;
 
 /** True for paintings, prints and drawings [D-020]. */
 export const isWallArt = (object: Pick<MetObject, "classification" | "objectName">) =>
@@ -34,32 +35,15 @@ export function searchUrl(departmentId: number, offset = 0, limit = 500): string
 
 export const objectUrl = (objectId: number) => `${base}/v1/objects/${objectId}`;
 
-/** Takes one id from each list in turn: a, b, c, a, b, c, and so on. Duplicates keep their first place. */
-export function interleave(lists: readonly (readonly number[])[]): number[] {
-  const seen = new Set<number>();
-  const out: number[] = [];
-  const longest = Math.max(0, ...lists.map((l) => l.length));
-  for (let i = 0; i < longest; i++) {
-    for (const list of lists) {
-      const id = list[i];
-      if (id !== undefined && !seen.has(id)) {
-        seen.add(id);
-        out.push(id);
-      }
-    }
-  }
-  return out;
-}
-
 export interface MetObject {
   objectID: number;
   isPublicDomain: boolean;
   primaryImage: string;
   primaryImageSmall: string;
-  title: string;
-  artistDisplayName: string;
-  objectDate: string;
-  creditLine: string;
+  title: string | null;
+  artistDisplayName: string | null;
+  objectDate: string | null;
+  creditLine: string | null;
   classification: string;
   objectName: string;
   tags: { term: string }[] | null;
@@ -78,18 +62,18 @@ export function toRawWork(object: MetObject, size: Size | null, rank: number): R
   if (!size) return "image size could not be read";
   const small = sizeProblem(size.width, size.height);
   if (small) return small;
-  const title = object.title.trim() || "Untitled";
+  const title = object.title?.trim() || "Untitled";
   return {
     sourceId: String(object.objectID),
     title,
-    artist: object.artistDisplayName.trim() || "Unknown artist",
-    date: object.objectDate.trim() || "Undated",
+    artist: object.artistDisplayName?.trim() || "Unknown artist",
+    date: object.objectDate?.trim() || "Undated",
     lane: "fine-art",
     imageUrl: object.primaryImage,
     thumbSourceUrl: object.primaryImageSmall,
     width: size.width,
     height: size.height,
-    license: object.creditLine.trim() ? `Public domain (CC0). ${object.creditLine.trim()}` : "Public domain (CC0)",
+    license: object.creditLine?.trim() ? `Public domain (CC0). ${object.creditLine.trim()}` : "Public domain (CC0)",
     rank,
     group: fineArtGroup([title, object.objectName, ...(object.tags ?? []).map((t) => t.term)]),
   };

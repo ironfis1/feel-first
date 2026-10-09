@@ -1,9 +1,33 @@
 {
   "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
   "testRunner": "vitest",
-  "vitest": { "configFile": "vitest.config.mts" },
-  "mutate": ["src/lib/schemas.ts"],
-  "thresholds": { "high": 90, "low": 80, "break": 80 },
-  "reporters": ["clear-text", "progress", "html"],
+  "vitest": {
+    "configFile": "vitest.config.mts"
+  },
+  "mutate": [
+    "src/lib/schemas.ts",
+    "scripts/ingest/lib/imageSize.ts",
+    "scripts/ingest/lib/curation.ts",
+    "scripts/ingest/lib/raw.ts:1-62",
+    "scripts/ingest/aic.ts:1-96",
+    "scripts/ingest/met.ts:1-81",
+    "scripts/ingest/rijks.ts:1-154",
+    "scripts/ingest/jpl.ts:1-80",
+    "scripts/ingest/loc.ts:1-95",
+    "scripts/merge.ts:13-113",
+    "scripts/thumbs.ts:15-59",
+    "scripts/validate-data.ts:11-20"
+  ],
+  "thresholds": {
+    "high": 90,
+    "low": 80,
+    "break": 80
+  },
+  "reporters": [
+    "clear-text",
+    "progress",
+    "html",
+    "json"
+  ],
   "coverageAnalysis": "perTest"
 }

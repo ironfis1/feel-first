@@ -1,7 +1,8 @@
 // Art Institute of Chicago ingest (docs/asset-sources.md, D-017, D-019, D-020).
 // Run by hand: node scripts/ingest/aic.ts
 
-import { capPerArtist, contentProblem, fineArtGroup, sizeProblem } from "./lib/curation.ts";
+import { capPerArtist, contentProblem, sizeProblem } from "./lib/curation.ts";
+import { fineArtGroup } from "./lib/groups.ts";
 import { createClient } from "./lib/http.ts";
 import { type RawWork, type Skip, writeRaw } from "./lib/raw.ts";
 

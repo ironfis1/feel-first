@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import fixture from "../../../data/fixtures/catalog.fixture.json";
+import fixture from "../../fixtures/catalog.metadata.json";
 import {
   emotionTags,
   getAllWorks,
@@ -8,10 +8,10 @@ import {
   lanes,
   subjects,
 } from "@/lib/catalog";
-import { workSchema } from "@/lib/schemas";
+import { metadataWorkSchema } from "@/lib/schemas";
 
 // Contract tests for every function the catalog module exports (docs/testing.md functional gate).
-// They check the module's contract, not the fixture's contents, so they survive the M2 data swap.
+// They check the module's contract, not the data's contents. Vitest points data/catalog.json at the metadata fixture.
 
 const ids = (list: readonly { id: string }[]) => list.map((w) => w.id);
 const ascending = (list: string[]) => [...list].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
@@ -35,9 +35,9 @@ describe("vocabularies [Gap G1, D-008]", () => {
 describe("getAllWorks", () => {
   const all = getAllWorks();
 
-  it("returns every work in the data file, each valid against the work schema", () => {
+  it("returns every work in the data file, each valid against the M2 work schema", () => {
     expect(all).toHaveLength(fixture.length);
-    for (const work of all) expect(workSchema.safeParse(work).success).toBe(true);
+    for (const work of all) expect(metadataWorkSchema.safeParse(work).success).toBe(true);
   });
 
   it("returns works in ascending catalog id order [Res #23]", () => {
