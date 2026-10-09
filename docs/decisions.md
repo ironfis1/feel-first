@@ -109,6 +109,14 @@ Decision: No. robots.txt disallows all crawlers, and every page carries a noinde
 Why: The prototype is for one reader and should not appear in search results.
 Spec reference: none; the spec does not cover indexing.
 
+### D-012: Claude subscription prorated by hours
+Date: 2026-10-09
+Decided by: Scott
+Question: How is the Claude subscription prorated into X for the cost line? The build log header said monthly fee times build days, divided by 30.
+Decision: Prorate by build hours: $100 monthly fee times hours logged, divided by 160. Upsun cost is added later from actual invoices, not estimated.
+Why: Scott's instruction when logging the first two sessions (1.5 hours at $100 per month over 160 hours).
+Spec reference: Res #40, Gap G31. The cost line wording is unchanged; this sets how X is computed.
+
 ---
 
 ## Open questions
