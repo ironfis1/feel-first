@@ -93,8 +93,34 @@ Decision: Config holds the five names only for now. Color values are set during 
 Why: Color values are a visual design choice, which D-004 places in Milestone 4.
 Spec reference: Gap G14, D-004.
 
+### D-010: Concept bar wording
+Date: 2026-10-09
+Decided by: Scott
+Question: What exact text does the concept bar show?
+Decision: "A concept by Scott Reasinger. Not affiliated with any company or website." No company is named in the bar.
+Why: A generic disclaimer covers both companies without naming either.
+Spec reference: RB43, Res #26, Section 1.5. This refines the label wording; the bar still says the prototype is a concept by Scott and is not affiliated.
+
+### D-011: No search indexing or crawling
+Date: 2026-10-09
+Decided by: Scott
+Question: Should art.reasinger.net allow search engines to index or crawl it? The spec is silent.
+Decision: No. robots.txt disallows all crawlers, and every page carries a noindex, nofollow robots meta tag.
+Why: The prototype is for one reader and should not appear in search results.
+Spec reference: none; the spec does not cover indexing.
+
 ---
 
 ## Open questions
 
-None at present. Add new questions here as they come up, in the same format as the decisions above.
+Add new questions here as they come up, in the same format as the decisions above.
+
+### Q-005: Framed price width on landscape pieces (Milestone 4)
+Raised: 2026-10-09
+Question: Print sizes are listed width x height (12x16), but a landscape piece hangs 16 inches wide. Does the framed price "$1.50 per inch of width" [Gap G5, Gap G28] use the listed width or the hung width?
+Options: (a) the listed width, so the price is the same for both orientations; (b) the hung width, so landscape framing costs more.
+
+### Q-006: Room type to wall scene mapping (Milestone 5)
+Raised: 2026-10-09
+Question: Gap G7 says room types without a scene use the sofa, but does not state which room types map to the bed and desk scenes.
+Options: (a) bedroom uses bed, office uses desk, all others use sofa; (b) Scott specifies.
