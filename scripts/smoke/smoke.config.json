@@ -1,0 +1,35 @@
+{
+  "baseUrl": "https://art.reasinger.net",
+  "routes": {
+    "threshold": "/",
+    "room": "/room",
+    "piece": "/piece/REPLACE-WITH-A-FIXTURE-ID",
+    "wall": "/wall",
+    "bag": "/bag",
+    "close": "/close",
+    "signals": "/signals"
+  },
+  "conceptBarMustInclude": ["Scott Reasinger", "not affiliated"],
+  "bannedCopy": ["replatform", "salesforce", "60-slot", "czerpak", "st. jean"],
+  "analyticsHosts": [
+    "googletagmanager.com",
+    "google-analytics.com",
+    "analytics.google.com",
+    "plausible.io",
+    "segment.com",
+    "segment.io",
+    "hotjar.com",
+    "clarity.ms",
+    "vercel-insights.com",
+    "va.vercel-scripts.com",
+    "mixpanel.com",
+    "amplitude.com",
+    "fullstory.com",
+    "heap.io",
+    "newrelic.com",
+    "nr-data.net",
+    "sentry.io"
+  ],
+  "ttfbWarnMs": 1000,
+  "timeoutMs": 10000
+}

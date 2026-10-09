@@ -125,6 +125,25 @@ Decision: Blackfire is allowed for now. It adds no script to visitor pages (chec
 Why: Scott's call on 2026-10-09.
 Spec reference: Section 1.7 (no analytics or tracking scripts). This covers server-side platform monitoring only; no browser analytics is added.
 
+### D-014: Testing policy
+Date: 2026-10-09
+Decided by: Scott
+Question: How rigorous should testing be, without paying for low-value tests?
+Decision:
+- All logic is unit tested, and components get render tests. The amount of testing is set by risk tier, not coverage.
+- An independent test-evaluator subagent (Sonnet) triages each unit before tests are written. It scores impact, silence, surface, complexity and boundary, citing evidence for each score. Scott reviews the tier table.
+- High-tier files must reach an 80% mutation score with Stryker.
+- A test-sweeper subagent (Haiku) flags low-value tests after they are written, and flagged tests are deleted.
+- Every interface with a defined send or return gets a functional gate.
+- Tests never call outside parties: mock, stub, or replay recorded fixtures only.
+- Coverage is reported, never gated.
+- Deploy, then test: there is no pre-deploy gate. Scott runs a manual live smoke test after each deploy, and the script grows by milestone.
+- The M1 code gets a test backfill at the start of M2.
+- The milestone exit-criteria process continues unchanged, with the testing loop added to every milestone's exit.
+Why: Coverage numbers reward trivial tests. Risk tiers plus mutation testing put effort where silent or demo-breaking failures would occur. Outside calls in tests cost money, fail randomly and need secrets. A prototype with no outside exposure does not need a pre-deploy gate.
+Spec reference: none; this is build process. Details in docs/testing.md.
+Note: the kit drafted this as D-006, but D-006 was already used in M1 for the AI model. Scott chose to number it D-014 on 2026-10-09.
+
 ---
 
 ## Open questions

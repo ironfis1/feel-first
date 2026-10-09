@@ -2,6 +2,13 @@
 
 Seven milestones. Each has a scope, the open questions it depends on, and exit criteria. Work only inside the current milestone. Claude provides a prompt for each one in `prompts/` [Res #30]. Scott confirms a milestone is done before the next one starts.
 
+**Every milestone also follows the testing loop in `docs/testing.md` (D-014).** Its exit always includes these standing criteria, in addition to the ones listed under each milestone:
+- New and changed units are tiered in `docs/test-tiers.md`, and Scott has reviewed the table.
+- Tier requirements are met, High-tier mutation score is at least 80%, and sweeper flags are resolved.
+- Functional gates for the milestone's interfaces are in place and passing, and no test calls an outside party.
+- After deploy, the live smoke test passes, with checks added or activated for anything new that faces the live world.
+- Coverage is reported for information.
+
 The order puts the risky, slow work first: getting real images, then getting real AI output. Screens are built on top of real data, not fixtures that later get thrown away.
 
 ---
@@ -25,9 +32,10 @@ The order puts the risky, slow work first: getting real images, then getting rea
 
 ## M2 Assets
 
-**Decided:** D-001 (hybrid image serving) and D-002 (curation rules).
+**Decided:** D-001 (hybrid image serving), D-002 (curation rules), D-014 (testing).
 
 **Scope**
+- **First, the M1 test backfill:** install the test tools, triage the M1 code, write its tests, set up Stryker and the functional gates for the catalog module and config, and wire `npm run smoke:live`.
 - One ingest script per source.
 - A merge step producing about 300 fine-art works and about 300 posters into `data/catalog.json`, with metadata and credits but no emotional fields yet.
 - A skip log for Scott to review.
@@ -37,6 +45,8 @@ The order puts the risky, slow work first: getting real images, then getting rea
 - Every record has credits and a license.
 - Thumbnails load from the app and full-size images from the source institutions (D-001).
 - Scott has reviewed the skip log and a contact sheet of a random 60 works.
+- The M1 test backfill is complete.
+- Smoke checks `m2.museum-apis`, `m2.thumbnails` and `m2.full-images` are active and passing.
 
 ## M3 Build-time AI
 
@@ -56,6 +66,8 @@ The order puts the risky, slow work first: getting real images, then getting rea
 - `signals.json` exists and every figure reproduces from the seed.
 - The J2 phrase list and word map are approved.
 - API spend is logged in `build-log.md`.
+- The J8 determinism test passes, and the J1 and J4 response validators have contract tests against recorded responses.
+- Smoke check `m3.anthropic-key` is active (costly, run with `--include-costly`).
 
 ## M4 Core journey
 
@@ -77,6 +89,7 @@ The order puts the risky, slow work first: getting real images, then getting rea
 - The demo path from Threshold to Close works on desktop and phone.
 - Posters lead every Room view.
 - Quality-bar sections 3, 5, 6 and 10 pass.
+- The Playwright demo-path test runs Threshold to Close at 390px and 1440px, locally and against production (`npm run test:prod`).
 
 ## M5 Live AI, Wall and Signals
 
@@ -87,7 +100,9 @@ The order puts the risky, slow work first: getting real images, then getting rea
 
 **Exit**
 - Quality-bar sections 2, 8 and 9 pass.
-- The demo path runs from Threshold through Signals.
+- The demo path runs from Threshold through Signals, and the Playwright test covers it.
+- The J2 functional gate covers all five paths with no live calls.
+- Smoke checks `m5.j2-cache`, `m5.j2-live` and `m5.signals` are active and passing.
 
 ## M6 Builder Notes and polish
 
@@ -98,8 +113,8 @@ The order puts the risky, slow work first: getting real images, then getting rea
 - A Message discipline sweep of every string in the codebase.
 
 **Exit**
-- Every quality-bar section passes.
-- The demo path runs ten times clean on production.
+- Every quality-bar section passes, including section 11.
+- The demo path runs ten times clean on production (`npm run test:prod`, repeated).
 - A string search finds:
   - no em dashes,
   - no vendor name and no "replatform",
@@ -117,7 +132,7 @@ The order puts the risky, slow work first: getting real images, then getting rea
 7. The intro note is drafted through the get-in-the-room workflow and passes the gatekeeper panel.
 
 **Exit**
-- The cost line shows actual figures.
+- The cost line shows actual figures, and smoke check `m7.cost-line` passes.
 - The production deploy is tagged.
 - The video is recorded (75 to 105 seconds, mandate first, a poster by 20 seconds, ending on Signals).
 - The note is approved.

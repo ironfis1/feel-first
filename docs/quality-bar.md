@@ -133,7 +133,25 @@ Every number shown must be true or clearly labeled.
   - Text meets WCAG AA contrast.
 - Fail: the mood field is mouse-only; focus is invisible; the Threshold animation cannot be reduced.
 
-## 11. Cheap to run
+## 11. Tested where it matters
+
+Testing follows `docs/testing.md` (D-014). The point is to spend test effort where a failure would hurt, and nowhere else.
+
+- Pass:
+  - Every unit has a tier in `docs/test-tiers.md`, and Scott has reviewed the table.
+  - High-tier units have a test for every branch and named edge case, and Stryker catches at least 80% of mutants in their files.
+  - Medium-tier units have tests for their main behavior and named edge cases.
+  - Every functional gate in `docs/testing.md` that applies so far is in place and passing.
+  - The test-sweeper's flags are resolved.
+  - No test makes a network call to an outside party.
+  - After each deploy, the live smoke test passes.
+- Fail:
+  - A test hits the Anthropic API, a museum API or any other outside service.
+  - A High-tier file below 80% mutation score with no recorded, accepted reason.
+  - Tests written to raise a coverage number.
+  - An interface with a defined send or return and no contract test.
+
+## 12. Cheap to run
 
 - Pass: the app runs on the smallest Upsun resource allocation that meets the speed standards, with no database or storage service. Claude spend stays inside the console cap Scott sets. `build-log.md` has a row for every working day.
 - Fail: a new paid service with no entry in `decisions.md`; per-visitor API calls the pre-warm cache should have absorbed.
