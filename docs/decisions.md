@@ -189,6 +189,22 @@ Decision: 1686px wide.
 Why: Sharp on retina screens at the large Piece view. Every AIC work in the catalog is public domain.
 Spec reference: Gap G2 (imageUrl), D-001, D-017.
 
+### D-020: Fine-art selection criteria
+Date: 2026-10-09
+Decided by: Scott
+Question: The spec sets about 100 works from each museum [Res #37] but not which works. Which does each script select?
+Decision: Paintings, prints and drawings only. Candidates are ranked by the museum's own quality signal where it has one (for example AIC boost rank or Met highlights), and picks are spread across subject types (landscape, seascape, still life, figure, city, botanical and others) so the mood field is covered.
+Why: These are the things people hang as wall art, and a subject spread gives J1 material across the whole field.
+Spec reference: Section 2.2, Res #37, D-002.
+
+### D-021: How the content curation rule is applied
+Date: 2026-10-09
+Decided by: Scott
+Question: Curation rule 5 in docs/asset-sources.md (skip graphic violence, nudity, and imagery that would read badly in a CEO demo) needs judgment. How is it applied?
+Decision: Two passes. First, the scripts skip any work whose title, subjects or tags match a list of flag words, logging the matched word. Second, Claude looks at every selected thumbnail in session and skips anything else that breaks the rule, also logged with a reason. Scott reviews both through the skip log and the contact sheet.
+Why: A word list alone misses images whose metadata is bland; a visual pass in session costs nothing extra.
+Spec reference: D-002.
+
 ---
 
 ## Open questions
