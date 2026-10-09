@@ -1,0 +1,46 @@
+# Upsun configuration for Feel First (spec Section 1.4, Res #59, D-005).
+# Kept minimal because hosting cost feeds the cost line (Res #40).
+
+applications:
+  app:
+    source:
+      root: "/"
+    type: "nodejs:24"
+
+    # 0.1 CPU on the BALANCED profile gives 352 MB RAM, enough for next start.
+    # The CPU size itself is set with `upsun resources:set`, not in this file.
+    container_profile: BALANCED
+
+    variables:
+      env:
+        NEXT_TELEMETRY_DISABLED: "1"
+
+    build:
+      # Skip Upsun's default npm prune + npm install; the hook below runs npm ci from the lockfile.
+      flavor: none
+
+    hooks:
+      build: |
+        set -eux
+        npm ci --no-audit --no-fund
+        npm run build
+
+    # No mounts: the app writes nothing at runtime, so it needs no disk allocation.
+
+    web:
+      commands:
+        # Call the local binary directly (not npx) so nothing writes to ~/.npm at runtime.
+        start: "node_modules/.bin/next start -p $PORT"
+      upstream:
+        socket_family: tcp
+      locations:
+        "/":
+          passthru: true
+
+routes:
+  "https://{default}/":
+    type: upstream
+    upstream: "app:http"
+  "http://{default}/":
+    type: redirect
+    to: "https://{default}/"
