@@ -117,6 +117,14 @@ Decision: Prorate by build hours: $100 monthly fee times hours logged, divided b
 Why: Scott's instruction when logging the first two sessions (1.5 hours at $100 per month over 160 hours).
 Spec reference: Res #40, Gap G31. The cost line wording is unchanged; this sets how X is computed.
 
+### D-013: Upsun Blackfire monitoring allowed for now
+Date: 2026-10-09
+Decided by: Scott
+Question: Upsun sends a Blackfire post-deploy event. Does the platform's server monitoring count as an "analytics add-on from the hosting platform" that the build rules forbid?
+Decision: Blackfire is allowed for now. It adds no script to visitor pages (checked on art.reasinger.net: no scripts outside /_next/). Scott will check its cost impact later and revisit if it adds hosting cost.
+Why: Scott's call on 2026-10-09.
+Spec reference: Section 1.7 (no analytics or tracking scripts). This covers server-side platform monitoring only; no browser analytics is added.
+
 ---
 
 ## Open questions
