@@ -160,6 +160,35 @@ Decision: Tighten it. (1) A record with a field not in the Section 3.2 list is a
 Why: A test that pins a loophole guards nothing. These catch ingest and J1 mistakes at build time.
 Spec reference: Section 3.2, Gap G2, D-001, D-008.
 
+### D-017: Source APIs verified against current documentation
+Date: 2026-10-09
+Decided by: Scott (findings recorded for his review before any ingest code)
+Question: Do the endpoints, rate limits, license fields and identification requests in docs/asset-sources.md match each source's current official documentation?
+Decision: These findings were checked against official documentation on 2026-10-09 and the ingest scripts follow them. Every script identifies itself as "Feel First prototype (scott@reasinger.net)".
+- Art Institute of Chicago (api.artic.edu/docs): differs. The identifying header is `AIC-User-Agent`, not `User-Agent` (the scripts send both). Anonymous use is limited to 60 requests per minute, and scrapers are asked to make no more than one request per second. Search returns at most 100 per page and 10,000 in total. The IIIF base should be read from the response's `config.iiif_url`, not hard-coded. AIC recommends 843px-wide IIIF images; 1686px is available for public-domain works. Filtering on `is_public_domain` works as described.
+- The Met (metmuseum.github.io): differs. The `/search` endpoint was retired on 2026-10-01. Its replacement is `/public/collection/v1.1/search` with `offset` and `limit` (up to 500 per page, 10,000 in total). `isPublicDomain` is not a search filter, so it is checked on each object record, as before. The published limit is 80 requests per second. No identifying header is requested. Open access data and images are CC0.
+- Rijksmuseum (data.rijksmuseum.nl/docs): the current official service is Rijksmuseum Data Services, with no API key. The old key-based REST API is superseded. Search is `https://data.rijksmuseum.nl/search/collection` (filters include `type` and `imageAvailable=true`, 100 per page, `pageToken` paging). Each object is read as Linked Art JSON-LD from `https://id.rijksmuseum.nl/{id}?_profile=la-framed&_mediatype=application/ld+json`. Images are IIIF at `iiif.micr.io`, reached through the object's visual item and digital object, so one work takes about three requests. Rights appear as Linked Art `subject_to` with a license URI (CC0 seen on a sample). The policy page says public-domain and CC0 material is free to use and asks for credit to the Rijksmuseum. No rate limit is published, so the script throttles to one request per second.
+- NASA JPL Visions of the Future: no API. The series is the gallery page https://www.jpl.nasa.gov/galleries/visions-of-the-future/ with full-size files linked from each poster's page. The page text says 14 posters, but the gallery shows 19 entries. The JPL Image Use Policy says images "may be used for any purpose without prior permission", except that no endorsement by NASA, JPL or Caltech may be implied and their logos need approval. The policy's default credit is "Courtesy NASA/JPL-Caltech". No rate limit is published; the script throttles to one request per second.
+- Library of Congress WPA posters: differs. The JSON API is limited to 20 requests per minute, and exceeding it blocks the client for an hour (the countdown restarts on any request during the block). Image downloads are limited to 150 per minute. The collection has 947 items, not about 900. Rights appear in `rights_advisory` (for example "No known restrictions on publication."). Listing results only link images up to 1024px, so each candidate needs an item request to find a file of at least 1,200px on the long edge.
+Why: docs/asset-sources.md asks that each source be checked before an ingest script is written, and that differences are logged.
+Spec reference: Section 2.2, Section 2.4, D-001, D-002.
+
+### D-018: JPL poster scope
+Date: 2026-10-09
+Decided by: Scott
+Question: The JPL gallery shows 19 entries but its text says the series is 14. Which count as "every available JPL poster" [RB38, Res #18]?
+Decision: 17. All gallery entries, except that the three color versions of the Deep Space Atomic Clock design count as one poster. The red version is kept by default and the other two are logged as skips, so Scott can swap the color at the skip-log review.
+Why: The Room should not show one design three times.
+Spec reference: Section 2.2, D-017.
+
+### D-019: AIC full-size image width
+Date: 2026-10-09
+Decided by: Scott
+Question: AIC recommends 843px-wide IIIF images and offers 1686px for public-domain works. Which does imageUrl use for the Piece and Wall screens?
+Decision: 1686px wide.
+Why: Sharp on retina screens at the large Piece view. Every AIC work in the catalog is public domain.
+Spec reference: Gap G2 (imageUrl), D-001, D-017.
+
 ---
 
 ## Open questions
