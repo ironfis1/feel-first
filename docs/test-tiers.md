@@ -16,6 +16,10 @@ Tooling note: Stryker's Vitest runner 10.0.0 did not activate runtime mutants un
 
 ## Sweep results
 
+### 2026-10-09 (M2 Part B)
+
+Kept 205, flagged 2, both deleted (flag 6): the Met and Rijksmuseum tests "matches the recorded search response shape" and "matches the recorded search page shape" only inspected the fixture and never called our code.
+
 ### 2026-10-09 (M2 Part A)
 
 Kept 156, flagged 1. Deleted: workSchema "derives orientation from dimensions" (flag 3, duplicate). The orientation tests through the schema already cover all three branches. Mutation score unchanged by the deletion.

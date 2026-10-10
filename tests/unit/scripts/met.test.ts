@@ -30,11 +30,6 @@ describe("Met URLs [D-017, D-020]", () => {
     expect(departmentIds).toEqual([11, 9, 1, 6, 21]);
     expect(classifications).toEqual(["Paintings", "Prints", "Drawings"]);
   });
-
-  it("matches the recorded search response shape", () => {
-    expect(recorded.search.total).toBeGreaterThan(0);
-    expect(recorded.search.objectIDs.every(Number.isInteger)).toBe(true);
-  });
 });
 
 describe("Met screen on recorded objects", () => {

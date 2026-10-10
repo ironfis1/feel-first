@@ -37,10 +37,6 @@ describe("Rijksmuseum URLs [D-017]", () => {
     expect(searchUrl("oil painting")).toBe("https://data.rijksmuseum.nl/search/collection?type=oil%20painting&imageAvailable=true");
     expect(linkedArtUrl("https://id.rijksmuseum.nl/1")).toBe("https://id.rijksmuseum.nl/1?_profile=la-framed&_mediatype=application/ld%2Bjson");
   });
-
-  it("matches the recorded search page shape", () => {
-    expect(recorded.search.orderedItems.every((i: { id: string }) => i.id.startsWith("https://id.rijksmuseum.nl/"))).toBe(true);
-  });
 });
 
 describe("Rijksmuseum on the recorded chain", () => {
