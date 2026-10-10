@@ -4,6 +4,21 @@ The test-evaluator subagent's triage tables are saved here verbatim, newest firs
 
 ## Mutation results
 
+### 2026-10-10: all High-tier files (M2 Part B)
+
+Overall 91.67% (932 killed, 14 timeout, 77 survived, 9 without coverage). Break threshold 80. Per file: validate-data.ts 100, curation.ts 97.40, rijks.ts 96.18, imageSize.ts 95.12, thumbs.ts 94.29, merge.ts 93.18, raw.ts 92.00, jpl.ts 90.00, schemas.ts 90.28, met.ts 87.34, aic.ts 85.32, loc.ts 84.11.
+
+Accepted survivors (the 14 in schemas.ts are the error-wording literals accepted in Part A):
+- Null guards on source fields (`?.`, `?? []`, empty-string and empty-array fallbacks): aic.ts 68, 72, 73, 77, 91; loc.ts 55 to 65, 71, 72, 92; met.ts 27, 57, 69, 78; rijks.ts 78, 97. They matter only when a source omits a field. Without the guard the record throws, and the per-record try/catch logs it as a skip. The recorded fixtures always carry these fields.
+- `.trim()` removed on source text: aic.ts 82, 83, 89; loc.ts 57, 58; met.ts 65, 69, 70, 76; rijks.ts 90, 96. The recorded responses have no surrounding spaces, so the output is unchanged.
+- Regex anchors or quantifiers loosened: loc.ts 38, jpl.ts 41, 50, 66, rijks.ts 118. Each still matches the same real inputs, because the URL and gallery markup never carry the text the anchor guards against.
+- Equivalent loop bounds: curation.ts 61 and 103, merge.ts 39 and 44. An inner check (`picked.length < n`, `i < list.length`, the `while (shortfall > 0)` loop) already stops the same case.
+- imageSize.ts 17 (single PNG signature bytes) and 27 (`marker >= 0xc0`): a file must match the other signature bytes, or carry a marker below C0, to tell them apart. Real JPEG and PNG files do neither.
+- String literals with no effect on output: aic.ts 17 (a field name in the request list, not read back by tests), jpl.ts 13 (the gallery URL, only used live), merge.ts 104 and 111 and thumbs.ts 15 (file encoding and path in by-hand `main` code), raw.ts 41 and curation.ts 32 (message text and the regex escape replacement for words that hold no special characters).
+- jpl.ts 37 (the last entity decode in the chain): the recorded gallery has no `&quot;`.
+- thumbs.ts 56 (`{ quality }` removed): sharp's default WebP quality is 80 against our 78, and the test checks format and width only.
+- raw.ts 46 (`min(1)` to `max(1)` on a skip's sourceId): no test passes a long id through the skip schema alone. The sourceId comes from the same parsed record that the raw-work schema checks.
+
 ### 2026-10-09: src/lib/schemas.ts (M2 Part A)
 
 Score 90.21% (129 killed, 14 survived, 0 without coverage). Break threshold 80.
@@ -23,6 +38,38 @@ Kept 205, flagged 2, both deleted (flag 6): the Met and Rijksmuseum tests "match
 ### 2026-10-09 (M2 Part A)
 
 Kept 156, flagged 1. Deleted: workSchema "derives orientation from dimensions" (flag 3, duplicate). The orientation tests through the schema already cover all three branches. Mutation score unchanged by the deletion.
+
+## Triage 2026-10-10 (M2, commit 9ea46e3, thumbs.ts main() full-size fallback)
+
+| Unit | File | I | Si | Su | C | B | Total | Tier |
+|---|---|---|---|---|---|---|---|---|
+| main (full-size fallback) | scripts/thumbs.ts | 2 | 2 | 3 | 2 | 3 | 12 | High (manual, see main row) |
+
+### Evidence and required tests
+
+#### main (full-size fallback) (High, manual)
+- Impact 2: A fault leaves a room tile without a thumbnail, or with the wrong one. The failure list on line 102 names missing files, so the demo does not break silently. The old behavior was a plain failed file; the change reduces failures.
+- Silence 2: A plain double failure is reported (lines 94, 97, 101). The quiet risk is line 78. `fullUrls` is keyed by `thumbSourceUrl` alone, not by `sourceKey:sourceId`. If two raw works share a thumb URL, the last one wins. The fallback could then fetch another work's full image under the right credit, and the result would look plausible.
+- Surface 3: The script writes every file in `public/thumbs/`, which backs the room tiles on the demo path (same basis as the existing plan row). The new branch only runs for requests that fail, which in practice means the LOC failures logged under D-017/D-025.
+- Complexity 2: One new map (lines 73, 78) and one new conditional retry (lines 92-93). The two-step request is awaited in sequence, with no loop or timer of its own.
+- Boundary 3: Sends to live museum and library hosts through the per-source clients, and reads the `data/raw/*.json` contract through `loadRaw`.
+- Needs a test?: By the rubric, yes: the total is 12, which is High. But a test is not practical as the code stands. `main` is not exported and is guarded by `import.meta.main` (line 105). It can only run against live sources. Tests must not call the network, and I am not proposing a refactor. So treat it like the merge `main()` row (High, manual). Do not add a unit test that mocks `main`. A mock-heavy test of `main` would mirror the implementation line for line and would be flagged by the sweeper. The existing tests for `plan`, `resize` and `sourceKeyOf` stay as they are.
+- Must verify (by hand, in the milestone check, or as a unit test only if `main` is later exported by Scott's decision):
+  - A thumbnail request that returns OK never triggers a second request.
+  - A non-OK thumbnail response with a known `imageUrl` triggers exactly one retry, to the full-size URL, on the same source's client.
+  - A non-OK response with no `fullUrls` entry fails without a retry, with the original status in the message.
+  - If both requests fail, the failure line reports the second status (line 94 reads the reassigned `response`), and the job counts once in the failed total.
+  - The fallback buffer goes through `resize`, so the file written is a 640px-wide WebP and not the full-size original.
+  - A thrown error on the first request (network or timeout) goes to the catch and does not try the fallback. This is current behavior, so pin it as intended or flag it to Scott.
+  - Shared `thumbSourceUrl` across works: the check should confirm no two raw works collide, for example by counting distinct `thumbSourceUrl` values against works in `data/raw/*.json`. A collision would make line 78 pick the wrong full image.
+- Functional gate: Museum and library ingest (replayed recorded response, no network) and Data files (zod parse of `catalog.json` and the raw files). The existing ingest and `loadRaw` gates already cover these. The only evidence needed for this change is a recorded LOC failure fixture. The post-run result should be the real check: after `node scripts/thumbs.ts`, the log shows 0 failed and every catalog `thumbUrl` has a file. That is the practical test for this change.
+
+### Manual verification (2026-10-10)
+- No collisions: 1,399 raw works across the five sources have 1,399 distinct `thumbSourceUrl` values.
+- Post-run: `node scripts/thumbs.ts` reports 0 written, 0 removed, 0 failed, 0 without a source. All 600 catalog `thumbUrl` files exist, and the prebuild check passes.
+- The fallback goes through `resize`: all 283 WPA thumbnails, most written through the fallback, are WebP and no wider than 640px.
+- A thrown first-request error does not try the fallback, and that is intended. The client already retries network errors and timeouts (D-017). The fallback exists only for the LOC 500 answer. A rerun picked up every timed-out file.
+- No unit test added, per the triage.
 
 ## Triage 2026-10-09 (M2 Part B, asset pipeline)
 
