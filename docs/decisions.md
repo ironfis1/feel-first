@@ -244,6 +244,38 @@ Decision: (1) The same WPA poster design may appear more than once in different 
 Why: Scott reviewed the catalog and accepted it as built.
 Spec reference: D-002, D-017, D-020, D-021.
 
+### D-026: J1 sees the local thumbnails
+Date: 2026-10-10
+Decided by: Scott
+Question: docs/ai-jobs.md says J1 sees a rendition about 800px on the long edge. The committed thumbnails are 640px wide (D-023), so landscape works are 640px on the long edge. Use the thumbnails, or fetch an 800px rendition from each source?
+Decision: Use the local thumbnails in public/thumbs/.
+Why: 640px is enough to judge mood, palette and subject. It needs no source requests (the Library of Congress allows 20 a minute) and costs slightly fewer image tokens.
+Spec reference: Section 4 J1, D-023.
+
+### D-027: Mood bucket keys
+Date: 2026-10-10
+Decided by: Scott
+Question: The spec fixes 9 buckets [Res #9, Gap G4] but not how they are keyed in copy.json, config and signals.json.
+Decision: A bucket key is the valence band, a hyphen, then the arousal band. Valence bands are heavy, mid, bright; arousal bands are calm, mid, charged. Examples: heavy-calm, mid-mid, bright-charged.
+Why: Readable in the data files and the review pages.
+Spec reference: Section 3.4, Gap G3, Gap G4.
+
+### D-028: The word-map fallback also extracts room type and size
+Date: 2026-10-10
+Decided by: Scott
+Question: Gap G9 gives the word map about 150 mood words but does not say whether the fallback returns J2's room type and size.
+Decision: data/j2-wordmap.json holds the mood words with coordinates plus the words for the fixed room types and size words (Gap G7), so the fallback returns constraints too.
+Why: A visitor who types "small print for the nursery" while the API is down still gets the size preselected and the room qualifier.
+Spec reference: Gap G7, Gap G9, Section 3.9.
+
+### D-029: J8 file shapes
+Date: 2026-10-10
+Decided by: Scott
+Question: Gap G27 names the files but not their fields.
+Decision: data/signals-seed.json holds the seed, the session count and the sessions; each session has its mood bucket, the work ids viewed, and its add-to-bag lines (work id, size, material, frame or null). data/signals.json holds the seed, a simulated flag, the four findings (kind, bucket, action, text, and the named figures the text cites) and the per-bucket aggregate figures. Pick rate is adds divided by views. The app never imports signals-seed.json.
+Why: Every figure in signals.json can be recomputed from the sessions in the seed file [Res #38].
+Spec reference: Section 3.10, Section 3.11, Gap G27.
+
 ---
 
 ## Open questions
