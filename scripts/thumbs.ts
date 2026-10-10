@@ -70,9 +70,13 @@ function clients(): Record<SourceKey, Client> {
 async function main() {
   const catalog = metadataCatalogFileSchema.parse(JSON.parse(await readFile(path.join(root, "data/catalog.json"), "utf8")));
   const sourceUrls = new Map<string, string>();
+  const fullUrls = new Map<string, string>();
   for (const key of sourceKeys) {
     if (!existsSync(path.join(root, "data/raw", `${key}.json`))) continue;
-    for (const w of await loadRaw(key)) sourceUrls.set(`${key}:${w.sourceId}`, w.thumbSourceUrl);
+    for (const w of await loadRaw(key)) {
+      sourceUrls.set(`${key}:${w.sourceId}`, w.thumbSourceUrl);
+      fullUrls.set(w.thumbSourceUrl, w.imageUrl);
+    }
   }
   await mkdir(thumbsDir, { recursive: true });
   const { jobs, orphans, missing } = plan(catalog, sourceUrls, await readdir(thumbsDir));
@@ -82,7 +86,11 @@ async function main() {
   const failures: string[] = [];
   for (const [index, job] of jobs.entries()) {
     try {
-      const response = await byKey[job.sourceKey].request(job.url);
+      // Some LOC master files fail to scale on the server but serve at full size, so fall back
+      // to the full image and resize it here (D-017 findings).
+      let response = await byKey[job.sourceKey].request(job.url);
+      const fullUrl = fullUrls.get(job.url);
+      if (!response.ok && fullUrl) response = await byKey[job.sourceKey].request(fullUrl);
       if (!response.ok) throw new Error(`returned ${response.status}`);
       await writeFile(path.join(thumbsDir, job.file), await resize(Buffer.from(await response.arrayBuffer())));
     } catch (error) {

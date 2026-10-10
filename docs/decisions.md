@@ -176,6 +176,7 @@ Findings while running the scripts on 2026-10-09:
 - Library of Congress: item and resource JSON endpoints answered 503 for a period while the collection listing worked.
 - AIC: only 140 public-domain paintings, prints and drawings carry AIC's boost rank. After those, works are ordered by AIC's "viewed often" flag, AIC's own popularity signal.
 - To keep one series from crowding a lane (for example Hokusai's Fifty-three Stations), each museum contributes at most 3 works per named artist. Extra works are logged as skips. This applies D-020's spread.
+- Library of Congress (2026-10-09): for about 200 WPA posters, tile.loc.gov answers 500 to any scaled IIIF request on the master file but serves the same file at full size. The thumbnail script falls back to the full-size image and resizes it locally. Catalog records are unchanged.
 Why: docs/asset-sources.md asks that each source be checked before an ingest script is written, and that differences are logged.
 Spec reference: Section 2.2, Section 2.4, D-001, D-002.
 
@@ -234,6 +235,14 @@ Question: The Rijksmuseum IIIF full scan can be 6000px and several megabytes. Wh
 Decision: 1686px wide, the same as AIC (D-019), or the scan's own width if smaller.
 Why: Consistent with AIC, and fast enough for the Piece screen.
 Spec reference: Gap G2 (imageUrl), D-001, D-019.
+
+### D-025: Catalog review outcomes
+Date: 2026-10-10
+Decided by: Scott
+Question: The M2 review of the skip log and contact sheet raised five points the spec does not settle.
+Decision: (1) The same WPA poster design may appear more than once in different printings. (2) JPL posters keep artist "NASA/JPL-Caltech" and date "Undated". (3) LOC dates drop the cataloguers' square brackets. (4) At most 3 works per artist stays. (5) The borderline works kept after the visual check (a funerary papyrus strip, Blake drawings, three WPA book-care posters with a silhouette imp) stay. The visual check skipped 44 works, listed in data/raw/visual-skips.json.
+Why: Scott reviewed the catalog and accepted it as built.
+Spec reference: D-002, D-017, D-020, D-021.
 
 ---
 
