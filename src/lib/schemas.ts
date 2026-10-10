@@ -2,6 +2,9 @@
 // Data files are validated against these when they load, so a bad file fails the build.
 
 import { z } from "zod";
+import { frameFinishes, materials, printSizes, roomTypes, sizeWordToPrintSize } from "../config/feel.ts";
+import { bucketKeys, type BucketKey } from "./buckets.ts";
+import { inventedHeard, j2OutputSchema, normalizePhrase } from "./j2.ts";
 
 /** The two content lanes [RB36, D-008]. */
 export const lanes = ["fine-art", "poster"] as const;
@@ -106,7 +109,6 @@ export const workSchema = z.strictObject(workFields).superRefine(orientationMatc
 /** A whole catalog file with J1's emotional fields: the M3 contract. */
 export const catalogFileSchema = catalogOf(workSchema);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- the J1 fields are left out on purpose
 const { valence, arousal, tags, palette, subject, ...metadataFields } = workFields;
 
 /** One work before J1 runs: every Section 3.2 field except valence, arousal, tags, palette and subject (M2). */
@@ -120,6 +122,7 @@ const emDash = String.fromCharCode(0x2014);
 const noEmDash = (text: string) => !text.includes(emDash);
 
 const positive = z.number().positive();
+const effort = z.enum(["low", "medium", "high"]);
 
 /** The tunable values in src/config/feel.ts [spec Section 7, Gap G18]. */
 export const configSchema = z
@@ -128,6 +131,7 @@ export const configSchema = z
     contactEmail: z.email(),
     linkedInUrl: z.url(),
     claudeModel: z.string().min(1),
+    claudeEffort: z.strictObject({ j1: effort, j2: effort, j4: effort, j8: effort }),
     roomPageSizePerLane: z.number().int().positive(),
     nudgeStep: z.number().gt(0).lt(1),
     driftBehavior: z.literal("end-of-lane"),
@@ -182,3 +186,115 @@ export const configSchema = z
       ctx.addIssue({ code: "custom", message: "cost line shown before N and X are filled", path: ["showCostLine"] });
     }
   });
+
+// ---------------------------------------------------------------------------
+// Milestone 3 files
+// ---------------------------------------------------------------------------
+
+/** The five fields J1 adds to each work [spec Section 3.2, Gap G1]. Also the J1 response contract. */
+export const j1FieldsSchema = z.strictObject({ valence, arousal, tags, palette, subject });
+
+/** An object with exactly the 9 bucket keys, each holding a value of the given schema [D-027]. */
+export const perBucket = <T extends z.ZodType>(value: T) =>
+  z.strictObject(Object.fromEntries(bucketKeys.map((key) => [key, value])) as Record<BucketKey, T>);
+
+/** One "why this found you" line: non-empty and free of em dashes. J4's fuller checks live in its validator. */
+const curatorLine = z.string().trim().min(1).refine(noEmDash, "no em dash");
+
+/** copy.json: each work id maps to its 9 lines, one per mood bucket [Res #9, Gap G2, D-027]. */
+export const copyFileSchema = z.record(z.string().min(1), perBucket(curatorLine));
+
+const printSizeIds = printSizes.map((size) => size.id) as [string, ...string[]];
+const materialIds = Object.keys(materials) as [keyof typeof materials, ...(keyof typeof materials)[]];
+const bucketEnum = z.enum(bucketKeys as [BucketKey, ...BucketKey[]]);
+
+/** One simulated add-to-bag line. Only framed prints take a frame [Gap G5, Gap G28]. */
+const addLineSchema = z
+  .strictObject({
+    id: z.string().min(1),
+    size: z.enum(printSizeIds),
+    material: z.enum(materialIds),
+    frame: z.enum(frameFinishes).nullable(),
+  })
+  .refine((line) => (line.material === "framed") === (line.frame !== null), "a frame goes with framed prints only");
+
+/** One simulated session: its mood bucket, the works it opened, and what it added to the bag [D-029]. */
+const sessionSchema = z
+  .strictObject({
+    bucket: bucketEnum,
+    views: z.array(z.string().min(1)).min(1),
+    adds: z.array(addLineSchema),
+  })
+  .refine((s) => s.adds.every((line) => s.views.includes(line.id)), "every added work was viewed");
+
+/** data/signals-seed.json: the seeded simulated dataset [Res #38, Gap G27, D-029]. */
+export const signalsSeedFileSchema = z
+  .strictObject({
+    seed: z.number().int(),
+    sessionCount: z.number().int().positive(),
+    sessions: z.array(sessionSchema),
+  })
+  .refine((file) => file.sessions.length === file.sessionCount, "sessionCount must equal the number of sessions");
+
+/** Every number written in a sentence, with thousands separators removed. */
+export function numbersIn(text: string): number[] {
+  return (text.match(/-?\d[\d,]*(?:\.\d+)?/g) ?? []).map((token) => Number(token.replace(/,/g, "")));
+}
+
+/** The four finding kinds, in screen order [spec Section 3.11]. */
+export const findingKinds = ["rack-candidate", "attach-pattern", "under-converting", "licensing-gap"] as const;
+
+const findingSchema = z
+  .strictObject({
+    kind: z.enum(findingKinds),
+    bucket: bucketEnum,
+    action: z.string().trim().min(1).refine(noEmDash, "no em dash"),
+    text: z.string().trim().min(1).refine(noEmDash, "no em dash"),
+    figures: z.record(z.string().min(1), z.number()),
+  })
+  .superRefine((finding, ctx) => {
+    // Every figure in a finding comes from the seeded data [Res #38].
+    const known = Object.values(finding.figures);
+    for (const n of numbersIn(finding.text)) {
+      if (!known.includes(n)) ctx.addIssue({ code: "custom", message: `${n} in the text is not one of the figures`, path: ["text"] });
+    }
+  });
+
+/** Per-bucket aggregates the findings cite [D-029]. */
+const bucketFiguresSchema = z.strictObject({
+  sessions: z.number().int().nonnegative(),
+  views: z.number().int().nonnegative(),
+  adds: z.number().int().nonnegative(),
+  works: z.number().int().nonnegative(),
+});
+
+/** data/signals.json: the four J8 findings and the figures behind them [spec Section 3.11, Gap G27, D-029]. */
+export const signalsFileSchema = z
+  .strictObject({
+    seed: z.number().int(),
+    simulated: z.literal(true),
+    sessionCount: z.number().int().positive(),
+    buckets: perBucket(bucketFiguresSchema),
+    findings: z.array(findingSchema).length(4),
+  })
+  .refine((file) => findingKinds.every((kind, i) => file.findings[i]?.kind === kind), "one finding of each kind, in order");
+
+/** data/j2-cache.json: normalized phrase to real J2 output [Res #7, Res #8, docs/ai-jobs.md]. */
+export const j2CacheFileSchema = z.record(z.string().min(1), j2OutputSchema).superRefine((cache, ctx) => {
+  for (const [key, answer] of Object.entries(cache)) {
+    if (key !== normalizePhrase(key)) ctx.addIssue({ code: "custom", message: "key is not normalized", path: [key] });
+    const invented = inventedHeard(answer.heard, key);
+    if (invented.length) ctx.addIssue({ code: "custom", message: `heard words not in the phrase: ${invented.join(", ")}`, path: [key, "heard"] });
+  }
+});
+
+/** A single lowercase word, as the fallback splits typed text. */
+const word = z.string().regex(/^[a-z']+$/, "one lowercase word");
+const sizeWords = Object.keys(sizeWordToPrintSize) as [keyof typeof sizeWordToPrintSize, ...(keyof typeof sizeWordToPrintSize)[]];
+
+/** data/j2-wordmap.json: the fallback's mood words, plus room-type and size words [Gap G7, Gap G9, D-028]. */
+export const j2WordmapFileSchema = z.strictObject({
+  words: z.record(word, z.strictObject({ valence, arousal })),
+  roomTypes: z.record(word, z.enum(roomTypes)),
+  sizes: z.record(word, z.enum(sizeWords)),
+});

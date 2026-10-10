@@ -21,6 +21,17 @@ export const linkedInUrl = "https://www.linkedin.com/in/scottreasinger/";
 /** Claude model used by J1, J2, J4 and J8 [docs/ai-jobs.md, D-006]. */
 export const claudeModel = "claude-opus-5-5";
 
+/**
+ * Effort per job: how much the model thinks before answering, which sets thinking-token spend.
+ * J2 runs live under a 4-second timeout, so it thinks least. Set from the M3 pilots.
+ */
+export const claudeEffort = {
+  j1: "medium",
+  j2: "low",
+  j4: "medium",
+  j8: "medium",
+} as const satisfies Record<string, "low" | "medium" | "high">;
+
 // ---------------------------------------------------------------------------
 // Room and matching (J3, J7)
 // ---------------------------------------------------------------------------
