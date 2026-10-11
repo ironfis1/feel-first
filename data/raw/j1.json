@@ -1,0 +1,512 @@
+{
+  "w-0004": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.05,
+      "arousal": 0.75,
+      "tags": [
+        "awe",
+        "energized",
+        "tense",
+        "defiant"
+      ],
+      "palette": [
+        "#e3d3b5",
+        "#1f3f7a",
+        "#c8b79a",
+        "#7f9fc0",
+        "#f2ead8"
+      ],
+      "subject": "seascape"
+    }
+  },
+  "w-0017": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": -0.45,
+      "arousal": -0.4,
+      "tags": [
+        "nostalgic",
+        "contemplative",
+        "melancholy",
+        "wistful"
+      ],
+      "palette": [
+        "#1a1f17",
+        "#2b2a1e",
+        "#5a4a2e",
+        "#8a6a3a",
+        "#b8a07a"
+      ],
+      "subject": "still life"
+    }
+  },
+  "w-0028": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": -0.35,
+      "arousal": 0.25,
+      "tags": [
+        "contemplative",
+        "tense",
+        "melancholy",
+        "nostalgic",
+        "awe"
+      ],
+      "palette": [
+        "#3a3524",
+        "#5e5a3c",
+        "#7f7c58",
+        "#26231a",
+        "#4d6470"
+      ],
+      "subject": "landscape"
+    }
+  },
+  "w-0052": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.05,
+      "arousal": -0.2,
+      "tags": [
+        "contemplative",
+        "serene",
+        "awe",
+        "tense"
+      ],
+      "palette": [
+        "#7a6a45",
+        "#5e5236",
+        "#c8853e",
+        "#8f8f86",
+        "#2e2a20"
+      ],
+      "subject": "animal"
+    }
+  },
+  "w-0108": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.05,
+      "arousal": 0.25,
+      "tags": [
+        "contemplative",
+        "tense",
+        "melancholy",
+        "wistful"
+      ],
+      "palette": [
+        "#c9a43c",
+        "#b5523a",
+        "#d8c8a8",
+        "#9a9ab8",
+        "#7fa66a"
+      ],
+      "subject": "interior"
+    }
+  },
+  "w-0133": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.45,
+      "arousal": 0.65,
+      "tags": [
+        "energized",
+        "playful",
+        "joyful",
+        "nostalgic"
+      ],
+      "palette": [
+        "#e8dfa8",
+        "#1a1a1a",
+        "#7a7a6e",
+        "#d8442c",
+        "#f0e9d0"
+      ],
+      "subject": "graphic"
+    }
+  },
+  "w-0136": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": -0.62,
+      "arousal": -0.12,
+      "tags": [
+        "melancholy",
+        "contemplative",
+        "awe",
+        "tense"
+      ],
+      "palette": [
+        "#8a8170",
+        "#5a5246",
+        "#b5ab98",
+        "#2f2a24",
+        "#d8cfbd"
+      ],
+      "subject": "figure"
+    }
+  },
+  "w-0139": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.5,
+      "arousal": 0.25,
+      "tags": [
+        "serene",
+        "joyful",
+        "tender",
+        "contemplative",
+        "energized"
+      ],
+      "palette": [
+        "#e3ddd6",
+        "#3f5f9e",
+        "#5f9a6e",
+        "#4fb88a",
+        "#2c3f72"
+      ],
+      "subject": "still life"
+    }
+  },
+  "w-0201": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.35,
+      "arousal": -0.55,
+      "tags": [
+        "serene",
+        "contemplative",
+        "wistful",
+        "nostalgic"
+      ],
+      "palette": [
+        "#c9cfd6",
+        "#d9bf96",
+        "#b8c98a",
+        "#c4b3a8",
+        "#a8b8cc"
+      ],
+      "subject": "landscape"
+    }
+  },
+  "w-0203": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.35,
+      "arousal": 0.1,
+      "tags": [
+        "playful",
+        "tender",
+        "nostalgic",
+        "contemplative"
+      ],
+      "palette": [
+        "#3a3a2a",
+        "#5a2e1e",
+        "#d8d2c0",
+        "#6b6a50",
+        "#1a1612"
+      ],
+      "subject": "animal"
+    }
+  },
+  "w-0232": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": -0.12,
+      "arousal": -0.58,
+      "tags": [
+        "contemplative",
+        "serene",
+        "nostalgic",
+        "melancholy",
+        "wistful"
+      ],
+      "palette": [
+        "#8a7f6e",
+        "#a89a84",
+        "#5e564c",
+        "#c9c4b8",
+        "#7a4a38"
+      ],
+      "subject": "cityscape"
+    }
+  },
+  "w-0237": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": -0.45,
+      "arousal": -0.3,
+      "tags": [
+        "contemplative",
+        "melancholy",
+        "wistful",
+        "awe"
+      ],
+      "palette": [
+        "#3a3430",
+        "#4e463f",
+        "#2a2522",
+        "#6a5f55",
+        "#45364a"
+      ],
+      "subject": "figure"
+    }
+  },
+  "w-0302": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.72,
+      "arousal": 0.78,
+      "tags": [
+        "energized",
+        "playful",
+        "joyful",
+        "awe"
+      ],
+      "palette": [
+        "#ee3a2b",
+        "#f2b830",
+        "#f4ead6",
+        "#8e2a73",
+        "#111111"
+      ],
+      "subject": "space"
+    }
+  },
+  "w-0310": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.55,
+      "arousal": 0.55,
+      "tags": [
+        "playful",
+        "energized",
+        "nostalgic",
+        "joyful",
+        "awe"
+      ],
+      "palette": [
+        "#141214",
+        "#e2502a",
+        "#1d3a6a",
+        "#f2e6cf",
+        "#8a2a3a"
+      ],
+      "subject": "graphic"
+    }
+  },
+  "w-0313": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.55,
+      "arousal": 0.45,
+      "tags": [
+        "playful",
+        "awe",
+        "tender",
+        "energized",
+        "nostalgic"
+      ],
+      "palette": [
+        "#e8261e",
+        "#8e1f1c",
+        "#f26a4f",
+        "#1e2a2e",
+        "#ffffff"
+      ],
+      "subject": "space"
+    }
+  },
+  "w-0325": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.1,
+      "arousal": 0.45,
+      "tags": [
+        "tense",
+        "nostalgic",
+        "energized",
+        "defiant"
+      ],
+      "palette": [
+        "#ece6d8",
+        "#4a6fa8",
+        "#e0673a",
+        "#1a1a1a",
+        "#a9b4c4"
+      ],
+      "subject": "graphic"
+    }
+  },
+  "w-0326": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": -0.35,
+      "arousal": 0.45,
+      "tags": [
+        "tense",
+        "defiant",
+        "nostalgic",
+        "melancholy"
+      ],
+      "palette": [
+        "#1f1e1f",
+        "#e9b25e",
+        "#9aa3b3",
+        "#5e7a78",
+        "#c8653a"
+      ],
+      "subject": "graphic"
+    }
+  },
+  "w-0329": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.3,
+      "arousal": -0.15,
+      "tags": [
+        "nostalgic",
+        "contemplative",
+        "serene",
+        "playful"
+      ],
+      "palette": [
+        "#f1e6d2",
+        "#4a4a4e",
+        "#2a2f55",
+        "#e9dcc4",
+        "#c8452e"
+      ],
+      "subject": "graphic"
+    }
+  },
+  "w-0331": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.35,
+      "arousal": -0.05,
+      "tags": [
+        "awe",
+        "nostalgic",
+        "serene",
+        "contemplative"
+      ],
+      "palette": [
+        "#e8a3a8",
+        "#8a7a9e",
+        "#2e2d4a",
+        "#d9c9b8",
+        "#c87a4a"
+      ],
+      "subject": "place"
+    }
+  },
+  "w-0367": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.15,
+      "arousal": 0.65,
+      "tags": [
+        "energized",
+        "tense",
+        "defiant",
+        "playful",
+        "nostalgic"
+      ],
+      "palette": [
+        "#ece3cc",
+        "#141414",
+        "#262838",
+        "#d2401f",
+        "#8a8a88"
+      ],
+      "subject": "animal"
+    }
+  },
+  "w-0391": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.3,
+      "arousal": 0.45,
+      "tags": [
+        "energized",
+        "playful",
+        "nostalgic",
+        "tense"
+      ],
+      "palette": [
+        "#1a1f4e",
+        "#e8b83a",
+        "#f2efe6",
+        "#c9c9c9",
+        "#1b1a1a"
+      ],
+      "subject": "graphic"
+    }
+  },
+  "w-0503": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.55,
+      "arousal": -0.05,
+      "tags": [
+        "playful",
+        "nostalgic",
+        "joyful",
+        "serene"
+      ],
+      "palette": [
+        "#6a96d0",
+        "#e8e6dc",
+        "#2a2a2e",
+        "#d8d070",
+        "#5c88c0"
+      ],
+      "subject": "graphic"
+    }
+  },
+  "w-0552": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.62,
+      "arousal": 0.35,
+      "tags": [
+        "energized",
+        "joyful",
+        "nostalgic",
+        "playful"
+      ],
+      "palette": [
+        "#f1f0ea",
+        "#2a4fb0",
+        "#a9bfd6",
+        "#8c3a2a",
+        "#2a2a2a"
+      ],
+      "subject": "figure"
+    }
+  },
+  "w-0566": {
+    "promptHash": "265c6a5d0fca",
+    "fields": {
+      "valence": 0.62,
+      "arousal": 0.3,
+      "tags": [
+        "joyful",
+        "nostalgic",
+        "playful",
+        "energized"
+      ],
+      "palette": [
+        "#3a302c",
+        "#f2b83a",
+        "#d2662a",
+        "#4f5232",
+        "#f0e0b0"
+      ],
+      "subject": "graphic"
+    }
+  }
+}
