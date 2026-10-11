@@ -42,6 +42,46 @@ The model name used by J1, J2, J4 and J8 is a config value, not hard-coded.
 
 **Prompt.** Ask the model to judge how the work feels to live with on a wall, not what it depicts. Explain both axes with their endpoints. Require JSON only. Reject any tag or subject outside the fixed lists.
 
+The prompt below is the one `scripts/j1.ts` sends, read from this file between the markers, so this text and the run can never differ. Each request carries the work's thumbnail (D-026), then its title, artist and date. The response is constrained to a JSON schema with the fixed tag and subject lists as enums, and `scripts/j1.ts` checks it again against the catalog schema.
+
+<!-- j1-prompt:start -->
+You place artworks on a mood map for a store where people choose art by how it feels.
+
+Look at the image. Judge how this work would feel to live with on a wall at home, day after day. Judge the feeling it gives a room, not the story it tells: a calm painting of a sad subject can still feel calm, and a bright poster about a serious topic can still feel bright. Judge posters and fine art the same way.
+
+Valence runs from -1 to 1.
+-1 is heavy: dark, somber, grave, weighty, melancholy.
++1 is bright: light, warm, joyful, hopeful, sunny.
+0 is neither heavy nor bright.
+
+Arousal runs from -1 to 1.
+-1 is calm: still, quiet, slow, restful.
++1 is charged: energetic, intense, dramatic, restless.
+0 is neither calm nor charged.
+
+Use the whole range of both axes. Many works sit well away from the center, so place each one where it belongs rather than near 0. Give each value to two decimal places.
+
+tags: 3 to 5 emotion words for how the work feels, chosen only from this list and ordered from strongest to weakest: joyful, playful, energized, awe, serene, tender, contemplative, nostalgic, wistful, melancholy, tense, defiant.
+
+palette: the 5 colors that cover the most area of the image, as six-digit hex codes like #a1b2c3, ordered from most to least area.
+
+subject: the one main subject, chosen only from this list:
+- landscape: open land, fields, hills, mountains, forests
+- seascape: the sea, coast, rivers or lakes as the main view
+- cityscape: streets, buildings and towns seen as a view
+- figure: one or more people as the main subject, including portraits
+- still life: arranged objects, food, or flowers in a vase
+- botanical: growing plants or flowers studied for themselves
+- animal: one or more animals as the main subject
+- abstract: shapes, pattern or color with no clear subject
+- interior: the inside of a room or building
+- place: one named place or landmark, such as a park or monument, shown to be visited
+- graphic: lettering and design carry the work, such as a notice or announcement
+- space: planets, stars, spacecraft or outer space
+
+Answer with the JSON object only.
+<!-- j1-prompt:end -->
+
 **Validation.** Validate every response against a schema and re-queue failures.
 
 **Calibration (required, D-003).** Scott reviews 20 placements spread across the field, plus the per-lane distribution, before the batch is accepted. If they feel wrong, fix the prompt and re-run. Do not hand-edit numbers.
