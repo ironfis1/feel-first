@@ -308,6 +308,14 @@ Decision: Allow places. A capitalized word that does not start a sentence must c
 Why: Lines can stay specific ("the Thames at night") while the most common way a person's name gets in, a portrait title, is closed. Scott accepted that a person named in a non-figure title could still slip through.
 Spec reference: Section 4 J4, docs/ai-jobs.md J4 banned list.
 
+### D-034: J4 lines are at most 30 words
+Date: 2026-10-11
+Decided by: Scott
+Question: The J4 pilot lines met "one or two sentences" but ran 27 to 54 words (median 37), a short paragraph rather than a line on the Piece screen. Cap the length?
+Decision: Each line is at most 30 words, in addition to the two-sentence limit. The prompt asks for it and the validator rejects longer lines.
+Why: Tighter lines read as a curator's note, and the cap cuts J4 output cost by about a third.
+Spec reference: Section 4 J4, docs/ai-jobs.md J4 style.
+
 ---
 
 ## Open questions

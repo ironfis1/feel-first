@@ -1,4 +1,4 @@
-// The rules every J4 "why this found you" line must pass [spec Section 4 J4, docs/ai-jobs.md J4, D-033].
+// The rules every J4 "why this found you" line must pass [spec Section 4 J4, docs/ai-jobs.md J4, D-033, D-034].
 // The banned-phrase list lives only here: scripts/j4.ts appends it to the prompt and checks lines against it.
 
 /** Generic phrasing a thoughtful curator would not use. Matched whole-word and case-insensitively. */
@@ -33,6 +33,9 @@ export const bannedPhrases = [
   "truly",
   "nestled",
 ] as const;
+
+/** Most words a line may have [D-034]. */
+export const maxLineWords = 30;
 
 const emDash = String.fromCharCode(0x2014);
 const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -89,6 +92,8 @@ export function lineProblems(line: string, work: { title: string; artist: string
   const text = line.trim();
   if (!text) return ["empty line"];
   if (sentenceCount(text) > 2) problems.push("more than two sentences");
+  const words = text.split(/\s+/).length;
+  if (words > maxLineWords) problems.push(`${words} words, over ${maxLineWords}`);
   if (text.includes(emDash)) problems.push("em dash");
   if (text.includes("!")) problems.push("exclamation point");
   const banned = text.match(bannedPattern);

@@ -140,7 +140,7 @@ Answer with the JSON object only.
 
 **Output.** One "why this found you" line per work per mood bucket, which is 9 lines per work. They go in `data/copy.json`, keyed by work id and bucket.
 
-**Style.** One or two sentences. Name something specific in the work (light, color, gesture, subject) and connect it to that bucket's feeling.
+**Style.** One or two sentences, at most 30 words (D-034). Name something specific in the work (light, color, gesture, subject) and connect it to that bucket's feeling.
 
 **Banned:**
 - em dashes
@@ -152,7 +152,7 @@ Answer with the JSON object only.
 
 **How it runs.** `scripts/j4.ts` sends one batch request per work, carrying the work's thumbnail (as J1 does, D-026), its title, artist, date, lane and J1 fields. The model returns all 9 lines in one JSON object keyed by bucket (D-027), so the image is read once per work, not nine times. The script appends the banned-phrase list from `scripts/lib/j4-rules.ts` to the prompt below, so the list lives in one place and the validator and the prompt cannot drift apart.
 
-**Validator.** Every line is checked before it is accepted; one bad line re-queues the whole work. A line is rejected if it is empty, runs past two sentences, contains an em dash or an exclamation point, uses a banned phrase, or has a capitalized word that is not the start of a sentence and does not come from the artist's name or, for works whose subject is not figure, the title (D-033).
+**Validator.** Every line is checked before it is accepted; one bad line re-queues the whole work. A line is rejected if it is empty, runs past two sentences, contains an em dash or an exclamation point, uses a banned phrase, runs past 30 words (D-034), or has a capitalized word that is not the start of a sentence and does not come from the artist's name or, for works whose subject is not figure, the title (D-033).
 
 <!-- j4-prompt:start -->
 You write the short note that tells a visitor why an artwork found them, in a store where people choose art by how it feels. The visitor has described their mood, and the store matched this work to it.
@@ -170,12 +170,14 @@ Write one note for each of these 9 moods the visitor might be in:
 - mid-charged: restless, alert, full of energy
 - bright-charged: joyful, lively, exuberant
 
-Each note is one or two sentences. Name one specific thing you can see in the work, such as its light, a color, a gesture, a shape, the weather or the lettering, and connect it to that mood. When the work's own feeling is close to the mood, say what it shares with it. When the work's feeling is far from the mood, say honestly how it meets the mood, for example as a counterweight or a way out of it. Never claim a match that is not there.
+Each note is one or two sentences and at most 30 words. Name one specific thing you can see in the work, such as its light, a color, a gesture, a shape, the weather or the lettering, and connect it to that mood. When the work's own feeling is close to the mood, say what it shares with it. When the work's feeling is far from the mood, say honestly how it meets the mood, for example as a counterweight or a way out of it, and find a fresh way to say so each time rather than opening with "This is not". Never claim a match that is not there.
 
 Write the way a thoughtful curator talks to a visitor: plain, warm, exact. Speak to the visitor as "you" when it helps. Vary how the 9 notes open, and do not repeat the same detail in every note.
 
 Rules:
-- Do not name any person except the artist. Name a place only if it is in the title.
+- Do not name any person except the artist. Name a place only if it is in the title. When the subject is figure, use no names from the title at all.
+- Do not quote words or letters printed on the work unless they also appear in the title. Describe lettering by how it looks instead.
+- Name colors in plain lowercase words, such as deep blue or rust, not names like Prussian blue.
 - Do not use em dashes or exclamation points.
 - Do not mention prices, the store, or the mood map itself.
 
