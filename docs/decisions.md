@@ -316,6 +316,22 @@ Decision: Each line is at most 30 words, in addition to the two-sentence limit. 
 Why: Tighter lines read as a curator's note, and the cap cuts J4 output cost by about a third.
 Spec reference: Section 4 J4, docs/ai-jobs.md J4 style.
 
+### D-035: J4 aims at about 25 words and runs at low effort
+Date: 2026-10-11
+Decided by: Scott
+Question: The second J4 pilot passed 21 of 24 works, with the 3 rejects at 31 or 32 words, and measured about $0.016 per work, putting the full run near $11. About two thirds of output was hidden thinking at medium effort. Change the prompt target and the effort?
+Decision: The prompt asks for about 25 words, never more than 30; the validator still rejects lines over 30 (D-034). J4 effort in src/config/feel.ts moves from medium to low. A third 24-work pilot measures quality and cost before the full run.
+Why: Aiming below the cap should stop near misses that re-queue a whole work, and low effort cuts thinking spend. The pilot shows whether line quality holds.
+Spec reference: Section 4 J4, D-034.
+
+### D-036: How J8 picks its four findings from the seeded data
+Date: 2026-10-11
+Decided by: Scott
+Question: The spec names the four finding shapes (D-029) but not how a segment or group qualifies, or what the simulation assumes.
+Decision: A poster group is the set of posters sharing a J1 subject. A group's lift counts only when it has at least 300 views in the segment. The attach finding needs at least 100 adds in the segment. The simulation follows assumptions A1 to A10 listed in the header of scripts/j8-seed.ts, with seed 20261008 and 20,000 sessions.
+Why: J1 subject is the only grouping every poster has. The thresholds keep small, noisy cells from producing a finding. Stating the assumptions lets each finding be traced to a cause rather than to noise.
+Spec reference: Section 3.10, Section 3.11, Res #38, Gap G27, D-029.
+
 ---
 
 ## Open questions

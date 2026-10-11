@@ -30,7 +30,7 @@ export const claudeModel = "claude-opus-5-5";
 export const claudeEffort = {
   j1: "medium",
   j2: "low",
-  j4: "medium",
+  j4: "low",
   j8: "medium",
 } as const satisfies Record<string, "low" | "medium" | "high">;
 

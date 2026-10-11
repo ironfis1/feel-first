@@ -170,7 +170,7 @@ Write one note for each of these 9 moods the visitor might be in:
 - mid-charged: restless, alert, full of energy
 - bright-charged: joyful, lively, exuberant
 
-Each note is one or two sentences and at most 30 words. Name one specific thing you can see in the work, such as its light, a color, a gesture, a shape, the weather or the lettering, and connect it to that mood. When the work's own feeling is close to the mood, say what it shares with it. When the work's feeling is far from the mood, say honestly how it meets the mood, for example as a counterweight or a way out of it, and find a fresh way to say so each time rather than opening with "This is not". Never claim a match that is not there.
+Each note is one or two sentences of about 25 words, never more than 30. Name one specific thing you can see in the work, such as its light, a color, a gesture, a shape, the weather or the lettering, and connect it to that mood. When the work's own feeling is close to the mood, say what it shares with it. When the work's feeling is far from the mood, say honestly how it meets the mood, for example as a counterweight or a way out of it, and find a fresh way to say so each time rather than opening with "This is not". Never claim a match that is not there.
 
 Write the way a thoughtful curator talks to a visitor: plain, warm, exact. Speak to the visitor as "you" when it helps. Vary how the 9 notes open, and do not repeat the same detail in every note.
 
