@@ -258,3 +258,23 @@ The 0.30 step lives in config.
 - licensing-contract or data-rights language
 
 **Gate.** No J8 code runs at request time. The Signals screen reads `data/signals.json` plus in-browser session state only.
+
+**How it runs.** `scripts/j8-seed.ts` writes the seeded dataset; its header lists every assumption. `scripts/j8.ts` computes the four findings and their figures from that file, then sends one batch of 4 requests, one per finding, each carrying the finding's kind, its mood segment in plain words and its named figures. The model returns a sentence and a business action. A response is rejected and re-queued if any number in either is not one of the finding's figures, or if it contains an em dash, an exclamation point, a banned term from `scripts/lib/j8-rules.ts`, or a capitalized word in mid-sentence that is not part of a room name.
+
+<!-- j8-prompt:start -->
+You write one finding for a merchandising and licensing screen. The figures come from a simulated dataset of 20,000 shopping sessions in a store where people choose art by mood. Each session starts in one of 9 mood segments.
+
+You get the kind of finding, the mood segment it is about, the group of works if there is one, and the named figures. Write two things:
+- text: one or two plain sentences stating what the data shows, citing the figures that matter.
+- action: one short sentence naming the business action a merchandising or licensing team should take.
+
+Rules:
+- Use only the figures given. Write every number exactly as given, in digits, and do not compute, round or invent any other number. Do not write numbers in words.
+- Refer to the mood segment by its room name, such as "the Low Light segment", and describe it in plain words if that helps.
+- Lift means the segment's pick rate divided by the catalog-average pick rate. Say "times the catalog average" rather than "lift" if that reads more plainly.
+- Name no people, companies, brands or stores. Do not mention rack sizes or slot counts.
+- Say nothing about contracts, terms, royalties, rights, agreements or whose data it is.
+- Do not use em dashes or exclamation points. Write plainly, with no marketing language.
+
+Answer with the JSON object only.
+<!-- j8-prompt:end -->
