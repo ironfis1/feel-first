@@ -292,6 +292,14 @@ Decision: Fix the prompt and re-run all 600 works. The revision separates a post
 Why: docs/ai-jobs.md requires posters to land across the whole field, checked per lane before the batch is accepted (D-003). AI output is never hand-edited, so the prompt is the only fix.
 Spec reference: Section 4 J1, D-003.
 
+### D-032: J1 calibration accepted on the revised prompt, with the poster skew as a known limit
+Date: 2026-10-11
+Decided by: Scott
+Question: The revised prompt (a8a9b5008f5d) fixed the nostalgic tag (on 23 posters, down from 288) but posters still cluster: 240 of 299 are bright or charged, 13 sit in the calm row, and none are heavy-calm. Revise again, change the poster set, or accept?
+Decision: Accept the revised prompt's placements. The poster skew is logged as a known limit of the poster set (WPA promotion and JPL travel posters are mostly upbeat, bold work), not a prompt fault. Works that fail validation are retried on the same prompt; only if they keep failing does the prompt change.
+Why: Two prompts that both told the model to separate printing style from feeling gave nearly the same poster spread, and individual placements read correctly. Further prompt runs cost about $3.46 each with little expected change.
+Spec reference: Section 4 J1, D-003, D-031.
+
 ---
 
 ## Open questions

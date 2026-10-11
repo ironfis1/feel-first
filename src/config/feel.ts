@@ -1,6 +1,8 @@
 // Every tunable value in Feel First lives here (spec Section 7, Res #10, Gap G18).
 // Components import from this file. Nothing else hard-codes these values.
 
+import type { BucketKey } from "../lib/buckets.ts";
+
 // ---------------------------------------------------------------------------
 // Identity and contact
 // ---------------------------------------------------------------------------
@@ -47,6 +49,19 @@ export const driftBehavior = "end-of-lane" as const;
 
 /** Mood bucket cut points on each axis, giving a 3x3 grid of equal thirds [Gap G4, Gap G18]. */
 export const bucketCutPoints = [-1 / 3, 1 / 3] as const;
+
+/** One room name per mood bucket, written once and approved by Scott on 2026-10-11 [Res #9, RB54]. */
+export const roomNames = {
+  "heavy-calm": "Low Light",
+  "mid-calm": "Still Air",
+  "bright-calm": "Morning Light",
+  "heavy-mid": "Overcast",
+  "mid-mid": "Plain Daylight",
+  "bright-mid": "Warm Afternoon",
+  "heavy-charged": "Gathering Storm",
+  "mid-charged": "High Wind",
+  "bright-charged": "Full Sun",
+} as const satisfies Record<BucketKey, string>;
 
 /** Number of emotion tags shown in the Piece fingerprint [Res #13]. */
 export const fingerprintTagCount = 3;

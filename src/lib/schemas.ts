@@ -124,6 +124,10 @@ const noEmDash = (text: string) => !text.includes(emDash);
 const positive = z.number().positive();
 const effort = z.enum(["low", "medium", "high"]);
 
+/** An object with exactly the 9 bucket keys, each holding a value of the given schema [D-027]. */
+export const perBucket = <T extends z.ZodType>(value: T) =>
+  z.strictObject(Object.fromEntries(bucketKeys.map((key) => [key, value])) as Record<BucketKey, T>);
+
 /** The tunable values in src/config/feel.ts [spec Section 7, Gap G18]. */
 export const configSchema = z
   .object({
@@ -136,6 +140,7 @@ export const configSchema = z
     nudgeStep: z.number().gt(0).lt(1),
     driftBehavior: z.literal("end-of-lane"),
     bucketCutPoints: z.tuple([axis, axis]).refine(([low, high]) => low < high, "cut points must ascend"),
+    roomNames: perBucket(z.string().trim().min(1).refine(noEmDash, "no em dash")),
     fingerprintTagCount: z.number().int().min(1).max(3),
     j2TimeoutMs: z.number().int().positive(),
     j2RateLimit: z.object({ calls: z.number().int().positive(), windowMs: z.number().int().positive() }),
@@ -201,9 +206,6 @@ export function withoutJ1(catalogJson: unknown): unknown {
   return catalogJson.map((w: Record<string, unknown>) => Object.fromEntries(Object.entries(w).filter(([key]) => !j1Keys.includes(key))));
 }
 
-/** An object with exactly the 9 bucket keys, each holding a value of the given schema [D-027]. */
-export const perBucket = <T extends z.ZodType>(value: T) =>
-  z.strictObject(Object.fromEntries(bucketKeys.map((key) => [key, value])) as Record<BucketKey, T>);
 
 /** One "why this found you" line: non-empty and free of em dashes. J4's fuller checks live in its validator. */
 const curatorLine = z.string().trim().min(1).refine(noEmDash, "no em dash");
