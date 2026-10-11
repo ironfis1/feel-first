@@ -150,6 +150,38 @@ Answer with the JSON object only.
 
 **Room names.** Claude also drafts the 9 room names. Scott approves them, and they live in config.
 
+**How it runs.** `scripts/j4.ts` sends one batch request per work, carrying the work's thumbnail (as J1 does, D-026), its title, artist, date, lane and J1 fields. The model returns all 9 lines in one JSON object keyed by bucket (D-027), so the image is read once per work, not nine times. The script appends the banned-phrase list from `scripts/lib/j4-rules.ts` to the prompt below, so the list lives in one place and the validator and the prompt cannot drift apart.
+
+**Validator.** Every line is checked before it is accepted; one bad line re-queues the whole work. A line is rejected if it is empty, runs past two sentences, contains an em dash or an exclamation point, uses a banned phrase, or has a capitalized word that is not the start of a sentence and does not come from the artist's name or, for works whose subject is not figure, the title (D-033).
+
+<!-- j4-prompt:start -->
+You write the short note that tells a visitor why an artwork found them, in a store where people choose art by how it feels. The visitor has described their mood, and the store matched this work to it.
+
+You get the image, its title, artist, date and lane (fine art or poster), and where it sits on the mood map: valence from -1 heavy to +1 bright, arousal from -1 calm to +1 charged, plus its strongest feelings.
+
+Write one note for each of these 9 moods the visitor might be in:
+- heavy-calm: somber, quiet, still, inward
+- mid-calm: restful, even, unhurried
+- bright-calm: light, gentle, warm, at rest
+- heavy-mid: grave, weighty, thoughtful
+- mid-mid: balanced, steady, everyday
+- bright-mid: warm, hopeful, easy
+- heavy-charged: dramatic, stormy, tense
+- mid-charged: restless, alert, full of energy
+- bright-charged: joyful, lively, exuberant
+
+Each note is one or two sentences. Name one specific thing you can see in the work, such as its light, a color, a gesture, a shape, the weather or the lettering, and connect it to that mood. When the work's own feeling is close to the mood, say what it shares with it. When the work's feeling is far from the mood, say honestly how it meets the mood, for example as a counterweight or a way out of it. Never claim a match that is not there.
+
+Write the way a thoughtful curator talks to a visitor: plain, warm, exact. Speak to the visitor as "you" when it helps. Vary how the 9 notes open, and do not repeat the same detail in every note.
+
+Rules:
+- Do not name any person except the artist. Name a place only if it is in the title.
+- Do not use em dashes or exclamation points.
+- Do not mention prices, the store, or the mood map itself.
+
+Answer with the JSON object only, with one note for each mood key.
+<!-- j4-prompt:end -->
+
 ---
 
 ## J5 Wall reader (runtime, no AI)

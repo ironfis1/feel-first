@@ -11,7 +11,6 @@
 // AI output is never edited by hand: if results are wrong, change the prompt and re-run.
 // scripts/merge.ts rebuilds data/catalog.json from the raw sources without J1 fields; run --merge again after it.
 
-import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -19,6 +18,7 @@ import type { Message } from "@anthropic-ai/sdk/resources/messages";
 import { claudeEffort, claudeModel } from "../src/config/feel.ts";
 import { catalogFileSchema, emotionTags, j1FieldsSchema, metadataCatalogFileSchema, subjects, withoutJ1 } from "../src/lib/schemas.ts";
 import { type BatchRequest, liveBatchApi, runBatch } from "./lib/batch.ts";
+import { hashOf, promptBetween } from "./lib/prompt.ts";
 
 const root = path.resolve(import.meta.dirname, "..");
 const resultsFile = path.join(root, "data/raw/j1.json");
@@ -38,13 +38,9 @@ export type J1Fields = ReturnType<typeof j1FieldsSchema.parse>;
 type Stored = Record<string, { promptHash: string; fields: J1Fields }>;
 
 /** The J1 prompt: the text between the j1-prompt markers in docs/ai-jobs.md. */
-export function promptFrom(markdown: string): string {
-  const match = markdown.match(/<!-- j1-prompt:start -->\r?\n([\s\S]*?)\r?\n<!-- j1-prompt:end -->/);
-  if (!match) throw new Error("docs/ai-jobs.md has no J1 prompt between the j1-prompt markers");
-  return match[1].replace(/\r\n/g, "\n").trim();
-}
+export const promptFrom = (markdown: string) => promptBetween(markdown, "j1-prompt");
 
-export const hashOf = (prompt: string) => createHash("sha256").update(prompt).digest("hex").slice(0, 12);
+export { hashOf };
 
 /** The structured output schema. Counts, ranges, uniqueness and hex format are checked after parsing. */
 export const j1JsonSchema = {

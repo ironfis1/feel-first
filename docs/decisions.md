@@ -300,6 +300,14 @@ Decision: Accept the revised prompt's placements. The poster skew is logged as a
 Why: Two prompts that both told the model to separate printing style from feeling gave nearly the same poster spread, and individual placements read correctly. Further prompt runs cost about $3.46 each with little expected change.
 Spec reference: Section 4 J1, D-003, D-031.
 
+### D-033: How the J4 validator enforces the ban on names
+Date: 2026-10-11
+Decided by: Scott
+Question: J4 lines may not name any person other than the artist, but a validator cannot reliably tell a person's name from a place name, and some titles are people. Ban every proper noun except the artist's, or allow places?
+Decision: Allow places. A capitalized word that does not start a sentence must come from the artist's name or the work's title. For works whose J1 subject is figure, title words are not allowed, since those titles usually name the sitter, and a capitalized title word that is not the artist's or a plain describing word (portrait, woman, young and the like) is rejected anywhere in the line, including at the start of a sentence. Any other capitalized word rejects the response, which is re-queued.
+Why: Lines can stay specific ("the Thames at night") while the most common way a person's name gets in, a portrait title, is closed. Scott accepted that a person named in a non-figure title could still slip through.
+Spec reference: Section 4 J4, docs/ai-jobs.md J4 banned list.
+
 ---
 
 ## Open questions
