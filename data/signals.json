@@ -1,0 +1,118 @@
+{
+  "seed": 20261008,
+  "simulated": true,
+  "sessionCount": 20000,
+  "buckets": {
+    "heavy-calm": {
+      "sessions": 1943,
+      "views": 11509,
+      "adds": 107,
+      "works": 31
+    },
+    "mid-calm": {
+      "sessions": 2826,
+      "views": 16706,
+      "adds": 294,
+      "works": 122
+    },
+    "bright-calm": {
+      "sessions": 3109,
+      "views": 18156,
+      "adds": 416,
+      "works": 32
+    },
+    "heavy-mid": {
+      "sessions": 1603,
+      "views": 9306,
+      "adds": 112,
+      "works": 17
+    },
+    "mid-mid": {
+      "sessions": 3628,
+      "views": 21433,
+      "adds": 524,
+      "works": 125
+    },
+    "bright-mid": {
+      "sessions": 2570,
+      "views": 15335,
+      "adds": 350,
+      "works": 122
+    },
+    "heavy-charged": {
+      "sessions": 949,
+      "views": 5765,
+      "adds": 79,
+      "works": 19
+    },
+    "mid-charged": {
+      "sessions": 1831,
+      "views": 10942,
+      "adds": 189,
+      "works": 58
+    },
+    "bright-charged": {
+      "sessions": 1541,
+      "views": 9088,
+      "adds": 191,
+      "works": 74
+    }
+  },
+  "findings": [
+    {
+      "kind": "rack-candidate",
+      "bucket": "bright-calm",
+      "action": "Build a retail rack of these place posters aimed at Morning Light shoppers.",
+      "text": "In the Morning Light segment, where shoppers want art that feels bright, gentle and at rest, the 12 place posters were picked at 5 percent of views, or 2.6 times the catalog average of 1.9 percent. That comes from 64 adds on 1279 views across 20000 simulated sessions.",
+      "figures": {
+        "lift": 2.6,
+        "groupPickRatePct": 5,
+        "catalogPickRatePct": 1.9,
+        "groupViews": 1279,
+        "groupAdds": 64,
+        "groupWorks": 12,
+        "totalSessions": 20000
+      }
+    },
+    {
+      "kind": "attach-pattern",
+      "bucket": "heavy-calm",
+      "action": "Offer black frames as the default framing option on works shown to the Low Light segment.",
+      "text": "In the Low Light segment, where shoppers lean toward somber, quiet and still work, 57 percent of the 107 adds were framed, compared with 41.8 percent across all adds in the 20000 simulated sessions. Black was the leading finish, used on 47.5 percent of this segment's framed adds.",
+      "figures": {
+        "framedSharePct": 57,
+        "catalogFramedSharePct": 41.8,
+        "topFinishSharePct": 47.5,
+        "segmentAdds": 107,
+        "totalSessions": 20000
+      }
+    },
+    {
+      "kind": "under-converting",
+      "bucket": "heavy-calm",
+      "action": "Review and refresh the works shown to Low Light sessions, testing stronger somber and quiet pieces to raise picks per work viewed.",
+      "text": "The Low Light segment, where shoppers start in a heavy and calm mood that is somber, quiet and still, adds works to the bag at a pick rate of 0.9 percent against a catalog average of 1.9 percent, or 0.49 times the catalog average. This is the lowest conversion of any mood segment, across 1943 of the 20000 simulated sessions.",
+      "figures": {
+        "pickRatePct": 0.9,
+        "catalogPickRatePct": 1.9,
+        "lift": 0.49,
+        "sessions": 1943,
+        "totalSessions": 20000
+      }
+    },
+    {
+      "kind": "licensing-gap",
+      "bucket": "bright-calm",
+      "action": "Prioritize licensing new bright, gentle, calm works to deepen the Morning Light segment.",
+      "text": "The Morning Light segment, for bright and calm moods, has 32 catalog works for 3109 of the 20000 simulated sessions, which is 10.3 works per 1000 sessions against 30 per 1000 sessions across the whole catalog. It has the fewest works per expected session of any mood segment.",
+      "figures": {
+        "works": 32,
+        "sessions": 3109,
+        "worksPer1000Sessions": 10.3,
+        "perSessions": 1000,
+        "catalogWorksPer1000Sessions": 30,
+        "totalSessions": 20000
+      }
+    }
+  ]
+}
