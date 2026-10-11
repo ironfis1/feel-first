@@ -68,7 +68,7 @@ Use the whole range of both axes. Many works sit well away from the center, so p
 - about 0.7, 0.7 (bright and charged): a crowded carnival, dancers in motion, a vivid circus or sports poster full of movement.
 Give each value to two decimal places.
 
-tags: 3 to 5 emotion words for how the work feels, chosen only from this list and ordered from strongest to weakest: joyful, playful, energized, awe, serene, tender, contemplative, nostalgic, wistful, melancholy, tense, defiant. Choose only feelings the work clearly gives. Use nostalgic only when the work itself looks back with longing at an earlier time, never because the work is old or printed in an old style. Use contemplative only when the work draws the eye into slow, inward attention, never just because it is quiet or old.
+tags: 3 to 5 emotion words for how the work feels, chosen only from this list and ordered from strongest to weakest: joyful, playful, energized, awe, serene, tender, contemplative, nostalgic, wistful, melancholy, tense, defiant. Choose only feelings the work clearly gives, but always give at least 3: if only one or two feelings are strong, add the next closest ones last. Use nostalgic only when the work itself looks back with longing at an earlier time, never because the work is old or printed in an old style. Use contemplative only when the work draws the eye into slow, inward attention, never just because it is quiet or old.
 
 palette: the 5 colors that cover the most area of the image, as six-digit hex codes like #a1b2c3, ordered from most to least area.
 
