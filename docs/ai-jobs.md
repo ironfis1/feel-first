@@ -122,6 +122,26 @@ Answer with the JSON object only.
 
 **Review.** Claude drafts the phrase list and the word map. Scott approves both. The phrase used in the video must be in the cache.
 
+**How the drafts run.** `scripts/j2-draft.ts --video="<phrase>"` sends one request through the Message Batches API with the prompt below and writes `data/raw/j2-draft.json` for review. The validator rejects a draft unless it has 45 to 55 distinct lowercase phrases including the video phrase, 140 to 160 distinct mood words with at least 8 in each of the 9 buckets, a word for every room type and size word, no word in two lists, and no em dash. After Scott approves, `--write` turns the draft into `data/j2-wordmap.json`, and `scripts/j2-cache.ts` sends each approved phrase live through the shared J2 module (`src/lib/j2.ts`), the same request and parser the runtime route uses, and writes `data/j2-cache.json`.
+
+<!-- j2-draft-prompt:start -->
+You draft two lists for the mood interpreter of an online art store that hangs its gallery by feeling. A visitor types a short phrase about a feeling, a moment or a room, and the interpreter places it on a two-axis mood field.
+
+Valence runs from -1 to 1. -1 is heavy: somber, grave, dark, weighty. +1 is bright: light, warm, hopeful, sunny. 0 is neither.
+Arousal runs from -1 to 1. -1 is calm: still, quiet, slow, restful. +1 is charged: energetic, intense, restless, loud. 0 is neither.
+The field is cut into nine regions at -0.33 and 0.33 on each axis: heavy, mid or bright, crossed with calm, mid or charged.
+
+First, phrases: about 50 phrases a visitor is likely to type into a box that asks them to describe a moment in their own words. Write them the way people actually type, in lowercase, 2 to 9 words, with no final period. Mix everyday moments ("sunday coffee while it rains"), feelings, times of day, weather and seasons, life events such as a new baby or a first apartment, and requests that name a room or a print size ("something big and calm for the bedroom"). Cover all nine regions, including the heavy and charged ones. Name no people, brands, places, films, songs or holidays tied to one faith. The phrase the visitor will type in the demo video is given below and must appear exactly as written.
+
+Second, mood words: about 150 single lowercase words a visitor might type, each with a valence and an arousal to two decimal places. Use common words for feelings, weather, light, times of day, seasons, activities and textures. Spread them across the whole field with at least 10 in every region, and place each word where a thoughtful person would. Leave out words that only name a room or a size.
+
+Third, room words: single lowercase words that name or clearly imply each room type, mapped to one of the room types listed below. Include each room type's own name, or its first word when the name has two.
+
+Fourth, size words: single lowercase words that ask for a print size, mapped to small, medium or large. Include those three words.
+
+No word may appear in more than one of the mood, room and size lists.
+<!-- j2-draft-prompt:end -->
+
 **Logging.** Log only which path answered (cache, live or fallback). Never log the visitor's text.
 
 ---
