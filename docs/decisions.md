@@ -276,6 +276,22 @@ Decision: data/signals-seed.json holds the seed, the session count and the sessi
 Why: Every figure in signals.json can be recomputed from the sessions in the seed file [Res #38].
 Spec reference: Section 3.10, Section 3.11, Gap G27.
 
+### D-030: A point on a bucket cut belongs to the middle band
+Date: 2026-10-11
+Decided by: Scott
+Question: The cut points are -1/3 and +1/3 on each axis, but the spec does not say which bucket a value exactly on a cut belongs to.
+Decision: A value exactly on a cut goes to the middle band. Only values below -1/3 are heavy or calm, and only values above +1/3 are bright or charged.
+Why: It keeps the outer buckets strictly outside the cuts, and src/lib/buckets.ts already works this way.
+Spec reference: Section 3.4, docs/ai-jobs.md shared coordinate space.
+
+### D-031: J1 calibration fails on the first prompt, and the prompt is revised
+Date: 2026-10-11
+Decided by: Scott
+Question: The first full J1 run (prompt 265c6a5d0fca) put 244 of 300 posters in the bright or charged buckets and only 3 in the calm row, tagged 288 of 300 posters "nostalgic", and crowded fine art into mid-calm and mid-mid. Accept it, or fix the prompt and re-run?
+Decision: Fix the prompt and re-run all 600 works. The revision separates a poster's printing style from its feeling, limits "nostalgic" and "contemplative" to works that earn them, and gives an anchor description for each corner of the field.
+Why: docs/ai-jobs.md requires posters to land across the whole field, checked per lane before the batch is accepted (D-003). AI output is never hand-edited, so the prompt is the only fix.
+Spec reference: Section 4 J1, D-003.
+
 ---
 
 ## Open questions

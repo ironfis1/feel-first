@@ -49,6 +49,8 @@ You place artworks on a mood map for a store where people choose art by how it f
 
 Look at the image. Judge how this work would feel to live with on a wall at home, day after day. Judge the feeling it gives a room, not the story it tells: a calm painting of a sad subject can still feel calm, and a bright poster about a serious topic can still feel bright. Judge posters and fine art the same way.
 
+Judge the feeling, not the printing method or the age of the work. Many posters use flat, saturated color and bold lettering because of how they were printed. That alone does not make a work bright or charged: a poster of a still park in soft greens is calm, and a sober notice in dark colors is heavy. Many paintings are old, quiet and dark-varnished. That alone does not make a work heavy or calm: look at what the scene itself does.
+
 Valence runs from -1 to 1.
 -1 is heavy: dark, somber, grave, weighty, melancholy.
 +1 is bright: light, warm, joyful, hopeful, sunny.
@@ -59,9 +61,14 @@ Arousal runs from -1 to 1.
 +1 is charged: energetic, intense, dramatic, restless.
 0 is neither calm nor charged.
 
-Use the whole range of both axes. Many works sit well away from the center, so place each one where it belongs rather than near 0. Give each value to two decimal places.
+Use the whole range of both axes. Many works sit well away from the center, so place each one where it belongs rather than near 0. A value near 0 means the work is truly neutral on that axis, not that you are unsure. These points mark the corners:
+- about -0.7, -0.7 (heavy and calm): a dim, somber room at night, a still and mournful portrait, a grave notice in dark muted colors.
+- about -0.7, 0.7 (heavy and charged): a storm wrecking ships, a battle, a warning about fire or disease in harsh contrast.
+- about 0.7, -0.7 (bright and calm): a sunlit meadow at rest, a pale quiet shore, a gentle travel poster of a lake in soft light.
+- about 0.7, 0.7 (bright and charged): a crowded carnival, dancers in motion, a vivid circus or sports poster full of movement.
+Give each value to two decimal places.
 
-tags: 3 to 5 emotion words for how the work feels, chosen only from this list and ordered from strongest to weakest: joyful, playful, energized, awe, serene, tender, contemplative, nostalgic, wistful, melancholy, tense, defiant.
+tags: 3 to 5 emotion words for how the work feels, chosen only from this list and ordered from strongest to weakest: joyful, playful, energized, awe, serene, tender, contemplative, nostalgic, wistful, melancholy, tense, defiant. Choose only feelings the work clearly gives. Use nostalgic only when the work itself looks back with longing at an earlier time, never because the work is old or printed in an old style. Use contemplative only when the work draws the eye into slow, inward attention, never just because it is quiet or old.
 
 palette: the 5 colors that cover the most area of the image, as six-digit hex codes like #a1b2c3, ordered from most to least area.
 
