@@ -8,7 +8,7 @@ export default defineConfig({
     alias: [
       { find: "@", replacement: path.resolve(import.meta.dirname, "src") },
       // Tests never read the real catalog through the catalog module; they get the fixture.
-      { find: /^.*\/data\/catalog\.json$/, replacement: path.resolve(import.meta.dirname, "tests/fixtures/catalog.metadata.json") },
+      { find: /^.*\/data\/catalog\.json$/, replacement: path.resolve(import.meta.dirname, "data/fixtures/catalog.fixture.json") },
     ],
   },
   oxc: { jsx: { runtime: "automatic" } },

@@ -7,10 +7,10 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type { z } from "zod";
 import {
+  catalogFileSchema,
   copyFileSchema,
   j2CacheFileSchema,
   j2WordmapFileSchema,
-  metadataCatalogFileSchema,
   signalsFileSchema,
   signalsSeedFileSchema,
 } from "../src/lib/schemas.ts";
@@ -55,7 +55,7 @@ function check<T>(name: string, schema: z.ZodType<T>, json: unknown, extra: (dat
 
 async function main() {
   const catalogJson = await readJson("catalog.json");
-  const problems = check("catalog.json", metadataCatalogFileSchema, catalogJson, (catalog) =>
+  const problems = check("catalog.json", catalogFileSchema, catalogJson, (catalog) =>
     catalogProblems(catalog, (url) => existsSync(path.join(root, "public", url))),
   );
   const ids = new Set((catalogJson as { id: string }[]).map((w) => w.id));

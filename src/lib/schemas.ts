@@ -194,6 +194,13 @@ export const configSchema = z
 /** The five fields J1 adds to each work [spec Section 3.2, Gap G1]. Also the J1 response contract. */
 export const j1FieldsSchema = z.strictObject({ valence, arousal, tags, palette, subject });
 
+/** A catalog file with any J1 fields removed, so scripts that need only the M2 metadata read it before and after the J1 merge. */
+export function withoutJ1(catalogJson: unknown): unknown {
+  if (!Array.isArray(catalogJson)) return catalogJson;
+  const j1Keys = Object.keys(j1FieldsSchema.shape);
+  return catalogJson.map((w: Record<string, unknown>) => Object.fromEntries(Object.entries(w).filter(([key]) => !j1Keys.includes(key))));
+}
+
 /** An object with exactly the 9 bucket keys, each holding a value of the given schema [D-027]. */
 export const perBucket = <T extends z.ZodType>(value: T) =>
   z.strictObject(Object.fromEntries(bucketKeys.map((key) => [key, value])) as Record<BucketKey, T>);

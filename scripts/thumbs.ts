@@ -5,7 +5,7 @@ import { existsSync } from "node:fs";
 import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
-import { metadataCatalogFileSchema } from "../src/lib/schemas.ts";
+import { metadataCatalogFileSchema, withoutJ1 } from "../src/lib/schemas.ts";
 import { jplUserAgent } from "./ingest/jpl.ts";
 import { type Client, createClient } from "./ingest/lib/http.ts";
 import { type SourceKey, sourceKeys, sourceNames } from "./ingest/lib/raw.ts";
@@ -68,7 +68,7 @@ function clients(): Record<SourceKey, Client> {
 }
 
 async function main() {
-  const catalog = metadataCatalogFileSchema.parse(JSON.parse(await readFile(path.join(root, "data/catalog.json"), "utf8")));
+  const catalog = metadataCatalogFileSchema.parse(withoutJ1(JSON.parse(await readFile(path.join(root, "data/catalog.json"), "utf8"))));
   const sourceUrls = new Map<string, string>();
   const fullUrls = new Map<string, string>();
   for (const key of sourceKeys) {

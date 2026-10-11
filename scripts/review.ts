@@ -5,7 +5,7 @@
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { metadataCatalogFileSchema } from "../src/lib/schemas.ts";
+import { metadataCatalogFileSchema, withoutJ1 } from "../src/lib/schemas.ts";
 import { rawFileSchema, type Skip, sourceKeys, sourceNames } from "./ingest/lib/raw.ts";
 import { loadVisualSkips } from "./merge.ts";
 
@@ -100,7 +100,7 @@ async function main() {
     bySource.push({ source: sourceNames[key], skips: [...raw.skips, ...visualSkips] });
   }
   await writeFile(path.join(reviewDir, "skip-log.md"), skipLogMarkdown(bySource));
-  const catalog = metadataCatalogFileSchema.parse(JSON.parse(await readFile(path.join(root, "data/catalog.json"), "utf8")));
+  const catalog = metadataCatalogFileSchema.parse(withoutJ1(JSON.parse(await readFile(path.join(root, "data/catalog.json"), "utf8"))));
   const totals = {
     fineArt: catalog.filter((w) => w.lane === "fine-art").length,
     posters: catalog.filter((w) => w.lane === "poster").length,

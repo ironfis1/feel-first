@@ -9,6 +9,7 @@
 // The prompt is read from docs/ai-jobs.md. Results are kept in data/raw/j1.json with a hash of the
 // prompt that produced them, so a prompt change re-tags everything and old answers are never mixed in.
 // AI output is never edited by hand: if results are wrong, change the prompt and re-run.
+// scripts/merge.ts rebuilds data/catalog.json from the raw sources without J1 fields; run --merge again after it.
 
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
@@ -16,7 +17,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { Message } from "@anthropic-ai/sdk/resources/messages";
 import { claudeEffort, claudeModel } from "../src/config/feel.ts";
-import { catalogFileSchema, emotionTags, j1FieldsSchema, metadataCatalogFileSchema, subjects } from "../src/lib/schemas.ts";
+import { catalogFileSchema, emotionTags, j1FieldsSchema, metadataCatalogFileSchema, subjects, withoutJ1 } from "../src/lib/schemas.ts";
 import { type BatchRequest, liveBatchApi, runBatch } from "./lib/batch.ts";
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -121,10 +122,7 @@ async function main() {
 
   if (args.includes("--merge")) {
     // A re-merge after a re-run replaces the J1 fields already in the file.
-    const j1Keys = Object.keys(j1FieldsSchema.shape);
-    const metadata = metadataCatalogFileSchema.parse(
-      (catalogJson as Record<string, unknown>[]).map((w) => Object.fromEntries(Object.entries(w).filter(([key]) => !j1Keys.includes(key)))),
-    );
+    const metadata = metadataCatalogFileSchema.parse(withoutJ1(catalogJson));
     const merged = catalogFileSchema.parse(mergeJ1(metadata, stored, promptHash));
     await writeFile(path.join(root, "data/catalog.json"), JSON.stringify(merged, null, 2) + "\n");
     console.log(`data/catalog.json: J1 fields merged for ${merged.length} works (prompt ${promptHash})`);
