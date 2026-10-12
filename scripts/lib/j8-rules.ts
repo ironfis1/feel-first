@@ -34,7 +34,8 @@ export const bannedTerms = [
 
 const emDash = String.fromCharCode(0x2014);
 const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-const bannedPattern = new RegExp(`(?<![\\p{L}\\p{N}-])(?:${bannedTerms.map(escape).join("|")})(?![\\p{L}-])`, "iu");
+// A hyphen counts as a word boundary, so "non-exclusive" and "rights-holder" are caught.
+const bannedPattern = new RegExp(`(?<![\\p{L}\\p{N}])(?:${bannedTerms.map(escape).join("|")})(?![\\p{L}\\p{N}])`, "iu");
 
 /**
  * Numbers written as words, which would slip past the digit check. "one" is left out because it is
@@ -46,7 +47,8 @@ export const numberWords = [
   "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety", "hundred", "thousand", "million",
   "dozen", "twice", "double", "triple", "half", "quarter",
 ] as const;
-const numberWordPattern = new RegExp(`(?<![\\p{L}-])(?:${numberWords.join("|")})(?![\\p{L}-])`, "iu");
+// A hyphen counts as a word boundary, so "twenty-five" and "two-thirds" are caught.
+const numberWordPattern = new RegExp(`(?<![\\p{L}\\p{N}])(?:${numberWords.join("|")})(?![\\p{L}\\p{N}])`, "iu");
 
 /** Words that may be capitalized mid-sentence: the room names, which name the mood segments on screen. */
 const roomNameWords = new Set(Object.values(roomNames).flatMap((name) => name.toLowerCase().split(/\s+/)));

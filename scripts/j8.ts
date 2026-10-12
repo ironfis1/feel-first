@@ -104,10 +104,15 @@ export function computeDrafts(seedFile: SeedFile, catalog: readonly Work[]): Dra
   const topFinish = [...frameFinishes].sort((x, y) => (finishes[y] ?? 0) - (finishes[x] ?? 0))[0];
 
   // 3. Under-converting segment: the lowest pick rate against the catalog average.
-  const under = [...bucketKeys].sort((x, y) => buckets[x].adds / buckets[x].views - buckets[y].adds / buckets[y].views)[0];
+  // A bucket with no views or no sessions has no rate, so it is left out rather than sorted as NaN.
+  const under = bucketKeys
+    .filter((k) => buckets[k].views > 0)
+    .sort((x, y) => buckets[x].adds / buckets[x].views - buckets[y].adds / buckets[y].views)[0];
 
   // 4. Licensing gap: the fewest catalog works per expected session [Gap G27].
-  const gap = [...bucketKeys].sort((x, y) => buckets[x].works / buckets[x].sessions - buckets[y].works / buckets[y].sessions)[0];
+  const gap = bucketKeys
+    .filter((k) => buckets[k].sessions > 0)
+    .sort((x, y) => buckets[x].works / buckets[x].sessions - buckets[y].works / buckets[y].sessions)[0];
 
   const drafts: Draft[] = [
     {
@@ -246,7 +251,7 @@ export function parseJ8(
   } catch {
     return { ok: false, reason: "malformed JSON" };
   }
-  const out = json as { text?: unknown; action?: unknown };
+  const out = (typeof json === "object" && json !== null ? json : {}) as { text?: unknown; action?: unknown };
   if (typeof out.text !== "string" || typeof out.action !== "string") return { ok: false, reason: "text and action must be strings" };
   const problems = [
     ...findingProblems(out.text, figures).map((p) => `text: ${p}`),
