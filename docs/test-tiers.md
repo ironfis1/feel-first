@@ -43,6 +43,63 @@ Kept 205, flagged 2, both deleted (flag 6): the Met and Rijksmuseum tests "match
 
 Kept 156, flagged 1. Deleted: workSchema "derives orientation from dimensions" (flag 3, duplicate). The orientation tests through the schema already cover all three branches. Mutation score unchanged by the deletion.
 
+## Triage 2026-10-12 (M3, validate-data additions)
+
+| Unit | File | I | Si | Su | C | B | Total | Tier |
+|---|---|---|---|---|---|---|---|---|
+| copyProblems | scripts/validate-data.ts | 2 | 2 | 1 | 2 | 3 | 10 | Medium |
+| seedProblems | scripts/validate-data.ts | 2 | 2 | 1 | 2 | 3 | 10 | Medium |
+| main() required-file and optional copy.json change | scripts/validate-data.ts | 2 | 2 | 1 | 2 | 3 | 10 | Medium |
+
+### Evidence and required tests
+
+#### copyProblems (Medium)
+- Impact 2: Build-time gate on data/copy.json (lines 30-37), the per-work lines shown on the Piece screen [Gap G2]. A wrong verdict blocks a good build or lets a file with gaps ship, but it computes no visitor-facing number itself.
+- Silence 2: A missed mismatch ships a Piece screen with a blank or orphaned line. A false failure is loud. The check is dormant until copy.json exists (D-039), so a defect could go unnoticed until the full J4 run.
+- Surface 1: One caller, line 75 in main().
+- Complexity 2: Two independent set differences (lines 32-33), each with its own message and a count plus first example.
+- Boundary 3: Enforces the copy.json data contract against the catalog id set.
+- Must test:
+  - Exact match of keys and ids returns [].
+  - One id missing from copy gives "N works have no lines, for example <id>" with the correct count.
+  - One extra key not in the catalog gives "N entries are not catalog works, for example <key>".
+  - Both problems at once return both messages, missing first.
+  - Empty copy against a non-empty catalog reports all missing.
+  - Empty catalog with a non-empty copy reports all unknown.
+  - Only the key counts: a present key with an empty or odd value is not flagged here (schema owns that).
+- Functional gate: Data files validated at build time (prebuild gate in docs/testing.md).
+
+#### seedProblems (Medium)
+- Impact 2: Guards signals-seed.json (lines 40-43), so the seeded Signals dataset uses real catalog ids [Res #38]. A fake id would quietly distort the Signals figures the CEO sees, but only if the gate misses it.
+- Silence 2: A missed bad id gives plausible-looking Signals counts that point at nothing. The failure is not a crash.
+- Surface 1: One caller, line 65 in main().
+- Complexity 2: flatMap over sessions, filter against the id set, dedupe through a Set, and a count of unique ids with the first as example (line 42).
+- Boundary 3: Enforces the seed-file data contract against the catalog.
+- Must test:
+  - All views known returns [].
+  - Sessions with no views, or no sessions, return [].
+  - The same unknown id repeated across views and sessions counts once ("1 viewed ids are not catalog works").
+  - Two distinct unknown ids give count 2 and the first-seen id as the example.
+  - An unknown id in a later session is still found.
+  - A known id is never reported.
+- Functional gate: Data files validated at build time (prebuild gate in docs/testing.md).
+
+#### main() required-file and optional copy.json change (Medium)
+- Impact 2: Lines 63-76 make the build fail if signals-seed.json, signals.json, j2-cache.json or j2-wordmap.json is absent or invalid. copy.json is checked only when present (D-039). This is the gate for the data the Signals screen and J2 rely on.
+- Silence 2: Loud on a missing required file ("data/<name>: missing"). Silent by design when copy.json is absent, so the full J4 run could never be forced. A wrong existsSync path would hide the check, not crash.
+- Surface 1: Runs only as npm prebuild, guarded by import.meta.main (line 85). The existing test checks the prebuild wiring only.
+- Complexity 2: A table of four validators, an exists-or-missing branch, one conditional extra check and process.exit on any problem.
+- Boundary 3: Data-contract gate over five data files.
+- Must test:
+  - Each of the four required files, when absent, produces "data/<name>: missing" and a failing exit.
+  - copy.json absent does not add a problem.
+  - copy.json present and valid passes. Present with a mismatched id set fails through copyProblems.
+  - Problems carry the "data/<file>:" prefix.
+  - Schema failures are capped at 5 issues per file.
+  - The existing prebuild wiring test (package.json prebuild equals "node scripts/validate-data.ts") stays.
+  - main() is not exported. Cover it through the functional gate (running the script against the committed data) rather than by changing code.
+- Functional gate: Data files validated at build time (prebuild gate in docs/testing.md). Run it against the real data directory and confirm exit 0 with copy.json absent (D-039).
+
 ## Triage 2026-10-11 (M3, build-time AI jobs)
 
 Existing tests: none for any M3 unit. `tests/unit/lib/catalogLoad.test.ts` line 35 covers "works lack J1 fields" only. `tests/unit/lib/configSchema.test.ts` has no `roomNames` or `claudeEffort` assertion (grep found none). Recorded fixtures present: `tests/fixtures/anthropic/j1-pilot.jsonl`, `j4-pilot.jsonl`, `j8.jsonl`. There is NO recorded J2 response fixture, so the J2 contract tests need one made from a `data/runs/j2-cache-*.jsonl` record.

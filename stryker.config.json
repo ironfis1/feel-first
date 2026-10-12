@@ -16,7 +16,7 @@
     "scripts/ingest/loc.ts:1-95",
     "scripts/merge.ts:13-113",
     "scripts/thumbs.ts:15-59",
-    "scripts/validate-data.ts:11-20",
+    "scripts/validate-data.ts:21-28",
     "src/lib/j2.ts",
     "scripts/lib/batch.ts",
     "scripts/lib/j4-rules.ts",
