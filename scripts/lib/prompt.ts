@@ -5,7 +5,8 @@ import { createHash } from "node:crypto";
 
 /** The text between <!-- name:start --> and <!-- name:end --> in docs/ai-jobs.md, with line endings normalized. */
 export function promptBetween(markdown: string, name: string): string {
-  const match = markdown.match(new RegExp(String.raw`<!-- ${name}:start -->\r?\n([\s\S]*?)\r?\n<!-- ${name}:end -->`));
+  const marker = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = markdown.match(new RegExp(String.raw`<!-- ${marker}:start -->\r?\n([\s\S]*?)\r?\n<!-- ${marker}:end -->`));
   if (!match) throw new Error(`docs/ai-jobs.md has no prompt between the ${name} markers`);
   return match[1].replace(/\r\n/g, "\n").trim();
 }
