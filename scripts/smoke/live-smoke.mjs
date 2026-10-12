@@ -300,8 +300,36 @@ const CHECKS = [
     },
   },
 
+  // ---------- M3 build-time AI ----------
+  {
+    id: 'm3.anthropic-key',
+    costly: true,
+    description: 'One minimal Anthropic API call succeeds with the build key',
+    async run() {
+      // The key comes from the environment or .env.local and is never printed. The call costs a fraction of a cent.
+      if (!process.env.ANTHROPIC_API_KEY) {
+        try {
+          process.loadEnvFile(path.join(here, '../../.env.local'));
+        } catch {
+          return fail('ANTHROPIC_API_KEY is not set and .env.local was not found');
+        }
+      }
+      const { default: Anthropic } = await import('@anthropic-ai/sdk');
+      const { claudeModel } = await import('../../src/config/feel.ts');
+      try {
+        const message = await new Anthropic({ timeout: config.timeoutMs }).messages.create({
+          model: claudeModel,
+          max_tokens: 16,
+          messages: [{ role: 'user', content: 'Reply with the word ready.' }],
+        });
+        return pass(`${claudeModel} answered (${message.usage.input_tokens} in, ${message.usage.output_tokens} out)`);
+      } catch (err) {
+        return fail(`${err.status ?? ''} ${err.name}`.trim());
+      }
+    },
+  },
+
   // ---------- planned for later milestones ----------
-  { id: 'm3.anthropic-key', pending: 'M3', costly: true, description: 'One minimal Anthropic API call succeeds with the build key' },
   { id: 'm5.j2-cache', pending: 'M5', description: 'J2 answers a pre-warmed phrase from the cache' },
   { id: 'm5.j2-live', pending: 'M5', costly: true, description: 'J2 answers a novel phrase from a live call within 4 seconds' },
   { id: 'm5.signals', pending: 'M5', description: 'Signals screen shows four findings and the simulated label' },

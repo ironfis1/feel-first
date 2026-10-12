@@ -60,16 +60,19 @@ async function main() {
   );
   const ids = new Set((catalogJson as { id: string }[]).map((w) => w.id));
 
-  // The Milestone 3 files are checked once they exist.
-  const optional: Record<string, (json: unknown) => string[]> = {
-    "copy.json": (json) => check("copy.json", copyFileSchema, json, (copy) => copyProblems(copy, ids)),
+  // The Milestone 3 files must exist, except copy.json, which is written by the deferred J4 full run (D-039).
+  const required: Record<string, (json: unknown) => string[]> = {
     "signals-seed.json": (json) => check("signals-seed.json", signalsSeedFileSchema, json, (seed) => seedProblems(seed, ids)),
     "signals.json": (json) => check("signals.json", signalsFileSchema, json),
     "j2-cache.json": (json) => check("j2-cache.json", j2CacheFileSchema, json),
     "j2-wordmap.json": (json) => check("j2-wordmap.json", j2WordmapFileSchema, json),
   };
-  for (const [name, validate] of Object.entries(optional)) {
+  for (const [name, validate] of Object.entries(required)) {
     if (existsSync(path.join(root, "data", name))) problems.push(...validate(await readJson(name)));
+    else problems.push(`data/${name}: missing`);
+  }
+  if (existsSync(path.join(root, "data/copy.json"))) {
+    problems.push(...check("copy.json", copyFileSchema, await readJson("copy.json"), (copy) => copyProblems(copy, ids)));
   }
 
   if (problems.length) {
