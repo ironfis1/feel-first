@@ -9,6 +9,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { Message } from "@anthropic-ai/sdk/resources/messages";
+import { z } from "zod";
 import { claudeEffort, claudeModel, roomTypes, sizeWordToPrintSize } from "../src/config/feel.ts";
 import { bucketKeys, bucketOf } from "../src/lib/buckets.ts";
 import { normalizePhrase } from "../src/lib/j2.ts";
@@ -27,12 +28,14 @@ export const minWordsPerBucket = 8;
 
 export const promptFrom = (markdown: string) => promptBetween(markdown, "j2-draft-prompt");
 
-export type J2Draft = {
-  phrases: string[];
-  words: { word: string; valence: number; arousal: number }[];
-  roomWords: { word: string; roomType: (typeof roomTypes)[number] }[];
-  sizeWords: { word: string; size: keyof typeof sizeWordToPrintSize }[];
-};
+/** The shape of a draft. Its rules are checked by draftProblems once the shape holds. */
+export const j2DraftSchema = z.strictObject({
+  phrases: z.array(z.string()),
+  words: z.array(z.strictObject({ word: z.string(), valence: z.number(), arousal: z.number() })),
+  roomWords: z.array(z.strictObject({ word: z.string(), roomType: z.enum(roomTypes) })),
+  sizeWords: z.array(z.strictObject({ word: z.string(), size: z.enum(sizeWords as [keyof typeof sizeWordToPrintSize, ...(keyof typeof sizeWordToPrintSize)[]]) })),
+});
+export type J2Draft = z.infer<typeof j2DraftSchema>;
 
 export const j2DraftJsonSchema = {
   type: "object",
@@ -142,17 +145,17 @@ export function parseJ2Draft(message: Message, video: string): { ok: true; value
   if (message.stop_reason !== "end_turn") return { ok: false, reason: `stop reason ${message.stop_reason}` };
   const body = message.content.find((block) => block.type === "text");
   if (!body || body.type !== "text") return { ok: false, reason: "no text block" };
-  let draft: J2Draft;
+  let json: unknown;
   try {
-    draft = JSON.parse(body.text) as J2Draft;
+    json = JSON.parse(body.text);
   } catch {
     return { ok: false, reason: "malformed JSON" };
   }
-  if (!Array.isArray(draft?.phrases) || !Array.isArray(draft.words) || !Array.isArray(draft.roomWords) || !Array.isArray(draft.sizeWords)) {
-    return { ok: false, reason: "missing lists" };
-  }
-  const problems = draftProblems(draft, video);
-  return problems.length ? { ok: false, reason: problems.join("; ") } : { ok: true, value: draft };
+  // A malformed list member is a rejected draft, re-queued like any other, never a crash after the batch is paid for.
+  const shape = j2DraftSchema.safeParse(json);
+  if (!shape.success) return { ok: false, reason: shape.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ") };
+  const problems = draftProblems(shape.data, video);
+  return problems.length ? { ok: false, reason: problems.join("; ") } : { ok: true, value: shape.data };
 }
 
 type DraftFile = { promptHash: string; video: string; draft: J2Draft };
@@ -161,6 +164,7 @@ async function main() {
   const args = process.argv.slice(2);
   if (args.includes("--write")) {
     const file = JSON.parse(await readFile(draftPath, "utf8")) as DraftFile;
+    j2DraftSchema.parse(file.draft);
     const problems = draftProblems(file.draft, file.video);
     if (problems.length) throw new Error(`draft fails validation: ${problems.join("; ")}`);
     await writeFile(path.join(root, "data/j2-wordmap.json"), JSON.stringify(wordmapFile(file.draft), null, 2) + "\n");

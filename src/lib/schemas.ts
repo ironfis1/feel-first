@@ -245,9 +245,12 @@ export const signalsSeedFileSchema = z
   })
   .refine((file) => file.sessions.length === file.sessionCount, "sessionCount must equal the number of sessions");
 
-/** Every number written in a sentence, with thousands separators removed. */
+/**
+ * Every number written in a sentence, with thousands separators removed. A minus sign counts only when it
+ * does not follow a letter or digit, so "mid-1990s" reads as 1990, not -1990.
+ */
 export function numbersIn(text: string): number[] {
-  return (text.match(/-?\d[\d,]*(?:\.\d+)?/g) ?? []).map((token) => Number(token.replace(/,/g, "")));
+  return (text.match(/(?:(?<![\p{L}\p{N}])-)?\d[\d,]*(?:\.\d+)?/gu) ?? []).map((token) => Number(token.replace(/,/g, "")));
 }
 
 /** The four finding kinds, in screen order [spec Section 3.11]. */
@@ -264,8 +267,10 @@ const findingSchema = z
   .superRefine((finding, ctx) => {
     // Every figure in a finding comes from the seeded data [Res #38].
     const known = Object.values(finding.figures);
-    for (const n of numbersIn(finding.text)) {
-      if (!known.includes(n)) ctx.addIssue({ code: "custom", message: `${n} in the text is not one of the figures`, path: ["text"] });
+    for (const field of ["text", "action"] as const) {
+      for (const n of numbersIn(finding[field])) {
+        if (!known.includes(n)) ctx.addIssue({ code: "custom", message: `${n} in the ${field} is not one of the figures`, path: [field] });
+      }
     }
   });
 
