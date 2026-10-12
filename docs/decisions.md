@@ -348,6 +348,14 @@ Decision: Approved as drafted: 52 phrases including the D-037 video phrase, 147 
 Why: Every bucket has 14 to 19 words and the phrases cover all nine regions. Scott accepted the somber phrases and the odd word placements flagged in review.
 Spec reference: Section 4 J2, Gap G9, D-028, D-037.
 
+### D-039: The J4 full run is deferred until the Piece screen copy settles
+Date: 2026-10-12
+Decided by: Scott
+Question: The J4 full run (576 works, about $6.20 to $7 measured on the third pilot) is the last M3 job. Run it now, or wait while M4 may still change the line style or prompt?
+Decision: Defer it. M3 finishes everything else and closes with "copy.json is complete" as the one open exit item. M4 may start with J4 lines for only the 24 pilot works. The full run happens once the Piece screen copy is settled, and before the video is recorded at the latest. scripts/validate-data.ts requires copy.json only from then.
+Why: Lines are keyed by a hash of the prompt and the work's J1 fields, so any prompt change after a full run would re-run and re-bill the affected works. Running once after iteration costs the least.
+Spec reference: docs/milestones.md M3 exit, Section 4 J4, D-035.
+
 ---
 
 ## Open questions
