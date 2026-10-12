@@ -148,3 +148,22 @@ describe("configSchema field rules", () => {
     expect(accepted((c) => (c.roomPageSizePerLane = 6.5))).toBe(false);
   });
 });
+
+describe("configSchema room names and effort (M3)", () => {
+  it("requires exactly one room name per bucket [Res #9, D-027]", () => {
+    expect(issuesAfter((c) => delete c.roomNames["mid-mid"]).map((i) => i.path)).toEqual([["roomNames", "mid-mid"]]);
+    expect(accepted((c) => (c.roomNames["mid-warm"] = "Spare Room"))).toBe(false);
+  });
+
+  it("rejects a blank or em dash room name", () => {
+    expect(issuesAfter((c) => (c.roomNames["heavy-calm"] = "   ")).map((i) => i.path)).toEqual([["roomNames", "heavy-calm"]]);
+    expect(issuesAfter((c) => (c.roomNames["heavy-calm"] = `Low ${String.fromCharCode(0x2014)} Light`)).map((i) => i.message)).toEqual(["no em dash"]);
+  });
+
+  it("requires a known effort level for exactly the four jobs", () => {
+    expect(issuesAfter((c) => delete c.claudeEffort.j2).map((i) => i.path)).toEqual([["claudeEffort", "j2"]]);
+    expect(accepted((c) => (c.claudeEffort.j3 = "low"))).toBe(false);
+    expect(issuesAfter((c) => (c.claudeEffort.j8 = "max")).map((i) => i.path)).toEqual([["claudeEffort", "j8"]]);
+    for (const level of ["low", "medium", "high"]) expect(accepted((c) => (c.claudeEffort.j1 = level))).toBe(true);
+  });
+});
