@@ -1,0 +1,588 @@
+{
+  "a slow sunday morning in the bedroom, something large": {
+    "valence": 0.45,
+    "arousal": -0.6,
+    "roomType": "bedroom",
+    "size": "large",
+    "heard": [
+      "slow",
+      "sunday",
+      "morning",
+      "bedroom",
+      "large"
+    ]
+  },
+  "sunday coffee while it rains": {
+    "valence": 0.3,
+    "arousal": -0.6,
+    "roomType": "kitchen",
+    "size": null,
+    "heard": [
+      "sunday",
+      "coffee",
+      "rains"
+    ]
+  },
+  "something big and calm for the bedroom": {
+    "valence": 0.2,
+    "arousal": -0.6,
+    "roomType": "bedroom",
+    "size": "large",
+    "heard": [
+      "big",
+      "calm",
+      "bedroom"
+    ]
+  },
+  "first apartment and everything feels new": {
+    "valence": 0.72,
+    "arousal": 0.38,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "first",
+      "apartment",
+      "new"
+    ]
+  },
+  "bringing home our new baby": {
+    "valence": 0.75,
+    "arousal": 0.15,
+    "roomType": "nursery",
+    "size": null,
+    "heard": [
+      "new",
+      "baby",
+      "home"
+    ]
+  },
+  "quiet snowfall outside the window": {
+    "valence": 0.25,
+    "arousal": -0.8,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "quiet",
+      "snowfall",
+      "window"
+    ]
+  },
+  "the first warm day of spring": {
+    "valence": 0.75,
+    "arousal": 0.3,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "first",
+      "warm",
+      "spring"
+    ]
+  },
+  "dancing in the kitchen with the music loud": {
+    "valence": 0.8,
+    "arousal": 0.85,
+    "roomType": "kitchen",
+    "size": null,
+    "heard": [
+      "dancing",
+      "kitchen",
+      "music",
+      "loud"
+    ]
+  },
+  "late night thunderstorm": {
+    "valence": -0.45,
+    "arousal": 0.55,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "late",
+      "night",
+      "thunderstorm"
+    ]
+  },
+  "grief that sits heavy in my chest": {
+    "valence": -0.85,
+    "arousal": -0.35,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "grief",
+      "heavy",
+      "chest"
+    ]
+  },
+  "missing someone who is gone": {
+    "valence": -0.65,
+    "arousal": -0.45,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "missing",
+      "gone"
+    ]
+  },
+  "a long lazy summer afternoon": {
+    "valence": 0.6,
+    "arousal": -0.6,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "lazy",
+      "summer",
+      "afternoon",
+      "long"
+    ]
+  },
+  "golden hour at the beach": {
+    "valence": 0.75,
+    "arousal": -0.3,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "golden",
+      "hour",
+      "beach"
+    ]
+  },
+  "rainy november evening alone": {
+    "valence": -0.45,
+    "arousal": -0.6,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "rainy",
+      "november",
+      "evening",
+      "alone"
+    ]
+  },
+  "nervous before a big interview": {
+    "valence": -0.25,
+    "arousal": 0.65,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "nervous",
+      "big",
+      "interview"
+    ]
+  },
+  "heart racing after good news": {
+    "valence": 0.75,
+    "arousal": 0.8,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "heart",
+      "racing",
+      "good",
+      "news"
+    ]
+  },
+  "we just got engaged": {
+    "valence": 0.88,
+    "arousal": 0.62,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "engaged",
+      "just",
+      "got"
+    ]
+  },
+  "angry and cannot sleep": {
+    "valence": -0.55,
+    "arousal": 0.7,
+    "roomType": "bedroom",
+    "size": null,
+    "heard": [
+      "angry",
+      "cannot",
+      "sleep"
+    ]
+  },
+  "a small print for the entry": {
+    "valence": 0.15,
+    "arousal": 0.05,
+    "roomType": "entry",
+    "size": "small",
+    "heard": [
+      "small",
+      "print",
+      "entry"
+    ]
+  },
+  "something medium and cheerful for the office": {
+    "valence": 0.65,
+    "arousal": 0.35,
+    "roomType": "office",
+    "size": "medium",
+    "heard": [
+      "cheerful",
+      "medium",
+      "office"
+    ]
+  },
+  "foggy morning by the lake": {
+    "valence": 0.05,
+    "arousal": -0.7,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "foggy",
+      "morning",
+      "lake"
+    ]
+  },
+  "autumn leaves and a warm sweater": {
+    "valence": 0.45,
+    "arousal": -0.4,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "autumn",
+      "leaves",
+      "warm",
+      "sweater"
+    ]
+  },
+  "the city at midnight": {
+    "valence": -0.15,
+    "arousal": 0.25,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "city",
+      "midnight"
+    ]
+  },
+  "cozy reading nook with tea": {
+    "valence": 0.45,
+    "arousal": -0.6,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "cozy",
+      "reading",
+      "nook",
+      "tea"
+    ]
+  },
+  "a soft nursery full of light": {
+    "valence": 0.7,
+    "arousal": -0.5,
+    "roomType": "nursery",
+    "size": null,
+    "heard": [
+      "soft",
+      "nursery",
+      "light"
+    ]
+  },
+  "burned out after a long week": {
+    "valence": -0.35,
+    "arousal": -0.55,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "burned",
+      "out",
+      "long",
+      "week"
+    ]
+  },
+  "celebrating a promotion": {
+    "valence": 0.85,
+    "arousal": 0.7,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "celebrating",
+      "promotion"
+    ]
+  },
+  "waiting at the hospital": {
+    "valence": -0.45,
+    "arousal": 0.35,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "waiting",
+      "hospital"
+    ]
+  },
+  "stormy sea and wild wind": {
+    "valence": -0.35,
+    "arousal": 0.85,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "stormy",
+      "sea",
+      "wild",
+      "wind"
+    ]
+  },
+  "calm focus for deep work": {
+    "valence": 0.15,
+    "arousal": -0.55,
+    "roomType": "office",
+    "size": null,
+    "heard": [
+      "calm",
+      "focus",
+      "deep",
+      "work"
+    ]
+  },
+  "first snow of the year": {
+    "valence": 0.45,
+    "arousal": -0.35,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "first",
+      "snow"
+    ]
+  },
+  "a gentle lullaby at bedtime": {
+    "valence": 0.45,
+    "arousal": -0.8,
+    "roomType": "nursery",
+    "size": null,
+    "heard": [
+      "gentle",
+      "lullaby",
+      "bedtime"
+    ]
+  },
+  "restless and can't sit still": {
+    "valence": -0.15,
+    "arousal": 0.75,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "restless",
+      "can't",
+      "sit",
+      "still"
+    ]
+  },
+  "dinner party with old friends": {
+    "valence": 0.65,
+    "arousal": 0.35,
+    "roomType": "kitchen",
+    "size": null,
+    "heard": [
+      "dinner",
+      "party",
+      "old",
+      "friends"
+    ]
+  },
+  "empty house after moving out": {
+    "valence": -0.45,
+    "arousal": -0.55,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "empty",
+      "house",
+      "moving",
+      "out"
+    ]
+  },
+  "dusk settling over the hills": {
+    "valence": 0.15,
+    "arousal": -0.6,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "dusk",
+      "settling",
+      "hills"
+    ]
+  },
+  "bright and bold for the living room": {
+    "valence": 0.75,
+    "arousal": 0.6,
+    "roomType": "living room",
+    "size": null,
+    "heard": [
+      "bright",
+      "bold",
+      "living",
+      "room"
+    ]
+  },
+  "a hot sticky summer night": {
+    "valence": 0.25,
+    "arousal": 0.45,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "hot",
+      "sticky",
+      "summer",
+      "night"
+    ]
+  },
+  "birthday morning with balloons": {
+    "valence": 0.82,
+    "arousal": 0.55,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "birthday",
+      "morning",
+      "balloons"
+    ]
+  },
+  "heavy rain on a tin roof": {
+    "valence": -0.15,
+    "arousal": 0.05,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "heavy",
+      "rain",
+      "tin",
+      "roof"
+    ]
+  },
+  "slow breathing before sleep": {
+    "valence": 0.25,
+    "arousal": -0.85,
+    "roomType": "bedroom",
+    "size": null,
+    "heard": [
+      "slow",
+      "breathing",
+      "sleep"
+    ]
+  },
+  "road trip with the windows down": {
+    "valence": 0.75,
+    "arousal": 0.6,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "road",
+      "trip",
+      "windows",
+      "down"
+    ]
+  },
+  "a quiet goodbye": {
+    "valence": -0.45,
+    "arousal": -0.65,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "quiet",
+      "goodbye"
+    ]
+  },
+  "winter dark at four pm": {
+    "valence": -0.55,
+    "arousal": -0.45,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "winter",
+      "dark",
+      "four",
+      "pm"
+    ]
+  },
+  "fresh start in the new year": {
+    "valence": 0.6,
+    "arousal": 0.3,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "fresh",
+      "start",
+      "new",
+      "year"
+    ]
+  },
+  "sunrise run along the river": {
+    "valence": 0.65,
+    "arousal": 0.55,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "sunrise",
+      "run",
+      "river"
+    ]
+  },
+  "melancholy but peaceful": {
+    "valence": -0.45,
+    "arousal": -0.6,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "melancholy",
+      "peaceful"
+    ]
+  },
+  "something large and moody for the office": {
+    "valence": -0.45,
+    "arousal": 0.15,
+    "roomType": "office",
+    "size": "large",
+    "heard": [
+      "large",
+      "moody",
+      "office"
+    ]
+  },
+  "kids laughing in the garden": {
+    "valence": 0.82,
+    "arousal": 0.55,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "kids",
+      "laughing",
+      "garden"
+    ]
+  },
+  "anxious thoughts at three am": {
+    "valence": -0.55,
+    "arousal": 0.6,
+    "roomType": "bedroom",
+    "size": null,
+    "heard": [
+      "anxious",
+      "thoughts",
+      "three",
+      "am"
+    ]
+  },
+  "still water at dawn": {
+    "valence": 0.35,
+    "arousal": -0.8,
+    "roomType": null,
+    "size": null,
+    "heard": [
+      "still",
+      "water",
+      "dawn"
+    ]
+  },
+  "a small happy print for the kitchen": {
+    "valence": 0.6,
+    "arousal": 0.25,
+    "roomType": "kitchen",
+    "size": "small",
+    "heard": [
+      "happy",
+      "small",
+      "kitchen"
+    ]
+  }
+}
