@@ -31,6 +31,10 @@ Tooling note: Stryker's Vitest runner 10.0.0 did not activate runtime mutants un
 
 ## Sweep results
 
+### 2026-10-12 (M3)
+
+Kept about 215 across the 18 M3 test files, flagged 2, both deleted (flag 3, duplicate): j1Schema "parses the committed data/catalog.json through catalogFileSchema" repeated the 600-work check in tests/unit/data/m3Files.test.ts, and the `[]` body case in j8 "rejects a JSON null body instead of throwing" repeated "requires a string text and a string action".
+
 ### 2026-10-09 (M2 Part B)
 
 Kept 205, flagged 2, both deleted (flag 6): the Met and Rijksmuseum tests "matches the recorded search response shape" and "matches the recorded search page shape" only inspected the fixture and never called our code.

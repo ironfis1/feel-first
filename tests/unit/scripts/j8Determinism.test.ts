@@ -38,7 +38,8 @@ describe("J8 seed determinism, committed data", () => {
     expect([seed, sessionCount]).toEqual([20261008, 20_000]);
     // About one second for 20,000 sessions over the 600-work catalog.
     expect(seedFileText(simulate(catalog)) === seedText).toBe(true);
-  });
+    // Stryker's instrumented code runs it many times slower, so it gets a longer limit than the default.
+  }, 120_000);
 
   it("reproduces every figure in data/signals.json", () => {
     expect(signals.seed).toBe(seedFile.seed);
@@ -49,5 +50,5 @@ describe("J8 seed determinism, committed data", () => {
       signals.findings.map((f) => ({ kind: f.kind, bucket: f.bucket, figures: f.figures })),
     );
     for (const [i, d] of drafts.entries()) expect(Object.keys(d.figures)).toEqual(Object.keys(signals.findings[i].figures));
-  });
+  }, 60_000);
 });

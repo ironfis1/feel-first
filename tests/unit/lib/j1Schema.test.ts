@@ -1,7 +1,5 @@
-import { readFileSync } from "node:fs";
-import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { catalogFileSchema, emotionTags, j1FieldsSchema, subjects, withoutJ1 } from "@/lib/schemas";
+import { emotionTags, j1FieldsSchema, subjects, withoutJ1 } from "@/lib/schemas";
 import { validWork } from "../../fixtures/works";
 
 // High tier for j1FieldsSchema, Medium for withoutJ1 (docs/test-tiers.md). Spec Section 3.2, Gap G1.
@@ -74,10 +72,6 @@ describe("j1FieldsSchema", () => {
     expect(paths({ palette: ["#000", "#000", color, "#000", "#000"] })).toEqual(["palette.2"]);
   });
 
-  it("parses the committed data/catalog.json through catalogFileSchema", () => {
-    const catalog = JSON.parse(readFileSync(path.resolve(import.meta.dirname, "../../../data/catalog.json"), "utf8"));
-    expect(catalogFileSchema.safeParse(catalog).error?.issues ?? []).toEqual([]);
-  });
 });
 
 describe("withoutJ1", () => {

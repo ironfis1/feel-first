@@ -385,9 +385,8 @@ describe("parseJ8 against recorded responses (j8.jsonl)", () => {
     expect(parseJ8(answer("[]"), figures)).toEqual(reason);
   });
 
-  it("rejects a JSON null or array body instead of throwing", () => {
+  it("rejects a JSON null body instead of throwing", () => {
     expect(parseJ8(answer("null"), figures)).toEqual({ ok: false, reason: "text and action must be strings" });
-    expect(parseJ8(answer("[]"), figures)).toEqual({ ok: false, reason: "text and action must be strings" });
   });
 
   it("prefixes each problem with its field and joins them", () => {
