@@ -52,12 +52,14 @@ export function sentenceCount(line: string): number {
 /** Capitalized words that do not start a sentence, with any trailing possessive removed. */
 export function midSentenceCapitals(line: string): string[] {
   const words: string[] = [];
-  const pattern = /[\p{L}\p{N}'’-]+/gu;
+  // A word starts with a letter or digit, so a quote mark is never a word of its own.
+  const pattern = /[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu;
   let sentenceStart = true;
   let last = 0;
   for (const match of line.matchAll(pattern)) {
     const between = line.slice(last, match.index);
-    if (/[.?!:]\s*["'“‘(]*\s*$/u.test(between) && last > 0) sentenceStart = true;
+    // A terminator, then any closing quotes or brackets, then any opening ones, starts a new sentence.
+    if (/[.?!:]["'”’)\]]*\s*["'“‘(]*\s*$/u.test(between)) sentenceStart = true;
     const word = match[0].replace(/['’]s$/u, "");
     if (!sentenceStart && /^\p{Lu}/u.test(word)) words.push(word);
     sentenceStart = false;
