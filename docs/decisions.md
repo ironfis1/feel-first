@@ -340,6 +340,14 @@ Decision: "a slow sunday morning in the bedroom, something large". It is passed 
 Why: It should exercise every J2 output at once (a mood point, the bedroom room type and the large size), and its expected segment, Morning Light, is the segment of the J8 rack-candidate and licensing-gap findings.
 Spec reference: Section 4 J2, Res #7, Res #8, docs/ai-jobs.md J2 review.
 
+### D-038: J2 phrase list and word map approved
+Date: 2026-10-12
+Decided by: Scott
+Question: Approve the Claude-drafted J2 lists (data/raw/j2-draft.json, prompt 450d18489769) as they are, or re-draft?
+Decision: Approved as drafted: 52 phrases including the D-037 video phrase, 147 mood words, 21 room words and 12 size words. data/j2-wordmap.json is written from the draft, and the 52 phrases go to the live cache run.
+Why: Every bucket has 14 to 19 words and the phrases cover all nine regions. Scott accepted the somber phrases and the odd word placements flagged in review.
+Spec reference: Section 4 J2, Gap G9, D-028, D-037.
+
 ---
 
 ## Open questions

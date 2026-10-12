@@ -1,0 +1,629 @@
+{
+  "words": {
+    "joy": {
+      "valence": 0.9,
+      "arousal": 0.6
+    },
+    "excited": {
+      "valence": 0.75,
+      "arousal": 0.85
+    },
+    "party": {
+      "valence": 0.7,
+      "arousal": 0.85
+    },
+    "dancing": {
+      "valence": 0.75,
+      "arousal": 0.8
+    },
+    "celebration": {
+      "valence": 0.85,
+      "arousal": 0.75
+    },
+    "sunny": {
+      "valence": 0.85,
+      "arousal": 0.4
+    },
+    "summer": {
+      "valence": 0.75,
+      "arousal": 0.45
+    },
+    "festive": {
+      "valence": 0.8,
+      "arousal": 0.7
+    },
+    "playful": {
+      "valence": 0.75,
+      "arousal": 0.6
+    },
+    "thrilled": {
+      "valence": 0.85,
+      "arousal": 0.85
+    },
+    "vibrant": {
+      "valence": 0.7,
+      "arousal": 0.7
+    },
+    "laughter": {
+      "valence": 0.85,
+      "arousal": 0.6
+    },
+    "adventure": {
+      "valence": 0.6,
+      "arousal": 0.7
+    },
+    "energetic": {
+      "valence": 0.55,
+      "arousal": 0.9
+    },
+    "cheerful": {
+      "valence": 0.8,
+      "arousal": 0.45
+    },
+    "calm": {
+      "valence": 0.45,
+      "arousal": -0.8
+    },
+    "peaceful": {
+      "valence": 0.6,
+      "arousal": -0.75
+    },
+    "serene": {
+      "valence": 0.6,
+      "arousal": -0.8
+    },
+    "cozy": {
+      "valence": 0.65,
+      "arousal": -0.55
+    },
+    "gentle": {
+      "valence": 0.5,
+      "arousal": -0.6
+    },
+    "restful": {
+      "valence": 0.5,
+      "arousal": -0.8
+    },
+    "tea": {
+      "valence": 0.45,
+      "arousal": -0.5
+    },
+    "dawn": {
+      "valence": 0.5,
+      "arousal": -0.45
+    },
+    "content": {
+      "valence": 0.65,
+      "arousal": -0.45
+    },
+    "lullaby": {
+      "valence": 0.55,
+      "arousal": -0.8
+    },
+    "blissful": {
+      "valence": 0.8,
+      "arousal": -0.4
+    },
+    "soft": {
+      "valence": 0.45,
+      "arousal": -0.6
+    },
+    "warm": {
+      "valence": 0.7,
+      "arousal": -0.35
+    },
+    "tranquil": {
+      "valence": 0.55,
+      "arousal": -0.85
+    },
+    "meadow": {
+      "valence": 0.6,
+      "arousal": -0.45
+    },
+    "hopeful": {
+      "valence": 0.75,
+      "arousal": 0.1
+    },
+    "happy": {
+      "valence": 0.85,
+      "arousal": 0.3
+    },
+    "bright": {
+      "valence": 0.75,
+      "arousal": 0.25
+    },
+    "spring": {
+      "valence": 0.7,
+      "arousal": 0.2
+    },
+    "morning": {
+      "valence": 0.5,
+      "arousal": 0
+    },
+    "fresh": {
+      "valence": 0.6,
+      "arousal": 0.15
+    },
+    "grateful": {
+      "valence": 0.75,
+      "arousal": 0
+    },
+    "sunshine": {
+      "valence": 0.85,
+      "arousal": 0.3
+    },
+    "loving": {
+      "valence": 0.8,
+      "arousal": 0.05
+    },
+    "tender": {
+      "valence": 0.6,
+      "arousal": -0.3
+    },
+    "picnic": {
+      "valence": 0.7,
+      "arousal": 0.15
+    },
+    "blossom": {
+      "valence": 0.7,
+      "arousal": 0.05
+    },
+    "sweet": {
+      "valence": 0.7,
+      "arousal": 0
+    },
+    "angry": {
+      "valence": -0.75,
+      "arousal": 0.85
+    },
+    "furious": {
+      "valence": -0.85,
+      "arousal": 0.9
+    },
+    "panic": {
+      "valence": -0.8,
+      "arousal": 0.9
+    },
+    "anxious": {
+      "valence": -0.6,
+      "arousal": 0.7
+    },
+    "stormy": {
+      "valence": -0.5,
+      "arousal": 0.7
+    },
+    "thunder": {
+      "valence": -0.4,
+      "arousal": 0.8
+    },
+    "chaos": {
+      "valence": -0.6,
+      "arousal": 0.85
+    },
+    "stress": {
+      "valence": -0.65,
+      "arousal": 0.7
+    },
+    "rage": {
+      "valence": -0.9,
+      "arousal": 0.95
+    },
+    "frantic": {
+      "valence": -0.55,
+      "arousal": 0.9
+    },
+    "fear": {
+      "valence": -0.8,
+      "arousal": 0.7
+    },
+    "tense": {
+      "valence": -0.5,
+      "arousal": 0.6
+    },
+    "restless": {
+      "valence": -0.4,
+      "arousal": 0.6
+    },
+    "hurricane": {
+      "valence": -0.7,
+      "arousal": 0.9
+    },
+    "dread": {
+      "valence": -0.8,
+      "arousal": 0.5
+    },
+    "grief": {
+      "valence": -0.85,
+      "arousal": -0.4
+    },
+    "lonely": {
+      "valence": -0.7,
+      "arousal": -0.45
+    },
+    "somber": {
+      "valence": -0.7,
+      "arousal": -0.5
+    },
+    "mourning": {
+      "valence": -0.85,
+      "arousal": -0.45
+    },
+    "exhausted": {
+      "valence": -0.5,
+      "arousal": -0.75
+    },
+    "gloomy": {
+      "valence": -0.6,
+      "arousal": -0.45
+    },
+    "bleak": {
+      "valence": -0.7,
+      "arousal": -0.5
+    },
+    "weary": {
+      "valence": -0.5,
+      "arousal": -0.65
+    },
+    "desolate": {
+      "valence": -0.75,
+      "arousal": -0.6
+    },
+    "depressed": {
+      "valence": -0.85,
+      "arousal": -0.6
+    },
+    "hollow": {
+      "valence": -0.6,
+      "arousal": -0.55
+    },
+    "drained": {
+      "valence": -0.55,
+      "arousal": -0.7
+    },
+    "overcast": {
+      "valence": -0.4,
+      "arousal": -0.45
+    },
+    "numb": {
+      "valence": -0.5,
+      "arousal": -0.8
+    },
+    "heartbroken": {
+      "valence": -0.9,
+      "arousal": -0.35
+    },
+    "sad": {
+      "valence": -0.75,
+      "arousal": -0.2
+    },
+    "melancholy": {
+      "valence": -0.55,
+      "arousal": -0.3
+    },
+    "dark": {
+      "valence": -0.6,
+      "arousal": 0
+    },
+    "heavy": {
+      "valence": -0.6,
+      "arousal": -0.1
+    },
+    "bitter": {
+      "valence": -0.6,
+      "arousal": 0.2
+    },
+    "regret": {
+      "valence": -0.65,
+      "arousal": 0.05
+    },
+    "sorrow": {
+      "valence": -0.8,
+      "arousal": -0.25
+    },
+    "grim": {
+      "valence": -0.7,
+      "arousal": 0.1
+    },
+    "rainy": {
+      "valence": -0.35,
+      "arousal": -0.15
+    },
+    "gray": {
+      "valence": -0.4,
+      "arousal": -0.25
+    },
+    "disappointed": {
+      "valence": -0.6,
+      "arousal": 0
+    },
+    "homesick": {
+      "valence": -0.5,
+      "arousal": -0.1
+    },
+    "shadow": {
+      "valence": -0.45,
+      "arousal": 0
+    },
+    "loss": {
+      "valence": -0.8,
+      "arousal": -0.15
+    },
+    "busy": {
+      "valence": 0,
+      "arousal": 0.7
+    },
+    "city": {
+      "valence": 0.1,
+      "arousal": 0.65
+    },
+    "wind": {
+      "valence": 0,
+      "arousal": 0.55
+    },
+    "urgent": {
+      "valence": -0.2,
+      "arousal": 0.85
+    },
+    "loud": {
+      "valence": 0,
+      "arousal": 0.8
+    },
+    "rush": {
+      "valence": -0.1,
+      "arousal": 0.8
+    },
+    "electric": {
+      "valence": 0.25,
+      "arousal": 0.85
+    },
+    "intense": {
+      "valence": -0.05,
+      "arousal": 0.85
+    },
+    "surprised": {
+      "valence": 0.2,
+      "arousal": 0.75
+    },
+    "traffic": {
+      "valence": -0.3,
+      "arousal": 0.65
+    },
+    "wild": {
+      "valence": 0.15,
+      "arousal": 0.8
+    },
+    "bold": {
+      "valence": 0.3,
+      "arousal": 0.65
+    },
+    "workout": {
+      "valence": 0.25,
+      "arousal": 0.8
+    },
+    "nervous": {
+      "valence": -0.3,
+      "arousal": 0.65
+    },
+    "quiet": {
+      "valence": 0.15,
+      "arousal": -0.75
+    },
+    "still": {
+      "valence": 0.1,
+      "arousal": -0.85
+    },
+    "fog": {
+      "valence": -0.1,
+      "arousal": -0.6
+    },
+    "sleepy": {
+      "valence": 0.1,
+      "arousal": -0.8
+    },
+    "snow": {
+      "valence": 0.25,
+      "arousal": -0.55
+    },
+    "dusk": {
+      "valence": 0,
+      "arousal": -0.5
+    },
+    "winter": {
+      "valence": -0.2,
+      "arousal": -0.45
+    },
+    "misty": {
+      "valence": 0,
+      "arousal": -0.6
+    },
+    "slow": {
+      "valence": 0.1,
+      "arousal": -0.75
+    },
+    "pensive": {
+      "valence": -0.2,
+      "arousal": -0.5
+    },
+    "lazy": {
+      "valence": 0.25,
+      "arousal": -0.7
+    },
+    "stone": {
+      "valence": -0.15,
+      "arousal": -0.55
+    },
+    "linen": {
+      "valence": 0.3,
+      "arousal": -0.5
+    },
+    "moonlight": {
+      "valence": 0.3,
+      "arousal": -0.6
+    },
+    "drowsy": {
+      "valence": 0,
+      "arousal": -0.8
+    },
+    "nostalgic": {
+      "valence": 0.1,
+      "arousal": -0.2
+    },
+    "autumn": {
+      "valence": 0.1,
+      "arousal": -0.2
+    },
+    "afternoon": {
+      "valence": 0.2,
+      "arousal": 0
+    },
+    "evening": {
+      "valence": 0.05,
+      "arousal": -0.25
+    },
+    "cloudy": {
+      "valence": -0.2,
+      "arousal": -0.2
+    },
+    "thoughtful": {
+      "valence": 0.15,
+      "arousal": -0.25
+    },
+    "curious": {
+      "valence": 0.3,
+      "arousal": 0.3
+    },
+    "wood": {
+      "valence": 0.2,
+      "arousal": -0.2
+    },
+    "ordinary": {
+      "valence": 0,
+      "arousal": 0
+    },
+    "bittersweet": {
+      "valence": 0,
+      "arousal": -0.1
+    },
+    "focused": {
+      "valence": 0.2,
+      "arousal": 0.25
+    },
+    "breeze": {
+      "valence": 0.3,
+      "arousal": 0.1
+    },
+    "velvet": {
+      "valence": 0.2,
+      "arousal": -0.3
+    },
+    "midnight": {
+      "valence": -0.2,
+      "arousal": 0
+    },
+    "ambivalent": {
+      "valence": 0,
+      "arousal": 0.05
+    },
+    "walking": {
+      "valence": 0.25,
+      "arousal": 0.15
+    },
+    "cooking": {
+      "valence": 0.4,
+      "arousal": 0.3
+    },
+    "thrill": {
+      "valence": 0.6,
+      "arousal": 0.9
+    },
+    "radiant": {
+      "valence": 0.85,
+      "arousal": 0.5
+    },
+    "fireworks": {
+      "valence": 0.7,
+      "arousal": 0.9
+    },
+    "relaxed": {
+      "valence": 0.55,
+      "arousal": -0.7
+    },
+    "sunset": {
+      "valence": 0.55,
+      "arousal": -0.4
+    },
+    "bath": {
+      "valence": 0.5,
+      "arousal": -0.7
+    },
+    "furnace": {
+      "valence": -0.35,
+      "arousal": 0.5
+    },
+    "jealous": {
+      "valence": -0.6,
+      "arousal": 0.55
+    },
+    "lightning": {
+      "valence": -0.35,
+      "arousal": 0.85
+    },
+    "tired": {
+      "valence": -0.35,
+      "arousal": -0.7
+    },
+    "ache": {
+      "valence": -0.6,
+      "arousal": -0.35
+    },
+    "rust": {
+      "valence": -0.4,
+      "arousal": -0.35
+    },
+    "eager": {
+      "valence": 0.55,
+      "arousal": 0.6
+    },
+    "nap": {
+      "valence": 0.4,
+      "arousal": -0.85
+    }
+  },
+  "roomTypes": {
+    "living": "living room",
+    "lounge": "living room",
+    "sofa": "living room",
+    "couch": "living room",
+    "bedroom": "bedroom",
+    "bed": "bedroom",
+    "headboard": "bedroom",
+    "office": "office",
+    "desk": "office",
+    "study": "office",
+    "workspace": "office",
+    "kitchen": "kitchen",
+    "dining": "kitchen",
+    "pantry": "kitchen",
+    "nursery": "nursery",
+    "crib": "nursery",
+    "baby": "nursery",
+    "entry": "entry",
+    "hallway": "entry",
+    "foyer": "entry",
+    "entryway": "entry"
+  },
+  "sizes": {
+    "small": "small",
+    "tiny": "small",
+    "little": "small",
+    "mini": "small",
+    "medium": "medium",
+    "mid": "medium",
+    "moderate": "medium",
+    "large": "large",
+    "big": "large",
+    "huge": "large",
+    "oversized": "large",
+    "giant": "large"
+  }
+}

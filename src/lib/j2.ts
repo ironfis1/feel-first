@@ -95,6 +95,7 @@ export function parseJ2(message: J2Message, text: string): J2Parse {
 
 /** Heard words that are not words of the visitor's text. Chips show only what the visitor typed. */
 export function inventedHeard(heard: readonly string[], text: string): string[] {
-  const words = new Set(normalizePhrase(text).split(/[^a-z0-9']+/));
-  return heard.filter((word) => !words.has(word));
+  const straight = (s: string) => s.replace(/[‘’]/g, "'");
+  const words = new Set(straight(normalizePhrase(text)).split(/[^\p{L}\p{N}']+/u));
+  return heard.filter((word) => !words.has(straight(word)));
 }
