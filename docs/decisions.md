@@ -332,6 +332,14 @@ Decision: A poster group is the set of posters sharing a J1 subject. A group's l
 Why: J1 subject is the only grouping every poster has. The thresholds keep small, noisy cells from producing a finding. Stating the assumptions lets each finding be traced to a cause rather than to noise.
 Spec reference: Section 3.10, Section 3.11, Res #38, Gap G27, D-029.
 
+### D-037: The demo video phrase
+Date: 2026-10-11
+Decided by: Scott
+Question: docs/ai-jobs.md J2 requires the phrase typed in the demo video to be in the pre-warm cache. Which phrase?
+Decision: "a slow sunday morning in the bedroom, something large". It is passed to scripts/j2-draft.ts with --video and the draft validator rejects any phrase list without it.
+Why: It should exercise every J2 output at once (a mood point, the bedroom room type and the large size), and its expected segment, Morning Light, is the segment of the J8 rack-candidate and licensing-gap findings.
+Spec reference: Section 4 J2, Res #7, Res #8, docs/ai-jobs.md J2 review.
+
 ---
 
 ## Open questions
