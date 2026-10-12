@@ -173,4 +173,10 @@ describe("signalsFileSchema", () => {
     empty.findings[3].text = "   ";
     expect(signalsFileSchema.safeParse(empty).success).toBe(false);
   });
+
+  it("rejects a whitespace-only action", () => {
+    const blank = committed();
+    blank.findings[2].action = "   ";
+    expect(signalsIssues(blank).map((i) => i.path)).toEqual([["findings", 2, "action"]]);
+  });
 });

@@ -148,11 +148,19 @@ describe("j1Request", () => {
     ]);
   });
 
-  it("asks for exactly the five fields, with tags and subject from the fixed lists", () => {
-    expect(j1JsonSchema.additionalProperties).toBe(false);
-    expect(j1JsonSchema.required).toEqual(["valence", "arousal", "tags", "palette", "subject"]);
-    expect(j1JsonSchema.properties.tags.items.enum).toEqual([...emotionTags]);
-    expect(j1JsonSchema.properties.subject.enum).toEqual([...subjects]);
+  it("types each field: an object of two numbers, two string arrays and a string", () => {
+    expect(j1JsonSchema).toEqual({
+      type: "object",
+      additionalProperties: false,
+      required: ["valence", "arousal", "tags", "palette", "subject"],
+      properties: {
+        valence: { type: "number" },
+        arousal: { type: "number" },
+        tags: { type: "array", items: { type: "string", enum: [...emotionTags] } },
+        palette: { type: "array", items: { type: "string" } },
+        subject: { type: "string", enum: [...subjects] },
+      },
+    });
   });
 
   it("reads the prompt from the j1-prompt markers", () => {

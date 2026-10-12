@@ -134,6 +134,26 @@ describe("midSentenceCapitals", () => {
   it("starts a new sentence only at the word right after the terminator", () => {
     expect(midSentenceCapitals("Calm. Water near Venice")).toEqual(["Venice"]);
   });
+
+  it("keeps the sentence going when a comma follows the terminator", () => {
+    expect(midSentenceCapitals("calm., Venice")).toEqual(["Venice"]);
+  });
+
+  it("starts a sentence after a terminator with no space before the next word (pin)", () => {
+    expect(midSentenceCapitals("calm.Venice")).toEqual([]);
+  });
+
+  it("starts a sentence when a space separates the opening quote from the word", () => {
+    expect(midSentenceCapitals('It is. " Quoted')).toEqual([]);
+  });
+
+  it("strips a possessive only at the end of a word", () => {
+    expect(midSentenceCapitals("the D'souza house")).toEqual(["D'souza"]);
+  });
+
+  it("looks only at a word's first letter", () => {
+    expect(midSentenceCapitals("an eBay price")).toEqual([]);
+  });
 });
 
 describe("allowedNames", () => {
@@ -145,6 +165,10 @@ describe("allowedNames", () => {
 
   it("includes only the artist for a figure work [D-033]", () => {
     expect(allowedNames({ ...work, subject: "figure" })).toEqual(new Set(["van", "gogh"]));
+  });
+
+  it("keeps an 's inside a name", () => {
+    expect(allowedNames({ title: "Harbor", artist: "Ana D'souza", subject: "landscape" })).toEqual(new Set(["ana", "d'souza", "harbor"]));
   });
 });
 
@@ -170,6 +194,18 @@ describe("sitterNames", () => {
 
   it("strips a possessive and keeps the original capitalization", () => {
     expect(sitterNames({ title: "Mona Lisa's Smile", artist: "Leo", subject: "figure" })).toEqual(new Set(["Mona", "Lisa", "Smile"]));
+  });
+
+  it.each(["Head Of An Old Man", "Mother And Child", "Bust Of A Gentleman", "Lady In A Study", "Figure Of A Girl", "Boy In An Old Study"])(
+    "finds no sitter in the describing title %j",
+    (title) => {
+      expect(sitterNames({ title, artist: "Ann Lee", subject: "figure" })).toEqual(new Set());
+    },
+  );
+
+  it("keeps an 's inside a name and ignores a word that is not capitalized first", () => {
+    expect(sitterNames({ title: "Portrait of Ana D'souza", artist: "Leo", subject: "figure" })).toEqual(new Set(["Ana", "D'souza"]));
+    expect(sitterNames({ title: "Woman with an iPad", artist: "Leo", subject: "figure" })).toEqual(new Set());
   });
 });
 
@@ -245,6 +281,12 @@ describe("lineProblems", () => {
   it("rejects a sitter's name anywhere, including the start of a sentence", () => {
     expect(lineProblems("Roulin sits still.", portrait)).toEqual(["names the sitter: Roulin"]);
     expect(lineProblems("Calm. Roulin's hands rest.", portrait)).toEqual(["names the sitter: Roulin"]);
+  });
+
+  it("names every sitter word in the line, keeping an 's inside a name", () => {
+    const work = { title: "Portrait of Ana D'souza", artist: "Leo Ray", subject: "figure" };
+    expect(lineProblems("D'souza sits.", work)).toEqual(["names the sitter: D'souza"]);
+    expect(lineProblems("Ana D'souza sits.", work)).toEqual(["name not from the artist or title: D'souza", "names the sitter: Ana, D'souza"]);
   });
 
   it("matches the sitter's name case-sensitively (pin)", () => {

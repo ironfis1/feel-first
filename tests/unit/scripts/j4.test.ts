@@ -6,9 +6,7 @@ import { claudeEffort, claudeModel } from "@/config/feel";
 import { bucketKeys } from "@/lib/buckets";
 import { copyFileSchema, type workSchema } from "@/lib/schemas";
 import { pilotIds } from "../../../scripts/j1.ts";
-import { copyFor, inputHash, j4JsonSchema, j4Request, type Lines, parseJ4, systemPrompt, workText, worksToWrite } from "../../../scripts/j4.ts";
-import { lineProblems } from "../../../scripts/lib/j4-rules.ts";
-import { hashOf } from "../../../scripts/lib/prompt.ts";
+import { copyFor, inputHash, j4JsonSchema, j4Request, type Lines, parseJ4, sampleLines, systemPrompt, workText, worksToWrite } from "../../../scripts/j4.ts";
 import { validWork } from "../../fixtures/works.ts";
 
 // High tier (docs/test-tiers.md): parseJ4 and copyFor. Medium: systemPrompt, workText, inputHash, j4Request, worksToWrite.
@@ -18,7 +16,8 @@ type Work = z.infer<typeof workSchema>;
 const work = (overrides: Partial<Work> = {}) => validWork(overrides) as Work;
 const root = path.resolve(import.meta.dirname, "../../..");
 const markdown = "intro\n<!-- j4-prompt:start -->\nWrite one line per bucket.\n<!-- j4-prompt:end -->\noutro";
-const system = systemPrompt(markdown);
+// An opaque system prompt for the tests that only pass one through; systemPrompt itself is called inside its own tests.
+const system = "J4 SYSTEM PROMPT";
 
 /** Nine passing lines, one per bucket, each naming its bucket so mix-ups show. */
 const nineLines = (): Lines => Object.fromEntries(bucketKeys.map((key) => [key, `Calm water for ${key}.`])) as Lines;
@@ -29,9 +28,10 @@ const without = (lines: Lines, ...keys: string[]) => Object.fromEntries(Object.e
 
 describe("systemPrompt", () => {
   it("is the j4-prompt block followed by every banned phrase, in order, ending with a period", () => {
-    expect(system.startsWith("Write one line per bucket.\n\nNever use these words or phrases: captivating, captivates, evoke, evokes,")).toBe(true);
-    expect(system.endsWith(", a sense of, truly, nestled.")).toBe(true);
-    expect(system).toContain("evokes emotion, stunning,");
+    const prompt = systemPrompt(markdown);
+    expect(prompt.startsWith("Write one line per bucket.\n\nNever use these words or phrases: captivating, captivates, evoke, evokes,")).toBe(true);
+    expect(prompt.endsWith(", a sense of, truly, nestled.")).toBe(true);
+    expect(prompt).toContain("evokes emotion, stunning,");
   });
 
   it("throws when the marker is missing", () => {
@@ -63,17 +63,13 @@ describe("workText", () => {
   it("prints the fine-art lane as 'fine art'", () => {
     expect(workText(work({ lane: "fine-art" })).split("\n")[3]).toBe("Lane: fine art");
   });
-
-  it("gives the same text for the same work", () => {
-    expect(workText(work())).toBe(workText(work()));
-  });
 });
 
 describe("inputHash", () => {
   const base = work();
 
   it("hashes the system prompt and the work text together", () => {
-    expect(inputHash(system, base)).toBe(hashOf(`${system}\n---\n${workText(base)}`));
+    expect(inputHash(system, base)).toBe("32857022cd45");
     expect(inputHash(system, base)).toBe(inputHash(system, work()));
   });
 
@@ -230,29 +226,17 @@ describe("parseJ4 contract: recorded J4 batch results", () => {
         return { ...r, work: w, parsed: parseJ4(r.result.message, w) };
       });
 
-  /** The reason parseJ4 should give for a response whose JSON has all nine keys. */
-  const expectedReason = (text: string, w: Work) => {
-    const raw = JSON.parse(text) as Lines;
-    return bucketKeys.flatMap((key) => lineProblems(raw[key].trim(), w).map((p) => `${key}: ${p}`)).join("; ");
-  };
-  const textOf = (r: Recorded) => r.result.message.content.find((b) => b.type === "text")!;
-
-  it("first pilot (older prompt, no 30-word cap): every response is either nine trimmed lines or rejected per lineProblems", () => {
+  it("first pilot (older prompt, no 30-word cap): every response is rejected, each problem prefixed with its bucket", () => {
     const results = replay("j4-pilot.jsonl");
     expect(results).toHaveLength(39);
+    const bucketPrefix = new RegExp(`^(${bucketKeys.join("|")}): `);
     for (const r of results) {
       expect(r.result.type).toBe("succeeded");
-      const text = textOf(r);
-      if (text.type !== "text") throw new Error("no text");
-      if (r.parsed.ok) {
-        expect(Object.keys(r.parsed.value)).toEqual([...bucketKeys]);
-        for (const line of Object.values(r.parsed.value)) expect(line).toBe(line.trim());
-      } else {
-        expect(r.parsed.reason).toBe(expectedReason(text.text, r.work));
-      }
+      if (r.parsed.ok) throw new Error(`${r.work.id} was accepted`);
+      for (const problem of r.parsed.reason.split("; ")) expect(problem).toMatch(bucketPrefix);
+      // Every line from that prompt ran long, so the cap rejects all of them [D-034].
+      expect(r.parsed.reason).toContain("words, over 30");
     }
-    // Every line from that prompt ran long, so the cap rejects all of them [D-034].
-    expect(results.every((r) => !r.parsed.ok && r.parsed.reason.includes("words, over 30"))).toBe(true);
   });
 
   it("third pilot (current prompt): all 24 pilot works end accepted, and the rejections are the recorded near misses", () => {
@@ -333,5 +317,33 @@ describe("copyFor", () => {
     const stale = { ...current(a, b), "w-0001": { inputHash: inputHash(`${system} old`, a), lines: linesFor("w-0001") } };
     expect(() => copyFor([a, b], stale, system)).toThrow("1 works have no J4 lines for their current input, for example w-0001");
     expect(() => copyFor([work({ ...a, valence: 0.9 }), b], current(a, b), system)).toThrow("for example w-0001");
+  });
+});
+
+describe("sampleLines", () => {
+  const current = work({ id: "w-0001", title: "First" });
+  const stale = work({ id: "w-0002", title: "Second" });
+  const missing = work({ id: "w-0003", title: "Third" });
+  const other = work({ id: "w-0004", title: "Fourth" });
+  const linesFor = (id: string) => Object.fromEntries(bucketKeys.map((key) => [key, `Line for ${id} in ${key}.`])) as Lines;
+  const stored = {
+    [current.id]: { inputHash: inputHash(system, current), lines: linesFor(current.id) },
+    [stale.id]: { inputHash: inputHash(`${system} old`, stale), lines: linesFor(stale.id) },
+    [other.id]: { inputHash: inputHash(system, other), lines: linesFor(other.id) },
+  };
+  const catalog = [current, stale, missing, other];
+
+  it("draws (work, bucket, line) picks only from works with lines for their current input", () => {
+    const all = sampleLines(catalog, stored, system, 100, 7);
+    expect(all.map((p) => `${p.work.id} ${p.bucket}`).sort()).toEqual(
+      ["w-0001", "w-0004"].flatMap((id) => bucketKeys.map((key) => `${id} ${key}`)).sort(),
+    );
+    for (const p of all) expect(p.line).toBe(`Line for ${p.work.id} in ${p.bucket}.`);
+  });
+
+  it("returns n picks, the same ones for the same seed", () => {
+    const five = sampleLines(catalog, stored, system, 5, 7);
+    expect(five).toHaveLength(5);
+    expect(sampleLines(catalog, stored, system, 5, 7)).toEqual(five);
   });
 });

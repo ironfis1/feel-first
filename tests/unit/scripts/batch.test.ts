@@ -292,6 +292,39 @@ describe("runBatch", () => {
   });
 });
 
+describe("runBatch polling", () => {
+  /** A stub API whose first poll reports the batch still running. */
+  const runningOnce = () => {
+    const { api } = stubApi([[item("a", ok("ok-a"))]]);
+    const statuses = ["in_progress", "ended"];
+    vi.mocked(api.retrieve).mockImplementation(async () => ({ processing_status: statuses.shift() ?? "ended", request_counts: {} }) as never);
+    return api;
+  };
+
+  it("waits through options.sleep for pollMs while the batch is still running", async () => {
+    const sleeps: number[] = [];
+    const api = runningOnce();
+    const { values } = await runBatch(api, [request("a")], parseText, { log: () => {}, pollMs: 7, sleep: async (ms) => void sleeps.push(ms) });
+    expect(sleeps).toEqual([7]);
+    expect(values.get("a")).toBe("ok-a");
+  });
+
+  it("waits pollMs on a real timer when no sleep is given", async () => {
+    vi.useFakeTimers();
+    try {
+      const api = runningOnce();
+      const run = runBatch(api, [request("a")], parseText, { log: () => {}, pollMs: 1000 });
+      await vi.advanceTimersByTimeAsync(999);
+      expect(api.retrieve).toHaveBeenCalledTimes(1);
+      await vi.advanceTimersByTimeAsync(1);
+      expect(api.retrieve).toHaveBeenCalledTimes(2);
+      expect((await run).values.get("a")).toBe("ok-a");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+});
+
 describe("waitForEnd", () => {
   function polling(statuses: string[]) {
     const sleeps: number[] = [];

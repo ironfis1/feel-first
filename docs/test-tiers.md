@@ -4,6 +4,21 @@ The test-evaluator subagent's triage tables are saved here verbatim, newest firs
 
 ## Mutation results
 
+### 2026-10-12: all High-tier files (M3)
+
+Overall 95.07% (2296 killed, 35 timeout, 112 survived, 9 without coverage). Break threshold 80. M3 files: batch.ts 100, validate-data.ts 100 (mutate range moved to lines 21-28 after M3 imports shifted catalogProblems), j8.ts 98.90, j2.ts 98.73, j2-draft.ts 98.38, j1.ts 97.81, j4-rules.ts 96.70, j4.ts 96.24, j8-seed.ts 95.78, j8-rules.ts 94.00, schemas.ts 93.94, j2-cache.ts 87.50. The M2 files are unchanged from the 2026-10-10 entry.
+
+The first M3 run scored 91.50% with 134 M3 survivors. Tests were added to kill every survivor that could matter; the rest are accepted:
+- Issue code `"custom"` replaced with `""`: schemas.ts 272, 299, 301. zod still records the issue at the right path and the parse still fails. Nothing reads the code. The other 13 in schemas.ts are the error-wording literals accepted in M2.
+- Paths used only by the by-hand `main` code: j1.ts 23, 24; j4.ts 30, 31; j8.ts 23; j8-seed.ts 44; j2-draft.ts 20, 21; j2-cache.ts 13.
+- Type-narrowing guard after `find((b) => b.type === "text")`: j1.ts 87, j4.ts 101, j8.ts 247, j2-draft.ts 147. The block found is always a text block, so the second check is unreachable.
+- Equivalent mutants: j4-rules.ts 46, 48, 49 (the trims and `\s+` in sentenceCount cover for each other, and the filter on trimmed parts drops any empty part); j4-rules.ts 86 (the title passed to allowedNames for a figure work is ignored by design); j4.ts 109 (per-bucket issue paths have one element, so the join separator never shows); j8-rules.ts 54 (room names have single spaces); j2.ts 99 (an empty split part could only match an empty heard word, which every caller's schema rejects); j2-cache.ts 25 (the initial reason is returned only if the loop never runs, and maxAttempts is 3); j8.ts 83 (`<` to `<=`: cell keys are unique, so the tie-break never compares equal strings); j8-seed.ts 107 (on the extra pass r becomes NaN and the fallthrough returns the same last index); j8-seed.ts 152 (work ids are unique).
+- Generator boundaries never hit: j8-seed.ts 122, 164, 169, 179. The mutant differs only when mulberry32 returns exactly the compared value (about 1 in 2^32 per draw). The seed-20261008 determinism test reproduces every figure, so it does not happen for the committed data.
+- Regex escape helpers: j4-rules.ts 41, j8-rules.ts 36. The `""` replacement is a no-op because neither banned list holds a regex special character. The `[^...]` mutant makes the module throw at import, and Stryker's Vitest runner reports 0 tests run as survived (the false survival described under M2 Part A).
+- j4.ts 67 (`j4JsonSchema` entries replaced with undefined): `Object.fromEntries` throws at import, the same import-crash false survival.
+
+Tooling note: setup code at file level that throws under a mutant makes Stryker's Vitest runner record 0 tests and report a survivor. Calls that can throw under mutation were moved inside the tests that use them, which turned j4.ts 42, j2-draft.ts 108, 122, 156 and j8.ts 101 into kills.
+
 ### 2026-10-10: all High-tier files (M2 Part B)
 
 Overall 91.67% (932 killed, 14 timeout, 77 survived, 9 without coverage). Break threshold 80. Per file: validate-data.ts 100, curation.ts 97.40, rijks.ts 96.18, imageSize.ts 95.12, thumbs.ts 94.29, merge.ts 93.18, raw.ts 92.00, jpl.ts 90.00, schemas.ts 90.28, met.ts 87.34, aic.ts 85.32, loc.ts 84.11.
@@ -30,6 +45,14 @@ Accepted survivors. All 14 are string literals that change only the wording of a
 Tooling note: Stryker's Vitest runner 10.0.0 did not activate runtime mutants under Vitest 5.0.3, so every mutant inside a refine callback was falsely reported as surviving (53%). Activating the same mutant by hand showed the tests kill it. The project pins Vitest 4.1, which the runner supports.
 
 ## Sweep results
+
+### 2026-10-12 (M3, tests added to kill mutants, and validate-data)
+
+Kept 297, flagged 4, all resolved:
+- j1 "asks for exactly the five fields, with tags and subject from the fixed lists" (flag 3, duplicate): deleted, since "types each field" already checks the whole schema.
+- j4 "gives the same text for the same work" (flag 6, passes on a constant): deleted. "lists the eight fields in order" checks the real output.
+- j4 "hashes the system prompt and the work text together" (flag 4, rebuilt the formula): the expected value is now the literal hash.
+- j4 first-pilot contract (flag 4, rebuilt the reason string): now checks that every response is rejected, each problem carries its bucket prefix, and the word cap is among the reasons.
 
 ### 2026-10-12 (M3)
 

@@ -6,7 +6,7 @@ import type { z } from "zod";
 import { claudeEffort, claudeModel } from "@/config/feel";
 import { type BucketKey, bucketKeys } from "@/lib/buckets";
 import { catalogFileSchema, findingKinds, signalsFileSchema, signalsSeedFileSchema } from "@/lib/schemas";
-import { bucketFigures, computeDrafts, type Draft, draftText, j8JsonSchema, j8Request, minGroupViews, parseJ8, signalsFile } from "../../../scripts/j8.ts";
+import { bucketFigures, computeDrafts, type Draft, draftText, j8JsonSchema, j8Request, minGroupViews, parseJ8, segmentWords, signalsFile } from "../../../scripts/j8.ts";
 import { validWork } from "../../fixtures/works.ts";
 
 // High tier (docs/test-tiers.md): bucketFigures, computeDrafts, parseJ8, signalsFile. Medium: draftText, j8Request.
@@ -166,6 +166,16 @@ describe("computeDrafts [Gap G27, D-029]", () => {
         filler,
       );
       expect(computeDrafts(tie, catalog)[0].bucket).toBe("bright-calm");
+      // The same tie with the winning cell seen first.
+      const reversed = seedOf(
+        sessions(30, "bright-calm", ["ps2"], [add("ps2")]),
+        sessions(270, "bright-calm", ["ps2"]),
+        sessions(30, "mid-mid", ["ps1"], [add("ps1")]),
+        sessions(270, "mid-mid", ["ps1"]),
+        sessions(100, "heavy-calm", ["f-heavy-calm"], [add("f-heavy-calm")]),
+        filler,
+      );
+      expect(computeDrafts(reversed, catalog)[0].bucket).toBe("bright-calm");
     });
 
     it("breaks a tie between groups in one bucket by group name", () => {
@@ -239,15 +249,23 @@ describe("computeDrafts [Gap G27, D-029]", () => {
       sessions(300, "mid-mid", ["ps1"]),
       sessions(10, "mid-mid", ["ps1"], [add("ps1")]),
     );
-    const [, , under, gap] = computeDrafts(sparse, catalog);
+    // Computed inside each test, so a broken sort fails a test instead of the whole file.
+    const sparseDrafts = () => computeDrafts(sparse, catalog);
+
+    it("sorts copies, leaving the shared bucketKeys order unchanged", () => {
+      sparseDrafts();
+      expect(bucketKeys).toEqual(["heavy-calm", "mid-calm", "bright-calm", "heavy-mid", "mid-mid", "bright-mid", "heavy-charged", "mid-charged", "bright-charged"]);
+    });
 
     it("picks the lowest real pick rate, mid-mid, not a bucket with no views", () => {
+      const under = sparseDrafts()[2];
       expect(under.bucket).toBe("mid-mid");
       expect(under.figures.pickRatePct).toBe(3.2);
     });
 
     it("still finds the licensing gap when empty buckets hold works (Infinity sorts last)", () => {
       // heavy-calm 2 works per 100 sessions, mid-mid 2 per 310; the rest have works but no sessions.
+      const gap = sparseDrafts()[3];
       expect(gap.bucket).toBe("mid-mid");
       expect(gap.figures.worksPer1000Sessions).toBe(6.5);
     });
@@ -279,6 +297,18 @@ describe("draftText", () => {
       "- totalSessions = 820 (simulated sessions in the dataset)",
     ]);
     expect(draftText(attach)).toContain("\nGroup: white frame\n");
+    expect(draftText(attach).split("\n")[0]).toBe("Kind: frame attach pattern: how often one mood segment adds a frame, and which finish it picks");
+    expect(draftText(under).split("\n")[0]).toBe(
+      "Kind: under-converting mood segment: the segment whose sessions add the fewest works to the bag per work viewed",
+    );
+  });
+
+  it("describes each segment with the J4 prompt's words for that mood", () => {
+    const ai = readFileSync(repo("docs/ai-jobs.md"), "utf8");
+    for (const key of bucketKeys) {
+      const words = segmentWords[key].split(": ")[1];
+      expect(ai).toContain(`\n- ${key}: ${words}`);
+    }
   });
 
   it("leaves out the group line when there is no group", () => {
@@ -295,6 +325,7 @@ describe("draftText", () => {
       for (const [name, value] of Object.entries(d.figures)) {
         expect(draftText(d)).toContain(`- ${name} = ${value} (`);
         expect(draftText(d)).not.toContain(`- ${name} = ${value} (${name})`);
+        expect(draftText(d)).not.toContain(`- ${name} = ${value} ()`);
       }
     }
   });
@@ -375,6 +406,12 @@ describe("parseJ8 against recorded responses (j8.jsonl)", () => {
       reason: "no text block",
     });
     expect(parseJ8(answer('{"text": "cut off'), figures)).toEqual({ ok: false, reason: "malformed JSON" });
+  });
+
+  it("reads the text block after a thinking block", () => {
+    const thinking = { type: "thinking" as const, thinking: "", signature: "" };
+    const both = { stop_reason: "end_turn" as const, content: [thinking, ...answer(JSON.stringify({ text: "A segment.", action: "Stock more." })).content] };
+    expect(parseJ8(both, figures)).toEqual({ ok: true, value: { text: "A segment.", action: "Stock more." } });
   });
 
   it("requires a string text and a string action", () => {

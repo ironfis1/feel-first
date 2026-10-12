@@ -13,6 +13,7 @@ import {
   minWordsPerBucket,
   parseJ2Draft,
   phraseRange,
+  promptFrom,
   wordmapFile,
   wordRange,
 } from "../../../scripts/j2-draft.ts";
@@ -81,6 +82,12 @@ describe("j2DraftRequest gate: request shape only", () => {
         content: "Room types: living room, bedroom, office, kitchen, nursery, entry.\nSize words: small, medium, large.\nThe demo video phrase: a slow sunday morning",
       },
     ]);
+  });
+
+  it("reads the prompt from the j2-draft-prompt markers", () => {
+    const markdown = "<!-- j2-draft-prompt:start -->\nDraft it.\n<!-- j2-draft-prompt:end -->\n<!-- j4-prompt:start -->\nWrite.\n<!-- j4-prompt:end -->";
+    expect(promptFrom(markdown)).toBe("Draft it.");
+    expect(() => promptFrom("<!-- j4-prompt:start -->\nWrite.\n<!-- j4-prompt:end -->")).toThrow("j2-draft-prompt");
   });
 
   it("enumerates the room types and size words in the JSON schema", () => {
@@ -221,6 +228,17 @@ describe("draftProblems [docs/ai-jobs.md J2, D-037]", () => {
     const crossed = draft();
     crossed.sizeWords = crossed.sizeWords.map((w) => (w.word === "medium" ? { word: "medium", size: "large" } : w));
     expect(draftProblems(crossed, video)).toEqual(["size words missing: medium"]);
+
+    const renamed = draft();
+    renamed.sizeWords = renamed.sizeWords.map((w) => (w.word === "small" ? { word: "tiny", size: "small" } : w));
+    expect(draftProblems(renamed, video)).toEqual(["size words missing: small"]);
+  });
+
+  it("lists several missing size words and several repeated words, comma-separated", () => {
+    const d = draft();
+    d.sizeWords = d.sizeWords.filter((w) => w.word !== "small" && w.word !== "medium");
+    d.roomWords.push({ word: "big", roomType: "office" }, { word: "large", roomType: "office" });
+    expect(draftProblems(d, video)).toEqual(["size words missing: small, medium", "words in more than one list or repeated: large, big"]);
   });
 
   it("flags a word in two lists, once", () => {
@@ -323,10 +341,12 @@ describe("J2 draft contract against the recorded batch result [D-037, D-038]", (
     custom_id: string;
     result: { type: string; message: Message };
   };
-  const parsed = parseJ2Draft(line.result.message, video);
+  // Parsed inside each test, so a broken parser fails a test instead of the whole file.
+  const parse = () => parseJ2Draft(line.result.message, video);
 
   it("accepts the recorded draft for the video phrase", () => {
     expect(line.custom_id).toBe("j2-draft");
+    const parsed = parse();
     expect(parsed.ok).toBe(true);
     if (!parsed.ok) return;
     expect([parsed.value.phrases.length, parsed.value.words.length, parsed.value.roomWords.length, parsed.value.sizeWords.length]).toEqual([52, 147, 21, 12]);
@@ -338,6 +358,7 @@ describe("J2 draft contract against the recorded batch result [D-037, D-038]", (
   });
 
   it("produces exactly the committed data/j2-wordmap.json", () => {
+    const parsed = parse();
     if (!parsed.ok) throw new Error(parsed.reason);
     const committed = JSON.parse(readFileSync(path.join(root, "data/j2-wordmap.json"), "utf8"));
     expect(wordmapFile(parsed.value)).toEqual(committed);
