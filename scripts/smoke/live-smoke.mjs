@@ -386,4 +386,6 @@ await writeFile(
   JSON.stringify({ baseUrl, ranAt: new Date().toISOString(), results }, null, 2),
 );
 
-process.exit(results.some((r) => r.status === 'FAIL') ? 1 : 0);
+// Set the exit code and let Node exit on its own: calling process.exit while the Anthropic SDK's sockets
+// are still closing trips a libuv assertion on Windows.
+process.exitCode = results.some((r) => r.status === 'FAIL') ? 1 : 0;
