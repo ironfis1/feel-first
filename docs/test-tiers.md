@@ -39,6 +39,675 @@ Kept 205, flagged 2, both deleted (flag 6): the Met and Rijksmuseum tests "match
 
 Kept 156, flagged 1. Deleted: workSchema "derives orientation from dimensions" (flag 3, duplicate). The orientation tests through the schema already cover all three branches. Mutation score unchanged by the deletion.
 
+## Triage 2026-10-11 (M3, build-time AI jobs)
+
+Existing tests: none for any M3 unit. `tests/unit/lib/catalogLoad.test.ts` line 35 covers "works lack J1 fields" only. `tests/unit/lib/configSchema.test.ts` has no `roomNames` or `claudeEffort` assertion (grep found none). Recorded fixtures present: `tests/fixtures/anthropic/j1-pilot.jsonl`, `j4-pilot.jsonl`, `j8.jsonl`. There is NO recorded J2 response fixture, so the J2 contract tests need one made from a `data/runs/j2-cache-*.jsonl` record.
+
+| Unit | File | I | Si | Su | C | B | Total | Tier |
+|---|---|---|---|---|---|---|---|---|
+| promptBetween | scripts/lib/prompt.ts | 2 | 2 | 3 | 2 | 2 | 11 | Medium |
+| hashOf | scripts/lib/prompt.ts | 1 | 1 | 3 | 1 | 1 | 7 | Low |
+| runBatch | scripts/lib/batch.ts | 3 | 2 | 3 | 3 | 3 | 14 | High |
+| waitForEnd | scripts/lib/batch.ts | 1 | 1 | 2 | 2 | 3 | 9 | Medium |
+| liveBatchApi | scripts/lib/batch.ts | 1 | 1 | 2 | 1 | 3 | 8 | Medium |
+| j1Request (with j1JsonSchema, promptFrom) | scripts/j1.ts | 2 | 2 | 3 | 1 | 3 | 11 | Medium |
+| parseJ1 | scripts/j1.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| worksToTag (with pilotIds) | scripts/j1.ts | 2 | 2 | 2 | 1 | 1 | 8 | Medium |
+| mergeJ1 | scripts/j1.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| j1 --merge path in main | scripts/j1.ts | 3 | 2 | 3 | 2 | 3 | 13 | High (manual) |
+| sentenceCount | scripts/lib/j4-rules.ts | 2 | 2 | 2 | 2 | 1 | 9 | Medium |
+| midSentenceCapitals | scripts/lib/j4-rules.ts | 2 | 3 | 3 | 3 | 1 | 12 | High |
+| allowedNames | scripts/lib/j4-rules.ts | 2 | 2 | 2 | 2 | 1 | 9 | Medium |
+| sitterNames (with figureTitleWords) | scripts/lib/j4-rules.ts | 2 | 3 | 2 | 2 | 1 | 10 | Medium |
+| lineProblems (with bannedPhrases, maxLineWords) | scripts/lib/j4-rules.ts | 2 | 3 | 3 | 3 | 2 | 13 | High |
+| systemPrompt | scripts/j4.ts | 2 | 2 | 3 | 1 | 2 | 10 | Medium |
+| workText | scripts/j4.ts | 2 | 2 | 3 | 1 | 2 | 10 | Medium |
+| inputHash | scripts/j4.ts | 2 | 3 | 3 | 1 | 1 | 10 | Medium |
+| j4Request (with j4JsonSchema) | scripts/j4.ts | 2 | 2 | 3 | 1 | 3 | 11 | Medium |
+| parseJ4 | scripts/j4.ts | 3 | 3 | 3 | 3 | 3 | 15 | High |
+| worksToWrite | scripts/j4.ts | 2 | 2 | 2 | 1 | 1 | 8 | Medium |
+| copyFor | scripts/j4.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| sampleLines | scripts/j4.ts | 1 | 2 | 1 | 2 | 1 | 7 | Low |
+| j4 --merge path in main (writes data/copy.json) | scripts/j4.ts | 3 | 2 | 3 | 2 | 3 | 13 | High (manual) |
+| mulberry32 | scripts/j8-seed.ts | 3 | 3 | 3 | 3 | 2 | 14 | High |
+| pick | scripts/j8-seed.ts | 3 | 3 | 3 | 2 | 1 | 12 | High |
+| simulate (with moodShares, propensity, posterAffinity, moodPoint, materialWeights) | scripts/j8-seed.ts | 3 | 3 | 3 | 3 | 3 | 15 | High |
+| seedFileText | scripts/j8-seed.ts | 2 | 2 | 2 | 1 | 3 | 10 | Medium |
+| bucketFigures | scripts/j8.ts | 3 | 3 | 3 | 2 | 2 | 13 | High |
+| computeDrafts | scripts/j8.ts | 3 | 3 | 3 | 3 | 2 | 14 | High |
+| segmentWords | scripts/j8.ts | 1 | 2 | 2 | 1 | 1 | 7 | Low |
+| draftText (with kindWords, figureWords) | scripts/j8.ts | 2 | 3 | 2 | 2 | 2 | 11 | Medium |
+| j8Request (with j8JsonSchema) | scripts/j8.ts | 2 | 2 | 2 | 1 | 3 | 10 | Medium |
+| parseJ8 | scripts/j8.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| signalsFile | scripts/j8.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| findingProblems (with bannedTerms) | scripts/lib/j8-rules.ts | 3 | 3 | 3 | 2 | 2 | 13 | High |
+| numbersIn | src/lib/schemas.ts | 3 | 3 | 3 | 2 | 2 | 13 | High |
+| draftInput | scripts/j2-draft.ts | 1 | 1 | 1 | 1 | 2 | 6 | Low |
+| j2DraftRequest (with j2DraftJsonSchema) | scripts/j2-draft.ts | 1 | 1 | 1 | 1 | 3 | 7 | Low (gate required) |
+| wordmapFile | scripts/j2-draft.ts | 2 | 3 | 2 | 2 | 3 | 12 | High |
+| draftProblems | scripts/j2-draft.ts | 2 | 2 | 2 | 3 | 2 | 11 | Medium |
+| parseJ2Draft | scripts/j2-draft.ts | 2 | 2 | 2 | 2 | 3 | 11 | Medium |
+| cachePhrase | scripts/j2-cache.ts | 3 | 2 | 3 | 2 | 3 | 13 | High |
+| normalizePhrase | src/lib/j2.ts | 3 | 3 | 3 | 1 | 2 | 12 | High |
+| j2OutputSchema | src/lib/j2.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| j2Request (with j2JsonSchema, j2SystemPrompt) | src/lib/j2.ts | 2 | 2 | 3 | 1 | 3 | 11 | Medium |
+| parseJ2 | src/lib/j2.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| inventedHeard | src/lib/j2.ts | 2 | 3 | 3 | 2 | 2 | 12 | High |
+| configSchema additions (roomNames, claudeEffort) | src/lib/schemas.ts | 2 | 2 | 3 | 1 | 2 | 10 | Medium |
+| perBucket | src/lib/schemas.ts | 3 | 2 | 3 | 1 | 2 | 11 | Medium |
+| withoutJ1 | src/lib/schemas.ts | 2 | 2 | 2 | 1 | 2 | 9 | Medium |
+| j1FieldsSchema | src/lib/schemas.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| copyFileSchema (with curatorLine) | src/lib/schemas.ts | 3 | 2 | 3 | 1 | 3 | 12 | High |
+| signalsSeedFileSchema (with sessionSchema, addLineSchema) | src/lib/schemas.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| signalsFileSchema (with findingSchema, bucketFiguresSchema, findingKinds) | src/lib/schemas.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| j2CacheFileSchema | src/lib/schemas.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| j2WordmapFileSchema | src/lib/schemas.ts | 2 | 2 | 2 | 1 | 3 | 10 | Medium |
+| catalog.ts changes (J1-bearing catalogFileSchema load) | src/lib/catalog.ts | 2 | 2 | 3 | 1 | 3 | 11 | Medium |
+| roomNames, claudeEffort | src/config/feel.ts | 1 | 1 | 3 | 1 | 1 | 7 | Low |
+| main() of j1, j4, j8, j2-draft, j2-cache, j8-seed (excluding the two --merge rows) | scripts/*.ts | 2 | 1 | 2 | 3 | 3 | 11 | Medium (manual) |
+
+Scoring notes. Silence 3 is given where a wrong output looks plausible: a mood point, a validator that wrongly accepts a line, a Signals figure, a cache key. Loud failures (zod throw, missing marker, thrown error) score Silence 1 or 2. Surface 3 is given to anything feeding the Room, the Piece line, Signals, or the J2 path. Boundary 3 is given to units that send to or parse Anthropic output, or that read or write a data file contract. For files that mix pure functions with `main()`, Stryker `mutate` should list only the pure-function line ranges, as in the M2 table.
+
+### Evidence and required tests
+
+#### promptBetween (Medium)
+- Impact 2: Sends the wrong prompt text to every job if the marker slice is off (prompt.ts line 8).
+- Silence 2: A wrong slice that still matches sends a truncated prompt. Only the hash changes.
+- Surface 3: j1.ts line 41, j4.ts line 42, j8.ts line 287, j2-draft.ts line 28.
+- Complexity 2: Lazy regex, CRLF handling, trim (lines 8 to 10).
+- Boundary 2: Reads the `docs/ai-jobs.md` marker convention.
+- Must test: LF and CRLF documents give identical output with no `\r`. The lazy match stops at the first end marker when two blocks exist. Marker names are distinct (`j1-prompt` does not match inside `j1-prompt-v2`). Missing marker throws with the name. Surrounding blank lines are trimmed and inner blank lines are kept. A regex-special name does not break the match. The real `docs/ai-jobs.md` yields non-empty text for j1-prompt, j4-prompt, j8-prompt and j2-draft-prompt (cheap guard against a renamed marker).
+- Functional gate: none.
+
+#### hashOf (Low)
+- Impact 1: A fault causes an extra re-run or a stale reuse, both visible in the run log counts (j1.ts line 124).
+- Silence 1: sha256 sliced to 12 hex characters (line 14). Nothing to drift.
+- Surface 3: Every job.
+- Complexity 1: One expression.
+- Boundary 1: Internal.
+- Must test: none (Low). It is exercised through inputHash, worksToTag and mergeJ1 tests, where a changed input must give a different hash and the same input the same hash.
+- Functional gate: none.
+
+#### runBatch (High)
+- Impact 3: It decides which response is stored for which work. A mis-keyed result puts one work's mood, line or finding on another (lines 80 to 93).
+- Silence 2: A mis-keyed result still validates, because each validator checks shape, not identity. Usage totals are billing figures.
+- Surface 3: J1, J4, J8 and J2 draft all go through it.
+- Complexity 3: Async loop, retry queue, resume, attempt cap, result-type switch (lines 75 to 110).
+- Boundary 3: Defined send and return with the Anthropic Batches API.
+- Must test (all with a stub BatchApi, injected `sleep` and `log`, and a temp `recordTo`; replay `j1-pilot.jsonl`, `j4-pilot.jsonl`, `j8.jsonl` as the stub results):
+  - Results arrive in a different order than the requests. Each value is keyed by `custom_id`, not position.
+  - A result with an unknown `custom_id` is ignored. A request with no result line fails with "no result returned" and is re-queued.
+  - Result types errored (reason `errored: <error.error.type>`), expired and canceled are re-queued with the right reason. A succeeded result that fails parse is re-queued with the parser's reason.
+  - Attempt 2 submits only the failed requests. An item accepted on attempt 2 is in `values` and removed from `failures`.
+  - Stops at `maxAttempts` (default 3) with the item still in `failures`. Stops early when nothing is pending. An empty request list makes zero `create` calls.
+  - `resumeBatchId` skips `create` on attempt 1 only, and later attempts create a new batch.
+  - Usage counts every succeeded response including rejected ones. Missing cache fields count as 0. Errored results add nothing.
+  - `recordTo` gets one JSON line per result per attempt, containing `attempt`, `batch` and the item.
+  - A parser that throws propagates (pin; there is no try/catch around `parse`).
+- Functional gate: Anthropic Batches calls (contract tests against recorded responses).
+
+#### waitForEnd (Medium)
+- Impact 1: A fault hangs a by-hand script. Nothing reaches a screen.
+- Silence 1: A hang is obvious.
+- Surface 2: All batch jobs, off the demo path.
+- Complexity 2: Polling loop with injected sleep (lines 55 to 60).
+- Boundary 3: Reads `processing_status` from the Batches API.
+- Must test: returns on the first poll when "ended". Polls N times, sleeping `pollMs` between, and logs status and counts each non-ended poll. Does not sleep after the final poll. A `retrieve` rejection propagates.
+- Functional gate: Anthropic Batches calls (stub).
+
+#### liveBatchApi (Medium)
+- Impact 1: A fault stops a by-hand run.
+- Silence 1: Missing key throws at `loadEnvFile` or the SDK.
+- Surface 2: Five scripts.
+- Complexity 1: One branch (line 39).
+- Boundary 3: Builds the live client.
+- Must test: keep to two cases with `process.loadEnvFile` and the SDK constructor mocked. Key already set means the file is not loaded. Key missing means `.env.local` is loaded. Do not assert the SDK internals (the sweeper would flag that). The key must not appear in any log line.
+- Functional gate: Anthropic Batches calls (the live path is covered by Scott's by-hand run; no test calls out).
+
+#### j1Request (Medium)
+- Impact 2: A wrong request degrades every J1 placement (lines 62 to 80).
+- Silence 2: Dropping the artist or date context still returns a plausible placement.
+- Surface 3: J1 tags all 600 works that drive the Room.
+- Complexity 1: A single object literal.
+- Boundary 3: Defined send to the Batches API (output_config, json_schema).
+- Must test: `custom_id` is the work id. The image block is base64 `image/webp` and comes before the text block. Text is exactly `Title: ...\nArtist: ...\nDate: ...`. Model equals `claudeModel` and effort equals `claudeEffort.j1`. `j1JsonSchema` has `additionalProperties:false`, all five required fields, tag enum equal to `emotionTags` and subject enum equal to `subjects`. `promptFrom` reads the `j1-prompt` markers.
+- Functional gate: Anthropic Batches calls.
+
+#### parseJ1 (High)
+- Impact 3: Its output becomes every work's valence, arousal, tags, palette and subject, which place the work in the Room (line 94).
+- Silence 3: A value at 1.0001 or a wrong-count palette that slipped through would still look like a mood point.
+- Surface 3: The whole catalog and every ranking.
+- Complexity 2: Four early returns plus a zod parse and an issue join (lines 85 to 96).
+- Boundary 3: Parses an Anthropic response into the catalog contract.
+- Must test (against `j1-pilot.jsonl`, replayed, plus hand-built variants):
+  - Every recorded pilot response is accepted, and the value has exactly the five J1 keys.
+  - `stop_reason` of `max_tokens`, `refusal` and null is rejected with the stop reason. No text block is rejected. A thinking block before the text block is skipped.
+  - Malformed JSON is rejected. An extra key is rejected (strict).
+  - Valence and arousal exactly at -1 and 1 pass. 1.0001 and -1.0001 fail. NaN and strings fail.
+  - Tags: 2 fails, 3 passes, 5 passes, 6 fails. Duplicate tags fail. A tag outside the 12 fixed words fails. A subject outside the 12 fails.
+  - Palette: 4 and 6 colors fail, 5 pass. `#abc` and `#aabbcc` pass. A name like "red", `#abcd` and `#gggggg` fail.
+  - The reason string names the failing path.
+- Functional gate: Anthropic Batches calls (J1 contract against `tests/fixtures/anthropic/j1-pilot.jsonl`; validator rejects tags and subjects outside the fixed lists, and malformed JSON).
+
+#### worksToTag (Medium)
+- Impact 2: Decides which works are sent, so wrong filtering wastes money or leaves works untagged (lines 100 to 103).
+- Silence 2: A stale hash match silently skips a work. mergeJ1 throws if any is missing, so it is bounded.
+- Surface 2: J1 runs only.
+- Complexity 1: Two filters.
+- Boundary 1: Internal.
+- Must test: pilot mode returns exactly works whose id is in `pilotIds`, ignoring stored results. Rest mode returns works with no stored entry or an entry with a different prompt hash, and excludes works with a matching hash. `pilotIds` has 24 unique ids, 12 per lane (the comment says so; the ids are catalog-specific, so check they exist in the committed catalog).
+- Functional gate: none.
+
+#### mergeJ1 (High)
+- Impact 3: Writes the J1 fields into every catalog record (line 109).
+- Silence 3: Spread order `{ ...w, ...stored[w.id].fields }` lets stored fields override. A stale entry with a matching hash but another work's fields would pass silently.
+- Surface 3: Whole catalog.
+- Complexity 2: Missing-check plus map.
+- Boundary 3: Produces the `catalogFileSchema` contract.
+- Must test: throws with the count and first missing id when any work has no entry or an entry with another prompt hash. Each work gets exactly its own fields. Order and metadata fields are preserved. A work that already has J1 fields gets them replaced. Extra stored ids not in the catalog are ignored. The output passes `catalogFileSchema` for fixture data. An empty catalog gives [].
+- Functional gate: Data files (zod schema validation of `catalog.json`).
+
+#### j1 --merge path in main (High, manual)
+- Impact 3: Rewrites the real `data/catalog.json`.
+- Silence 2: `catalogFileSchema.parse` runs before the write (line 122).
+- Surface 3: Whole catalog.
+- Complexity 2: Strip, validate, merge, validate, write.
+- Boundary 3: File I/O contract.
+- Must test: not unit-tested (`main` is guarded by `import.meta.main`, line 153). Covered by the tests of `withoutJ1`, `mergeJ1` and the schemas. Check after each run: the printed count is 600 and the prebuild check passes.
+- Functional gate: Data files.
+
+#### sentenceCount (Medium)
+- Impact 2: Enforces the two-sentence limit on lines shown on the Piece screen (j4-rules.ts line 94).
+- Silence 2: A miscount lets a long line through, which a reader would notice on the Piece screen.
+- Surface 2: J4 only.
+- Complexity 2: Lookbehind split with closing-quote handling (line 48).
+- Boundary 1: Internal.
+- Must test: one, two and three sentences. Terminators ., ? and !. A closing quote or parenthesis after the terminator. No terminal punctuation counts as one. Empty or whitespace gives 0. Trailing whitespace. A decimal such as "3.5" does not split. Pin abbreviations ("St. Louis" counts as two).
+- Functional gate: none.
+
+#### midSentenceCapitals (High)
+- Impact 2: It is the only check that stops a line naming things the model invented (a sitter, a place, a person) (line 62).
+- Silence 3: A missed name reads as ordinary curator prose among 5,400 lines, and Scott reviews 20.
+- Surface 3: J4 (via lineProblems) and J8 (j8-rules.ts line 54).
+- Complexity 3: Stateful scan with sentence-start tracking, quote and colon handling, possessive stripping (lines 56 to 64).
+- Boundary 1: Internal.
+- Must test: first word of the line is not returned. A word after ., ? or ! is a new sentence. A word after a colon is a new sentence. A word after a closing or opening quote following a terminator. A capital mid-sentence is returned. A possessive ("Monet's") is returned without the "'s", with both ' and ’. Hyphenated and apostrophe words ("Self-Portrait", "Don't") are one word. A lone "I" mid-sentence is flagged (pin). Digits and lowercase words are not returned. Several capitals return in order with duplicates. Empty string gives []. A capital directly after a comma is returned. The `last > 0` guard: the first match never resets state.
+- Functional gate: none.
+
+#### allowedNames (Medium)
+- Impact 2: Sets the names a line may use (line 71).
+- Silence 2: A wrong set silently rejects good lines or allows invented names.
+- Surface 2: J4 only.
+- Complexity 2: Subject branch plus tokenization.
+- Boundary 1: Internal.
+- Must test: non-figure includes artist and title words, lowercased. A figure includes the artist only, not the title (D-033). Possessives and curly apostrophes are stripped. Hyphenated names stay whole. Digits are included.
+- Functional gate: none.
+
+#### sitterNames (Medium)
+- Impact 2: Stops a line naming a portrait's sitter, including at the start of a sentence (lines 82 to 86).
+- Silence 3: A missed sitter is a plausible but unsupported claim about who is pictured.
+- Surface 2: Figure-subject works in J4 only.
+- Complexity 2: Filter with artist and stop-word exclusion.
+- Boundary 1: Internal.
+- Must test: non-figure gives an empty set. "Portrait of Madame Cezanne" by Cezanne gives no "Cezanne" (artist excluded). "Portrait of Madame X" gives {Madame, X}. Stop words in any case ("The", "Of", "Young") are excluded. Lowercase title words are excluded. A title with possessive ("Mona Lisa's") strips it. Case: returned words keep original capitalization (lineProblems matches case-sensitively at line 105; pin).
+- Functional gate: none.
+
+#### lineProblems (High)
+- Impact 2: It is the gate for every J4 line the CEO may read (5,400 lines).
+- Silence 3: A wrong accept looks like a normal line.
+- Surface 3: parseJ4 for all 600 works.
+- Complexity 3: Seven rules, a lookbehind banned-phrase regex, name checks (lines 90 to 107).
+- Boundary 2: Internal, used by j4.ts line 111.
+- Must test:
+  - Empty and whitespace-only give exactly ["empty line"].
+  - Sentences: 2 pass, 3 fail. Words: 30 pass, 31 fail, with the count in the message. Em dash and "!" each flagged.
+  - Each banned phrase is caught, whole-word and case-insensitive. "evoke" does not match inside "revoke"; "truly" does not match "untruly". Hyphen neighbors are not matches ("must-have" matches, "a must-haves"?) so pin edge adjacency. Multi-word phrases ("a sense of"). Pin that "evokes emotion" and "evokes" overlap.
+  - Mid-sentence capitals pass only if from the artist, or the title (non-figure). Figure title words fail unless the artist's.
+  - Sitter names fail anywhere in the line, including sentence start.
+  - Several problems are all returned. Duplicate offending names are listed once.
+  - Every recorded J4 pilot line in `j4-pilot.jsonl` that was accepted passes with its work.
+- Functional gate: none (internal). The J4 contract gate covers it through parseJ4.
+
+#### systemPrompt (Medium)
+- Impact 2: The J4 system prompt for every line (j4.ts line 42).
+- Silence 2: A lost banned list is caught only by line rejections.
+- Surface 3: All J4 requests and the input hash.
+- Complexity 1: Template.
+- Boundary 2: Joins docs text and rules list.
+- Must test: output starts with the j4-prompt block, ends with every `bannedPhrases` entry in order, joined by ", " and a final period. A missing marker throws. The real `docs/ai-jobs.md` produces a non-empty result.
+- Functional gate: none.
+
+#### workText (Medium)
+- Impact 2: The text Claude sees about each work.
+- Silence 2: A wrong field mapping (for example lane) gives plausible lines that don't fit the work.
+- Surface 3: All J4 requests and inputHash.
+- Complexity 1: One array.
+- Boundary 2: Feeds the hash contract.
+- Must test: all eight lines present in order. Lane "poster" prints "poster" and "fine-art" prints "fine art". Tags joined with ", ". Valence and arousal print as stored. Same work gives the same text (hash stability).
+- Functional gate: none.
+
+#### inputHash (Medium)
+- Impact 2: Decides which works' lines are stale.
+- Silence 3: A field left out of the hash would leave stale lines in place after a J1 change, with nothing flagging it (line 60).
+- Surface 3: worksToWrite, copyFor, sampleLines, main.
+- Complexity 1: One expression.
+- Boundary 1: Internal.
+- Must test: same inputs give the same hash. A change to the system prompt, title, artist, date, lane, subject, valence, arousal or any tag changes the hash. A change to palette, id or thumbUrl does not change it (pin: the image is excluded by design).
+- Functional gate: none.
+
+#### j4Request (Medium)
+- Impact 2: Wrong request means bad or rejected lines.
+- Silence 2: Dropped context still returns plausible lines.
+- Surface 3: All 600 works.
+- Complexity 1: Object literal.
+- Boundary 3: Defined send.
+- Must test: `custom_id` equals work id. Image block first, then `workText`. Model and `claudeEffort.j4` come from config. `j4JsonSchema.required` equals the nine `bucketKeys` and `additionalProperties:false`.
+- Functional gate: Anthropic Batches calls.
+
+#### parseJ4 (High)
+- Impact 3: Its output is `copy.json`, the "why this found you" line on the Piece screen for all 600 works.
+- Silence 3: A line that breaks the rules but passes is invisible among 5,400.
+- Surface 3: Piece screen, demo path.
+- Complexity 3: Four early returns, zod issue join, trimming, a per-bucket flat-map of problems prefixed with the bucket (lines 99 to 113).
+- Boundary 3: Parses an Anthropic response into the copy contract.
+- Must test (replay `j4-pilot.jsonl`):
+  - Every accepted recorded response gives nine trimmed lines. Every recorded rejection is rejected for the recorded reason.
+  - `stop_reason` not `end_turn`, no text block, malformed JSON are rejected with the exact reason.
+  - A missing bucket key, an extra bucket key and a non-string value are rejected (strict object).
+  - Lines are trimmed in the output. A whitespace-only line is rejected as "empty line".
+  - Problems are prefixed with the bucket key, and several buckets' problems are joined with "; ".
+  - Exactly one bad bucket among nine rejects the whole response.
+- Functional gate: Anthropic Batches calls (J4 contract against `tests/fixtures/anthropic/j4-pilot.jsonl`).
+
+#### worksToWrite (Medium)
+- Impact 2: Chooses which works are billed.
+- Silence 2: A wrong skip leaves a stale line, which copyFor then refuses.
+- Surface 2: J4 runs.
+- Complexity 1: Two filters.
+- Boundary 1: Internal.
+- Must test: pilot mode returns only `pilotIds` works, ignoring stored. Rest mode skips works whose stored `inputHash` equals the current one and includes missing or changed ones. A changed system prompt re-selects every work.
+- Functional gate: none.
+
+#### copyFor (High)
+- Impact 3: Builds `copy.json`, the Piece-screen line for every work.
+- Silence 3: Mapping uses the id, but nothing re-checks that the lines belong to that work beyond the hash (line 126).
+- Surface 3: Piece screen.
+- Complexity 2: Missing-check, `fromEntries`.
+- Boundary 3: Produces the `copyFileSchema` contract.
+- Must test: throws with count and first id when any work lacks lines or has a stale hash. Each id maps to its own nine lines. Output passes `copyFileSchema` for fixtures. Extra stored ids are ignored. An empty catalog gives {}.
+- Functional gate: Data files.
+
+#### sampleLines (Low)
+- Impact 1: A review aid, never shown to visitors.
+- Silence 2: A wrong sample would hide lines from Scott, but `sample` is already tested in review.test.ts.
+- Surface 1: `--sample` only.
+- Complexity 2: Filter and flat-map.
+- Boundary 1: Internal.
+- Must test: none (Low).
+- Functional gate: none.
+
+#### j4 --merge path in main (High, manual)
+- Impact 3: Writes `data/copy.json`.
+- Silence 2: `copyFileSchema.parse` and `copyProblems` run before the write (lines 144 to 147).
+- Surface 3: Piece screen.
+- Complexity 2: Orchestration.
+- Boundary 3: File I/O contract.
+- Must test: not unit-tested. Covered by copyFor, copyFileSchema and the existing copyProblems. After each run check 600 works and nine lines each in the printed count.
+- Functional gate: Data files.
+
+#### mulberry32 (High)
+- Impact 3: Every Signals figure derives from its sequence.
+- Silence 3: An altered constant changes every figure to another plausible set.
+- Surface 3: The whole J8 pipeline, the Signals screen.
+- Complexity 3: Bitwise 32-bit arithmetic with `Math.imul` and unsigned shifts (lines 92 to 100).
+- Boundary 2: The determinism contract in D-029.
+- Must test: golden values (the first 5 outputs for seed 20261008, recorded once). Every value is in [0, 1). Same seed gives the same sequence, different seeds differ. Two generators are independent. A negative or above-2^32 seed is coerced by `>>> 0`, so seed -1 equals 4294967295. Mean of 10,000 draws near 0.5 within a loose tolerance.
+- Functional gate: J8 seed determinism test.
+
+#### pick (High)
+- Impact 3: Chooses every mood bucket, work, material, size and frame in the simulation.
+- Silence 3: An off-by-one in the cumulative walk shifts probabilities slightly.
+- Surface 3: simulate calls it at lines 158, 172, 180, 181, 182.
+- Complexity 2: Cumulative subtraction loop.
+- Boundary 1: Internal.
+- Must test: a stubbed `random` of 0 returns index 0, just under 1 returns the last index. Exact cumulative boundaries (r equal to a cumulative sum goes to the next index because the test is `< 0`). Weights need not sum to 1. A zero-weight entry is never chosen when others have weight. Weights [1,0,0] always give 0. A single weight gives 0. Empty weights return -1 (pin). Distribution over 10,000 draws is within tolerance of the weights.
+- Functional gate: none.
+
+#### simulate (High)
+- Impact 3: It is the whole Signals dataset: sessions, views, adds, material, size, frame.
+- Silence 3: A wrong assumption (A1 to A9) shifts every figure while the output still validates.
+- Surface 3: All four findings and the Signals screen.
+- Complexity 3: Random draws in a fixed order, rejection sampling (lines 118 to 124), a geometric view count, lane choice, weighted work choice, nested weights (lines 157 to 186).
+- Boundary 3: Produces the `signals-seed.json` contract and the seed-20261008 reproduction promise.
+- Must test:
+  - Determinism: the same catalog, seed and count give deep-equal output. A different seed differs. Input catalog order does not change the output (it sorts by id, line 152). The input array is not mutated.
+  - Golden: a small fixture catalog with a recorded output hash for seed 20261008 (this is the testing.md determinism test). Any reorder of random draws fails it.
+  - Structure: `sessions.length === count`; output passes `signalsSeedFileSchema`; `seed` and `sessionCount` echo the inputs.
+  - Views: 3 to 15 per session; no work repeated within a session; a pool smaller than the view count skips without error; a catalog with one lane still works.
+  - Adds: always a subset of views; frame is null unless material is "framed", and then is one of `frameFinishes`; size is a valid `printSizes` id.
+  - Mood point: always inside the unit circle and inside its bucket; assert `bucketOf` of the sampled point for every bucket.
+  - Assumption checks at large n with tolerance: mood shares near A1 (shares sum to 100); `moodShares`, `propensity` and `posterAffinity` hold the A1, A5, A6 values; calm moods shift paper to framed by 10 (A7); poster affinity applies only to posters.
+  - `count` of 0 gives empty sessions. Weights never go negative after the A7 shift.
+  - Pin the NaN case: a catalog work with missing valence makes the weights NaN (no guard).
+- Functional gate: J8 seed determinism test (seed 20261008 reproduces every Signals figure exactly).
+
+#### seedFileText (Medium)
+- Impact 2: Produces the committed seed file text.
+- Silence 2: A formatting slip that still parses changes the committed bytes.
+- Surface 2: One file.
+- Complexity 1: String assembly.
+- Boundary 3: The byte-for-byte reproducibility promise (header comment line 4).
+- Must test: `JSON.parse` of the output equals the input and passes `signalsSeedFileSchema`. One session per line. Ends with a newline. Same input gives the same string. Zero sessions still parses.
+- Functional gate: J8 seed determinism test (byte-for-byte).
+
+#### bucketFigures (High)
+- Impact 3: Sessions, views, adds and works per bucket feed all four findings and the `buckets` block in `signals.json`.
+- Silence 3: A wrong tally keeps every figure plausible.
+- Surface 3: Signals screen.
+- Complexity 2: Two loops and a bucket lookup.
+- Boundary 2: Produces the `buckets` part of the signals contract.
+- Must test: counts per bucket on a hand-built seed file. Works are placed by `bucketOf(valence, arousal)`, including a work exactly on -1/3 and 1/3 (cut-point boundaries). All nine keys always present, zero for empty buckets. Views and adds count lines, not unique works. Sum of sessions equals `sessionCount`.
+- Functional gate: J8 seed determinism test.
+
+#### computeDrafts (High)
+- Impact 3: Every number in the four Signals findings the CEO sees comes from here.
+- Silence 3: A wrong denominator or tie-break gives a different but plausible figure.
+- Surface 3: Signals screen, the last screen of the demo path.
+- Complexity 3: Four separate computations with thresholds, ties, rounding (lines 63 to 160).
+- Boundary 2: Produces `Draft` objects consumed by j8Request and signalsFile.
+- Must test:
+  - Hand-computed expected figures on a tiny fixture seed and catalog for each of the four findings.
+  - Rack: only poster views and adds count, fine art ignored. `minGroupViews` 299 is excluded and 300 is included. Highest adds/views wins. A tie breaks by ascending `bucket + group` string. `groupWorks` counts only posters of that subject. `lift` is rounded to 1 place, pick rate to 1 place. Pin: no qualifying cell throws a TypeError on `rack.group`.
+  - Attach: buckets under 100 adds are excluded (99 out, 100 in). Highest framed share wins. `topFinish` ties break by `frameFinishes` order. `framedSharePct`, `catalogFramedSharePct` and `topFinishSharePct` use the right denominators (segment adds, all adds, segment framed).
+  - Under-converting: lowest adds/views. Lift rounded to 2 places. A bucket with zero views makes NaN and breaks the sort (pin, or flag to Scott).
+  - Licensing gap: lowest works/sessions. `worksPer1000Sessions` is rounded to 1 place. `perSessions` is 1000. A bucket with zero sessions makes Infinity or NaN (pin).
+  - Every draft has `totalSessions` equal to `sessionCount`. Kinds appear in the order of `findingKinds`. Group labels read "<group> posters" and "<finish> frame".
+  - All figures are finite numbers.
+  - Golden: running over the committed `data/signals-seed.json` and `data/catalog.json` reproduces the figures in the committed `data/signals.json` exactly.
+- Functional gate: J8 seed determinism test.
+
+#### segmentWords (Low)
+- Impact 1: Descriptive text in a prompt.
+- Silence 2: A wrong phrase would nudge Claude's wording a little.
+- Surface 2: J8 prompts.
+- Complexity 1: A constant, typed `Record<BucketKey, string>` (compile-time completeness).
+- Boundary 1: Internal.
+- Must test: none (Low).
+- Functional gate: none.
+
+#### draftText (Medium)
+- Impact 2: The figures and labels Claude sees for each finding.
+- Silence 3: A mislabeled figure meaning gives a fluent but wrong sentence, and findingProblems checks only that numbers exist among the figures, not what they mean.
+- Surface 2: Four requests.
+- Complexity 2: Conditional group line, map over figures, label fallback `?? name`.
+- Boundary 2: Feeds the J8 prompt contract.
+- Must test: output has the Kind, Mood segment and Figures lines. The room name from `roomNames` is used. The Group line appears only when `group` is set. Every figure key of every kind produced by `computeDrafts` has an entry in `figureWords` (no fallback to the raw name). Values print unrounded as stored.
+- Functional gate: none.
+
+#### j8Request (Medium)
+- Impact 2: One request per finding.
+- Silence 2: A wrong `custom_id` breaks the byKind lookup (j8.ts line 293), which is loud.
+- Surface 2: Four requests.
+- Complexity 1: Object literal.
+- Boundary 3: Defined send.
+- Must test: `custom_id` equals the kind. User content equals `draftText`. Model and `claudeEffort.j8` come from config. The JSON schema requires `text` and `action` and forbids extra keys. `max_tokens` is 2000.
+- Functional gate: Anthropic Batches calls.
+
+#### parseJ8 (High)
+- Impact 3: Its text and action become the Signals sentences and business actions the CEO reads.
+- Silence 3: A sentence with a plausible but invented figure.
+- Surface 3: Signals screen.
+- Complexity 2: Type checks and two rule runs.
+- Boundary 3: Parses an Anthropic response into the signals contract.
+- Must test (replay `j8.jsonl`):
+  - Recorded accepted responses pass and return trimmed text and action.
+  - `stop_reason` not `end_turn`, no text block and malformed JSON are rejected.
+  - Non-string text or action, and missing keys, are rejected with "text and action must be strings". Pin: a JSON array or `null` body (the cast at line 249 throws on `null`).
+  - Problems are prefixed "text:" and "action:" and joined with "; ". A bad action alone rejects.
+  - A number in the text that is not in the figures is rejected.
+- Functional gate: Anthropic Batches calls (J8 contract against `tests/fixtures/anthropic/j8.jsonl`).
+
+#### signalsFile (High)
+- Impact 3: Builds `signals.json`, which the Signals screen renders.
+- Silence 3: Findings are matched to words by `kind`; a mismatch gives a sentence under the wrong figures.
+- Surface 3: Signals screen.
+- Complexity 2: Schema parse around a map.
+- Boundary 3: Produces the `signalsFileSchema` contract.
+- Must test: each finding takes the text and action of its own kind and the figures of its draft. `seed`, `sessionCount` and `buckets` come from the seed file and catalog. `simulated` is true. Output passes `signalsFileSchema`. A kind with no words throws (pin, TypeError at `words.get(...)!`). Drafts out of kind order are rejected by the schema.
+- Functional gate: Data files (zod schema validation of `signals.json`).
+
+#### findingProblems (High)
+- Impact 3: Rejects sentences with invented numbers, contract or rights language (Res #47, Res #53), em dashes and names on the Signals screen.
+- Silence 3: A number that is not in the figures but is plausible would be accepted if the check slipped.
+- Surface 3: Signals screen.
+- Complexity 2: Five rules with regex.
+- Boundary 2: Used by parseJ8 for text and action.
+- Must test: empty or whitespace returns exactly ["empty"]. Em dash and "!" are flagged. Each banned term is caught whole-word, case-insensitively ("rights" caught, "copyrights" not; "terms" caught; "60-slot" caught). Numbers: a figure value passes, "1,000" matches 1000, "18.4" matches 18.4, and an off-by-rounding value ("18.5") fails. Numbers written as words ("three") are not checked (pin as known gap). A year such as "1936" fails unless a figure. Negative sign: "mid-1990s" is read as -1990 (pin). "3,5" reads as 35 (pin). Capitalized mid-sentence words pass only if they are words of a room name ("Low Light" passes). Unknown capitals are listed once. Sentence-start capitals pass.
+- Functional gate: none beyond the J8 contract gate via parseJ8.
+
+#### numbersIn (High)
+- Impact 3: It is the check behind the rule "every number in a finding is one of its figures", in both the schema and findingProblems.
+- Silence 3: A mis-parsed number matches or misses a figure quietly.
+- Surface 3: `signalsFileSchema` and `findingProblems`.
+- Complexity 2: Regex plus separator stripping.
+- Boundary 2: Shared by schema and script.
+- Must test: integers, decimals, "1,000", "12,345.6". Negative values. Trailing period ("18.4." gives 18.4). Several numbers in order. No numbers gives []. Number glued to a unit ("18%", "3x"). Pin "3,5" and "mid-1990s" results.
+- Functional gate: Data files.
+
+#### draftInput (Low)
+- Impact 1: The user turn for one draft, and a miss is caught by `draftProblems` ("video phrase missing").
+- Silence 1: Loud.
+- Surface 1: One job, run once.
+- Complexity 1: Join.
+- Boundary 2: Internal.
+- Must test: none (Low).
+- Functional gate: none.
+
+#### j2DraftRequest (Low)
+- Impact 1: One request.
+- Silence 1: An API error is loud.
+- Surface 1: Run once.
+- Complexity 1: Object literal, with an `as BatchRequest` cast (line 92).
+- Boundary 3: Defined send.
+- Must test: none (Low) beyond the gate: `custom_id` is "j2-draft", model and `claudeEffort.j2` come from config, `max_tokens` is 16000, and the JSON schema enumerates `roomTypes` and size words.
+- Functional gate: Anthropic Batches calls (request shape check only).
+
+#### wordmapFile (High)
+- Impact 2: Becomes `j2-wordmap.json`, the fallback that answers when live J2 fails or times out.
+- Silence 3: `Object.fromEntries` silently keeps the last duplicate (lines 98 to 100), and a wrong value reads as a plausible mood.
+- Surface 2: J2 fallback path, off the main path.
+- Complexity 2: Three maps and a schema parse.
+- Boundary 3: Produces the `j2WordmapFileSchema` contract.
+- Must test: words, room words and size words map to the right sections. Duplicate words: last wins (pin) or flagged by draftProblems. Output passes the schema. A word with an uppercase letter, a hyphen or a digit throws. Valence outside [-1, 1] throws. An unknown room type throws.
+- Functional gate: Data files.
+
+#### draftProblems (Medium)
+- Impact 2: Gate on the draft Scott approves, including the demo-video phrase (D-037).
+- Silence 2: Scott reviews the draft by hand before `--write`.
+- Surface 2: J2 pre-warm and fallback inputs.
+- Complexity 3: Ten independent checks (lines 108 to 137).
+- Boundary 2: Internal.
+- Must test: em dash anywhere is flagged. Phrases not normalized, duplicates, count 44, 45, 55, 56. Video phrase missing, and the match is after normalization. Mood word count 139, 140, 160, 161. Duplicate mood words. A bucket with 7 words fails and one with 8 passes. A word with |valence| above 1 is excluded from the count. Missing room type and missing size word. A word in two lists. A size word mapped to a different size. Schema error text truncated to 300 characters. Pin: a non-string phrase or a null entry in `words` throws a TypeError instead of returning a problem (lines 110, 116).
+- Functional gate: none.
+
+#### parseJ2Draft (Medium)
+- Impact 2: Accepts the draft that Scott then approves.
+- Silence 2: Reviewed by Scott.
+- Surface 2: J2 build.
+- Complexity 2: Four early returns, the four-array check.
+- Boundary 3: Parses an Anthropic response.
+- Must test: stop reason, no text block, malformed JSON, "missing lists" for each absent array, a `null` body, then problems joined with "; ", and the success value. Pin: a TypeError from malformed list members escapes `runBatch` after the batch is paid for (see draftProblems).
+- Functional gate: Anthropic Batches calls (record one draft response as a fixture).
+
+#### cachePhrase (High)
+- Impact 3: Writes the pre-warmed answers; the demo video phrase must hit the cache (Res #7, Res #8).
+- Silence 2: Usage and the retry reason are visible in the log. A wrongly accepted answer is caught by `j2CacheFileSchema` before write.
+- Surface 3: Every cached phrase on the demo path.
+- Complexity 2: Retry loop with usage and record side effects (lines 26 to 36).
+- Boundary 3: Wraps live Messages calls and the J2 contract.
+- Must test (stubbed `send`): accepted on the first attempt sends once. Rejected twice then accepted sends three times and returns the value. Rejected three times returns `{ok:false}` with the last reason and does not send a fourth. Usage adds requests, input and output tokens for every attempt, including rejected. `record` is called once per attempt with phrase, attempt number and message. The phrase passed to `parseJ2` is the one sent. A `send` rejection propagates (pin; no catch).
+- Functional gate: J2 route request and response schema (shared module), Data files (`j2-cache.json`).
+
+#### normalizePhrase (High)
+- Impact 3: It is the cache key on both the writer and the runtime route. A mismatch turns the demo phrase into a live call or fallback.
+- Silence 3: A miss is silent: the app still answers, only slower or with different words.
+- Surface 3: j2-cache, j2-draft, schemas.ts line 294, M5 route.
+- Complexity 1: Chain of three string operations.
+- Boundary 2: Shared key contract.
+- Must test: uppercase to lowercase. Leading and trailing whitespace trimmed. Runs of spaces, tabs and newlines collapse to one space. Non-breaking space collapses. Idempotent (applying twice gives the same). Empty and whitespace-only give "". Punctuation is kept. Accented capitals lowercase. Pin: "İ" lowercases to two code points.
+- Functional gate: none beyond the J2 gates.
+
+#### j2OutputSchema (High)
+- Impact 3: The contract for every J2 answer, cached and live, driving the Room's mood point.
+- Silence 3: A value slightly out of range or an invented chip would show.
+- Surface 3: Cache schema, runtime route, parseJ2.
+- Complexity 2: Strict object, nullable enums, bounded array.
+- Boundary 3: Data and Anthropic contract.
+- Must test: valence and arousal at -1 and 1 pass; beyond fail; NaN, Infinity and strings fail. `roomType` null passes, an unknown room fails. `size` null passes, an unknown size fails. `heard` of 0 items fails, 1 and 5 pass, 6 fails, an empty string item fails. An extra key fails. Each missing key fails.
+- Functional gate: J2 route (request and response schema); Data files.
+
+#### j2Request (Medium)
+- Impact 2: The live request shape.
+- Silence 2: A wrong effort or an unnormalized message changes behavior quietly.
+- Surface 3: Pre-warm script and M5 runtime route.
+- Complexity 1: Object literal.
+- Boundary 3: Defined send.
+- Must test: message content is the normalized phrase. Model and `claudeEffort.j2` come from config. `output_config.format.schema` requires the five keys, and its enums equal `roomTypes` and the size words. `max_tokens` is 2000. The system prompt mentions `maxHeard`. The request contains no API key.
+- Functional gate: J2 route request schema.
+
+#### parseJ2 (High)
+- Impact 3: Decides whether a live or cached answer is used for the mood point.
+- Silence 3: A wrongly accepted answer would move the Room silently.
+- Surface 3: M3 cache writer and M5 route.
+- Complexity 2: Five early returns plus zod.
+- Boundary 3: Parses an Anthropic response.
+- Must test: stop reason `end_turn` only (max_tokens, refusal and null rejected with reason). No text block. First text block is used when others precede it. Empty body string is "malformed JSON". Malformed JSON. A schema failure lists paths. Heard words not typed by the visitor are rejected with their names. A valid answer returns the parsed value. Use a recorded J2 response as a fixture (none exists; create one from a `j2-cache` run record).
+- Functional gate: J2 route (request and response schema, one test per path).
+
+#### inventedHeard (High)
+- Impact 2: Stops chips showing words the visitor did not type.
+- Silence 3: A wrong tokenizer rejects good answers (forcing retries) or accepts invented ones.
+- Surface 3: parseJ2 and `j2CacheFileSchema`.
+- Complexity 2: Normalize, split, filter.
+- Boundary 2: Shared module.
+- Must test: all heard words present returns []. An absent word is returned. Apostrophes kept ("don't"); curly apostrophe splits (pin). Hyphenated text: "sun-drenched" yields "sun" and "drenched" as valid heard words, but "sun-drenched" is reported invented (pin). Digits. Accented letters split ("café" gives "caf", so heard "café" is rejected; pin). Uppercase heard word is rejected. Leading punctuation yields an empty token, so an empty heard string would pass (pin). Duplicate heard words each reported.
+- Functional gate: none beyond the J2 gates.
+
+#### configSchema additions: roomNames, claudeEffort (Medium)
+- Impact 2: Room names appear on screen and in the Signals sentences; effort sets J2 latency (schemas.ts lines 138 and 143).
+- Silence 2: A blank-but-present name is rejected by trim and min(1).
+- Surface 3: Room, Signals, J8 rules.
+- Complexity 1: Declarative.
+- Boundary 2: Config validation.
+- Must test: the real config parses. A missing bucket key, an extra bucket key, a whitespace-only name and an em dash name are rejected. `claudeEffort` missing a job, with an extra job, or an unknown level is rejected.
+- Functional gate: none.
+
+#### perBucket (Medium)
+- Impact 3: The nine-bucket shape for room names, copy, `buckets` and J4 output.
+- Silence 2: A strict object catches both missing and extra keys.
+- Surface 3: Four schemas.
+- Complexity 1: One `fromEntries`.
+- Boundary 2: Internal contract helper.
+- Must test: through the schemas above. Directly: exactly the keys from `bucketKeys`; missing and extra keys fail; the value schema applies to each key.
+- Functional gate: none.
+
+#### withoutJ1 (Medium)
+- Impact 2: Lets scripts read the catalog before and after the J1 merge.
+- Silence 2: Over-stripping fails the strict schema loudly. Under-stripping fails the strict metadata schema loudly.
+- Surface 2: j1, thumbs, review.
+- Complexity 1: Filter.
+- Boundary 2: Internal.
+- Must test: the five J1 keys are removed and all other keys kept. A metadata-only catalog is unchanged. A non-array input is returned as is. The input is not mutated. A `null` element throws (pin).
+- Functional gate: none.
+
+#### j1FieldsSchema (High)
+- Impact 3: It is the J1 response contract and the catalog's emotional fields.
+- Silence 3: See parseJ1 (range and count slips look like mood).
+- Surface 3: Every work, the Room and Piece.
+- Complexity 2: Strict object, bounds, unique-tag refine.
+- Boundary 3: Defined data and Anthropic contract.
+- Must test: same case list as parseJ1 (bounds at ±1, 3 to 5 unique tags from the 12, five hex colors, subject from the 12, strict keys), tested directly on the schema. The committed `data/catalog.json` parses through `catalogFileSchema`.
+- Functional gate: Data files and Anthropic Batches calls.
+
+#### copyFileSchema (High)
+- Impact 3: Contract for `copy.json`, the Piece-screen line.
+- Silence 2: It checks non-empty and no em dash only. Completeness against the catalog is `copyProblems` (validate-data.ts line 30).
+- Surface 3: Piece screen.
+- Complexity 1: A record of `perBucket`.
+- Boundary 3: Data file contract.
+- Must test: a valid file parses. Eight or ten keys per work fail. An empty or whitespace line fails. An em dash fails. Output lines are trimmed. An empty id key fails. Pin: an empty record passes (completeness is elsewhere).
+- Functional gate: Data files.
+
+#### signalsSeedFileSchema (High)
+- Impact 3: Validates the dataset every Signals figure comes from.
+- Silence 3: A malformed session that passes would shift a figure slightly.
+- Surface 3: simulate output, bucketFigures, computeDrafts.
+- Complexity 2: Nested refines.
+- Boundary 3: Data file contract.
+- Must test: `sessionCount` must equal `sessions.length`. A session needs at least one view. Every add must be in the session's views. `frame` null for non-framed and non-null for framed only. Size must be one of the config `printSizes` ids, material one of the three, frame one of `frameFinishes`. Unknown bucket fails. Extra keys fail. A non-integer seed fails. Pin: duplicate view ids within a session pass.
+- Functional gate: Data files and J8 seed determinism.
+
+#### signalsFileSchema (High)
+- Impact 3: The contract for what the Signals screen renders.
+- Silence 3: A finding whose text cites a number outside its figures is caught here, but only for `text`, not `action`.
+- Surface 3: Signals screen.
+- Complexity 2: Nested superRefine and an ordered-kinds check.
+- Boundary 3: Data file contract.
+- Must test: exactly four findings in `findingKinds` order (a swapped pair fails). `simulated` must be true. Nine buckets with non-negative integer figures. A number in the text not among the figures fails, with the path. Pin: a stray number in `action` passes the schema (findingProblems covers it at build time). Em dash in text or action fails. Empty text fails. A real `data/signals.json` parses.
+- Functional gate: Data files.
+
+#### j2CacheFileSchema (High)
+- Impact 3: Contract for the cached answers the demo uses (Res #7).
+- Silence 3: A non-normalized key never hits at runtime and nothing flags it.
+- Surface 3: Demo path.
+- Complexity 2: Record plus superRefine.
+- Boundary 3: Data file contract.
+- Must test: a normalized key with a valid answer passes. A key with uppercase or double spaces fails. A heard word not in the key fails with the path. An invalid output fails. An empty key fails. Pin: an empty cache passes and the video phrase is not required to be present.
+- Functional gate: Data files and J2 route cache-hit path.
+
+#### j2WordmapFileSchema (Medium)
+- Impact 2: Contract for the fallback word map.
+- Silence 2: Key regex and bounds reject bad words loudly.
+- Surface 2: Fallback path.
+- Complexity 1: Strict object and records.
+- Boundary 3: Data file contract.
+- Must test: lowercase word keys and apostrophes pass. Uppercase, hyphen, digit, space and accented keys fail. Values outside [-1, 1] fail. Unknown room type or size fails. Extra top-level key fails. Pin: empty maps pass.
+- Functional gate: Data files.
+
+#### catalog.ts changes (Medium)
+- Impact 2: Load-time validation of the J1-bearing catalog (line 24).
+- Silence 2: Loud on failure (the build fails).
+- Surface 3: Every screen reads through it.
+- Complexity 1: Parse, sort, freeze, map.
+- Boundary 3: Data file contract.
+- Must test: existing `catalogLoad.test.ts` and `catalog.test.ts` cover the contract, including J1 field absence (line 35). Add: the committed `data/catalog.json` parses against `catalogFileSchema` and has 600 works.
+- Functional gate: Catalog module (contract test for every exported function; present).
+
+#### roomNames, claudeEffort in feel.ts (Low)
+- Impact 1: Constants. A wrong word is visible and was approved by Scott on 2026-10-11 (feel.ts line 53).
+- Silence 1: Typed with `satisfies Record<BucketKey, string>` so completeness is compile-checked.
+- Surface 3: Room, Signals, J8 rules (`roomNameWords`).
+- Complexity 1: Constants.
+- Boundary 1: Internal.
+- Must test: none (Low). Covered by the configSchema additions row.
+- Functional gate: none.
+
+#### main() of j1, j4, j8, j2-draft, j2-cache, j8-seed (Medium, manual)
+- Impact 2: Each output passes a schema before it is written (j8-seed.ts line 199, j2-cache.ts line 62, j8.ts line 266, j2-draft.ts wordmapFile), and J8 refuses to write if any finding fails (line 302).
+- Silence 1: Each prints accepted and failed counts, usage and the raw record path.
+- Surface 2: Hand-run only.
+- Complexity 3: Orchestration, file I/O, live batch, resume.
+- Boundary 3: Live outside party and data files.
+- Must test: not unit-tested (testing.md rule 1, and `import.meta.main` guards). Manual check after each run: counts (24 pilot, 600 rest, 4 findings, 20,000 sessions), failed count 0, then `npm run` prebuild validation. Log spend in `build-log.md`.
+- Functional gate: Anthropic Batches calls and Data files (stub and schema, not live).
+
+### Notes for Scott
+- The testing.md J8 determinism gate (seed 20261008) is a named M3 exit item. It needs a golden file for `simulate` plus `computeDrafts` over fixture data.
+- Three silent-gap findings to pin or decide on, not to fix here: numbers written as words pass `findingProblems`; `signalsFileSchema` checks numbers only in `text`, not `action`; `parseJ2Draft` and `draftProblems` throw a TypeError on malformed list members, which would escape `runBatch` after the batch is paid for.
+- `inventedHeard` splits on `[^a-z0-9']+`, so accented words ("café") and curly apostrophes can cause false rejections of otherwise good J2 answers.
+- No J2 recorded response fixture exists in `tests/fixtures/anthropic/`. The J2 contract tests (parseJ2, cachePhrase) need one before they can be written.
+- High-tier files for Stryker: scripts/lib/batch.ts (runBatch), scripts/j1.ts, scripts/lib/j4-rules.ts, scripts/j4.ts, scripts/j8-seed.ts, scripts/j8.ts, scripts/lib/j8-rules.ts, scripts/j2-draft.ts, scripts/j2-cache.ts, src/lib/j2.ts, src/lib/schemas.ts. For the script files, limit `mutate` to the pure-function line ranges, as for M2.
+
 ## Triage 2026-10-10 (M2, commit 9ea46e3, thumbs.ts main() full-size fallback)
 
 | Unit | File | I | Si | Su | C | B | Total | Tier |
