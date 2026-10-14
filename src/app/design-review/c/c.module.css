@@ -1,0 +1,416 @@
+/* Round 1, Direction C: the feeling wheel (D-044, D-045). Local review only. */
+
+.root {
+  --night: #0f0e13;
+  --wall: #141319;
+  --text: #efeae2;
+  --muted: #a8a299;
+  --hair: rgb(239 234 226 / 0.14);
+  position: relative;
+  min-height: calc(100dvh - 30px);
+  color: var(--text);
+  background: var(--night);
+  font-family: var(--font-c), Georgia, serif;
+  overflow: hidden;
+}
+
+:global(body):has(.root) {
+  background: #0f0e13;
+}
+
+:global(body):has(.root) > :global([role="note"]) {
+  background: #0f0e13;
+  color: #8f8a83;
+  font-style: italic;
+  font-family: Georgia, serif;
+  border-bottom: 1px solid rgb(239 234 226 / 0.08);
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--feel) 22%, transparent), transparent 70%);
+  transition: background 600ms ease;
+  pointer-events: none;
+}
+
+/* ---------- Threshold ---------- */
+
+.threshold {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 20px;
+  padding: 28px 16px 36px;
+}
+
+.wheel,
+.wheelCompact {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  touch-action: none;
+  cursor: grab;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 0 0 1px rgb(239 234 226 / 0.1), 0 40px 90px -30px color-mix(in srgb, var(--feel) 55%, transparent);
+  transition: box-shadow 600ms ease;
+}
+
+.wheel {
+  width: min(86vw, 56vh, 560px);
+}
+
+.wheelCompact {
+  width: clamp(92px, 13vw, 150px);
+  flex: none;
+}
+
+.wheel:active,
+.wheelCompact:active {
+  cursor: grabbing;
+}
+
+.wheel:focus-visible,
+.wheelCompact:focus-visible,
+.pill:focus-visible,
+.react:focus-visible,
+.input:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
+}
+
+.point {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 30px;
+  height: 30px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffaf2 0%, #fffaf2 30%, var(--feel) 62%, transparent 72%);
+  box-shadow: 0 0 0 2px rgb(255 250 242 / 0.85), 0 0 24px 6px var(--feel);
+  animation: breathe var(--pulse) ease-in-out infinite;
+  pointer-events: none;
+}
+
+.wheelCompact .point {
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 0 0 1.5px rgb(255 250 242 / 0.85), 0 0 12px 3px var(--feel);
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    scale: 0.9;
+  }
+  50% {
+    scale: 1.12;
+  }
+}
+
+.naming {
+  position: relative;
+  text-align: center;
+  min-height: 92px;
+}
+
+.feeling {
+  margin: 0;
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 300;
+  line-height: 1.05;
+  color: color-mix(in srgb, var(--feel) 45%, var(--text));
+  animation: arrive 360ms ease-out;
+}
+
+.also {
+  margin: 4px 0 0;
+  font-size: 19px;
+  font-style: italic;
+  color: var(--muted);
+}
+
+@keyframes arrive {
+  from {
+    opacity: 0;
+    translate: 0 6px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.foot {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+}
+
+.prompt {
+  margin: 0;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--muted);
+  text-align: center;
+}
+
+.pill {
+  font: inherit;
+  font-size: 16px;
+  color: var(--night);
+  background: var(--text);
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 26px;
+  min-height: 44px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 500ms ease, translate 500ms ease, background 200ms;
+}
+
+.pill:hover {
+  background: color-mix(in srgb, var(--feel) 35%, var(--text));
+}
+
+.waiting {
+  opacity: 0;
+  translate: 0 6px;
+  pointer-events: none;
+}
+
+.shown {
+  opacity: 1;
+}
+
+/* ---------- Room ---------- */
+
+.room {
+  background: var(--wall);
+  padding: 0 16px 64px;
+  animation: arrive 500ms ease-out;
+}
+
+.roomWash {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 80vh;
+  background: radial-gradient(ellipse at 30% -20%, color-mix(in srgb, var(--feel) 30%, transparent), transparent 65%);
+  transition: background 600ms ease;
+  pointer-events: none;
+}
+
+.head {
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 36px 0 28px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.headText {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.roomFeeling {
+  margin: 0;
+  font-size: clamp(44px, 7vw, 88px);
+  font-weight: 300;
+  line-height: 1;
+  color: color-mix(in srgb, var(--feel) 40%, var(--text));
+  animation: arrive 360ms ease-out;
+}
+
+.roomAlso {
+  font-size: 0.42em;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.sentence {
+  margin: 4px 0 18px;
+  font-size: clamp(19px, 2.2vw, 24px);
+  font-style: italic;
+  line-height: 1.35;
+  max-width: 34ch;
+}
+
+.describe {
+  display: grid;
+  gap: 6px;
+  max-width: 520px;
+}
+
+.describeLabel {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.describeRow {
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 17px;
+  color: var(--text);
+  background: rgb(239 234 226 / 0.06);
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  padding: 10px 18px;
+  min-height: 44px;
+}
+
+.input::placeholder {
+  color: rgb(168 162 153 / 0.75);
+}
+
+.grid {
+  position: relative;
+  list-style: none;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 12px;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px 32px;
+  }
+}
+
+.cell {
+  display: grid;
+  align-content: start;
+  gap: 3px;
+  min-width: 0;
+  animation: arrive 400ms ease-out;
+}
+
+.mat {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: rgb(239 234 226 / 0.04);
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Contained, never cropped [D-002]. */
+.mat img {
+  position: absolute;
+  inset: 8%;
+  width: 84%;
+  height: 84%;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 18px rgb(0 0 0 / 0.55));
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reacts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.react {
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: none;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  padding: 8px 10px;
+  min-height: 44px;
+  cursor: pointer;
+  transition: border-color 200ms, background 200ms;
+}
+
+.react:hover {
+  border-color: var(--feel);
+  background: color-mix(in srgb, var(--feel) 12%, transparent);
+}
+
+.more {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding-top: 56px;
+}
+
+@media (max-width: 639px) {
+  .head {
+    padding-top: 24px;
+  }
+
+  .wheelCompact {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    width: 84px;
+  }
+
+  .eyebrow,
+  .roomFeeling {
+    padding-right: 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .point,
+  .feeling,
+  .roomFeeling,
+  .room,
+  .cell {
+    animation: none;
+  }
+
+  .wash,
+  .roomWash,
+  .pill,
+  .wheel,
+  .wheelCompact {
+    transition: none;
+  }
+}

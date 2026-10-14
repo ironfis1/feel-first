@@ -390,6 +390,22 @@ Decision: The check strips the credits block before it searches. The M6 string s
 Why: Credits must match the source record; every word the project writes still never uses an em dash.
 Spec reference: D-022, Gap G33, quality bar 7 and 8.
 
+### D-044: The mood field is a feeling wheel that names the feeling
+Date: 2026-10-14
+Decided by: Scott
+Question: Round 0 showed two wordless, abstract mood fields. Scott rejected both: the field should be about how the visitor feels, and feelings should lead to descriptions.
+Decision: The mood field stays a color field the visitor drags across, with no words printed on it, but its color comes from the 12 emotion words, and the feeling under the point is named in words as it moves. The 12 words are the fixed J1 vocabulary [Gap G1]. Each word's starting position is the average valence and arousal of the catalog works that carry it as their strongest tag; wistful, which leads no work, uses the average of every work that carries it at all. The visitor's mood is still a point on the same field, so J3, J7 and the buckets are unchanged.
+Why: Scott's Round 0 feedback on 2026-10-14.
+Spec reference: amends RB17 (wordless entry) and narrows Res #21 (color and motion still carry the field; no words sit on it, but the current feeling is named beside it). Whether the Gap G12 prompt changes is open (Q-009).
+
+### D-045: The Room leads with the feeling, then a sentence
+Date: 2026-10-14
+Decided by: Scott
+Question: How do feelings lead to descriptions in the Room?
+Decision: The Room's heading is the feeling the visitor is on, followed by one short sentence describing the room it opens into, one sentence per emotion word. Claude drafts the 12 sentences; Scott approves them.
+Why: Scott's Round 0 feedback on 2026-10-14.
+Spec reference: adds to Section 5.2. Whether the bucket room name stays on the Room is open (Q-010), since RB54 and Res #9 require it.
+
 ---
 
 ## Open questions
@@ -411,3 +427,13 @@ Options: (a) bedroom uses bed, office uses desk, all others use sofa; (b) Scott 
 Raised: 2026-10-09
 Question: The cost line reads "Built in N days for $X in AI and hosting." If X has cents, how is it written? Today costLineText prints the number as given, so 340.5 becomes "$340.5". A test pins this until it is decided.
 Options: (a) round to whole dollars; (b) always two decimals; (c) Scott enters X already formatted.
+
+### Q-009: Threshold prompt under the feeling wheel (Milestone 4)
+Raised: 2026-10-14
+Question: Gap G12 fixes the prompt "Move the light until it feels right." With the feeling wheel (D-044), does it stay, or change to a question such as "How do you feel?"
+Options: (a) keep the Gap G12 wording; (b) Scott gives new wording.
+
+### Q-010: Bucket room name on the Room under D-045 (Milestone 4)
+Raised: 2026-10-14
+Question: RB54 and Res #9 require the bucket's room name on the Room, and the Bag summary and Signals use room names. With the feeling and sentence leading (D-045), does the room name stay as a smaller label, or leave the Room?
+Options: (a) keep it as a small label above the feeling; (b) remove it from the Room, keeping room names on Bag and Signals.
