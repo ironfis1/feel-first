@@ -356,6 +356,40 @@ Decision: Defer it. M3 finishes everything else and closes with "copy.json is co
 Why: Lines are keyed by a hash of the prompt and the work's J1 fields, so any prompt change after a full run would re-run and re-bill the affected works. Running once after iteration costs the least.
 Spec reference: docs/milestones.md M3 exit, Section 4 J4, D-035.
 
+### D-040: Session state lives in memory only
+Date: 2026-10-14
+Decided by: Scott
+Question: Where does the visitor's session state live as they move between screens?
+Decision: Mood point, re-hang count, timers, Closer and Drift demotions, and bag lines live in a client-side store that persists across screens through client-side navigation. Nothing is written to localStorage, sessionStorage, cookies or the server. A full page reload resets the session to the center mood (0, 0) with an empty bag.
+Why: Spec Section 3.5 says session state is never stored, and Gap G32 already set the no-storage precedent.
+Spec reference: Section 3.5, Res #36, Gap G32.
+Note: the M4 prompt drafted this as D-007, which was already used for route paths. Scott chose D-040 on 2026-10-14.
+
+### D-041: One re-hang per completed gesture
+Date: 2026-10-14
+Decided by: Scott
+Question: Gap G13 defines what causes a re-hang but not how a continuous drag counts.
+Decision: A retune counts as one re-hang when the gesture ends (pointer up, touch end, or each arrow-key step), not on every frame of a drag. Each describe submission, Closer and Drift counts as one re-hang. The Room may re-order live during a drag, but the counter moves only at gesture end.
+Why: Counting frames would make the Close metric meaningless.
+Spec reference: Gap G13, Res #11.
+Note: the M4 prompt drafted this as D-008, which was already used for catalog field formats. Scott chose D-041 on 2026-10-14.
+
+### D-042: copy.json starts with the 24 J4 pilot works
+Date: 2026-10-14
+Decided by: Scott
+Question: copy.json does not exist yet (D-039), but the Piece screen needs "why this found you" lines. Which works get lines during M4?
+Decision: copy.json is written now from the 24 pilot works in data/raw/j4.json. The J4 full run happens later in M4, once Scott approves the Piece screen copy, at about $6 to $7.
+Why: Lets the Piece screen be built on real lines without spending on a full run that a copy change could invalidate.
+Spec reference: Section 3.3, Section 4 J4, D-039.
+
+### D-043: Smoke check skips source credits when searching for em dashes
+Date: 2026-10-14
+Decided by: Scott
+Question: Q-008. Credits may contain source em dashes (D-022), but m1.copy-discipline fails on any em dash in a rendered page.
+Decision: The check strips the credits block before it searches. The M6 string search likewise excludes data files.
+Why: Credits must match the source record; every word the project writes still never uses an em dash.
+Spec reference: D-022, Gap G33, quality bar 7 and 8.
+
 ---
 
 ## Open questions
@@ -363,6 +397,7 @@ Spec reference: docs/milestones.md M3 exit, Section 4 J4, D-035.
 Add new questions here as they come up, in the same format as the decisions above.
 
 ### Q-005: Framed price width on landscape pieces (Milestone 4)
+Update 2026-10-14: Scott answered "total linear measurement of all sides". This changes Gap G5 and Gap G28 (print width), so it waits on Scott confirming the spec amendment before it is logged as a decision.
 Raised: 2026-10-09
 Question: Print sizes are listed width x height (12x16), but a landscape piece hangs 16 inches wide. Does the framed price "$1.50 per inch of width" [Gap G5, Gap G28] use the listed width or the hung width?
 Options: (a) the listed width, so the price is the same for both orientations; (b) the hung width, so landscape framing costs more.
@@ -376,8 +411,3 @@ Options: (a) bedroom uses bed, office uses desk, all others use sofa; (b) Scott 
 Raised: 2026-10-09
 Question: The cost line reads "Built in N days for $X in AI and hosting." If X has cents, how is it written? Today costLineText prints the number as given, so 340.5 becomes "$340.5". A test pins this until it is decided.
 Options: (a) round to whole dollars; (b) always two decimals; (c) Scott enters X already formatted.
-
-### Q-008: Em-dash checks versus source credits (Milestones 4 and 6)
-Raised: 2026-10-09
-Question: Under D-022, credits in data/catalog.json and data/raw may contain em dashes, and the Piece screen shows credits. The live smoke check m1.copy-discipline fails on any em dash in rendered pages, and the M6 exit string search expects none. How should those checks treat source credits?
-Options: (a) the checks skip credit text (for example, the smoke check strips the credits block before searching, and the M6 search excludes data files); (b) Scott specifies.
