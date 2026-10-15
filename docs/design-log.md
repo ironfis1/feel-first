@@ -28,3 +28,8 @@ Scott's pick and why: Nocturne (A), as the direction to iterate from. He also ch
 Date: 2026-10-15
 What Scott asked for: build D-049 on Nocturne. The 12 feelings sit evenly around the wheel, and the Room's mood comes from the feelings' catalog positions.
 What changed: the feelings now sit 30 degrees apart at 0.75 of the radius, so the lights form an even ring of color around a dark, neutral center, and every part of the disc names a feeling. The name comes from the point's angle; "a little" and the second feeling appear when the point is at least a quarter of the way toward the next one. The Room's mood, its bucket room name and its hang come from the catalog positions of the two feelings either side, blended by angle and scaled by distance from center, so the rim at melancholy now opens "Overcast" with melancholy work. Closer and Drift move that mood and the point follows it on the wheel. B and C use the same wheel logic but are no longer being iterated.
+Scott's pick and why: "Round 3 is good for now", then on 2026-10-15 "design is settled".
+
+## Settled
+Date: 2026-10-15
+Scott declared the design settled on Round 3, Nocturne on the even feeling wheel. docs/design-system.md records it, the tokens live in src/styles/tokens.css, and the review routes and the unchosen directions (B, Print Room, and C) were deleted.

@@ -1,0 +1,82 @@
+/*
+ * Design tokens: the one place for color, type, spacing, focus and motion values.
+ * The settled direction is Nocturne on the even feeling wheel (docs/design-system.md, design-log Round 3).
+ * Every screen uses these. Nothing else hard-codes a color, font size or duration.
+ */
+
+:root {
+  /* Surfaces */
+  --c-night: #0c0c10; /* Threshold and page background */
+  --c-wall: #121216; /* the Room, Piece, Bag and Close walls */
+  --c-field: #1a1920; /* center of the feeling wheel */
+  --c-raised: rgb(236 232 223 / 0.04); /* quiet panels and mats */
+
+  /* Text and lines */
+  --c-text: #ece8df;
+  --c-muted: #a39f97;
+  --c-faint: #8d8982; /* concept bar */
+  --c-placeholder: rgb(163 159 151 / 0.6);
+  --c-hair: rgb(236 232 223 / 0.14);
+  --c-hair-faint: rgb(236 232 223 / 0.08);
+  --c-shadow: rgb(0 0 0 / 0.8);
+
+  /* The 12 feeling colors. The wheel is painted from these; the current feeling tints the light, wash and headings. */
+  --feel-nostalgic: #c99256;
+  --feel-joyful: #f4c64e;
+  --feel-playful: #ff8f5e;
+  --feel-awe: #7f78f2;
+  --feel-energized: #ee5a36;
+  --feel-defiant: #d43d80;
+  --feel-tense: #b8283c;
+  --feel-melancholy: #33508f;
+  --feel-contemplative: #5b84b1;
+  --feel-wistful: #a795cc;
+  --feel-serene: #5fc4b0;
+  --feel-tender: #eaa2b8;
+
+  /* Current feeling; screens set this inline from the session's feeling. */
+  --glow: var(--feel-nostalgic);
+  --glow-soft: color-mix(in srgb, var(--glow) 20%, transparent);
+
+  /* Type: one serif, self-hosted by next/font */
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --t-display: clamp(46px, 7vw, 92px); /* Room feeling heading */
+  --t-feeling: clamp(44px, 6.4vw, 72px); /* Threshold feeling name */
+  --t-title: clamp(30px, 4vw, 48px); /* Piece, Bag and Close headings */
+  --t-lede: clamp(19px, 2.2vw, 25px); /* feeling sentence, why-this-found-you line */
+  --t-prompt: clamp(18px, 2vw, 22px);
+  --t-also: 20px;
+  --t-body: 18px;
+  --t-caption: 17px;
+  --t-small: 15px;
+  --t-meta: 14px;
+  --t-label: 13px; /* uppercase, tracked */
+  --t-bar: 12px;
+  --track-label: 0.22em;
+
+  /* Spacing scale */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px; /* phone side gutter */
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --page-max: 1240px;
+
+  /* Controls */
+  --hit: 44px; /* minimum tap target */
+  --radius-pill: 999px;
+
+  /* Focus */
+  --focus-ring: 2px solid var(--glow);
+  --focus-offset: 3px;
+
+  /* Motion */
+  --m-quick: 200ms;
+  --m-arrive: 500ms;
+  --m-enter: 650ms;
+  --m-lights: 700ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+}

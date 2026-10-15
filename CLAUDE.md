@@ -16,6 +16,7 @@ Its audience is one person, the Trends CEO. He will read a short note, watch a 9
 6. `docs/decisions.md` records every decision made after the spec was locked, plus open questions. `docs/design-log.md` records each design round in Milestone 4.
 7. `docs/milestones.md` lists the milestones, their scope, and their exit criteria. Work only inside the current milestone.
 8. `docs/testing.md` is the testing policy: what gets tested, risk tiers, mutation testing, functional gates, and the testing loop for every milestone. `docs/test-tiers.md` holds the triage tables.
+9. `docs/design-system.md` is the settled visual design (Milestone 4): tokens, type, spacing, controls, image treatment and motion. The tokens live in `src/styles/tokens.css`. Every screen uses them.
 
 ## How to work in this repository
 
