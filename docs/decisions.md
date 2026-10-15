@@ -429,6 +429,7 @@ Question: Q-005. Does the framed price "$1.50 per inch of width" use the listed 
 Decision: Neither. The per-inch charge is on the total linear measurement of all four sides of the frame, measured on the outside of the frame: the print plus the 2-inch mat and the 1.25-inch frame on each side. The framed price is base plus $60 plus $1.50 per inch of that perimeter, so orientation no longer matters. Worked out: 12x16 is 18.5 x 22.5 outside, 82 inches, $123, framed total $222; 18x24 is 110 inches, $165, total $294; 24x36 is 146 inches, $219, total $398; 30x40 is 166 inches, $249, total $488.
 Why: Scott's answers on 2026-10-14 ("total linear measurement of all sides", then "perimeter of the frame").
 Spec reference: amends Gap G5 and Gap G28 (which priced on print width). The config field framedPerWidthInch and its comment change when pricing is built in Part B.
+Update 2026-10-15: Scott confirmed the $1.50 per inch rate on the outer frame perimeter, with the framed totals above.
 
 ### D-049: The wheel places feelings evenly; the matcher uses catalog positions
 Date: 2026-10-15
@@ -446,6 +447,14 @@ Decision: Write the test in Part B against the real J3. A work counts when the f
 Why: The stand-in ordering is deleted when the design settles, and building J3 early would break the M4 order.
 Spec reference: D-049, Section 4 J3, docs/testing.md.
 Note: an early read-only check on the review stand-in (nearest 6 works per lane at each feeling's catalog position) on 2026-10-15 found four feelings under 6 of 12: nostalgic 4, awe 4, defiant 5 and wistful 2. The other eight had 6 to 12.
+
+### D-051: The 12 feeling sentences are approved
+Date: 2026-10-15
+Decided by: Scott
+Question: D-045 has Claude draft one Room sentence per feeling for Scott's approval. Approve the 12 drafts?
+Decision: Approved as drafted. joyful: "A room of bright color and easy laughter." playful: "A room of bold shapes and a little mischief." energized: "A room that moves, with strong color and somewhere to go." awe: "A room of big skies and things larger than you." serene: "A room of soft light and slow mornings." tender: "A room of warm light and quiet care." contemplative: "A room for slow looking and long thoughts." nostalgic: "A room of old places and the people we were there." wistful: "A room of faded afternoons and things just out of reach." melancholy: "A room of low light that lets a sad day be a sad day." tense: "A room of held breath, sharp edges and weather coming in." defiant: "A room that stands its ground, loud and unafraid."
+Why: Scott's answer on 2026-10-15.
+Spec reference: D-045, Section 5.2.
 
 ---
 

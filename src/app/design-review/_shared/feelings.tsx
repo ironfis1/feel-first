@@ -24,7 +24,7 @@ export const feelingColor: Record<string, string> = {
   defiant: "#d43d80",
 };
 
-/** Draft room sentences, one per feeling, for Scott's approval (D-045). */
+/** Room sentences, one per feeling, approved by Scott (D-045, D-051). */
 export const feelingSentence: Record<string, string> = {
   joyful: "A room of bright color and easy laughter.",
   playful: "A room of bold shapes and a little mischief.",

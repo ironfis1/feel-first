@@ -6,6 +6,8 @@ This spec is the build reference for Claude Code. Every requirement traces to a 
 
 Rule of interpretation: anything not stated in this spec's sources is undecided and must not be treated as agreed, permitted, or forbidden [RB1].
 
+Post-lock amendments: decisions Scott made after the lock are recorded in docs/decisions.md and cited here as [D-nnn], for example [RB17, amended by D-044].
+
 ---
 
 ## 1. Purpose, audience and constraints
@@ -241,7 +243,7 @@ Subject list (fixed 12): landscape, seascape, cityscape, figure, still life, bot
 | Size 30x40 | $179 | [Gap G5] |
 | Paper print | Base price | [Gap G5] |
 | Canvas | 1.6x base | [Gap G5] |
-| Framed print | Base plus $60 plus $1.50 per inch of width | [Gap G5] |
+| Framed print | Base plus $60 plus $1.50 per inch of the outer frame perimeter (print plus mat and frame on every side) | [Gap G5, amended by D-048] |
 | Frames | Black, natural oak, white, brass, all the same price | [Gap G5, upheld by Res #42] |
 | Shipping | $9.95 flat | [Gap G5] |
 
@@ -403,25 +405,28 @@ Journey-wide rules:
 
 Required elements:
 
-- A wordless mood-spectrum entry [RB17].
+- A mood-spectrum entry with no words on the field itself [RB17, amended by D-044].
 - A two-dimensional mood field: valence from heavy to bright, arousal from calm to charged [RB18].
+- The mood field is a feeling wheel painted from the 12 emotion words, each with its own color. The words sit evenly, 30 degrees apart at the same radius, in the angle order of their catalog positions (counterclockwise from valence +1: nostalgic, joyful, playful, awe, energized, defiant, tense, melancholy, contemplative, wistful, serene, tender) [Gap G1, D-044, amended by D-049].
 - A movable point the visitor moves until it feels right [RB18].
+- As the point moves, the feeling under it is named in words beside the wheel, with a second feeling when the point sits between two [D-044, D-049].
 - The persistent concept bar [Res #20, Res #26].
 
 Allowed:
 
-- A one-line prompt: "Move the light until it feels right." [Res #20, Gap G12].
+- A one-line prompt: "Move the light until it feels right." [Res #20, Gap G12, upheld by D-046].
 - Builder Notes, when toggled on [Res #20].
 
 Prohibited:
 
 - No search box and no category menu [RB19].
 - No words required from the visitor [RB17, Res #21].
-- No axis labels on the mood field; color and motion carry the meaning [Res #21].
+- No axis labels and no words on the mood field; color and motion carry the meaning, and the named feeling sits beside the field, not on it [Res #21, narrowed by D-044].
 
 Behaviors:
 
 - The visitor's first touch on the Threshold starts the "time to first piece" timer [Res #11].
+- The mood J3 uses is the catalog position of the named feeling, blended linearly by angle with the second feeling when the point sits between two, and scaled by the point's distance from center, so the center stays the neutral mood (0, 0). A feeling's catalog position is the average valence and arousal of the works that carry it as their lead tag; a feeling that leads no work uses every work that carries it. J3, J7 and the buckets are unchanged [D-044, D-049].
 
 ### 5.2 Room
 
@@ -431,10 +436,11 @@ Required elements:
 - The 6 nearest works from each lane, interleaved [Res #5, refined by Res #37].
 - More works load in batches on request [Res #5].
 - The full catalog is never rendered at once [Res #5].
-- A compact copy of the mood field for retuning [RB21, Res #22].
+- A compact copy of the mood field (the feeling wheel) for retuning [RB21, Res #22, D-044].
 - A free-text box to describe a moment in the visitor's own words, routed to J2 [RB22, Res #4, Gap G8].
 - Closer and Drift controls on pieces [RB23].
-- The room name for the visitor's current mood bucket [RB54, Res #9].
+- A heading naming the visitor's current feeling, followed by one short sentence for that feeling; 12 sentences, one per emotion word, drafted by Claude and approved by Scott [D-045].
+- The room name for the visitor's current mood bucket, as a small label above the feeling heading [RB54, Res #9, upheld by D-047].
 
 Allowed:
 
@@ -643,7 +649,9 @@ Gap G18 sets this as a minimum list ("at least") [Gap G18]. Other tunable values
 | Size word mapping | small 12x16, medium 18x24, large 30x40 | [Gap G7] |
 | Wall scenes | sofa, bed, desk; default sofa | [Gap G7] |
 | Fingerprint tag count | 3 | [Res #13] |
-| Threshold prompt | "Move the light until it feels right." | [Gap G12] |
+| Threshold prompt | "Move the light until it feels right." | [Gap G12, upheld by D-046] |
+| Feeling wheel order | nostalgic, joyful, playful, awe, energized, defiant, tense, melancholy, contemplative, wistful, serene, tender, counterclockwise from valence +1 | [D-049] |
+| Feeling wheel radius | 0.75 of the wheel radius | [D-049] |
 | Contact email | scott@reasinger.net | [Res #29] |
 | LinkedIn URL | https://www.linkedin.com/in/scottreasinger/ | [Gap G15] |
 | Working name | Feel First | [Gap G15] |
@@ -751,6 +759,7 @@ What is missing: Res #41 gives a 1.25-inch frame width and a 2-inch mat, but not
 Options: (a) per side, mat on framed prints only, frame choice enabled only for framed print, price on print width; (b) Scott specifies.
 Why this matters: True scale on the Wall [RB89] and the framed price both depend on it.
 Resolution: Frame (1.25 inches) and mat (2 inches) apply to framed prints only, not to canvas or paper prints. The framed price uses the print width, not the outer frame width. (default accepted by Scott, 2026-10-08)
+Amended 2026-10-14 by D-048: the per-inch charge uses the perimeter of the outside of the frame (the print plus the 2-inch mat and the 1.25-inch frame on every side), not the print width.
 
 ## Gap G29
 Topic: Frame imagery assets
