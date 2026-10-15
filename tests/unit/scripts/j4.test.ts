@@ -318,6 +318,30 @@ describe("copyFor", () => {
     expect(() => copyFor([a, b], stale, system)).toThrow("1 works have no J4 lines for their current input, for example w-0001");
     expect(() => copyFor([work({ ...a, valence: 0.9 }), b], current(a, b), system)).toThrow("for example w-0001");
   });
+
+  describe("partial, until the J4 full run [D-042]", () => {
+    const c = work({ id: "w-0003", title: "Third" });
+    const stale = { ...current(a, c), "w-0003": { inputHash: inputHash(`${system} old`, c), lines: linesFor("w-0003") } };
+
+    it("keeps only works with lines for their current input, in catalog order", () => {
+      expect(copyFor([a, b, c], stale, system, true)).toEqual({ "w-0001": linesFor("w-0001") });
+      expect(Object.keys(copyFor([c, b, a], current(a, b, c), system, true))).toEqual(["w-0003", "w-0002", "w-0001"]);
+    });
+
+    it("returns every work when all are current, and passes copyFileSchema", () => {
+      const out = copyFor([a, b], current(a, b, c), system, true);
+      expect(out).toEqual({ "w-0001": linesFor("w-0001"), "w-0002": linesFor("w-0002") });
+      expect(copyFileSchema.safeParse(out).success).toBe(true);
+    });
+
+    it("throws when no work is current", () => {
+      expect(() => copyFor([a, b], {}, system, true)).toThrow("2 works have no J4 lines for their current input, for example w-0001");
+    });
+
+    it("throws a TypeError for an empty catalog (pin: no message to name)", () => {
+      expect(() => copyFor([], {}, system, true)).toThrow(TypeError);
+    });
+  });
 });
 
 describe("sampleLines", () => {

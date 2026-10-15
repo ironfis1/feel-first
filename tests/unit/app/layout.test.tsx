@@ -5,6 +5,13 @@ import RootLayout, { metadata } from "@/app/layout";
 // next/font only works inside the Next compiler; the test gets a stand-in class name.
 vi.mock("next/font/google", () => ({ Newsreader: () => ({ variable: "font-serif-var" }) }));
 import { workingName } from "@/config/feel";
+import { useSession } from "@/components/session/Session";
+
+/** A screen that reads the session, as every journey screen does. */
+function SessionReader() {
+  const { pages, bag } = useSession();
+  return <p>session pages {pages}, bag {bag.length}</p>;
+}
 
 describe("RootLayout", () => {
   const html = renderToStaticMarkup(
@@ -20,6 +27,13 @@ describe("RootLayout", () => {
     const content = html.indexOf("screen content");
     expect(bar).toBeGreaterThan(-1);
     expect(content).toBeGreaterThan(bar);
+  });
+});
+
+describe("RootLayout session", () => {
+  it("wraps every screen in the session, so a screen can call useSession [D-040]", () => {
+    const html = renderToStaticMarkup(RootLayout({ children: <SessionReader /> } as LayoutProps<"/">));
+    expect(html).toContain("session pages 1, bag 0");
   });
 });
 

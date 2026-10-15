@@ -1,5 +1,7 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { catalogProblems, copyProblems, seedProblems } from "../../../scripts/validate-data.ts";
+import { catalogProblems, copyMayBePartial, copyProblems, seedProblems } from "../../../scripts/validate-data.ts";
 
 // High tier (docs/test-tiers.md): the build-time gate on data/catalog.json. Medium: copyProblems and seedProblems.
 
@@ -47,6 +49,32 @@ describe("copyProblems [Gap G2]", () => {
       "1 works have no lines, for example w-3",
       "1 entries are not catalog works, for example w-9",
     ]);
+  });
+});
+
+describe("copyProblems, partial until the J4 full run [D-042]", () => {
+  const ids = new Set(["w-1", "w-2", "w-3"]);
+
+  it("allows missing works but still reports unknown entries", () => {
+    expect(copyProblems({ "w-1": {} }, ids, true)).toEqual([]);
+    expect(copyProblems({}, ids, true)).toEqual([]);
+    expect(copyProblems({ "w-1": {}, "w-9": {} }, ids, true)).toEqual(["1 entries are not catalog works, for example w-9"]);
+  });
+
+  it("reports both kinds of problem when not partial", () => {
+    expect(copyProblems({ "w-1": {}, "w-9": {} }, ids, false)).toEqual([
+      "2 works have no lines, for example w-2",
+      "1 entries are not catalog works, for example w-9",
+    ]);
+  });
+
+  it("is switched off once copy.json covers every catalog work (guard for after the full run)", () => {
+    const root = path.resolve(import.meta.dirname, "../../..");
+    const read = (name: string) => JSON.parse(readFileSync(path.join(root, "data", name), "utf8"));
+    const copy = read("copy.json") as Record<string, unknown>;
+    const complete = (read("catalog.json") as { id: string }[]).every((w) => w.id in copy);
+    if (complete) expect(copyMayBePartial).toBe(false);
+    else expect(copyMayBePartial).toBe(true);
   });
 });
 
