@@ -1,7 +1,6 @@
+import { Bag } from "@/components/bag/Bag";
+import { getWorkCards } from "@/lib/catalog";
+
 export default function BagPage() {
-  return (
-    <main>
-      <h1>Bag</h1>
-    </main>
-  );
+  return <Bag works={getWorkCards()} />;
 }

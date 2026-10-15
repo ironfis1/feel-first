@@ -1,0 +1,16 @@
+.nav {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--s-5);
+  max-width: var(--page-max);
+  margin: 0 auto;
+}
+
+.nav a {
+  color: var(--c-muted);
+}
+
+.nav a:hover {
+  color: var(--c-text);
+}

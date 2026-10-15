@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Newsreader } from "next/font/google";
 import { ConceptBar } from "@/components/ConceptBar";
+import { SessionProvider } from "@/components/session/Session";
 import { workingName } from "@/config/feel";
 import "../styles/tokens.css";
 import "./globals.css";
@@ -19,7 +20,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={serif.variable}>
       <body>
         <ConceptBar />
-        {children}
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   );

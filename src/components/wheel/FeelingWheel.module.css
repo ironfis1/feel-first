@@ -1,0 +1,82 @@
+/* The feeling wheel (docs/design-system.md, "The feeling wheel"). */
+
+.wheel {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.control {
+  touch-action: none; /* dragging never scrolls the page */
+  cursor: grab;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.control:active {
+  cursor: grabbing;
+}
+
+.full {
+  width: min(86vw, 54vh, 560px);
+}
+
+.compact {
+  width: clamp(96px, 14vw, 150px);
+  flex: none;
+}
+
+/* The feelings, as soft colored lights; the edge fades into the dark. */
+.lights {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  mask-image: radial-gradient(circle, #000 55%, transparent 72%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.compact .lights {
+  filter: blur(2px);
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--c-hair-faint);
+  pointer-events: none;
+}
+
+.control:focus-visible .ring {
+  border: 2px solid var(--glow);
+  box-shadow: 0 0 0 4px var(--c-hair);
+}
+
+.light {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--c-core) 0%, var(--glow) 14%, var(--glow-soft) 46%, transparent 70%);
+  filter: blur(2px);
+  mix-blend-mode: screen;
+  animation: breathe var(--pulse) ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    scale: 0.92;
+    opacity: 0.86;
+  }
+  50% {
+    scale: 1.06;
+    opacity: 1;
+  }
+}

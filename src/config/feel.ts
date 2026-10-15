@@ -147,6 +147,16 @@ export type MaterialId = keyof typeof materials;
 export const frameFinishes = ["black", "natural oak", "white", "brass"] as const;
 export type FrameFinish = (typeof frameFinishes)[number];
 
+/**
+ * What the Piece screen selects before the visitor chooses. A described size word overrides the size [Res #6].
+ * Provisional until Scott answers Q-011.
+ */
+export const pieceDefaults: { size: PrintSizeId; material: MaterialId; frame: FrameFinish } = {
+  size: "18x24",
+  material: "framed",
+  frame: "black",
+};
+
 /** Flat shipping estimate in USD; no tax [Gap G5, Res #14]. */
 export const shippingFlat = 9.95;
 
@@ -182,6 +192,28 @@ export const wallSceneReferenceWidthIn: Record<WallScene, number> = {
 
 /** The one line on the Threshold [Gap G12]. */
 export const thresholdPrompt = "Move the light until it feels right.";
+
+/** The Room sentence under the feeling heading, one per feeling, approved by Scott [D-045, D-051]. */
+export const feelingSentences = {
+  joyful: "A room of bright color and easy laughter.",
+  playful: "A room of bold shapes and a little mischief.",
+  energized: "A room that moves, with strong color and somewhere to go.",
+  awe: "A room of big skies and things larger than you.",
+  serene: "A room of soft light and slow mornings.",
+  tender: "A room of warm light and quiet care.",
+  contemplative: "A room for slow looking and long thoughts.",
+  nostalgic: "A room of old places and the people we were there.",
+  wistful: "A room of faded afternoons and things just out of reach.",
+  melancholy: "A room of low light that lets a sad day be a sad day.",
+  tense: "A room of held breath, sharp edges and weather coming in.",
+  defiant: "A room that stands its ground, loud and unafraid.",
+} as const satisfies Record<(typeof feelingWheelOrder)[number], string>;
+
+/** Shown under the describe box when no word of the text is in the word map [D-052]. */
+export const describeNoMatch = "Nothing in that moved the light. Try a word like rainy, calm or bright.";
+
+/** Placeholder in the describe box: the demo video phrase, which every interpreter reads [D-037]. */
+export const describePlaceholder = "a slow sunday morning in the bedroom, something large";
 
 // ---------------------------------------------------------------------------
 // Cost line [spec Section 8, Res #40, Gap G31]

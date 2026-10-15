@@ -1,0 +1,112 @@
+/* Shared controls (docs/design-system.md, "Buttons and controls"). Every control is at least --hit tall. */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  min-height: var(--hit);
+  padding: var(--s-3) 28px;
+  font-size: var(--t-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--c-text);
+  background: none;
+  border: 1px solid var(--c-hair);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: border-color var(--m-quick);
+}
+
+.pill:hover {
+  border-color: var(--glow);
+}
+
+.pill:disabled {
+  cursor: default;
+  color: var(--c-muted);
+  border-color: var(--c-hair-faint);
+}
+
+.text {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--hit);
+  padding: 10px 2px;
+  font-size: var(--t-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--c-text);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 6px;
+  transition: text-decoration-color var(--m-quick);
+}
+
+.text:hover {
+  text-decoration-color: var(--glow);
+}
+
+.label {
+  margin: 0;
+  font-size: var(--t-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--c-hair);
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--m-quick);
+}
+
+.link:hover {
+  text-decoration-color: var(--glow);
+}
+
+/* A screen on the wall: Room, Piece, Bag and Close. */
+.screen {
+  position: relative;
+  min-height: calc(100dvh - 30px);
+  padding: 0 var(--s-4) var(--s-8);
+  background: var(--c-wall);
+  animation: lightsUp var(--m-lights) ease-out;
+}
+
+.column {
+  position: relative;
+  max-width: var(--page-max);
+  margin: 0 auto;
+}
+
+.wash {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 70vh;
+  background: radial-gradient(ellipse at 50% -10%, var(--glow-soft), transparent 65%);
+  transition: background var(--m-arrive) ease;
+  pointer-events: none;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--t-title);
+  font-weight: 300;
+  line-height: 1.05;
+}
+
+@keyframes lightsUp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

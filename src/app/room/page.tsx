@@ -1,7 +1,6 @@
+import { Room } from "@/components/room/Room";
+import { getFeelingPositions, getWorkCards } from "@/lib/catalog";
+
 export default function RoomPage() {
-  return (
-    <main>
-      <h1>Room</h1>
-    </main>
-  );
+  return <Room works={getWorkCards()} positions={getFeelingPositions()} />;
 }

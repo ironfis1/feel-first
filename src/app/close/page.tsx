@@ -1,7 +1,5 @@
+import { Close } from "@/components/close/Close";
+
 export default function ClosePage() {
-  return (
-    <main>
-      <h1>Close</h1>
-    </main>
-  );
+  return <Close />;
 }

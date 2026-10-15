@@ -19,6 +19,15 @@
   --c-hair: rgb(236 232 223 / 0.14);
   --c-hair-faint: rgb(236 232 223 / 0.08);
   --c-shadow: rgb(0 0 0 / 0.8);
+  --c-inset: rgb(0 0 0 / 0.35); /* mat bevel, frame edge and mitre line */
+  --c-core: #fffaf0; /* white core of the visitor's light */
+
+  /* Framed previews and corner close-ups, drawn in code [Gap G29]. Frame finishes match config frameFinishes. */
+  --c-mat: #f3efe6;
+  --finish-black: linear-gradient(135deg, #2a292e 0%, #121115 55%, #1d1c21 100%);
+  --finish-natural-oak: linear-gradient(135deg, #c99a63 0%, #a87a48 40%, #bb8d58 70%, #9c6f40 100%);
+  --finish-white: linear-gradient(135deg, #f7f6f2 0%, #e4e2dc 100%);
+  --finish-brass: linear-gradient(135deg, #e2c77e 0%, #b8954a 45%, #d8b867 75%, #a5823d 100%);
 
   /* The 12 feeling colors. The wheel is painted from these; the current feeling tints the light, wash and headings. */
   --feel-nostalgic: #c99256;
