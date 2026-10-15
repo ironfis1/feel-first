@@ -47,6 +47,28 @@ export const nudgeStep = 0.3;
 /** What Drift does to a work: it moves to the end of its own lane's ranked list for the session [Gap G10, Gap G18, Gap G22]. */
 export const driftBehavior = "end-of-lane" as const;
 
+/**
+ * The feeling wheel: the 12 feelings sit evenly, 30 degrees apart, counterclockwise from valence +1,
+ * in the angle order of their catalog positions [D-044, D-049].
+ */
+export const feelingWheelOrder = [
+  "nostalgic",
+  "joyful",
+  "playful",
+  "awe",
+  "energized",
+  "defiant",
+  "tense",
+  "melancholy",
+  "contemplative",
+  "wistful",
+  "serene",
+  "tender",
+] as const;
+
+/** Where the feelings sit on the wheel, as a fraction of its radius [D-049]. */
+export const feelingWheelRadius = 0.75;
+
 /** Mood bucket cut points on each axis, giving a 3x3 grid of equal thirds [Gap G4, Gap G18]. */
 export const bucketCutPoints = [-1 / 3, 1 / 3] as const;
 

@@ -4,8 +4,8 @@
 
 import Image from "next/image";
 import { useMemo, useState, type CSSProperties } from "react";
-import { roomPageSizePerLane, thresholdPrompt } from "@/config/feel";
-import { FeelingWheel, feelingAt, feelingColor, feelingSentence, wheelPaint, type Positions } from "../_shared/feelings";
+import { nudgeStep, roomPageSizePerLane, thresholdPrompt } from "@/config/feel";
+import { FeelingWheel, feelingAt, feelingColor, feelingSentence, wheelPaint, wheelPositions, wheelPointFor, j3Mood, type Positions } from "../_shared/feelings";
 import { clampToCircle, reviewHang, roomNameOf, type Mood, type ReviewWork } from "../_shared/review";
 import s from "./b.module.css";
 
@@ -22,16 +22,16 @@ function pointVars(p: Mood, color: string): CSSProperties {
   } as CSSProperties;
 }
 
-function Disc({ mood, onMove, pos, size }: { mood: Mood; onMove: (p: Mood) => void; pos: Positions; size: "large" | "small" }) {
+function Disc({ mood, onMove, size }: { mood: Mood; onMove: (p: Mood) => void; size: "large" | "small" }) {
   // Feeling colors printed on paper.
-  const paint = useMemo(() => wheelPaint(pos, "radial-gradient(circle, #fbf8f2 0%, #ece6da 100%)", "e6", 32), [pos]);
+  const paint = useMemo(() => wheelPaint(wheelPositions(), "radial-gradient(circle, #fbf8f2 0%, #ece6da 100%)", "e6", 32), []);
   return (
     <FeelingWheel
       mood={mood}
       onMove={onMove}
-      pos={pos}
+     
       className={size === "large" ? s.disc : s.discSmall}
-      style={{ ...paint, ...pointVars(mood, feelingColor[feelingAt(mood, pos).main]) }}
+      style={{ ...paint, ...pointVars(mood, feelingColor[feelingAt(mood).main]) }}
     >
       <span className={s.hairV} aria-hidden />
       <span className={s.hairH} aria-hidden />
@@ -50,16 +50,18 @@ export function DirectionB({ works, positions }: { works: ReviewWork[]; position
   const [pages, setPages] = useState(1);
   const [demoted, setDemoted] = useState<Set<string>>(new Set());
 
-  const feel = feelingAt(mood, positions);
+  const feel = feelingAt(mood);
+  const j3 = useMemo(() => j3Mood(mood, positions), [mood, positions]);
   const vars = pointVars(mood, feelingColor[feel.main]);
-  const hang = useMemo(() => reviewHang(works, mood, roomPageSizePerLane * pages, demoted), [works, mood, pages, demoted]);
+  const hang = useMemo(() => reviewHang(works, j3, roomPageSizePerLane * pages, demoted), [works, j3, pages, demoted]);
 
   const move = (p: Mood) => {
     setMood(p);
     setTouched(true);
   };
   const nudge = (w: ReviewWork, dir: 1 | -1) => {
-    setMood((p) => clampToCircle({ v: p.v + dir * 0.3 * (w.v - p.v), a: p.a + dir * 0.3 * (w.a - p.a) }));
+    // Closer and Drift move the J3 mood, then the wheel point follows it (D-049).
+    setMood(wheelPointFor(clampToCircle({ v: j3.v + dir * nudgeStep * (w.v - j3.v), a: j3.a + dir * nudgeStep * (w.a - j3.a) }), positions));
     if (dir === -1) setDemoted((d) => new Set(d).add(w.id));
   };
 
@@ -67,7 +69,7 @@ export function DirectionB({ works, positions }: { works: ReviewWork[]; position
     return (
       <main className={`${s.root} ${s.threshold}`} style={vars}>
         <div className={s.discWrap}>
-          <Disc mood={mood} onMove={move} pos={positions} size="large" />
+          <Disc mood={mood} onMove={move} size="large" />
         </div>
         <div className={s.side}>
           <p className={s.prompt}>{thresholdPrompt}</p>
@@ -89,7 +91,7 @@ export function DirectionB({ works, positions }: { works: ReviewWork[]; position
     <main className={`${s.root} ${s.room}`} style={vars}>
       <header className={s.head}>
         <div className={s.headText}>
-          <p className={s.eyebrow}>{roomNameOf(mood)}</p>
+          <p className={s.eyebrow}>{roomNameOf(j3)}</p>
           <h1 key={feel.main} className={s.roomFeeling}>
             {feel.main}
             {feel.also && <span className={s.roomAlso}>a little {feel.also}</span>}
@@ -105,7 +107,7 @@ export function DirectionB({ works, positions }: { works: ReviewWork[]; position
             </button>
           </form>
         </div>
-        <Disc mood={mood} onMove={setMood} pos={positions} size="small" />
+        <Disc mood={mood} onMove={setMood} size="small" />
       </header>
 
       <ol className={s.grid}>

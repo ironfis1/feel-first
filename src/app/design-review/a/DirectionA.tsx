@@ -1,11 +1,11 @@
 "use client";
 
-// Round 2, Direction A: Nocturne on the feeling wheel (D-004, D-044, D-045). Local review only.
+// Round 3, Direction A: Nocturne on the even feeling wheel (D-004, D-044, D-045, D-049). Local review only.
 
 import Image from "next/image";
 import { useMemo, useState, type CSSProperties } from "react";
-import { roomPageSizePerLane, thresholdPrompt } from "@/config/feel";
-import { cap, FeelingWheel, feelingAt, feelingColor, feelingSentence, wheelPaint, type Positions } from "../_shared/feelings";
+import { nudgeStep, roomPageSizePerLane, thresholdPrompt } from "@/config/feel";
+import { cap, FeelingWheel, feelingAt, feelingColor, feelingSentence, wheelPaint, wheelPositions, wheelPointFor, j3Mood, type Positions } from "../_shared/feelings";
 import { clampToCircle, reviewHang, roomNameOf, type Mood, type ReviewWork } from "../_shared/review";
 import s from "./a.module.css";
 
@@ -24,11 +24,11 @@ function glowVars(p: Mood, color: string): CSSProperties {
   } as CSSProperties;
 }
 
-function Field({ mood, onMove, pos, compact }: { mood: Mood; onMove: (p: Mood) => void; pos: Positions; compact?: boolean }) {
+function Field({ mood, onMove, compact }: { mood: Mood; onMove: (p: Mood) => void; compact?: boolean }) {
   // Feelings are soft lights in the dark; the field has no edge beyond a faint ring.
-  const paint = useMemo(() => wheelPaint(pos, "radial-gradient(circle, #1a1920 0%, #0c0c10 70%)", "8c", 30), [pos]);
+  const paint = useMemo(() => wheelPaint(wheelPositions(), "radial-gradient(circle, #1a1920 0%, #0c0c10 70%)", "8c", 30), []);
   return (
-    <FeelingWheel mood={mood} onMove={onMove} pos={pos} className={compact ? s.fieldCompact : s.field} style={glowVars(mood, feelingColor[feelingAt(mood, pos).main])}>
+    <FeelingWheel mood={mood} onMove={onMove} className={compact ? s.fieldCompact : s.field} style={glowVars(mood, feelingColor[feelingAt(mood).main])}>
       <span className={s.lights} style={paint} aria-hidden />
       <span className={s.ring} aria-hidden />
       <span className={s.light} aria-hidden />
@@ -43,16 +43,18 @@ export function DirectionA({ works, positions }: { works: ReviewWork[]; position
   const [pages, setPages] = useState(1);
   const [demoted, setDemoted] = useState<Set<string>>(new Set());
 
-  const feel = feelingAt(mood, positions);
+  const feel = feelingAt(mood);
+  const j3 = useMemo(() => j3Mood(mood, positions), [mood, positions]);
   const vars = glowVars(mood, feelingColor[feel.main]);
-  const hang = useMemo(() => reviewHang(works, mood, roomPageSizePerLane * pages, demoted), [works, mood, pages, demoted]);
+  const hang = useMemo(() => reviewHang(works, j3, roomPageSizePerLane * pages, demoted), [works, j3, pages, demoted]);
 
   const move = (p: Mood) => {
     setMood(p);
     setTouched(true);
   };
   const nudge = (w: ReviewWork, dir: 1 | -1) => {
-    setMood((p) => clampToCircle({ v: p.v + dir * 0.3 * (w.v - p.v), a: p.a + dir * 0.3 * (w.a - p.a) }));
+    // Closer and Drift move the J3 mood, then the wheel point follows it (D-049).
+    setMood(wheelPointFor(clampToCircle({ v: j3.v + dir * nudgeStep * (w.v - j3.v), a: j3.a + dir * nudgeStep * (w.a - j3.a) }), positions));
     if (dir === -1) setDemoted((d) => new Set(d).add(w.id));
   };
   const enter = () => {
@@ -64,7 +66,7 @@ export function DirectionA({ works, positions }: { works: ReviewWork[]; position
     return (
       <main className={`${s.root} ${s.threshold} ${view === "entering" ? s.entering : ""}`} style={vars}>
         <span className={s.wash} aria-hidden />
-        <Field mood={mood} onMove={move} pos={positions} />
+        <Field mood={mood} onMove={move} />
         <div className={s.naming} aria-live="polite">
           <p key={feel.main} className={s.feeling}>
             {touched ? cap(feel.main) : " "}
@@ -86,7 +88,7 @@ export function DirectionA({ works, positions }: { works: ReviewWork[]; position
       <span className={s.roomWash} aria-hidden />
       <header className={s.roomHead}>
         <div className={s.roomTitle}>
-          <p className={s.eyebrow}>{roomNameOf(mood)}</p>
+          <p className={s.eyebrow}>{roomNameOf(j3)}</p>
           <h1 key={feel.main} className={s.roomFeeling}>
             {cap(feel.main)}
             {feel.also && <span className={s.roomAlso}>, a little {feel.also}</span>}
@@ -104,7 +106,7 @@ export function DirectionA({ works, positions }: { works: ReviewWork[]; position
             </div>
           </form>
         </div>
-        <Field mood={mood} onMove={setMood} pos={positions} compact />
+        <Field mood={mood} onMove={setMood} compact />
       </header>
 
       <ol className={s.hang}>

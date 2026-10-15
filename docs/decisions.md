@@ -430,6 +430,23 @@ Decision: Neither. The per-inch charge is on the total linear measurement of all
 Why: Scott's answers on 2026-10-14 ("total linear measurement of all sides", then "perimeter of the frame").
 Spec reference: amends Gap G5 and Gap G28 (which priced on print width). The config field framedPerWidthInch and its comment change when pricing is built in Part B.
 
+### D-049: The wheel places feelings evenly; the matcher uses catalog positions
+Date: 2026-10-15
+Decided by: Scott
+Question: Under D-044 the feelings sat at their catalog positions on the wheel. How should the wheel place them?
+Decision: The 12 feelings sit on the wheel at the same radius, 30 degrees apart, in the angle order of their D-044 catalog positions (counterclockwise from valence +1: nostalgic, joyful, playful, awe, energized, defiant, tense, melancholy, contemplative, wistful, serene, tender). The radius is 0.75 of the wheel's radius (feelingWheelRadius in src/config/feel.ts), so the whole disc is usable. The named feeling comes from the visitor's point on the wheel. The mood J3 uses is the D-044 catalog position of that feeling, blended linearly with the second feeling when the point sits between two, by angle. Distance from center scales how far the J3 mood moves from (0, 0) toward that position, so the center stays the neutral start.
+Why: The D-044 positions all sit inside the middle 40% of the field, nine on the positive side. The center landed on nostalgic (9 works), small drags flickered the label between awe, nostalgic, defiant and playful, and melancholy (2 works) owned half the wheel, so its Room showed contemplative work under a melancholy heading.
+Spec reference: amends D-044. J3, J7 and the buckets are unchanged.
+
+### D-050: Each feeling's Room is tested against J3 in Part B
+Date: 2026-10-15
+Decided by: Scott
+Question: Scott asked for a test that every feeling, at full radius, gives a Room whose top 12 works include at least 6 tagged with that feeling. J3 is Part B work, which waits until the design is settled. Test now against the review stand-in, in Part B against J3, or build J3 early?
+Decision: Write the test in Part B against the real J3. A work counts when the feeling is any of its tags, not only its lead tag. Failures are reported to Scott, not tuned around.
+Why: The stand-in ordering is deleted when the design settles, and building J3 early would break the M4 order.
+Spec reference: D-049, Section 4 J3, docs/testing.md.
+Note: an early read-only check on the review stand-in (nearest 6 works per lane at each feeling's catalog position) on 2026-10-15 found four feelings under 6 of 12: nostalgic 4, awe 4, defiant 5 and wistful 2. The other eight had 6 to 12.
+
 ---
 
 ## Open questions
