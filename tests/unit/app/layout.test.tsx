@@ -1,6 +1,9 @@
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import RootLayout, { metadata } from "@/app/layout";
+
+// next/font only works inside the Next compiler; the test gets a stand-in class name.
+vi.mock("next/font/google", () => ({ Newsreader: () => ({ variable: "font-serif-var" }) }));
 import { workingName } from "@/config/feel";
 
 describe("RootLayout", () => {
@@ -9,7 +12,7 @@ describe("RootLayout", () => {
   );
 
   it("sets the document language to English", () => {
-    expect(html).toMatch(/^<html lang="en">/);
+    expect(html).toMatch(/^<html lang="en"/);
   });
 
   it("puts the concept bar before the screen content on every page", () => {
