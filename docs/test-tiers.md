@@ -65,7 +65,7 @@ Tooling note: Stryker's Vitest runner 10.0.0 did not activate runtime mutants un
 Kept about 234, flagged 3:
 - pricing "has no floating-point noise in canvas prices" (flag 3, duplicate): deleted. The 12x16 canvas row of the price table already fails on float noise.
 - feelings "places all 12 feelings at the configured radius" (flag 4, rebuilt the formula): the cos and sin expectations are replaced with literal positions for awe, tense, wistful and joyful.
-- validateData "is switched off once copy.json covers every catalog work" (flag 6, passes on a constant): pending Scott. It is a deliberate guard that turns red after the J4 full run if copyMayBePartial is left true.
+- validateData "is switched off once copy.json covers every catalog work" (flag 6, passes on a constant): kept by Scott on 2026-10-15. It is a deliberate guard that turns red after the J4 full run if copyMayBePartial is left true.
 
 ### 2026-10-12 (M3, tests added to kill mutants, and validate-data)
 

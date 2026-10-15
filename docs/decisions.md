@@ -489,6 +489,22 @@ Decision: Once the Room header scrolls out of view, a slim bar slides in at the 
 Why: Res #10 requires the mood point to move visibly on Closer and Drift; below the first row the header wheel was off screen. Scott chose the bar over a floating corner wheel on 2026-10-15.
 Spec reference: Section 5.2, Res #10, D-041.
 
+### D-056: The Wall and Signals stubs get the screen links
+Date: 2026-10-15
+Decided by: Scott
+Question: The M4 prompt keeps Wall and Signals as the M1 stubs until M5, but a stub with no links is a dead end for free navigation. Add the Room, Bag and Close links to them?
+Decision: Yes. Each stub keeps its M1 content and gains the same screen links as the other screens. Nothing else of M5 is built.
+Why: Spec Section 5 requires free navigation between all screens [Res #3, Res #35].
+Spec reference: Section 5, Res #3, Res #35.
+
+### D-057: Four feelings below the D-050 bar are left as known gaps
+Date: 2026-10-15
+Decided by: Scott
+Question: The D-050 Room test on the real catalog and real J3 finds nostalgic 4, awe 4, defiant 5 and wistful 2 of the top 12 carrying the feeling, below 6. Act now or record?
+Decision: Record them as known gaps for now. The test marks those four as expected failures with their measured counts, so a change in either direction shows up.
+Why: Scott's answer on 2026-10-15.
+Spec reference: D-050, D-049.
+
 ---
 
 ## Open questions
