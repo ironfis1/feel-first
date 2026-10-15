@@ -406,17 +406,35 @@ Decision: The Room's heading is the feeling the visitor is on, followed by one s
 Why: Scott's Round 0 feedback on 2026-10-14.
 Spec reference: adds to Section 5.2. Whether the bucket room name stays on the Room is open (Q-010), since RB54 and Res #9 require it.
 
+### D-046: The Threshold prompt stays under the feeling wheel
+Date: 2026-10-14
+Decided by: Scott
+Question: Q-009. With the feeling wheel (D-044), does the Gap G12 prompt "Move the light until it feels right." stay?
+Decision: Keep it as written.
+Why: Scott's answer on 2026-10-14.
+Spec reference: Gap G12, D-044.
+
+### D-047: The bucket room name stays on the Room, above the feeling
+Date: 2026-10-14
+Decided by: Scott
+Question: Q-010. With the feeling and sentence leading the Room (D-045), does the bucket room name stay?
+Decision: Keep it as a small label above the feeling heading. Bag and Signals keep using room names as the spec says.
+Why: Scott's answer on 2026-10-14. It keeps RB54 and Res #9 intact.
+Spec reference: RB54, Res #9, D-045.
+
+### D-048: The framed per-inch charge uses the perimeter of the frame
+Date: 2026-10-14
+Decided by: Scott
+Question: Q-005. Does the framed price "$1.50 per inch of width" use the listed width or the hung width?
+Decision: Neither. The per-inch charge is on the total linear measurement of all four sides of the frame, measured on the outside of the frame: the print plus the 2-inch mat and the 1.25-inch frame on each side. The framed price is base plus $60 plus $1.50 per inch of that perimeter, so orientation no longer matters. Worked out: 12x16 is 18.5 x 22.5 outside, 82 inches, $123, framed total $222; 18x24 is 110 inches, $165, total $294; 24x36 is 146 inches, $219, total $398; 30x40 is 166 inches, $249, total $488.
+Why: Scott's answers on 2026-10-14 ("total linear measurement of all sides", then "perimeter of the frame").
+Spec reference: amends Gap G5 and Gap G28 (which priced on print width). The config field framedPerWidthInch and its comment change when pricing is built in Part B.
+
 ---
 
 ## Open questions
 
 Add new questions here as they come up, in the same format as the decisions above.
-
-### Q-005: Framed price width on landscape pieces (Milestone 4)
-Update 2026-10-14: Scott answered "total linear measurement of all sides". This changes Gap G5 and Gap G28 (print width), so it waits on Scott confirming the spec amendment before it is logged as a decision.
-Raised: 2026-10-09
-Question: Print sizes are listed width x height (12x16), but a landscape piece hangs 16 inches wide. Does the framed price "$1.50 per inch of width" [Gap G5, Gap G28] use the listed width or the hung width?
-Options: (a) the listed width, so the price is the same for both orientations; (b) the hung width, so landscape framing costs more.
 
 ### Q-006: Room type to wall scene mapping (Milestone 5)
 Raised: 2026-10-09
@@ -427,13 +445,3 @@ Options: (a) bedroom uses bed, office uses desk, all others use sofa; (b) Scott 
 Raised: 2026-10-09
 Question: The cost line reads "Built in N days for $X in AI and hosting." If X has cents, how is it written? Today costLineText prints the number as given, so 340.5 becomes "$340.5". A test pins this until it is decided.
 Options: (a) round to whole dollars; (b) always two decimals; (c) Scott enters X already formatted.
-
-### Q-009: Threshold prompt under the feeling wheel (Milestone 4)
-Raised: 2026-10-14
-Question: Gap G12 fixes the prompt "Move the light until it feels right." With the feeling wheel (D-044), does it stay, or change to a question such as "How do you feel?"
-Options: (a) keep the Gap G12 wording; (b) Scott gives new wording.
-
-### Q-010: Bucket room name on the Room under D-045 (Milestone 4)
-Raised: 2026-10-14
-Question: RB54 and Res #9 require the bucket's room name on the Room, and the Bag summary and Signals use room names. With the feeling and sentence leading (D-045), does the room name stay as a smaller label, or leave the Room?
-Options: (a) keep it as a small label above the feeling; (b) remove it from the Room, keeping room names on Bag and Signals.

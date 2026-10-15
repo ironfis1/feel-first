@@ -6,7 +6,7 @@ import { DirectionC } from "./DirectionC";
 // Self-hosted by next/font: the font files are served from this app, not from Google.
 const text = Newsreader({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-c", display: "swap" });
 
-/** Round 1 review route. Local only: a production build returns 404 (D-004). */
+/** Round 1 review route, kept for comparison. Local only: a production build returns 404 (D-004). */
 export default function DesignReviewC() {
   if (process.env.NODE_ENV === "production") notFound();
   return (

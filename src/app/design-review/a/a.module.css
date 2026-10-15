@@ -1,4 +1,4 @@
-/* Round 0, Direction A: Nocturne. Local review only (D-004). */
+/* Round 2, Direction A: Nocturne on the feeling wheel. Local review only (D-004, D-044, D-045). */
 
 .root {
   --ink: #0c0c10;
@@ -31,8 +31,9 @@
 
 .threshold {
   display: grid;
-  place-items: center;
-  grid-template-rows: 1fr auto;
+  justify-items: center;
+  align-content: center;
+  gap: 12px;
   padding: 24px 16px 40px;
 }
 
@@ -56,7 +57,21 @@
 }
 
 .field {
-  width: min(88vw, 64vh, 620px);
+  width: min(86vw, 54vh, 560px);
+}
+
+/* The feelings, as soft colored lights; the edge fades into the dark. */
+.lights {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  mask-image: radial-gradient(circle, #000 55%, transparent 72%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.fieldCompact .lights {
+  filter: blur(2px);
 }
 
 .field:active,
@@ -87,6 +102,7 @@
   border-radius: 50%;
   background: radial-gradient(circle, #fffaf0 0%, var(--glow) 14%, var(--glow-soft) 46%, transparent 70%);
   filter: blur(2px);
+  mix-blend-mode: screen;
   animation: breathe var(--pulse) ease-in-out infinite;
   pointer-events: none;
 }
@@ -103,6 +119,30 @@
   }
 }
 
+.naming {
+  position: relative;
+  text-align: center;
+  min-height: 96px;
+}
+
+.feeling {
+  margin: 0;
+  font-size: clamp(44px, 6.4vw, 72px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--glow) 40%, var(--text));
+  animation: lightsUp 500ms ease-out;
+}
+
+.also {
+  margin: 2px 0 0;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+}
+
 .foot {
   position: relative;
   display: grid;
@@ -112,10 +152,10 @@
 
 .prompt {
   margin: 0;
-  font-size: clamp(20px, 2.6vw, 28px);
+  font-size: clamp(18px, 2vw, 22px);
   font-style: italic;
   font-weight: 300;
-  color: var(--text);
+  color: var(--muted);
   text-align: center;
 }
 
@@ -206,17 +246,42 @@
   border-bottom: 1px solid var(--hair);
 }
 
-.roomName {
-  margin: 0 0 20px;
-  font-size: clamp(38px, 6vw, 76px);
+.eyebrow {
+  margin: 0 0 10px;
+  font-size: 13px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.roomFeeling {
+  margin: 0;
+  font-size: clamp(46px, 7vw, 92px);
   font-weight: 300;
   line-height: 1;
   letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--glow) 35%, var(--text));
+  animation: lightsUp 500ms ease-out;
+}
+
+.roomAlso {
+  font-size: 0.4em;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.sentence {
+  margin: 12px 0 24px;
+  max-width: 34ch;
+  font-size: clamp(19px, 2.2vw, 25px);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.35;
 }
 
 .fieldCompact {
   width: clamp(96px, 14vw, 150px);
-  background: radial-gradient(circle, rgb(236 232 223 / 0.04), transparent 70%);
+  flex: none;
 }
 
 .describe {
@@ -379,7 +444,8 @@
     border-bottom: 0;
   }
 
-  .roomName {
+  .eyebrow,
+  .roomFeeling {
     padding-right: 96px;
   }
 
@@ -393,6 +459,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .light,
+  .feeling,
+  .roomFeeling,
   .room,
   .work {
     animation: none;
