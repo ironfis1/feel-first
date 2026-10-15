@@ -156,7 +156,7 @@ export const configSchema = z
         label: z.string().min(1),
         baseMultiplier: positive,
         framedFlat: positive,
-        framedPerWidthInch: positive,
+        framedPerPerimeterInch: positive,
       }),
     }),
     frameFinishes: z.array(z.string().min(1)).min(1),

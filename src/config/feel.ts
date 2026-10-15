@@ -133,12 +133,13 @@ export type PrintSizeId = (typeof printSizes)[number]["id"];
 /**
  * Materials and their price rules [Gap G5].
  * Paper is the base price. Canvas is 1.6x base.
- * Framed print is base plus a flat amount plus a per-inch amount on the print width, not the outer frame width [Gap G28].
+ * Framed print is base plus a flat amount plus a per-inch amount on the outer frame perimeter:
+ * the print plus the mat and the frame on every side [Gap G5, Gap G28, amended by D-048].
  */
 export const materials = {
   paper: { label: "Paper print", baseMultiplier: 1 },
   canvas: { label: "Canvas", baseMultiplier: 1.6 },
-  framed: { label: "Framed print", baseMultiplier: 1, framedFlat: 60, framedPerWidthInch: 1.5 },
+  framed: { label: "Framed print", baseMultiplier: 1, framedFlat: 60, framedPerPerimeterInch: 1.5 },
 } as const;
 export type MaterialId = keyof typeof materials;
 

@@ -3,6 +3,7 @@
 
 import type { z } from "zod";
 import data from "../../data/catalog.json";
+import { feelingPositions, type FeelingPositions } from "./feelings";
 import { catalogFileSchema, emotionTags, lanes, orientations, subjects, workSchema } from "./schemas";
 
 export { emotionTags, lanes, subjects };
@@ -38,4 +39,12 @@ export function getWorkById(id: string): Work | undefined {
 /** Every work in one lane, in ascending catalog ID order. Ranking is J3's job, not this module's. */
 export function getWorksByLane(lane: Lane): readonly Work[] {
   return works.filter((w) => w.lane === lane);
+}
+
+let positions: FeelingPositions | undefined;
+
+/** Each feeling's catalog position, computed from the catalog on first use [D-044, D-049]. */
+export function getFeelingPositions(): FeelingPositions {
+  positions ??= Object.freeze(feelingPositions(works));
+  return positions;
 }

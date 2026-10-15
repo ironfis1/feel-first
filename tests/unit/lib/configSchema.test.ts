@@ -120,7 +120,7 @@ describe("configSchema field rules", () => {
     ["canvas multiplier", (c: any, v: number) => (c.materials.canvas.baseMultiplier = v)],
     ["framed multiplier", (c: any, v: number) => (c.materials.framed.baseMultiplier = v)],
     ["framed flat amount", (c: any, v: number) => (c.materials.framed.framedFlat = v)],
-    ["framed per-inch amount", (c: any, v: number) => (c.materials.framed.framedPerWidthInch = v)],
+    ["framed per-inch amount", (c: any, v: number) => (c.materials.framed.framedPerPerimeterInch = v)],
     ["scene reference width", (c: any, v: number) => (c.wallSceneReferenceWidthIn.sofa = v)],
   ])("rejects a zero or negative %s [Gap G5]", (_label, set) => {
     expect(accepted((c) => set(c, 0))).toBe(false);

@@ -1,7 +1,8 @@
 // The 9 mood buckets: a 3x3 grid over valence and arousal [Res #9, Gap G4].
 // A bucket key is the valence band, a hyphen, then the arousal band, for example heavy-calm [D-027].
 
-import { bucketCutPoints } from "../config/feel.ts";
+import { bucketCutPoints, roomNames } from "../config/feel.ts";
+import type { MoodPoint } from "./mood.ts";
 
 /** Valence bands, from -1 (heavy) to +1 (bright) [Gap G3]. */
 export const valenceBands = ["heavy", "mid", "bright"] as const;
@@ -27,4 +28,9 @@ function third(value: number): 0 | 1 | 2 {
 /** The bucket a point on the mood field falls in [Gap G4]. */
 export function bucketOf(valence: number, arousal: number): BucketKey {
   return `${valenceBands[third(valence)]}-${arousalBands[third(arousal)]}`;
+}
+
+/** The room name for the bucket a mood point falls in [Res #9, RB54]. */
+export function roomNameFor(p: MoodPoint): string {
+  return roomNames[bucketOf(p.valence, p.arousal)];
 }
