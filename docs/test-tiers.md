@@ -60,6 +60,10 @@ Tooling note: Stryker's Vitest runner 10.0.0 did not activate runtime mutants un
 
 ## Sweep results
 
+### 2026-10-15 (M4, proxy)
+
+Kept 4, flagged 0 in `tests/unit/proxy.test.ts`.
+
 ### 2026-10-15 (M4 Part B)
 
 Kept about 234, flagged 3:
@@ -86,6 +90,37 @@ Kept 205, flagged 2, both deleted (flag 6): the Met and Rijksmuseum tests "match
 ### 2026-10-09 (M2 Part A)
 
 Kept 156, flagged 1. Deleted: workSchema "derives orientation from dimensions" (flag 3, duplicate). The orientation tests through the schema already cover all three branches. Mutation score unchanged by the deletion.
+
+## Triage 2026-10-15 (M4, src/proxy.ts)
+
+| Unit | File | I | Si | Su | C | B | Total | Tier |
+|---|---|---|---|---|---|---|---|---|
+| proxy (Piece id gate) | src/proxy.ts | 2 | 2 | 2 | 1 | 2 | 9 | Medium |
+| config.matcher | src/proxy.ts | 1 | 1 | 1 | 1 | 1 | 5 | Low |
+
+### Evidence and required tests
+
+#### proxy (Medium)
+- Impact 2: Lines 9-13 decide the status code for every /piece/:id request. A wrong answer breaks one screen. A bad id answering 200 or a real id rewritten to 404 breaks a Piece page, but the Wall and Room still work. A real id wrongly rewritten (line 11 inverted) would put 404 on every Piece link. That is a visible failure, not a wrong number.
+- Silence 2: A 200 on an unknown id looks like a normal page in a browser. Only a status check, the smoke test or a crawler notices. This was the original bug. The inverse failure (real id 404) is obvious on sight, so Silence is 2, not 3.
+- Surface 2: The matcher (line 15) limits it to /piece/:id. The only consumer is the Piece page (src/app/piece/[id]/page.tsx lines 17-18, which keeps notFound() as a fallback). The Piece page is reached from the demo path, but the proxy changes behavior only for ids that are not in the catalog.
+- Complexity 1: One conditional and two return paths. There is no state, async or math. Line 11 is a slice plus a lookup.
+- Boundary 2: It is an internal interface. It consumes getWorkById (src/lib/catalog.ts line 38) and Next's proxy contract (named `proxy` export plus `config.matcher`). There is no outside party and no data contract of ours.
+- Must test (unit, Vitest, with `next/server` real or lightly stubbed and the catalog real, because it is local JSON):
+  - A real catalog id (for example the first from getAllWorks()) returns a pass-through (NextResponse.next(), identifiable by the `x-middleware-next` header) and no rewrite header.
+  - An unknown id (for example `w-9999`) returns a rewrite to `/_no-such-piece`, with the origin taken from request.url.
+  - Empty segment (`/piece/`) and a nested path (`/piece/w-0001/extra`) take the rewrite path. The slice then yields "" or "w-0001/extra", neither of which is a catalog id.
+  - A malformed percent escape (`/piece/%E0%A4%A`) does not throw and rewrites. This is the explicit claim in the line 10 comment.
+  - A percent-encoded form of a real id is treated as unknown (raw segment compared as is). Pin this as current behavior only if Scott wants it fixed. Otherwise skip it.
+  - Case difference (`W-0001`) rewrites, because the lookup is exact.
+  - Proxy and page agree. Every id from getAllWorks() passes through, so the proxy never hides a page that would have rendered.
+- Not required: a test of config.matcher beyond one assertion that it equals "/piece/:id". That is optional and would mostly mirror the source. Mutation testing is not required (Medium).
+- Functional gate: none required by the rubric (Boundary 2). The end-to-end behavior is better covered by one HTTP-status check than by unit tests: an unknown id returns 404 and a real id returns 200. The M4 smoke checks (commit 11a24b8, "unknown Piece ids answer 404") and the Playwright demo path are the right place. Confirm the smoke check asserts the status code on the production container, since the original race only showed up there and cannot be reproduced in a unit test. Unit tests cannot prove the race is fixed.
+
+#### config.matcher (Low)
+- Impact 1, Silence 1, Surface 1, Complexity 1, Boundary 1: A single constant string on line 15 with no logic. A wrong matcher would stop the proxy running, and the Piece page's own notFound() would still answer (with the old race), so the failure is covered by the smoke check above.
+- Must test: none (Low)
+- Functional gate: none
 
 ## Triage 2026-10-15 (M4 Part B)
 
