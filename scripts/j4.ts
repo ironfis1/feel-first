@@ -5,6 +5,7 @@
 //   node scripts/j4.ts --rest               write lines for every work without a result for the current input
 //   node scripts/j4.ts --rest --resume=ID   re-attach to a batch already submitted
 //   node scripts/j4.ts --merge              write data/copy.json
+//   node scripts/j4.ts --merge --partial    write data/copy.json from only the works with current lines (D-042)
 //   node scripts/j4.ts --sample             print 20 seeded random lines for review
 //
 // The prompt is read from docs/ai-jobs.md, with the banned-phrase list from scripts/lib/j4-rules.ts appended.
@@ -119,11 +120,15 @@ export function worksToWrite(catalog: readonly Work[], stored: Stored, system: s
   return catalog.filter((w) => stored[w.id]?.inputHash !== inputHash(system, w));
 }
 
-/** copy.json: every work's 9 lines. Throws unless every work has lines for its current input. */
-export function copyFor(catalog: readonly Work[], stored: Stored, system: string): Record<string, Lines> {
-  const missing = catalog.filter((w) => stored[w.id]?.inputHash !== inputHash(system, w));
-  if (missing.length) throw new Error(`${missing.length} works have no J4 lines for their current input, for example ${missing[0].id}`);
-  return Object.fromEntries(catalog.map((w) => [w.id, stored[w.id].lines]));
+/**
+ * copy.json: every work's 9 lines. Throws unless every work has lines for its current input.
+ * Partial (D-042, until the J4 full run): only the works with lines for their current input, and at least one.
+ */
+export function copyFor(catalog: readonly Work[], stored: Stored, system: string, partial = false): Record<string, Lines> {
+  const current = catalog.filter((w) => stored[w.id]?.inputHash === inputHash(system, w));
+  const missing = catalog.filter((w) => !current.includes(w));
+  if (partial ? !current.length : missing.length) throw new Error(`${missing.length} works have no J4 lines for their current input, for example ${missing[0].id}`);
+  return Object.fromEntries(current.map((w) => [w.id, stored[w.id].lines]));
 }
 
 /** n seeded random (work, bucket, line) picks from the current results. */
@@ -141,11 +146,12 @@ async function main() {
   const stored: Stored = existsSync(resultsFile) ? JSON.parse(await readFile(resultsFile, "utf8")) : {};
 
   if (args.includes("--merge")) {
-    const copy = copyFileSchema.parse(copyFor(catalog, stored, system));
-    const problems = copyProblems(copy, new Set(catalog.map((w) => w.id)));
+    const partial = args.includes("--partial");
+    const copy = copyFileSchema.parse(copyFor(catalog, stored, system, partial));
+    const problems = copyProblems(copy, new Set(catalog.map((w) => w.id)), partial);
     if (problems.length) throw new Error(problems.join("\n"));
     await writeFile(path.join(root, "data/copy.json"), JSON.stringify(copy, null, 2) + "\n");
-    console.log(`data/copy.json: ${Object.keys(copy).length} works, 9 lines each (prompt ${hashOf(system)})`);
+    console.log(`data/copy.json: ${Object.keys(copy).length} of ${catalog.length} works, 9 lines each (prompt ${hashOf(system)})`);
     return;
   }
 

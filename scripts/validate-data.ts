@@ -26,10 +26,16 @@ export function catalogProblems(catalog: readonly { thumbUrl: string }[], thumbE
   return problems;
 }
 
-/** copy.json must hold lines for exactly the catalog's works [Gap G2]. */
-export function copyProblems(copy: Record<string, unknown>, catalogIds: ReadonlySet<string>): string[] {
+/** copy.json holds only the 24 J4 pilot works until the J4 full run; set to false after it (D-042). */
+export const copyMayBePartial = true;
+
+/**
+ * copy.json must hold lines for exactly the catalog's works [Gap G2]. Partial allows missing works,
+ * never unknown ones, until the J4 full run (D-042).
+ */
+export function copyProblems(copy: Record<string, unknown>, catalogIds: ReadonlySet<string>, partial = false): string[] {
   const problems: string[] = [];
-  const missing = [...catalogIds].filter((id) => !(id in copy));
+  const missing = partial ? [] : [...catalogIds].filter((id) => !(id in copy));
   const unknown = Object.keys(copy).filter((id) => !catalogIds.has(id));
   if (missing.length) problems.push(`${missing.length} works have no lines, for example ${missing[0]}`);
   if (unknown.length) problems.push(`${unknown.length} entries are not catalog works, for example ${unknown[0]}`);
@@ -72,7 +78,7 @@ async function main() {
     else problems.push(`data/${name}: missing`);
   }
   if (existsSync(path.join(root, "data/copy.json"))) {
-    problems.push(...check("copy.json", copyFileSchema, await readJson("copy.json"), (copy) => copyProblems(copy, ids)));
+    problems.push(...check("copy.json", copyFileSchema, await readJson("copy.json"), (copy) => copyProblems(copy, ids, copyMayBePartial)));
   }
 
   if (problems.length) {

@@ -456,6 +456,22 @@ Decision: Approved as drafted. joyful: "A room of bright color and easy laughter
 Why: Scott's answer on 2026-10-15.
 Spec reference: D-045, Section 5.2.
 
+### D-052: How the word map turns typed words into one mood point
+Date: 2026-10-15
+Decided by: Scott
+Question: The M4 prompt asks how matched words combine into one point and what happens when no word matches.
+Decision: Typed text is normalized as the M3 cache keys are (normalizePhrase) and split into words as the J2 "heard" check splits them. Each word is matched exactly against data/j2-wordmap.json, with no stemming. The mood is the unweighted mean of the distinct matched mood words. Negation is ignored. Room-type and size words are matched from the same file, and the result has the J2 output shape (valence, arousal, roomType, size, heard) so the M5 route can use it as its fallback unchanged. The wheel point moves to the point whose mood lies nearest the result (wheelPointFor), as Closer and Drift do. When no mood word matches, the mood stays where it is, the Room does not re-order, the describe submission does not count as a re-hang, and a quiet line under the box suggests a feeling word.
+Why: On the 52 cached J2 phrases, exact matching finds a word in 35, the plain mean lands 0.33 from J2 on average, and plural stripping, rescaling or first-word-only did no better. A no-match changes nothing on screen, so it is not a re-hang (Gap G13 defines a re-hang as a re-order); this narrows D-041's "each describe submission".
+Spec reference: Gap G7, Gap G9, Gap G13, D-028, D-041.
+
+### D-053: Smaller Piece, Bag and Close presentation choices
+Date: 2026-10-15
+Decided by: Scott
+Question: Four presentation points the spec leaves open.
+Decision: (1) The Piece fingerprint shows the work and the visitor as two points on a small feeling wheel, each placed with wheelPointFor. (2) Prices always show dollars and cents ($39.00). (3) Time to first piece shows "not measured" when the clock never started (for example, a visitor who opens a Piece from a direct link without interacting). (4) Until the J4 full run, a work with no copy.json line shows no "why this found you" line, and the data check allows a partial copy.json (D-042).
+Why: Scott's answers on 2026-10-15.
+Spec reference: Section 5.3, Section 5.5, Gap G23, D-042.
+
 ---
 
 ## Open questions
@@ -471,3 +487,8 @@ Options: (a) bedroom uses bed, office uses desk, all others use sofa; (b) Scott 
 Raised: 2026-10-09
 Question: The cost line reads "Built in N days for $X in AI and hosting." If X has cents, how is it written? Today costLineText prints the number as given, so 340.5 becomes "$340.5". A test pins this until it is decided.
 Options: (a) round to whole dollars; (b) always two decimals; (c) Scott enters X already formatted.
+
+### Q-011: What the Piece screen selects before the visitor chooses (Milestone 4)
+Raised: 2026-10-15
+Question: Spec Section 5.3 preselects the size only when J2 returned one. Otherwise nothing says which size, material and frame are selected when a Piece opens. Built provisionally as 18x24, framed print, black frame (config pieceDefaults), so the live framed preview shows at once.
+Options: (a) 18x24 framed in black, as built; (b) the smallest size on paper, with the frame preview shown once the visitor picks framed; (c) nothing selected, Add to bag waits until all three are chosen; (d) Scott specifies.
