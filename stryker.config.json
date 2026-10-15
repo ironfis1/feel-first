@@ -37,8 +37,8 @@
     "src/lib/wordmap.ts",
     "src/components/session/Session.tsx:52-90",
     "src/components/wheel/FeelingWheel.tsx:73-123",
-    "src/components/room/Room.tsx:27-62",
-    "src/components/room/Room.tsx:137-137"
+    "src/components/room/Room.tsx:27-72",
+    "src/components/room/Room.tsx:155-155"
   ],
   "thresholds": {
     "high": 90,
