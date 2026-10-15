@@ -83,6 +83,7 @@ All controls are at least 44px tall (`--hit`).
 - The visitor's point is a glow of `--glow` with a white core, blended with `screen`. It is larger and slower when calm and tighter and quicker when charged.
 - The named feeling sits below the Threshold wheel, never on it. "a little <feeling>" sits under it in italic.
 - Full size on the Threshold is `min(86vw, 54vh, 560px)`; the compact copy in the Room header is 96 to 150px (84px on a phone, top right).
+- Slim bar (D-055): once the Room header scrolls away, a fixed bar slides in at the top (`--c-wall` at 92% with a blur, a `--c-hair` rule under it) holding a 56px wheel, the feeling in `--t-lede` tinted like the heading, and the room name as a label on desktop. It slides with the Arrive timing and is inert while hidden.
 - Dragging never scrolls the page (`touch-action: none`). Arrow keys move the point (Shift for larger steps).
 
 ## Image treatment

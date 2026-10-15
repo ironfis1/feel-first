@@ -62,7 +62,7 @@ describe("Room", () => {
 
   it("names the room for the bucket, the feeling with its sentence, and no second feeling at the center", () => {
     mount();
-    expect(screen.getByText(roomNames["mid-mid"])).toBeTruthy();
+    expect(screen.getAllByText(roomNames["mid-mid"])).toHaveLength(2); // header and slim bar [D-055]
     expect(screen.getByRole("heading", { level: 1 }).textContent).toBe("Nostalgic");
     expect(screen.getByText(feelingSentences.nostalgic)).toBeTruthy();
   });
@@ -122,7 +122,7 @@ describe("Room", () => {
     expect(session.metrics.rehangs).toBe(1);
     expect(session.point).not.toEqual({ x: 0, y: 0 });
     expect(session.described).toEqual({ roomType: "bedroom", size: null });
-    expect(screen.getByText(/ for the bedroom$/)).toBeTruthy();
+    expect(screen.getAllByText(/ for the bedroom$/)).toHaveLength(2);
     expect(screen.getByRole("status").textContent).toBe("");
   });
 
@@ -154,5 +154,29 @@ describe("Room", () => {
     cleanup();
     mount(works.slice(0, 6));
     expect(screen.queryByRole("button", { name: "Show more" })).toBeNull();
+  });
+
+  it("shows the slim bar with the wheel only once the header has scrolled away [D-055]", () => {
+    let report: (entries: { isIntersecting: boolean }[]) => void = () => {};
+    const disconnect = vi.fn();
+    vi.stubGlobal(
+      "IntersectionObserver",
+      class {
+        constructor(cb: typeof report) {
+          report = cb;
+        }
+        observe() {}
+        disconnect = disconnect;
+      },
+    );
+    const { unmount } = mount();
+    expect(screen.getAllByRole("slider")).toHaveLength(1);
+    act(() => report([{ isIntersecting: false }]));
+    expect(screen.getAllByRole("slider")).toHaveLength(2);
+    act(() => report([{ isIntersecting: true }]));
+    expect(screen.getAllByRole("slider")).toHaveLength(1);
+    unmount();
+    expect(disconnect).toHaveBeenCalled();
+    vi.unstubAllGlobals();
   });
 });

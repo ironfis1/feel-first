@@ -168,6 +168,55 @@
   padding-top: var(--s-8);
 }
 
+/* The slim bar: pinned at the top once the header scrolls away (D-055). */
+.bar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  padding: var(--s-2) max(var(--s-4), calc((100vw - var(--page-max)) / 2));
+  background: color-mix(in srgb, var(--c-wall) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--c-hair);
+  translate: 0 -100%;
+  opacity: 0;
+  transition: translate var(--m-arrive) var(--ease-out), opacity var(--m-arrive) var(--ease-out);
+}
+
+.barShown {
+  translate: 0 0;
+  opacity: 1;
+}
+
+.bar .barWheel {
+  width: 56px;
+}
+
+.barFeeling {
+  margin: 0;
+  font-size: var(--t-lede);
+  font-weight: 300;
+  line-height: 1.1;
+  color: color-mix(in srgb, var(--glow) 35%, var(--c-text));
+}
+
+.barFeeling .also {
+  font-size: 0.75em;
+}
+
+.barRoom {
+  margin-left: auto;
+  text-align: right;
+}
+
+@media (max-width: 639px) {
+  .barRoom {
+    display: none;
+  }
+}
+
 @keyframes arrive {
   from {
     opacity: 0;

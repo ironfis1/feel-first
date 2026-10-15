@@ -481,6 +481,14 @@ Why: Scott's answer on 2026-10-15.
 Spec reference: Section 5.3, Res #6, Res #42.
 
 
+### D-055: A slim bar keeps the feeling in view while the Room scrolls
+Date: 2026-10-15
+Decided by: Scott
+Question: Scott had to scroll back to the top to see what Closer and Drift did to the wheel. Float the compact wheel, add a pinned bar, or leave it?
+Decision: Once the Room header scrolls out of view, a slim bar slides in at the top of the screen with the compact wheel (draggable, same re-hang rules), the feeling name with its "a little" second feeling, and the room name (desktop only). It hides again when the header returns. It covers no art.
+Why: Res #10 requires the mood point to move visibly on Closer and Drift; below the first row the header wheel was off screen. Scott chose the bar over a floating corner wheel on 2026-10-15.
+Spec reference: Section 5.2, Res #10, D-041.
+
 ---
 
 ## Open questions

@@ -5,7 +5,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { describeNoMatch, describePlaceholder, feelingSentences, roomPageSizePerLane } from "@/config/feel";
 import { roomNameFor } from "@/lib/buckets";
 import type { WorkCard } from "@/lib/catalog";
@@ -29,6 +29,16 @@ export function Room({ works, positions }: { works: readonly WorkCard[]; positio
   const { point, drifted, pages, described } = session;
   const [text, setText] = useState("");
   const [unheard, setUnheard] = useState(false);
+  // The slim bar shows once the header has scrolled away, so Closer and Drift stay visible on the wheel [D-055].
+  const headRef = useRef<HTMLElement>(null);
+  const [headGone, setHeadGone] = useState(false);
+  useEffect(() => {
+    const head = headRef.current;
+    if (!head || typeof IntersectionObserver === "undefined") return;
+    const watch = new IntersectionObserver(([e]) => setHeadGone(!e.isIntersecting));
+    watch.observe(head);
+    return () => watch.disconnect();
+  }, []);
 
   const mood = moodFor(point, positions);
   const feel = feelingAt(point);
@@ -65,7 +75,15 @@ export function Room({ works, positions }: { works: readonly WorkCard[]; positio
     <main className={c.screen}>
       <span className={c.wash} aria-hidden />
       <ScreenNav />
-      <header className={s.head}>
+      <div className={`${s.bar} ${headGone ? s.barShown : ""}`} inert={!headGone} aria-hidden={!headGone}>
+        <FeelingWheel point={point} onMove={session.movePoint} onGestureEnd={retuned} compact className={s.barWheel} />
+        <p className={s.barFeeling}>
+          {cap(feel.main)}
+          {feel.also && <span className={s.also}>, a little {feel.also}</span>}
+        </p>
+        <p className={`${c.label} ${s.barRoom}`}>{roomName}</p>
+      </div>
+      <header className={s.head} ref={headRef}>
         <div className={s.title}>
           <p className={`${c.label} ${s.eyebrow}`}>{roomName}</p>
           <h1 key={feel.main} className={s.feeling}>
