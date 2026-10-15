@@ -472,6 +472,15 @@ Decision: (1) The Piece fingerprint shows the work and the visitor as two points
 Why: Scott's answers on 2026-10-15.
 Spec reference: Section 5.3, Section 5.5, Gap G23, D-042.
 
+### D-054: What the Piece screen selects before the visitor chooses
+Date: 2026-10-15
+Decided by: Scott
+Question: Q-011. Spec Section 5.3 preselects the size only when J2 returned one. Which size, material and frame are selected when a Piece opens otherwise?
+Decision: 18x24, framed print, black frame (config pieceDefaults), so the live framed preview shows at once. A described size word still sets the size [Res #6].
+Why: Scott's answer on 2026-10-15.
+Spec reference: Section 5.3, Res #6, Res #42.
+
+
 ---
 
 ## Open questions
@@ -487,8 +496,3 @@ Options: (a) bedroom uses bed, office uses desk, all others use sofa; (b) Scott 
 Raised: 2026-10-09
 Question: The cost line reads "Built in N days for $X in AI and hosting." If X has cents, how is it written? Today costLineText prints the number as given, so 340.5 becomes "$340.5". A test pins this until it is decided.
 Options: (a) round to whole dollars; (b) always two decimals; (c) Scott enters X already formatted.
-
-### Q-011: What the Piece screen selects before the visitor chooses (Milestone 4)
-Raised: 2026-10-15
-Question: Spec Section 5.3 preselects the size only when J2 returned one. Otherwise nothing says which size, material and frame are selected when a Piece opens. Built provisionally as 18x24, framed print, black frame (config pieceDefaults), so the live framed preview shows at once.
-Options: (a) 18x24 framed in black, as built; (b) the smallest size on paper, with the frame preview shown once the visitor picks framed; (c) nothing selected, Add to bag waits until all three are chosen; (d) Scott specifies.

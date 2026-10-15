@@ -149,7 +149,7 @@ export type FrameFinish = (typeof frameFinishes)[number];
 
 /**
  * What the Piece screen selects before the visitor chooses. A described size word overrides the size [Res #6].
- * Provisional until Scott answers Q-011.
+ * Decided by Scott in D-054.
  */
 export const pieceDefaults: { size: PrintSizeId; material: MaterialId; frame: FrameFinish } = {
   size: "18x24",
