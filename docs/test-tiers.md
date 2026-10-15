@@ -4,6 +4,20 @@ The test-evaluator subagent's triage tables are saved here verbatim, newest firs
 
 ## Mutation results
 
+### 2026-10-15: M4 Part B High-tier files
+
+Overall 93.68% on the M4 files (445 killed or timed out, 30 survived), then one more kill in wordmap.ts. Break threshold 80. Per file: j4.ts copyFor 100, j7.ts 100, metrics.ts 100, mood.ts 100, FeelingWheel.tsx 73-123 100, feelings.ts 97.78, pricing.ts 97.78, wordmap.ts 94.59 (97.30 after the heard-size kill), Session.tsx 52-90 90.20, j6.ts 88.89, Room.tsx 27-62 and 137 85.00, j3.ts 83.05.
+
+The first run had Session.tsx at 79.41 and FeelingWheel.tsx at 79.31. The session actions were rebuilt as one `useMemo` over the stable `setState` (one dependency array instead of eight `useCallback` arrays), the mutate range was narrowed to SessionProvider (glowStyle is Low), and three wheel tests were added (no gesture listener, pointer capture, class list). Accepted survivors:
+- Sort comparator and tie variants on unique ids: j3.ts 21 (four), j6.ts 34 (four). Catalog ids are unique, so the equal-id branch never runs.
+- j3.ts 34, 35 (`.slice(0, n)` removed) and 37 (`i <= n`): the interleave loop and the `posters[i]` guard already stop at n.
+- React hook dependency arrays and the effect's early return: j3.ts 15, 32 (default `[]` parameters), Session.tsx 57, 66, 81. The behavior is the same; only re-run timing changes.
+- Session.tsx 87: the `display: contents` wrapper style. Layout only; jsdom does not lay out.
+- Room.tsx 30, 31 (initial text and no-match state), 36 (the larger-lane count: the fixture lanes are the same size), 54 (`e.preventDefault()` in jsdom form submit).
+- feelings.ts 60 (`>` against `>=` at a share of exactly 0.25, which floating-point angles never hit) and 84 (`deg <= 360` repeats degree 0).
+- pricing.ts 34 (`base / m.baseMultiplier`): the framed multiplier is 1.
+- wordmap.ts 18 (`+` dropped from the split): the empty parts it creates are filtered out.
+
 ### 2026-10-12: all High-tier files (M3)
 
 Overall 95.07% (2296 killed, 35 timeout, 112 survived, 9 without coverage). Break threshold 80. M3 files: batch.ts 100, validate-data.ts 100 (mutate range moved to lines 21-28 after M3 imports shifted catalogProblems), j8.ts 98.90, j2.ts 98.73, j2-draft.ts 98.38, j1.ts 97.81, j4-rules.ts 96.70, j4.ts 96.24, j8-seed.ts 95.78, j8-rules.ts 94.00, schemas.ts 93.94, j2-cache.ts 87.50. The M2 files are unchanged from the 2026-10-10 entry.

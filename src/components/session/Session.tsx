@@ -3,7 +3,7 @@
 // The visitor's session: wheel point, Drift demotions, Show more pages, metrics, the bag and the last described
 // room type and size. Held in client memory only; nothing is stored, sent or logged. A reload starts over [D-040].
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import type { RoomType, SizeWord } from "@/config/feel";
 import { addLine, removeLine, type BagChoice, type BagLine } from "@/lib/bag";
 import { feelingAt, type WheelPoint } from "@/lib/feelings";
@@ -65,25 +65,22 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     };
   }, [state.metrics.startedAt]);
 
-  const movePoint = useCallback((p: WheelPoint) => setState((s) => ({ ...s, point: p, touched: true })), []);
-  const countRehang = useCallback(() => setState((s) => ({ ...s, metrics: rehung(s.metrics) })), []);
-  const drift = useCallback(
-    (id: string) => setState((s) => ({ ...s, drifted: s.drifted.includes(id) ? s.drifted : [...s.drifted, id] })),
+  // Actions are made once: setState never changes, so screens can depend on them safely.
+  const actions = useMemo(
+    () => ({
+      movePoint: (p: WheelPoint) => setState((s) => ({ ...s, point: p, touched: true })),
+      countRehang: () => setState((s) => ({ ...s, metrics: rehung(s.metrics) })),
+      drift: (id: string) => setState((s) => ({ ...s, drifted: s.drifted.includes(id) ? s.drifted : [...s.drifted, id] })),
+      showMore: () => setState((s) => ({ ...s, pages: s.pages + 1 })),
+      describe: (p: WheelPoint, d: Described) =>
+        setState((s) => ({ ...s, point: p, touched: true, described: d, metrics: rehung(s.metrics) })),
+      addToBag: (c: BagChoice) => setState((s) => ({ ...s, bag: addLine(s.bag, c) })),
+      removeFromBag: (key: string) => setState((s) => ({ ...s, bag: removeLine(s.bag, key) })),
+      openPiece: () => setState((s) => ({ ...s, metrics: pieceOpened(s.metrics, Date.now()) })),
+    }),
     [],
   );
-  const showMore = useCallback(() => setState((s) => ({ ...s, pages: s.pages + 1 })), []);
-  const describe = useCallback(
-    (p: WheelPoint, d: Described) => setState((s) => ({ ...s, point: p, touched: true, described: d, metrics: rehung(s.metrics) })),
-    [],
-  );
-  const addToBag = useCallback((c: BagChoice) => setState((s) => ({ ...s, bag: addLine(s.bag, c) })), []);
-  const removeFromBag = useCallback((key: string) => setState((s) => ({ ...s, bag: removeLine(s.bag, key) })), []);
-  const openPiece = useCallback(() => setState((s) => ({ ...s, metrics: pieceOpened(s.metrics, Date.now()) })), []);
-
-  const value = useMemo(
-    () => ({ ...state, movePoint, countRehang, drift, showMore, describe, addToBag, removeFromBag, openPiece }),
-    [state, movePoint, countRehang, drift, showMore, describe, addToBag, removeFromBag, openPiece],
-  );
+  const value = useMemo(() => ({ ...state, ...actions }), [state, actions]);
 
   return (
     <SessionContext.Provider value={value}>

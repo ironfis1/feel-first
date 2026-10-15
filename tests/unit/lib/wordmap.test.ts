@@ -65,6 +65,7 @@ describe("interpretWords [D-052]", () => {
 
   it("hears only matched words, in the order typed, at most five", () => {
     expect(interpretWords("bedroom so calm and bright", map)!.heard).toEqual(["bedroom", "calm", "bright"]);
+    expect(interpretWords("a large calm", map)!.heard).toEqual(["large", "calm"]);
     const many = interpretWords("calm rainy bright don't bedroom large", map)!;
     expect(many.heard).toHaveLength(maxHeard);
     expect(many.heard).toEqual(["calm", "rainy", "bright", "don't", "bedroom"]);

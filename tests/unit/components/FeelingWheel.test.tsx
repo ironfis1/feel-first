@@ -110,4 +110,32 @@ describe("FeelingWheel", () => {
     expect(screen.getByRole("slider").getAttribute("aria-valuetext")).toBe("wistful");
     expect(screen.getByRole("slider").getAttribute("aria-valuenow")).toBe("270");
   });
+
+  it("works with no gesture listener, as on the Threshold", () => {
+    const onMove = vi.fn();
+    render(<FeelingWheel point={{ x: 0, y: 0 }} onMove={onMove} />);
+    const wheel = screen.getByRole("slider");
+    fireEvent.pointerDown(wheel, { pointerId: 1, clientX: 150, clientY: 100 });
+    fireEvent.pointerUp(wheel);
+    fireEvent.keyDown(wheel, { key: "ArrowUp" });
+    expect(onMove).toHaveBeenCalledTimes(2);
+  });
+
+  it("captures the pointer so a drag that leaves the wheel keeps moving the point", () => {
+    const capture = vi.spyOn(HTMLElement.prototype, "setPointerCapture");
+    const { wheel } = setup();
+    fireEvent.pointerDown(wheel, { pointerId: 7, clientX: 100, clientY: 100 });
+    expect(capture).toHaveBeenCalledWith(7);
+    capture.mockRestore();
+  });
+
+  it("adds the caller's class and no stray text to the class list", () => {
+    render(<FeelingWheel point={{ x: 0, y: 0 }} onMove={() => {}} className="mine" />);
+    const wheel = screen.getByRole("slider");
+    expect(wheel.classList).toContain("mine");
+    expect(wheel.className).not.toMatch(/undefined|Stryker/);
+    cleanup();
+    render(<FeelingWheel point={{ x: 0, y: 0 }} onMove={() => {}} />);
+    expect(screen.getByRole("slider").className.split(" ").filter(Boolean)).toHaveLength(3);
+  });
 });
