@@ -82,6 +82,10 @@ function visibleText(html) {
     .replace(/<style[\s\S]*?<\/style>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;/g, ' ')
+    .replace(/&#x27;|&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
     .replace(/&amp;/g, '&')
     .replace(/\s+/g, ' ');
 }
@@ -326,6 +330,91 @@ const CHECKS = [
       } catch (err) {
         return fail(`${err.status ?? ''} ${err.name}`.trim());
       }
+    },
+  },
+
+  // ---------- M4 core journey ----------
+  {
+    id: 'm4.room-poster-first',
+    description: 'The Room hangs works with a poster at position 1',
+    async run() {
+      const p = await page('room');
+      if (p.status !== 200) return fail(`room returned ${p.error ?? p.status}`);
+      const list = p.html.match(/<ol[^>]*aria-label="The room"[^>]*>([\s\S]*?)<\/ol>/);
+      if (!list) return fail('no hang list in the Room');
+      const lanes = [...list[1].matchAll(/data-lane="([^"]+)"/g)].map((m) => m[1]);
+      if (!lanes.length) return fail('the hang is empty');
+      return lanes[0] === 'poster' ? pass(`${lanes.length} works hung, a poster first`) : fail(`position 1 is ${lanes[0]}`);
+    },
+  },
+  {
+    id: 'm4.piece-pages',
+    description: 'Sample Piece screens show title, source and Add to bag; an unknown work is 404',
+    async run() {
+      const problems = [];
+      const sample = catalogSample();
+      for (const work of sample) {
+        try {
+          const { res } = await get(`${baseUrl}/piece/${work.id}`);
+          const text = visibleText(await res.text());
+          if (res.status !== 200) problems.push(`${work.id} -> ${res.status}`);
+          else for (const want of [work.title, work.source, 'Add to bag']) if (!text.includes(want)) problems.push(`${work.id}: missing "${want}"`);
+        } catch (err) {
+          problems.push(`${work.id}: ${err.message}`);
+        }
+      }
+      try {
+        const { res } = await get(`${baseUrl}/piece/no-such-work`);
+        await res.body?.cancel();
+        if (res.status !== 404) problems.push(`unknown work -> ${res.status}, expected 404`);
+      } catch (err) {
+        problems.push(`unknown work: ${err.message}`);
+      }
+      return problems.length ? fail(problems.join('; ')) : pass(`${sample.length}/${sample.length} Piece screens complete, unknown work 404`);
+    },
+  },
+  {
+    id: 'm4.fonts-self-hosted',
+    description: 'No route loads fonts from Google; the font files come from the site',
+    async run() {
+      const pages = await allPages();
+      const problems = [];
+      const fonts = new Set();
+      for (const p of pages) {
+        if (/fonts\.googleapis\.com|fonts\.gstatic\.com/i.test(p.html)) problems.push(`${p.routeName}: Google font host`);
+        // Font files appear in preload links and, escaped, in the streamed page data.
+        for (const m of p.html.matchAll(/\/_next\/static\/media\/[\w.-]+\.woff2/g)) fonts.add(m[0]);
+      }
+      if (!fonts.size) problems.push('no woff2 font file referenced');
+      for (const href of fonts) {
+        const url = new URL(href, baseUrl);
+        if (url.host !== baseHost) {
+          problems.push(`font from ${url.host}`);
+          continue;
+        }
+        try {
+          const { res } = await get(url.href);
+          await res.body?.cancel();
+          if (res.status !== 200) problems.push(`${url.pathname} -> ${res.status}`);
+        } catch (err) {
+          problems.push(`${url.pathname}: ${err.message}`);
+        }
+      }
+      return problems.length ? fail(problems.join('; ')) : pass(`${fonts.size} font file(s) served from ${baseHost}`);
+    },
+  },
+  {
+    id: 'm4.journey-copy',
+    description: 'The Room shows a feeling sentence; Close shows "No search typed" and the Signals link',
+    async run() {
+      const { feelingSentences } = await import('../../src/config/feel.ts');
+      const room = visibleText((await page('room')).html);
+      const closeHtml = (await page('close')).html;
+      const problems = [];
+      if (!Object.values(feelingSentences).some((line) => room.includes(line))) problems.push('room: no feeling sentence');
+      if (!visibleText(closeHtml).includes('No search typed')) problems.push('close: no "No search typed"');
+      if (!/<a[^>]*href="\/signals"/.test(closeHtml)) problems.push('close: no Signals link');
+      return problems.length ? fail(problems.join('; ')) : pass('feeling sentence, "No search typed" and the Signals link present');
     },
   },
 
