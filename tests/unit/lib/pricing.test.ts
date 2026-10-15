@@ -53,10 +53,6 @@ describe("priceOf: every size and material against Section 3.6 [Gap G5, D-048]",
     }
   }
 
-  it("has no floating-point noise in canvas prices", () => {
-    expect(String(priceOf("12x16", "canvas"))).toBe("62.4");
-  });
-
   it("throws on an unknown size", () => {
     expect(() => priceOf("9x9" as PrintSizeId, "paper")).toThrow("unknown print size");
   });

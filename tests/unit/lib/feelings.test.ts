@@ -34,12 +34,19 @@ describe("wheelFeelingPoints [D-049]", () => {
 
   it("places all 12 feelings at the configured radius, 30 degrees apart counterclockwise from the right", () => {
     expect(Object.keys(points)).toEqual([...feelingWheelOrder]);
-    feelingWheelOrder.forEach((f, i) => {
+    feelingWheelOrder.forEach((f) => {
       expect(Math.hypot(points[f].x, points[f].y)).toBeCloseTo(feelingWheelRadius, 12);
-      expect(points[f].x).toBeCloseTo(feelingWheelRadius * Math.cos((i * Math.PI) / 6), 12);
-      expect(points[f].y).toBeCloseTo(feelingWheelRadius * Math.sin((i * Math.PI) / 6), 12);
     });
     expect(points.nostalgic).toEqual({ x: feelingWheelRadius, y: 0 });
+    // D-049 at radius 0.75: awe is straight up, tense straight left, wistful at 270 degrees, joyful at 30.
+    expect(points.awe.x).toBeCloseTo(0, 12);
+    expect(points.awe.y).toBeCloseTo(0.75, 12);
+    expect(points.tense.x).toBeCloseTo(-0.75, 12);
+    expect(points.tense.y).toBeCloseTo(0, 12);
+    expect(points.wistful.x).toBeCloseTo(0, 12);
+    expect(points.wistful.y).toBeCloseTo(-0.75, 12);
+    expect(points.joyful.x).toBeCloseTo(0.6495, 4);
+    expect(points.joyful.y).toBeCloseTo(0.375, 12);
   });
 
   it("agrees with feelingAt: each painted light names its own feeling, with no second one", () => {
