@@ -6,7 +6,7 @@ The test-evaluator subagent's triage tables are saved here verbatim, newest firs
 
 ### 2026-10-15: M4 Part B High-tier files
 
-Overall 93.68% on the M4 files (445 killed or timed out, 30 survived), then one more kill in wordmap.ts. Break threshold 80. Per file: j4.ts copyFor 100, j7.ts 100, metrics.ts 100, mood.ts 100, FeelingWheel.tsx 73-123 100, feelings.ts 97.78, pricing.ts 97.78, wordmap.ts 94.59 (97.30 after the heard-size kill), Session.tsx 52-90 90.20, j6.ts 88.89, Room.tsx 27-72 and 155 85.19 (rerun after the D-055 slim bar; the two new survivors are the IntersectionObserver feature check and the initial hidden state), j3.ts 83.05.
+Overall 93.68% on the M4 files (445 killed or timed out, 30 survived), then one more kill in wordmap.ts. Break threshold 80. Per file: j4.ts copyFor 100, j7.ts 100, metrics.ts 100, mood.ts 100, FeelingWheel.tsx 73-123 100, feelings.ts 97.78, pricing.ts 97.78, wordmap.ts 94.59 (97.30 after the heard-size kill), Session.tsx 52-90 90.20, j6.ts 88.89, Room.tsx 27-72 and 155 85.19 (rerun after the D-055 slim bar; the two new survivors are the observe call, which the test's stand-in observer ignores, and the effect dependency array), j3.ts 83.05.
 
 The first run had Session.tsx at 79.41 and FeelingWheel.tsx at 79.31. The session actions were rebuilt as one `useMemo` over the stable `setState` (one dependency array instead of eight `useCallback` arrays), the mutate range was narrowed to SessionProvider (glowStyle is Low), and three wheel tests were added (no gesture listener, pointer capture, class list). Accepted survivors:
 - Sort comparator and tie variants on unique ids: j3.ts 21 (four), j6.ts 34 (four). Catalog ids are unique, so the equal-id branch never runs.
