@@ -12,7 +12,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "test:e2e": "playwright test --pass-with-no-tests",
-    "test:prod": "echo \"test:prod arrives in Milestone 4 (docs/testing.md).\"",
+    "test:prod": "node scripts/test-prod.mjs",
     "test:mutation": "stryker run",
     "smoke:live": "node scripts/smoke/live-smoke.mjs"
   },
