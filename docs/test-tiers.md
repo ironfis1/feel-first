@@ -66,6 +66,739 @@ Kept 205, flagged 2, both deleted (flag 6): the Met and Rijksmuseum tests "match
 
 Kept 156, flagged 1. Deleted: workSchema "derives orientation from dimensions" (flag 3, duplicate). The orientation tests through the schema already cover all three branches. Mutation score unchanged by the deletion.
 
+## Triage 2026-10-15 (M4 Part B)
+
+| Unit | File | I | Si | Su | C | B | Total | Tier |
+|---|---|---|---|---|---|---|---|---|
+| distance, clampToCircle | src/lib/mood.ts | 3 | 3 | 3 | 2 | 2 | 13 | High |
+| roomNameFor | src/lib/buckets.ts | 2 | 3 | 3 | 1 | 2 | 11 | Medium |
+| wheelFeelingPoints | src/lib/feelings.ts | 2 | 2 | 3 | 2 | 1 | 10 | Medium |
+| feelingPositions | src/lib/feelings.ts | 3 | 3 | 3 | 2 | 2 | 13 | High |
+| feelingAt (with neighbors, alsoShare) | src/lib/feelings.ts | 3 | 3 | 3 | 3 | 2 | 14 | High |
+| moodFor | src/lib/feelings.ts | 3 | 3 | 3 | 3 | 2 | 14 | High |
+| wheelPointFor | src/lib/feelings.ts | 3 | 3 | 3 | 3 | 2 | 14 | High |
+| clampToWheel | src/lib/feelings.ts | 2 | 2 | 3 | 2 | 1 | 10 | Medium |
+| rankLane | src/lib/j3.ts | 3 | 3 | 3 | 3 | 2 | 14 | High |
+| hang | src/lib/j3.ts | 3 | 3 | 3 | 3 | 2 | 14 | High |
+| nudge | src/lib/j7.ts | 3 | 3 | 3 | 2 | 2 | 13 | High |
+| printSize | src/lib/pricing.ts | 2 | 1 | 3 | 1 | 1 | 8 | Medium |
+| framedOuterInches, framedPerimeterInches | src/lib/pricing.ts | 3 | 3 | 3 | 2 | 2 | 13 | High |
+| priceOf | src/lib/pricing.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| frameFor | src/lib/pricing.ts | 2 | 3 | 3 | 1 | 2 | 11 | Medium |
+| totalsOf | src/lib/pricing.ts | 3 | 3 | 3 | 2 | 2 | 13 | High |
+| formatPrice | src/lib/pricing.ts | 3 | 2 | 3 | 1 | 1 | 10 | Medium |
+| lineKey, addLine | src/lib/bag.ts | 2 | 2 | 3 | 2 | 2 | 11 | Medium |
+| removeLine | src/lib/bag.ts | 2 | 1 | 2 | 1 | 2 | 8 | Medium |
+| bagTotals | src/lib/bag.ts | 3 | 2 | 3 | 1 | 2 | 11 | Medium |
+| bagCenter | src/lib/j6.ts | 2 | 3 | 3 | 2 | 2 | 12 | High |
+| feelTogether | src/lib/j6.ts | 2 | 3 | 3 | 1 | 2 | 11 | Medium |
+| suggestion | src/lib/j6.ts | 2 | 3 | 3 | 3 | 2 | 13 | High |
+| interacted, pieceOpened | src/lib/metrics.ts | 3 | 3 | 3 | 2 | 1 | 12 | High |
+| rehung | src/lib/metrics.ts | 3 | 3 | 3 | 1 | 1 | 11 | High |
+| closeSummary | src/lib/metrics.ts | 3 | 3 | 3 | 2 | 2 | 13 | High |
+| formatDuration | src/lib/metrics.ts | 3 | 3 | 3 | 2 | 1 | 12 | High |
+| wordsOf | src/lib/wordmap.ts | 2 | 3 | 3 | 2 | 2 | 12 | High |
+| interpretWords | src/lib/wordmap.ts | 3 | 3 | 3 | 3 | 3 | 15 | High |
+| getFeelingPositions | src/lib/catalog.ts | 2 | 2 | 3 | 1 | 3 | 11 | Medium |
+| getCopyLines | src/lib/catalog.ts | 2 | 2 | 3 | 1 | 3 | 11 | Medium |
+| getWorkCards | src/lib/catalog.ts | 2 | 2 | 3 | 1 | 3 | 11 | Medium |
+| copyFor (partial mode) | scripts/j4.ts | 3 | 3 | 3 | 2 | 3 | 14 | High |
+| copyProblems (partial flag, copyMayBePartial) | scripts/validate-data.ts | 2 | 3 | 1 | 2 | 3 | 11 | Medium |
+| feelingSentences, describeNoMatch, describePlaceholder, pieceDefaults | src/config/feel.ts | 2 | 1 | 2 | 1 | 1 | 7 | Low |
+| SessionProvider (with useSession) | src/components/session/Session.tsx | 3 | 3 | 3 | 3 | 1 | 13 | High |
+| glowStyle | src/components/session/Session.tsx | 1 | 1 | 3 | 1 | 1 | 7 | Low |
+| pointFromKey | src/components/wheel/FeelingWheel.tsx | 2 | 2 | 2 | 2 | 1 | 9 | Medium |
+| placeAt | src/components/wheel/FeelingWheel.tsx | 2 | 2 | 3 | 1 | 1 | 9 | Medium |
+| FeelingWheel | src/components/wheel/FeelingWheel.tsx | 3 | 3 | 3 | 3 | 1 | 13 | High |
+| WheelFace | src/components/wheel/FeelingWheel.tsx | 1 | 1 | 2 | 1 | 1 | 6 | Low |
+| Threshold | src/components/threshold/Threshold.tsx | 3 | 1 | 3 | 2 | 1 | 10 | Medium |
+| Room | src/components/room/Room.tsx | 3 | 3 | 3 | 3 | 1 | 13 | High |
+| Piece | src/components/piece/Piece.tsx | 3 | 2 | 3 | 2 | 1 | 11 | Medium |
+| Preview | src/components/piece/Preview.tsx | 2 | 3 | 3 | 2 | 1 | 11 | Medium |
+| FrameCorner | src/components/piece/Preview.tsx | 1 | 1 | 2 | 1 | 1 | 6 | Low |
+| Bag | src/components/bag/Bag.tsx | 3 | 2 | 3 | 2 | 1 | 11 | Medium |
+| Close | src/components/close/Close.tsx | 3 | 2 | 3 | 1 | 1 | 10 | Medium |
+| ScreenNav | src/components/ScreenNav.tsx | 1 | 1 | 3 | 1 | 1 | 7 | Low |
+| ThresholdPage, ClosePage | src/app/page.tsx, src/app/close/page.tsx | 1 | 1 | 2 | 1 | 1 | 6 | Low |
+| RoomPage, BagPage, PiecePage (generateStaticParams, notFound) | src/app/room/page.tsx, bag/page.tsx, piece/[id]/page.tsx | 2 | 1 | 2 | 1 | 1 | 7 | Low |
+| RootLayout (now wraps SessionProvider) | src/app/layout.tsx | 3 | 1 | 3 | 1 | 1 | 9 | Medium |
+
+### Evidence and required tests
+
+Scoring notes. Everything the visitor touches in M4 is on the demo path, so Surface is 3 for any unit used by the Room, Piece, Bag or Close. Silence 3 is given where a wrong output still looks plausible: a feeling name, a hang order, a price, a total, a bucket, a metric. Mutation (Stryker) on `.tsx` files should list only the logic line ranges named below, as in earlier milestones.
+
+#### distance, clampToCircle (High)
+- Impact 3: `distance` ranks every work in J3 (j3.ts line 20) and picks the J6 suggestion (j6.ts line 33). `clampToCircle` bounds every J7 nudge (j7.ts line 11).
+- Silence 3: A wrong norm or a clamp that bends direction still gives a believable ordering and mood.
+- Surface 3: J3, J6, J7, Room, Bag.
+- Complexity 2: `hypot` plus one branch (mood.ts line 16).
+- Boundary 2: Internal interface used by three modules.
+- Must test:
+  - distance is symmetric, 0 for equal points, and 5 for a 3-4-5 offset.
+  - clampToCircle returns the same point when r < 1 and when r is exactly 1.
+  - A point just past 1 is scaled to length 1 with the same direction, in all four quadrants.
+  - (0,0) is unchanged and does not divide by zero.
+  - The corner (1,1) maps to (0.7071, 0.7071).
+  - The input object is not mutated.
+- Functional gate: none.
+
+#### roomNameFor (Medium)
+- Impact 2: Names the room above the feeling in Room (Room.tsx line 62) and in the Bag line "Together they feel like ..." (via j6.ts line 21).
+- Silence 3: A wrong bucket gives a valid but wrong room name.
+- Surface 3: Room and Bag.
+- Complexity 1: One lookup over `bucketOf` (buckets.ts line 35).
+- Boundary 2: Reads `roomNames` from config.
+- Must test:
+  - All nine buckets map to their `roomNames` entry, using one point inside each.
+  - A point exactly on -1/3 and on 1/3 on each axis falls in the middle band (line 20 comment, `<` and `>` at lines 23 and 24).
+  - The origin gives the middle-middle room.
+  - A value just either side of a cut point lands in the neighboring band.
+- Functional gate: none.
+
+#### wheelFeelingPoints (Medium)
+- Impact 2: Places the 12 lights in the painted wheel (FeelingWheel.tsx lines 14 to 22) and nothing else.
+- Silence 2: A wrong angle order mislabels the lights against `feelingAt`. Noticeable only if you look.
+- Surface 3: Threshold, Room, Piece fingerprint.
+- Complexity 2: Trigonometry over an index (lines 21 to 25).
+- Boundary 1: Internal.
+- Must test:
+  - 12 points, every one at `feelingWheelRadius` from center.
+  - Index 0 sits at angle 0 (right). Spacing is 30 degrees counterclockwise.
+  - Consistency with `feelingAt`: for every feeling, `feelingAt(point).main` is that feeling and `also` is null.
+- Functional gate: none.
+
+#### feelingPositions (High)
+- Impact 3: Its output positions drive `moodFor`, so the whole Room ranking (D-044, D-049, D-050).
+- Silence 3: A wrong mean, or a lead-tag filter that picks the wrong set, yields a plausible but off ranking (line 38 and 39).
+- Surface 3: Room, Piece fingerprint, `wheelPointFor`.
+- Complexity 2: Lead filter, fallback filter, mean, throw (lines 31 to 44).
+- Boundary 2: Consumes catalog works and produces the `FeelingPositions` shape used by `catalog.getFeelingPositions`.
+- Must test:
+  - The position is the mean valence and arousal of works whose first tag is the feeling.
+  - A feeling that leads no work falls back to the mean of every work that carries it in any tag.
+  - A lead work is not diluted by works that carry the tag second or later.
+  - A feeling carried by no work throws "no work carries the feeling X".
+  - All 12 keys are present.
+  - A single lead work returns exactly its own point.
+  - Works with no lead for one feeling do not affect another.
+  - An empty work list throws.
+- Functional gate: catalog contract (see getFeelingPositions).
+
+#### feelingAt (High)
+- Impact 3: Names the feeling on the Threshold, the Room heading, the glow color, and the aria text.
+- Silence 3: An off-by-one segment or a wrong `also` rule shows a believable but wrong feeling.
+- Surface 3: Threshold, Room, Session glow.
+- Complexity 3: Angle normalization, wrap, share thresholds, tie rule (lines 47 to 61).
+- Boundary 2: Internal, used by five modules.
+- Must test:
+  - The origin (atan2 gives 0) returns the first feeling, nostalgic. Pin this: an untouched Room names nostalgic.
+  - An angle at each feeling's own point returns that feeling with `also` null. Use a small tolerance, since the share can land at 0.9999999 and pick the previous neighbor.
+  - Exactly halfway between two feelings (share 0.5) names the second as main and the first as also.
+  - Share exactly 0.25 and 0.75 gives an `also`. Share 0.2499 gives null.
+  - The wrap from the last feeling to the first (just under 360 degrees).
+  - Negative angles (lower half, y negative and y of -0).
+  - Radius does not change the answer (a tiny radius still names a feeling).
+- Functional gate: none.
+
+#### moodFor (High)
+- Impact 3: It is the mood J3 ranks by (D-049). Every Room, the Piece "why" line bucket and the fingerprint use it.
+- Silence 3: A wrong blend or scale still returns a mood point.
+- Surface 3: Room, Piece.
+- Complexity 3: Neighbor blend, radius scale, clamp to 1 (lines 67 to 76).
+- Boundary 2: Takes `FeelingPositions` from the catalog.
+- Must test:
+  - The center gives (0,0).
+  - At a feeling's exact angle and r = 1, the result is that feeling's position.
+  - At r = 0.5 the result is half of it.
+  - Halfway between two feelings, the result is the average of their positions.
+  - A point beyond the unit disc uses r = 1 (`Math.min`).
+  - The wrap between the last and first feeling.
+  - The result is continuous across a feeling boundary (just before and just after are close).
+- Functional gate: J3 per-feeling Room gate (D-050).
+
+#### wheelPointFor (High)
+- Impact 3: Closer, Drift and "Hang it" move the visible point by it (Room.tsx lines 48 and 59). The Piece fingerprint places the work with it (Piece.tsx line 64).
+- Silence 3: A projection that picks the wrong degree gives a plausible point.
+- Surface 3: Room, Piece.
+- Complexity 3: 360-step search, projection, clamp of r, strict `<` tie rule (lines 82 to 93).
+- Boundary 2: Takes `FeelingPositions`.
+- Must test:
+  - Target (0,0) returns (0,0).
+  - Round trip: for mood points reachable by the wheel, `moodFor(wheelPointFor(m))` is within a loose tolerance of m (about one degree of angle).
+  - A target equal to a feeling's position returns an angle near that feeling's angle.
+  - An unreachable far target gets r = 1 (clamped), never beyond.
+  - The result is always inside the unit disc.
+  - Equal-distance angles: the lowest degree wins (strict `<` at line 90).
+  - A target opposite a lone cluster does not return NaN.
+  - Pin the zero-length full-mood case (len2 of 0 gives NaN and the angle is skipped silently).
+- Functional gate: none beyond the D-050 gate.
+
+#### clampToWheel (Medium)
+- Impact 2: Keeps pointer and arrow-key points inside the disc (FeelingWheel.tsx lines 40 and 50). `moodFor` also clamps r, so an escape would be partly masked.
+- Silence 2: An out-of-disc point looks slightly off, with the light drawn outside the ring.
+- Surface 3: Every screen that has the wheel.
+- Complexity 2: Branch plus scale.
+- Boundary 1: Internal.
+- Must test: inside and exactly on r = 1 are returned unchanged. Outside is scaled to 1 with the same direction. The origin is unchanged.
+- Functional gate: none.
+
+#### rankLane (High)
+- Impact 3: The order of every Room [Res #5, Res #23].
+- Silence 3: A wrong tie-break or demotion gives a believable order.
+- Surface 3: Room via `hang`.
+- Complexity 3: Filter, sort with two keys, demoted set, tail dedupe (lines 15 to 26).
+- Boundary 2: Generic over `Rankable`, used by `hang`.
+- Must test:
+  - Only works of the requested lane.
+  - Nearest first.
+  - Ties at equal distance break by ascending id, by plain string comparison ("a10" before "a2").
+  - Drifted works move to the end in the order they were drifted.
+  - A duplicate id in `drifted` appears once.
+  - A drifted id not in the lane is ignored.
+  - All works drifted gives the tail in drift order.
+  - The input array and `drifted` are not mutated.
+  - An empty lane gives [].
+  - The default (no `drifted`) argument works.
+- Functional gate: J3 ranking.
+
+#### hang (High)
+- Impact 3: The Room.
+- Silence 3: A lane that lands in the wrong slot or a page boundary that drops a work looks like a normal Room.
+- Surface 3: Room, "Show more", the Room tests for D-050.
+- Complexity 3: Page math, two ranks, interleave loop with one lane running out (lines 32 to 42).
+- Boundary 2: Internal, one caller.
+- Must test:
+  - A poster is at position 1 at the center of each of the nine buckets and at the four field corners (1,1), (1,-1), (-1,1), (-1,-1). Corners are outside the unit circle, so also use them as raw input.
+  - Strict alternation poster, fine-art, poster, ...
+  - Exactly `roomPageSizePerLane x pages` per lane.
+  - `pages` of 2 starts with the same prefix as `pages` of 1 ("Show more" never reorders what is on screen).
+  - `pages` of 0, 1.9, -1 and NaN: pages is floored and at least 1 (pin NaN).
+  - One lane short: the other continues alone.
+  - An empty poster lane puts a fine-art work at position 1 (pin: "poster first" only holds if a poster exists).
+  - Drift demotion: a drifted work leaves its rank and is at the end of its lane, so it reappears only once the lane is exhausted (pin the slice at line 34).
+  - Ties by id.
+  - No duplicates in the output.
+  - Input not mutated.
+- Functional gate: J3 ranking and interleave. Also the D-050 per-feeling Room gate against the real catalog (see below).
+
+#### nudge (High)
+- Impact 3: Every Closer and Drift moves the mood [Res #10, Gap G11].
+- Silence 3: A wrong step or sign shifts the Room by a plausible amount.
+- Surface 3: Room.
+- Complexity 2: Sign plus clamp (lines 9 to 15).
+- Boundary 2: Uses `nudgeStep` and `clampToCircle`.
+- Must test:
+  - Closer moves 30% toward the work, so mood (0,0) with work (1,0) gives (0.3, 0).
+  - Drift moves 30% away.
+  - Closer on the same point leaves it unchanged.
+  - A Drift nudge that would leave the unit circle is clamped to length 1 with the same direction.
+  - A Closer toward a point outside the disc.
+  - A mood already on the unit circle.
+  - Both axes move independently.
+  - The step is read from config (no hard-coded 0.3).
+  - Input not mutated.
+- Functional gate: J7 nudge and clamp.
+
+#### printSize (Medium)
+- Impact 2: A bad id breaks Piece pricing (loud throw, line 9).
+- Silence 1: The throw is loud.
+- Surface 3: priceOf, Preview, Bag.
+- Complexity 1: A find and a throw.
+- Boundary 1: Internal.
+- Must test: every id in `printSizes` returns its row. An unknown id throws "unknown print size". Exercised through the pricing sweep.
+- Functional gate: none.
+
+#### framedOuterInches, framedPerimeterInches (High)
+- Impact 3: The perimeter sets the framed price (priceOf line 34, D-048).
+- Silence 3: A wrong border gives a plausible price.
+- Surface 3: Piece, Bag.
+- Complexity 2: Border arithmetic (lines 14 to 24).
+- Boundary 2: Internal.
+- Must test:
+  - Outer width and height add 2 x (mat + frame) to the print on each side, for every size.
+  - Perimeter is 2 x (width + height).
+  - Hand-computed values for 12x16 and 30x40.
+  - A portrait and a landscape size give width and height as listed (no swap).
+  - Unknown id throws.
+- Note: `Preview.tsx` lines 50 to 54 recomputes the outer size with its own orientation swap. A test should confirm the portrait-listed size matches `framedOuterInches`.
+- Functional gate: pricing against Section 3.6.
+
+#### priceOf (High)
+- Impact 3: Every price the CEO sees.
+- Silence 3: A wrong multiplier or per-inch rate gives a believable price.
+- Surface 3: Piece, Bag, totals.
+- Complexity 2: A material branch and the framed formula (lines 30 to 37).
+- Boundary 3: Must equal the Section 3.6 price table and D-048 formula.
+- Must test:
+  - Every size x every material (paper, canvas, framed) against the Section 3.6 table, as a frozen table of literal expected dollars.
+  - Frame finish never changes the price (no finish argument).
+  - Framed adds `framedFlat` and the per-inch term.
+  - Cents rounding gives no float noise (such as 62.400000000000006).
+  - Unknown size throws.
+  - A price is positive and finite for all combinations.
+- Functional gate: pricing for every size, material and frame combination, against the Section 3.6 table.
+
+#### frameFor (Medium)
+- Impact 2: Decides the frame stored in a bag line and the line key.
+- Silence 3: A frame kept on a paper print splits one line into two silently.
+- Surface 3: Piece, Bag.
+- Complexity 1: One branch and a default.
+- Boundary 2: Internal.
+- Must test: paper and canvas return null even if a finish is passed. Framed with a finish returns it. Framed with null returns `frameFinishes[0]`.
+- Functional gate: none.
+
+#### totalsOf (High)
+- Impact 3: Subtotal, shipping and total in the Bag.
+- Silence 3: A wrong total looks fine.
+- Surface 3: Bag.
+- Complexity 2: Sum, conditional shipping, rounding (lines 46 to 50).
+- Boundary 2: Internal.
+- Must test:
+  - An empty list gives subtotal 0, shipping 0, total 0.
+  - One price adds `shippingFlat`.
+  - Several prices sum to cents, with no float noise (a classic 0.1 + 0.2 case).
+  - Total equals subtotal + shipping.
+  - Shipping is flat, not per line.
+- Functional gate: pricing / bag totals.
+
+#### formatPrice (Medium)
+- Impact 3: Prices are shown with it, so a rounding error is visible [D-053 (2)].
+- Silence 2: A missing zero is noticeable.
+- Surface 3: Piece, Bag.
+- Complexity 1: One expression.
+- Boundary 1: Internal.
+- Must test: 39 gives "$39.00". 62.4 gives "$62.40". 0 gives "$0.00". A value over 1,000 shows no thousands separator (pin). A half-cent value rounds as `toFixed` does (pin).
+- Functional gate: none.
+
+#### lineKey, addLine (Medium)
+- Impact 2: Bag identity [Gap G20]; a wrong key duplicates or drops a line.
+- Silence 2: A duplicate line is visible in the Bag.
+- Surface 3: Piece (inBag at Piece.tsx line 40), Bag, Session.
+- Complexity 2: Normalization, a duplicate check, a spread (bag.ts lines 10 to 20).
+- Boundary 2: Internal interface.
+- Must test:
+  - The same work, size, material and frame added twice leaves one line (quantity fixed at 1).
+  - A different size, material or frame adds a second line.
+  - Paper with frame "black" and paper with null frame have the same key.
+  - Framed with a null finish is stored with `frameFinishes[0]`, with the same key as an explicit first finish.
+  - The new line carries `priceOf(size, material)`.
+  - The input bag is not mutated and a new array is returned even on a duplicate.
+- Functional gate: bag line identity, removal and totals.
+
+#### removeLine (Medium)
+- Impact 2: Remove button in the Bag.
+- Silence 1: Obvious on screen.
+- Surface 2: Bag only.
+- Complexity 1: A filter.
+- Boundary 2: Internal interface.
+- Must test: removes exactly the line with that key and keeps the order of the rest. An unknown key leaves the bag unchanged. Removing from an empty bag gives [].
+- Functional gate: bag line identity, removal and totals.
+
+#### bagTotals (Medium)
+- Impact 3: The totals the visitor sees.
+- Silence 2: Delegates to `totalsOf`, which is tested separately.
+- Surface 3: Bag.
+- Complexity 1: One map.
+- Boundary 2: Internal.
+- Must test: totals come from the line prices, not recomputed prices. Empty bag gives zero totals. A real three-line bag matches a hand sum.
+- Functional gate: bag totals.
+
+#### bagCenter (High)
+- Impact 2: Sets "Together they feel like ..." and the J6 suggestion [Gap G6].
+- Silence 3: A wrong average gives a plausible room name.
+- Surface 3: Bag.
+- Complexity 2: Two means and an empty guard.
+- Boundary 2: Internal.
+- Must test: empty gives null. One work gives that work's point. Unweighted mean of two or more. Two lines for the same work count twice (unweighted across lines, pin). Negative values.
+- Functional gate: J6 suggestion including the empty bag.
+
+#### feelTogether (Medium)
+- Impact 2: The one sentence on the Bag.
+- Silence 3: A wrong room name looks right.
+- Surface 3: Bag.
+- Complexity 1: Delegation.
+- Boundary 2: Internal.
+- Must test: empty gives null. The name equals `roomNameFor` of the center. A center on a cut point.
+- Functional gate: J6 including the empty bag.
+
+#### suggestion (High)
+- Impact 2: The "One more for this room" piece [Res #15].
+- Silence 3: A wrong nearest work looks reasonable.
+- Surface 3: Bag.
+- Complexity 3: Scan, exclusion set, strict compare, tie-break by id (lines 31 to 38).
+- Boundary 2: Internal.
+- Must test:
+  - Empty bag gives null.
+  - The nearest work to the center not in the bag.
+  - A work already in the bag is never chosen, even if it is the nearest.
+  - Ties at equal distance break by ascending id (the `d === bestD` branch, line 34).
+  - A catalog where every work is in the bag gives null.
+  - A work in the bag twice (two lines).
+  - Both lanes are eligible (no lane filter, pin).
+  - Input not mutated.
+- Functional gate: J6 suggestion, including the empty bag.
+
+#### interacted, pieceOpened (High)
+- Impact 3: They start and stop the time-to-first-piece clock shown on Close [Res #11, Gap G23].
+- Silence 3: A clock that restarts or stops early shows a plausible duration.
+- Surface 3: Close, Session.
+- Complexity 2: Two guard conditions.
+- Boundary 1: Internal.
+- Must test:
+  - `interacted` sets `startedAt` on a fresh state and leaves a later call unchanged (returns the same object).
+  - `pieceOpened` before any interaction changes nothing (pin: a Piece opened from a direct link does not start the clock, D-053 (3)).
+  - `pieceOpened` after the first interaction sets `firstPieceAt`, and a second call changes nothing.
+  - A visitor who never touched the Threshold keeps both times null.
+  - `freshMetrics` is not mutated.
+- Functional gate: session metrics, including a visitor who never touched the Threshold.
+
+#### rehung (High)
+- Impact 3: Feeds the Re-hangs figure on Close [D-041].
+- Silence 3: Off by one is invisible.
+- Surface 3: Close.
+- Complexity 1: One increment.
+- Boundary 1: Internal.
+- Must test: adds exactly 1 and keeps the other fields. Does not mutate the input. Three calls give 3.
+- Functional gate: session metrics.
+
+#### closeSummary (High)
+- Impact 3: The four figures on Close.
+- Silence 3: A wrong time or a negative duration reads as a number.
+- Surface 3: Close.
+- Complexity 2: Conditional and a clamp (lines 38 to 41).
+- Boundary 2: Produces the `CloseSummary` shape.
+- Must test:
+  - `timeToFirstPieceMs` is `firstPieceAt - startedAt`.
+  - It is null if either time is null (three combinations).
+  - A negative gap is clamped to 0.
+  - A zero gap is 0, not null.
+  - `noSearchTyped` is always true. `rehangs` and `piecesChosen` pass through.
+  - Bag lines of 0.
+- Functional gate: session metrics, including a visitor who never touched the Threshold.
+
+#### formatDuration (High)
+- Impact 3: The visible time.
+- Silence 3: A wrong unit or plural looks fine.
+- Surface 3: Close.
+- Complexity 2: Floor and pluralization (lines 44 to 49).
+- Boundary 1: Internal.
+- Must test:
+  - 0 ms gives "0 seconds".
+  - 1000 gives "1 second". 999 floors to "0 seconds".
+  - 8000 gives "8 seconds".
+  - 59999 gives "59 seconds".
+  - 60000 gives "1 minute".
+  - 65000 gives "1 minute 5 seconds".
+  - 121000 gives "2 minutes 1 second".
+  - A multi-hour value stays in minutes (pin).
+- Functional gate: session metrics.
+
+#### wordsOf (High)
+- Impact 2: Feeds the mood match for typed text.
+- Silence 3: A split that drops a word changes the mood silently.
+- Surface 3: Room describe, M5 J2 fallback.
+- Complexity 2: Normalize, curly apostrophe, regex split.
+- Boundary 2: Shares `normalizePhrase` with the J2 cache keys, and the "heard" check.
+- Must test: lowercase and trimming through `normalizePhrase`. Punctuation and commas split words. Curly apostrophes match straight ones ("don’t" equals "don't"). Digits are kept. Accented letters are kept (`\p{L}`). Empty or only punctuation gives []. Splits the way J2's `heard` check splits (compare with the j2.ts split).
+- Functional gate: word-map interpreter.
+
+#### interpretWords (High)
+- Impact 3: What "Hang it" does, including the video phrase [D-037, D-052].
+- Silence 3: A wrong mean or a missed word gives a plausible Room.
+- Surface 3: Room now, and the J2 fallback in M5.
+- Complexity 3: Set, hasOwn guards, mean, first room word, first size word, heard cap (lines 26 to 40).
+- Boundary 3: Returns the `J2Output` shape and reads `j2-wordmap.json`.
+- Must test:
+  - The no-match case returns null (D-052): empty text, only room or size words, unknown words.
+  - Mean of the distinct mood words, a repeated word counted once.
+  - `roomType` and `size` come from the first such word in the text, else null.
+  - `heard` is in text order, holds only matched words, and is capped at `maxHeard`.
+  - Prototype keys ("constructor", "toString", "__proto__") do not match (`Object.hasOwn`).
+  - Case, punctuation and curly apostrophes.
+  - The result passes `j2OutputSchema` (valence and arousal inside [-1,1], heard words appear in the text).
+  - The placeholder `describePlaceholder` ("a slow sunday morning in the bedroom, something large") interprets to a non-null result with room type bedroom and size large (D-037).
+  - A custom `map` argument is honored.
+  - The committed `data/j2-wordmap.json` parses through the schema on import.
+- Functional gate: the word-map interpreter including the agreed no-match case; the J2 output contract (`j2OutputSchema`).
+
+#### getFeelingPositions (Medium)
+- Impact 2: One accessor feeding Room and Piece.
+- Silence 2: A wrong position is covered by the `feelingPositions` tests.
+- Surface 3: Room and Piece pages.
+- Complexity 1: A memo (`??=`, line 51).
+- Boundary 3: Catalog module contract.
+- Must test: against the real catalog, 12 keys equal to `feelingWheelOrder`, every position finite and inside [-1,1] on both axes. A second call returns the same object. The result is frozen.
+- Functional gate: catalog module contract test.
+
+#### getCopyLines (Medium)
+- Impact 2: The "why this found you" line on Piece.
+- Silence 2: A wrong id shows another work's line or none.
+- Surface 3: Piece.
+- Complexity 1: One guarded lookup.
+- Boundary 3: Reads the `copy.json` contract.
+- Must test: a pilot work id returns nine lines keyed by all nine `bucketKeys`. A catalog work with no entry (partial copy.json, D-042) returns undefined. Prototype names ("constructor", "__proto__") return undefined (`Object.hasOwn`, line 62). An unknown id returns undefined.
+- Functional gate: catalog module contract test; data files (copy.json schema).
+
+#### getWorkCards (Medium)
+- Impact 2: Supplies the Room, Bag and J6 with works.
+- Silence 2: A wrong field would mis-rank or mis-caption.
+- Surface 3: Room, Bag.
+- Complexity 1: A map (lines 69 to 71).
+- Boundary 3: Catalog module contract.
+- Must test: count equals `getAllWorks().length`. Ascending id order. Each card has exactly the ten `WorkCard` fields and no extras (no imageUrl, tags, palette, so the client payload stays small). Values equal the work's. The result is not the frozen internal array.
+- Functional gate: catalog module contract test.
+
+#### copyFor, partial mode (High)
+- Impact 3: Builds `copy.json`, the Piece line for every work (j4.ts line 127).
+- Silence 3: Partial mode could let a stale line through.
+- Surface 3: Piece.
+- Complexity 2: Filter by current hash, branch on `partial` (lines 128 to 131).
+- Boundary 3: Produces the `copyFileSchema` contract.
+- Must test (add to the existing copyFor tests):
+  - Not partial: throws with the count and first id if any work lacks lines or has a stale hash.
+  - Partial: returns only works whose hash is current, and omits missing and stale ones.
+  - Partial with no current work throws.
+  - Partial with a catalog where every work is current returns all of them.
+  - Each id maps to its own nine lines. Extra stored ids are ignored. Key order follows the catalog.
+  - Pin: an empty catalog in partial mode throws a TypeError on `missing[0].id` instead of the message.
+  - The output passes `copyFileSchema`.
+- Functional gate: Data files (copy.json contract).
+
+#### copyProblems, partial flag (Medium)
+- Impact 2: Build-time gate on copy.json.
+- Silence 3: `copyMayBePartial = true` (validate-data.ts line 30) means that after the J4 full run, a work with no lines still passes unless the flag is flipped. Nothing forces the flip.
+- Surface 1: One caller (line 81).
+- Complexity 2: Two set differences, one skipped in partial mode.
+- Boundary 3: Data contract against the catalog id set.
+- Must test (add to the earlier copyProblems tests):
+  - Partial skips the "no lines" problem but still reports unknown entries.
+  - Not partial reports both as before.
+  - Partial with an empty copy and a full catalog returns [].
+  - An unknown key in partial mode returns "N entries are not catalog works, for example <key>".
+  - A guard test: if `data/copy.json` covers every catalog id, `copyMayBePartial` must be false.
+- Functional gate: Data files validated at build time.
+
+#### feelingSentences, describeNoMatch, describePlaceholder, pieceDefaults (Low)
+- Impact 2: Visible copy and defaults. `feelingSentences` is typed `satisfies Record<feeling, string>` (feel.ts line 210), so every feeling has one.
+- Silence 1: Wrong wording is visible on sight.
+- Surface 2: Room, Piece.
+- Complexity 1: Constants.
+- Boundary 1: Internal.
+- Must test: none (Low). Cheap checks go in existing tests: config schema check for no em dash in these strings, `pieceDefaults` values are valid size, material and frame ids, and the placeholder check above under `interpretWords`.
+- Functional gate: none.
+
+#### SessionProvider (High)
+- Impact 3: Holds the point, drifted list, pages, bag and metrics for every screen. It starts the clock.
+- Silence 3: A drift that duplicates, a rehang that double-counts, or a clock that starts late all look plausible on Close.
+- Surface 3: Every screen (layout.tsx line 23).
+- Complexity 3: State, a capture-phase `once` listener effect, `describe` that sets point, touched, described and counts a rehang (Session.tsx lines 52 to 93).
+- Boundary 1: Internal React context.
+- Must test (RTL with a small consumer; mutate lines 36 to 93 only):
+  - Initial state: point (0,0), touched false, no drift, pages 1, empty bag, fresh metrics.
+  - The first `pointerdown` starts the clock, so does the first `keydown`. A second event does not change `startedAt`. Listeners are removed on unmount and after start.
+  - `movePoint` sets touched.
+  - `countRehang` adds 1. `describe` sets point, touched, described and adds exactly 1 rehang.
+  - `drift` records an id once (a repeated id is not added twice).
+  - `showMore` increments pages.
+  - `addToBag` and `removeFromBag` follow `addLine`/`removeLine` (a duplicate is ignored).
+  - `openPiece` sets `firstPieceAt` once, and only after the clock has started.
+  - `useSession` outside the provider throws.
+  - Nothing is written to storage (spy on `localStorage`, `sessionStorage`, `fetch`; D-040).
+- Functional gate: session metrics.
+
+#### glowStyle (Low)
+- Impact 1: Sets one CSS color variable.
+- Silence 1: A wrong color is visible.
+- Surface 3: Every screen.
+- Complexity 1: A template string.
+- Boundary 1: Internal.
+- Must test: none (Low).
+- Functional gate: none.
+
+#### pointFromKey (Medium)
+- Impact 2: Keyboard movement of the wheel (accessibility).
+- Silence 2: A wrong direction is noticeable when used.
+- Surface 2: Wheel on Threshold and Room.
+- Complexity 2: Key map, step size, clamp.
+- Boundary 1: Internal.
+- Must test: each arrow moves one step in its direction (Up is +y, Right is +x). Shift uses the larger step (0.2 against 0.05). Other keys return null. A step at the edge is clamped to the unit disc.
+- Functional gate: none.
+
+#### placeAt (Medium)
+- Impact 2: Positions the light and the fingerprint marks.
+- Silence 2: A flipped y is off but not broken.
+- Surface 3: Threshold, Room, Piece.
+- Complexity 1: Two formulas.
+- Boundary 1: Internal.
+- Must test: (0,0) gives 50% / 50%. (1,0) gives 100% / 50%. (0,1) gives 50% / 0% (up is top). (-1,-1) maps to the far bottom-left.
+- Functional gate: none.
+
+#### FeelingWheel (High)
+- Impact 3: The only input of the Threshold and the Room.
+- Silence 3: A gesture that fires `onGestureEnd` twice or not at all miscounts re-hangs [D-041].
+- Surface 3: Threshold, Room.
+- Complexity 3: Pointer capture, gesture refs `from` and `last`, key handling (lines 73 to 123).
+- Boundary 1: Internal React props.
+- Must test (RTL, stubbing `setPointerCapture` and `getBoundingClientRect`; mutate lines 73 to 123 only):
+  - Pointer down inside moves the point with y inverted (up is charged).
+  - A drag moves the point only while down.
+  - Pointer up calls `onGestureEnd` once with the before and after points.
+  - A cancel also ends the gesture. An up with no down does nothing.
+  - A pointer outside the disc is clamped.
+  - An arrow key calls `onMove` and `onGestureEnd` once per step and prevents default. A non-arrow key does neither.
+  - `aria-valuetext` reads "main, a little also" when there is an also.
+  - `aria-valuenow` is 0 to 359.
+- Functional gate: none (internal). Drag with a real pointer is covered by Playwright.
+
+#### WheelFace (Low)
+- Impact 1: Markup for the fingerprint wheel.
+- Silence 1: Visible.
+- Surface 2: Piece.
+- Complexity 1: Markup.
+- Boundary 1: Internal.
+- Must test: none (Low).
+- Functional gate: none.
+
+#### Threshold (Medium)
+- Impact 3: The first screen; if Step in fails, the demo ends.
+- Silence 1: Failure is visible.
+- Surface 3: Demo path.
+- Complexity 2: Touched gating, reduced-motion branch, a timer (lines 25 to 30).
+- Boundary 1: Internal.
+- Must test (RTL with a mocked router and `matchMedia`): feeling name and "a little" line are blank until the point moves. "Step in" is hidden and not focusable until touched. With reduced motion, `router.push("/room")` is called at once. Without it, the push comes after 650 ms (fake timers). The prompt text is `thresholdPrompt`.
+- Functional gate: Playwright demo path.
+
+#### Room (High)
+- Impact 3: The main screen; it counts the Re-hangs figure on Close.
+- Silence 3: A re-hang counted when nothing changed, or missed on a Closer, shows a plausible number.
+- Surface 3: Demo path.
+- Complexity 3: `orderAt`, `retuned`, `react`, `submit`, `roomName`, show-more condition (lines 33 to 62, 137).
+- Boundary 1: Internal.
+- Must test (RTL with fixture cards and positions; mutate lines 27 to 62, 137 only):
+  - A poster is first in the list at the start.
+  - A retune that changes the hang order counts one re-hang. One that does not change the order counts none (D-041).
+  - Closer counts one re-hang and moves the point toward the work. Drift counts one, moves away and demotes the work (it is no longer in its lane's first page).
+  - Describe with a mood word calls `describe` once with a point and counts one re-hang. A no-match text shows `describeNoMatch`, changes nothing and counts no re-hang (D-052). Typing clears the message.
+  - The room name adds " for the <roomType>" only after a described room type.
+  - The feeling heading is capitalized and shows ", a little X" only when there is an `also`.
+  - "Show more" shows only when `pages x 6` is below the larger lane, and a click adds a page.
+  - Link targets point to `/piece/<id>`.
+- Functional gate: the per-feeling Room gate (D-050). Playwright demo path.
+
+#### Piece (Medium)
+- Impact 3: Prices, frame and Add to bag.
+- Silence 2: Prices come straight from `priceOf`, so errors are obvious.
+- Surface 3: Demo path.
+- Complexity 2: Three state values, `inBag` key check, bucket lookup (lines 26 to 40).
+- Boundary 1: Internal.
+- Must test (RTL):
+  - Defaults are `pieceDefaults` (18x24, framed, black). A described size word sets the initial size via `sizeWordToPrintSize`.
+  - Each size and material button shows `formatPrice(priceOf(...))`.
+  - The Frame group shows only for framed.
+  - Add to bag adds one line with the chosen size, material and frame, and the button then reads "In your bag" and is disabled. A different choice enables it again. Paper stores a null frame.
+  - The "why" line is the one for the bucket of the current mood, and is absent when `lines` is undefined.
+  - `openPiece` is called on mount.
+  - Credits end with a period only once (`stop`).
+- Functional gate: Playwright demo path (choose a frame, add to bag).
+
+#### Preview (Medium)
+- Impact 2: The framed preview [Res #42, Gap G29].
+- Silence 3: A wrong padding percentage gives believable frame proportions.
+- Surface 3: Piece.
+- Complexity 2: Orientation swap, padding math (lines 41 to 69).
+- Boundary 1: Internal.
+- Must test (RTL on inline style): no frame renders the plain work with no frame element. Framed padding percentages equal `frameWidthIn / outerW` and `matWidthIn / (outerW - 2 frameWidthIn)` for a portrait and a landscape work. A landscape work turns the print to landscape. The frame uses the chosen finish variable. The outer aspect agrees with `framedOuterInches`.
+- Functional gate: none (Playwright covers appearance).
+
+#### FrameCorner (Low)
+- Impact 1: Decorative swatch.
+- Silence 1: Visible.
+- Surface 2: Piece.
+- Complexity 1: Markup.
+- Boundary 1: Internal.
+- Must test: none (Low).
+- Functional gate: none.
+
+#### Bag (Medium)
+- Impact 3: Lines and totals.
+- Silence 2: Figures come from the lib functions.
+- Surface 3: Demo path.
+- Complexity 2: Lookup map, empty branch, optional suggestion (lines 28 to 108).
+- Boundary 1: Internal.
+- Must test (RTL): an empty bag shows "Nothing here yet", the way back to the Room, no totals and no suggestion. A filled bag shows each line's title, size, material and frame, price, and the Remove button removes it. Subtotal, shipping and total match `bagTotals`. The "Together they feel like ..." sentence appears. The suggestion shows a work not in the bag. A line whose work id is not in `works` is skipped without a crash.
+- Functional gate: Playwright demo path.
+
+#### Close (Medium)
+- Impact 3: The four metrics the CEO reads, and the Signals link.
+- Silence 2: Values come from `closeSummary` and `formatDuration`.
+- Surface 3: Demo path.
+- Complexity 1: Straight rendering with one ternary.
+- Boundary 1: Internal.
+- Must test (RTL): all four rows are present. "No search typed" is always shown. A null time shows "Not measured". A measured time shows the `formatDuration` text. Re-hangs and pieces chosen show the session numbers. The Signals link points to `/signals`. Contact links use the config values.
+- Functional gate: Playwright demo path (all four metrics present, Signals link present).
+
+#### ScreenNav (Low)
+- Impact 1: Navigation links.
+- Silence 1: A missing link is visible.
+- Surface 3: Four screens.
+- Complexity 1: Markup with a count suffix.
+- Boundary 1: Internal.
+- Must test: none (Low). Covered by the Playwright path.
+- Functional gate: none.
+
+#### Page stubs (Low)
+- ThresholdPage and ClosePage: one line each, no props, impact in the component (Impact 1, Silence 1, Surface 2, Complexity 1, Boundary 1).
+- RoomPage, BagPage, PiecePage: pass catalog data to a component (Impact 2). `generateStaticParams` returns every work id, and `notFound()` handles an unknown id (loud, Silence 1). Each serves one route (Surface 2).
+- Must test: none (Low). The production build prerenders all 600 Piece routes, and the demo path opens one.
+- Functional gate: none.
+
+#### RootLayout (Medium)
+- Impact 3: Without the `SessionProvider` wrapper, every screen throws in `useSession` (layout.tsx line 23).
+- Silence 1: The failure is a crash.
+- Surface 3: Every route.
+- Complexity 1: Markup.
+- Boundary 1: Internal.
+- Must test: the existing layout test (the one that stubs next/font) also asserts that the concept bar renders and that a child can call `useSession`. The Playwright demo path covers the rest.
+- Functional gate: none.
+
+### Functional gates for M4 Part B
+
+From the M4 prompt "Testing loop":
+- J3 ranking and interleave: `rankLane`, `hang`. Poster at position 1 at every bucket center and the four corners, tie-breaking by ascending id, Show more prefix property, Drift demotion within the lane.
+- J7 nudge and clamp: `nudge`, `clampToCircle`, including a point that would leave the unit circle.
+- Pricing against Section 3.6: `priceOf` for every size x material combination as a literal table, plus the framed perimeter formula (D-048). Frame finish does not change the price.
+- Bag line identity, removal, totals: `lineKey`, `addLine`, `removeLine`, `bagTotals`, `totalsOf`, plus the J6 suggestion including the empty bag.
+- Word-map interpreter including the no-match case (D-052), and the `J2Output` shape (`j2OutputSchema`).
+- Session metrics, including a visitor who never touched the Threshold.
+- Playwright demo path at 390px and 1440px, failing on any console error.
+
+Additional gates from Boundary 3 scores:
+- Catalog module contract: `getFeelingPositions`, `getCopyLines`, `getWorkCards` (docs/testing.md "Catalog module").
+- Data files: partial `copy.json` through `copyFileSchema`, `copyProblems` and `copyFor` (docs/testing.md "Data files").
+
+D-050 per-feeling Room gate, against the real catalog (not a unit test):
+- For each of the 12 feelings, put the wheel point at that feeling's angle with r = 1 (note `wheelFeelingPoints` sits at r = 0.75, so scale it to the full radius).
+- Call `moodFor` with `getFeelingPositions()`, then `hang(getWorkCards(), mood, 1, [])`. That gives the top 12.
+- Count works whose `tags` include the feeling in any position, using the full work records. `WorkCard` does not carry tags, so join on id through `getWorkById`.
+- Require at least 6 of 12.
+- Report failures to Scott rather than tuning around them. The 2026-10-15 read-only check on the stand-in ordering found nostalgic 4, awe 4, defiant 5 and wistful 2 below 6.
+- It reads only committed data and calls no outside party.
+
+### Covered by the Playwright demo path rather than unit tests
+
+These get no unit tests of their own, or only the thin behavior tests listed above:
+- Page stubs: `page.tsx`, `room/page.tsx`, `bag/page.tsx`, `close/page.tsx`, `piece/[id]/page.tsx`.
+- `ScreenNav`, `WheelFace`, `FrameCorner`, `glowStyle`.
+- Visual layout, spacing, color and motion of Threshold, Room, Piece, Bag and Close, including the real pointer drag on the wheel and the framed preview's appearance.
+- Config values `feelingSentences`, `describeNoMatch`, `describePlaceholder`, `pieceDefaults` (the end-to-end run reads them on screen).
+- Threshold, Piece, Bag and Close are Medium: they get the RTL behavior tests above for what shows and what a click does. Playwright carries the journey.
+
+### Stryker scope note
+
+- Keep all High-tier `src/lib` files in `mutate`: mood.ts, feelings.ts (feelingPositions, feelingAt, moodFor, wheelPointFor), j3.ts, j7.ts, pricing.ts (framedOuterInches, framedPerimeterInches, priceOf, totalsOf), j6.ts (bagCenter, suggestion), metrics.ts, wordmap.ts, and scripts/j4.ts `copyFor`.
+- For the three High `.tsx` units, list only their logic ranges: Session.tsx lines 36 to 93, FeelingWheel.tsx lines 73 to 123, Room.tsx lines 27 to 62 and 137.
+- Beware the known Stryker/Vitest false-survival: `wordmap.ts` parses `data/j2-wordmap.json` at import (line 12), so a mutant that throws there reports as a survivor. Keep that call inside the tests if needed.
+
 ## Triage 2026-10-12 (M3, validate-data additions)
 
 | Unit | File | I | Si | Su | C | B | Total | Tier |
