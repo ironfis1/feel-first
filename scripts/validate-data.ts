@@ -26,8 +26,8 @@ export function catalogProblems(catalog: readonly { thumbUrl: string }[], thumbE
   return problems;
 }
 
-/** copy.json holds only the 24 J4 pilot works until the J4 full run; set to false after it (D-042). */
-export const copyMayBePartial = true;
+/** copy.json covers every catalog work since the J4 full run (D-058); a missing line now fails the check. */
+export const copyMayBePartial = false;
 
 /**
  * copy.json must hold lines for exactly the catalog's works [Gap G2]. Partial allows missing works,

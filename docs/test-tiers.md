@@ -4,6 +4,10 @@ The test-evaluator subagent's triage tables are saved here verbatim, newest firs
 
 ## Mutation results
 
+### 2026-10-16: j4-rules.ts after D-059
+
+j4-rules.ts 84.58% (203 killed or timed out, 37 survived, 0 without coverage), down from 96.70. Break threshold 80. 31 of the survivors are single entries of the notNames list (lines 93 to 96) emptied to "": the triage tiers notNames Low and says not to test its contents entry by entry, and the tests cover each group through lineProblems (days, months, a holiday, pronouns). The other 6 are the accepted M3 survivors (lines 41, 46, 48, 49, 86).
+
 ### 2026-10-15: M4 Part B High-tier files
 
 Overall 93.68% on the M4 files (445 killed or timed out, 30 survived), then one more kill in wordmap.ts. Break threshold 80. Per file: j4.ts copyFor 100, j7.ts 100, metrics.ts 100, mood.ts 100, FeelingWheel.tsx 73-123 100, feelings.ts 97.78, pricing.ts 97.78, wordmap.ts 94.59 (97.30 after the heard-size kill), Session.tsx 52-90 90.20, j6.ts 88.89, Room.tsx 27-72 and 155 85.19 (rerun after the D-055 slim bar; the two new survivors are the observe call, which the test's stand-in observer ignores, and the effect dependency array), j3.ts 83.05.
@@ -60,6 +64,10 @@ Tooling note: Stryker's Vitest runner 10.0.0 did not activate runtime mutants un
 
 ## Sweep results
 
+### 2026-10-16 (M4, D-059 name exemptions)
+
+Kept 5, flagged 1 in part. Deleted: the two word-count assertions in "leaves the other rules in force on a line with an exempt word" (flag 3, duplicate of the 30/31-word test; "Sunday" at sentence start never reaches the exemption). The triage's "Sunday Afternoon" example and lowercase "his" pin were not added: "March" in a figure title covers the calendar word on the sitter path, and the sitter match is case-sensitive by construction, so a lowercase pin could not fail.
+
 ### 2026-10-15 (M4, proxy)
 
 Kept 4, flagged 0 in `tests/unit/proxy.test.ts`.
@@ -90,6 +98,57 @@ Kept 205, flagged 2, both deleted (flag 6): the Met and Rijksmuseum tests "match
 ### 2026-10-09 (M2 Part A)
 
 Kept 156, flagged 1. Deleted: workSchema "derives orientation from dimensions" (flag 3, duplicate). The orientation tests through the schema already cover all three branches. Mutation score unchanged by the deletion.
+
+## Triage 2026-10-16 (M4, D-059 J4 name-check exemptions)
+
+| Unit | File | I | Si | Su | C | B | Total | Tier |
+|---|---|---|---|---|---|---|---|---|
+| lineProblems (changed: both name checks now filter through isNotName) | scripts/lib/j4-rules.ts | 2 | 3 | 3 | 3 | 2 | 13 | High |
+| isNotName (new, private) | scripts/lib/j4-rules.ts | 2 | 3 | 2 | 2 | 1 | 10 | Medium |
+| notNames (new, exported set) | scripts/lib/j4-rules.ts | 1 | 2 | 1 | 1 | 1 | 6 | Low |
+
+Scores for the other units in this file are unchanged from the M3 triage (midSentenceCapitals High, allowedNames Medium, sitterNames Medium). Nothing else was re-scored.
+
+### Evidence and required tests
+
+#### lineProblems (High)
+- Impact 2: It gates every J4 line the CEO may read. The new filters at lines 117 and 120 decide whether a line is rejected or accepted, and D-059 shows they already decided the fate of 17 works.
+- Silence 3: The change widens what is accepted. A wrong exemption lets a real name through as ordinary curator prose, and nobody sees it unless Scott reviews that line. Over-exemption (for example every "X-" compound) is invisible. Over-rejection is at least visible as works left without a line.
+- Surface 3: parseJ4 uses it for all 600 works (see the M3 entry). The re-run of the 17 depends on the new behavior.
+- Complexity 3: Seven independent rule checks. Line 117 combines an allowed-names set, the mid-sentence scan and the exemption. Line 120 combines the case-sensitive sitter set, a separate tokenizer and the exemption.
+- Boundary 2: Internal contract used by scripts/j4.ts. It is not an outside party.
+- Must test (only the new D-059 behavior; the earlier cases keep their existing tests in tests/unit/scripts/j4Rules.test.ts):
+  - Mid-sentence check: "Tuesday", "Sunday", "May", "Halloween" and "T-square" mid-sentence in a line with no other problems return no problems.
+  - Sitter check: a figure work whose title is title-cased with "His", "Their", "March" or "Sunday" (for example "Sunday Afternoon") returns no "names the sitter" problem for those words.
+  - Still rejected: "Armor" and "Drawn" as figure title words still give "names the sitter". An invented name mid-sentence ("Margaret") still gives "name not from the artist or title".
+  - Mixed line: a line with an exempt word and a real name flags only the real name. The exempt word must not appear in the message list.
+  - Exemption does not widen the other rules: an exempt word does not stop the banned-phrase, em dash, exclamation or word-count checks. 30 words still passes and 31 still fails (the cap is unchanged).
+  - Both checks are independent: a word exempt in one check is exempt in the other (a pronoun that is also a sitter word).
+  - Pin the case-sensitive sitter match: a lowercase "his" in a figure line does not matter, and "His" is exempt only through isNotName.
+- Functional gate: none (Boundary 2). The existing J4 parse gate in the M3 entry still covers the data contract. Re-running the 17 works is a live job and is not a test.
+
+#### isNotName (Medium)
+- Impact 2: It decides whether a capitalized word counts as a name (lines 100 to 102). The effect reaches the accept or reject decision through lineProblems only.
+- Silence 3: A wrong true silently approves a name. The compound rule `/^\p{Lu}-/u` (line 101) accepts any single capital plus hyphen, such as "A-Lan" or "J-Smith", which could be a name. The failure looks like a normal accepted line.
+- Surface 2: Called twice, both inside lineProblems (lines 117 and 120). It is private. J8 uses midSentenceCapitals directly and is not affected.
+- Complexity 2: A case-insensitive set lookup plus one Unicode regex. There are no branches beyond the OR.
+- Boundary 1: Internal and private.
+- Must test (through lineProblems, since it is not exported):
+  - Case-insensitive match: "SUNDAY", "sunday" and "Sunday" are all exempt.
+  - Compound rule: "T-square" and "X-ray" are exempt. A lone capital with no hyphen ("T") is not exempt. Two capitals before the hyphen ("TV-set", "Ab-cd") are not exempt. A hyphen not in second position ("Mary-Ann") is not exempt.
+  - Possessive: "Sunday's" arrives as "Sunday" at the mid-sentence check (line 63 strips it) and is exempt. At the sitter check, line 120 also strips it.
+  - Pronouns at the sentence-start boundary are not checked mid-sentence, but "His" in a title (sitter path) is exempt. Words such as "Her" and "Us" are covered by the set.
+  - A near miss is not exempt: "Mayor", "Marches", "Sundays" (the plural form is not in the set) are still flagged.
+- Functional gate: none.
+
+#### notNames (Low)
+- Impact 1: A static list of 4 groups (days, months, holidays, pronouns), lines 92 to 97. A wrong entry only exempts one more ordinary word, and D-059 fixes the list as decided by Scott.
+- Silence 2: A missing entry shows up as a rejected work (visible). An extra entry could hide a name, but all entries are ordinary calendar words and pronouns. "may" is the only one that is also a given name, which is accepted in D-059.
+- Surface 1: Exported, but the only caller is isNotName in the same file. No other module imports it (not found in scripts or tests during this triage beyond the unit under test).
+- Complexity 1: Four array spreads into a Set, no logic.
+- Boundary 1: Internal.
+- Must test: none (Low). The behavior is exercised through the lineProblems and isNotName cases above. Do not write a test that re-lists the set contents.
+- Functional gate: none.
 
 ## Triage 2026-10-15 (M4, src/proxy.ts)
 

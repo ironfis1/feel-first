@@ -505,6 +505,22 @@ Decision: Record them as known gaps for now. The test marks those four as expect
 Why: Scott's answer on 2026-10-15.
 Spec reference: D-050, D-049.
 
+### D-058: The Piece copy is approved and the J4 full run happens now
+Date: 2026-10-16
+Decided by: Scott
+Question: Only the 24 pilot works have a "why this found you" line. Run J4 on the other 576 now, or hold off in case the line style changes later?
+Decision: Scott read the pilot lines in place on the live Piece screen (w-0302, w-0326, w-0004, w-0133) and approved them ("Those are good. At this point lets do the full run"). J4 runs on the remaining works with the current prompt, copy.json is merged in full, and copyMayBePartial in scripts/validate-data.ts goes to false.
+Why: Closes the D-042 condition and the M4 "Piece with the line" scope. A later prompt change would re-bill only the works it touches.
+Spec reference: Section 4 J4, D-039, D-042, D-053.
+
+### D-059: The J4 name checks stop counting calendar words and pronouns as names
+Date: 2026-10-16
+Decided by: Scott
+Question: The full run accepted 559 of 576 works. Of the 17 rejects, 9 had a line over 30 words, and the rest were flagged for names that are not names: title-cased figure titles made "His", "Their", "Armor", "Drawn", "March" and "Sunday" sitter words, and "Tuesday", "Sunday", "May", "Halloween" and "T-square" were flagged mid-sentence. Fix the checker and re-run the 17, re-run as is, or leave them without lines?
+Decision: Fix the checker and re-run the 17. Days, months, four holidays and personal pronouns are never counted as names, and neither is a compound led by one capital letter (T-square). Other title words stay as they were, so "Armor" and "Drawn" are still caught; the re-run gives those works a fresh try. The 30-word cap is unchanged. A work that still fails is left without a line.
+Why: Scott's answer on 2026-10-16. None of the flagged lines named a person.
+Spec reference: Section 4 J4, D-033, D-034.
+
 ---
 
 ## Open questions

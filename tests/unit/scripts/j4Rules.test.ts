@@ -314,3 +314,45 @@ describe("lineProblems", () => {
     ]);
   });
 });
+
+describe("lineProblems name exemptions [D-059]", () => {
+  const manet = { title: "Édouard Manet, Seated, Holding His Hat", artist: "Edgar Degas", subject: "figure" };
+  const siblings = { title: "Germain and Rose, Drawn by Their Uncle", artist: "Gabriel de Saint-Aubin", subject: "figure" };
+  const warrior = { title: "A Warrior in Full Armor", artist: "Salvator Rosa", subject: "figure" };
+  const march = { title: "In March read the books", artist: "Federal Art Project", subject: "figure" };
+
+  it("does not count days, months, holidays or a one-capital compound as names mid-sentence", () => {
+    for (const w of ["Tuesday", "Sunday", "May", "Halloween", "T-square", "X-ray", "SUNDAY", "Sunday's"]) {
+      expect(lineProblems(`Steady as a ${w} in the harbor.`, seascape)).toEqual([]);
+    }
+  });
+
+  it("still flags near misses and compounds that are not one capital and a hyphen", () => {
+    for (const w of ["Mayor", "Marches", "Sundays", "T", "TV-set", "Ab-cd", "Mary-Ann", "Margaret"]) {
+      expect(lineProblems(`Steady as a ${w} in the harbor.`, seascape)).toEqual([`name not from the artist or title: ${w}`]);
+    }
+  });
+
+  it("does not count title-cased pronouns or calendar words in a figure title as the sitter", () => {
+    expect(lineProblems("His face turned away, the light holds still.", manet)).toEqual([]);
+    expect(lineProblems("Their calm gazes rest.", siblings)).toEqual([]);
+    expect(lineProblems("March weather becomes an invitation.", march)).toEqual([]);
+  });
+
+  it("still flags ordinary title words and real names in a figure title", () => {
+    expect(lineProblems("Armor usually means battle.", warrior)).toEqual(["names the sitter: Armor"]);
+    expect(lineProblems("Drawn in pale grays, they sit.", siblings)).toEqual(["names the sitter: Drawn"]);
+    expect(lineProblems("Manet sits, calm.", manet)).toEqual(["names the sitter: Manet"]);
+  });
+
+  it("flags only the real name when a line holds an exempt word too", () => {
+    expect(lineProblems("On a Sunday near Venice, His hat rests.", manet)).toEqual(["name not from the artist or title: Venice"]);
+    expect(lineProblems("Rose sits in May.", siblings)).toEqual(["names the sitter: Rose"]);
+  });
+
+  it("leaves the other rules in force on a line with an exempt word", () => {
+    expect(lineProblems("A stunning Sunday.", seascape)).toEqual(['banned phrase "stunning"']);
+    expect(lineProblems(`A Sunday${emDash}calm.`, seascape)).toEqual(["em dash"]);
+    expect(lineProblems("A calm Sunday!", seascape)).toEqual(["exclamation point"]);
+  });
+});

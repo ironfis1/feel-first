@@ -88,6 +88,19 @@ export function sitterNames(work: { title: string; artist: string; subject: stri
   return new Set(words.filter((w) => /^\p{Lu}/u.test(w) && !artist.has(w.toLowerCase()) && !figureTitleWords.has(w.toLowerCase())));
 }
 
+/** Capitalized words that are never a person's name, so neither name check counts them (D-059). */
+export const notNames = new Set([
+  ...["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+  ...["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"],
+  ...["halloween", "christmas", "easter", "thanksgiving"],
+  ...["he", "she", "it", "we", "they", "his", "her", "hers", "its", "our", "their", "theirs", "him", "them", "us"],
+]);
+
+/** A calendar word or pronoun, or a compound led by one capital letter (T-square, X-ray). */
+function isNotName(word: string): boolean {
+  return notNames.has(word.toLowerCase()) || /^\p{Lu}-/u.test(word);
+}
+
 /** Every reason a line breaks the J4 rules; an empty list means it passes. */
 export function lineProblems(line: string, work: { title: string; artist: string; subject: string }): string[] {
   const problems: string[] = [];
@@ -101,10 +114,10 @@ export function lineProblems(line: string, work: { title: string; artist: string
   const banned = text.match(bannedPattern);
   if (banned) problems.push(`banned phrase "${banned[0]}"`);
   const allowed = allowedNames(work);
-  const names = midSentenceCapitals(text).filter((word) => !allowed.has(word.toLowerCase()));
+  const names = midSentenceCapitals(text).filter((word) => !allowed.has(word.toLowerCase()) && !isNotName(word));
   if (names.length) problems.push(`name not from the artist or title: ${[...new Set(names)].join(", ")}`);
   const sitters = sitterNames(work);
-  const named = [...text.matchAll(/[\p{L}\p{N}'’-]+/gu)].map((m) => m[0].replace(/['’]s$/u, "")).filter((w) => sitters.has(w));
+  const named = [...text.matchAll(/[\p{L}\p{N}'’-]+/gu)].map((m) => m[0].replace(/['’]s$/u, "")).filter((w) => sitters.has(w) && !isNotName(w));
   if (named.length) problems.push(`names the sitter: ${[...new Set(named)].join(", ")}`);
   return problems;
 }
