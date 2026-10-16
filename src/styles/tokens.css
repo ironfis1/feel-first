@@ -15,7 +15,7 @@
   --c-text: #ece8df;
   --c-muted: #a39f97;
   --c-faint: #8d8982; /* concept bar */
-  --c-placeholder: rgb(163 159 151 / 0.6);
+  --c-placeholder: rgb(163 159 151 / 0.8); /* 4.9:1 on the wall, WCAG AA */
   --c-hair: rgb(236 232 223 / 0.14);
   --c-hair-faint: rgb(236 232 223 / 0.08);
   --c-shadow: rgb(0 0 0 / 0.8);

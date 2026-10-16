@@ -23,7 +23,7 @@ Every value below lives in one file, `src/styles/tokens.css`, and every screen u
 | `--c-text` | #ece8df | Body text, headings |
 | `--c-muted` | #a39f97 | Labels, meta, secondary lines |
 | `--c-faint` | #8d8982 | Concept bar |
-| `--c-placeholder` | muted at 60% | Input placeholders |
+| `--c-placeholder` | muted at 80% (4.9:1 on the wall, AA) | Input placeholders |
 | `--c-hair` | text at 14% | Rules, outlines of controls |
 | `--c-hair-faint` | text at 8% | Concept bar rule, wheel ring |
 | `--c-shadow` | black at 80% | Hung-work shadow |

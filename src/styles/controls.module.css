@@ -59,7 +59,11 @@
   color: var(--c-muted);
 }
 
+/* A text link is a control too, so it keeps the 44px tap height (--hit) without a box around it. */
 .link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--hit);
   color: inherit;
   text-decoration: underline;
   text-decoration-color: var(--c-hair);
