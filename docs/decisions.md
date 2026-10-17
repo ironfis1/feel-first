@@ -536,3 +536,8 @@ Options: (a) bedroom uses bed, office uses desk, all others use sofa; (b) Scott 
 Raised: 2026-10-09
 Question: The cost line reads "Built in N days for $X in AI and hosting." If X has cents, how is it written? Today costLineText prints the number as given, so 340.5 becomes "$340.5". A test pins this until it is decided.
 Options: (a) round to whole dollars; (b) always two decimals; (c) Scott enters X already formatted.
+
+### Q-012: Slow first byte on the Wall, Bag, Close and Signals (Milestone 6)
+Raised: 2026-10-17
+Question: The live smoke test passes, but the first byte of the Wall, Bag, Close and Signals takes 460 to 960ms, against about 100 to 180ms for the Room and Piece (runs on 2026-10-16 and 2026-10-17). Quality-bar section 4 (it feels fast) is not an M4 exit item. Look into it, and when?
+Options: (a) look in M6 polish; (b) look in M5, since the Wall is rebuilt there; (c) accept as is.
