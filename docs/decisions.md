@@ -521,6 +521,14 @@ Decision: Fix the checker and re-run the 17. Days, months, four holidays and per
 Why: Scott's answer on 2026-10-16. None of the flagged lines named a person.
 Spec reference: Section 4 J4, D-033, D-034.
 
+### D-060: Milestone 4 is done
+Date: 2026-10-17
+Decided by: Scott
+Question: Every M4 exit criterion in docs/milestones.md has evidence. Is M4 done?
+Decision: Yes ("M4 is done"). Evidence: design settled (design-log, 2026-10-15); the demo path passes in Playwright at 390px and 1440px locally and against production, and Scott checked the wheel on an iPhone in Safari; 15 live Room views all open with a poster and alternate; quality-bar sections 3, 5, 6 and 10 checked on production, with the tap height and placeholder contrast fixed; copy.json covers all 600 works; 1,089 unit tests pass with 4 expected D-050 failures, High-tier mutation scores are at or above 80%, sweeper flags are resolved; live smoke test 14 pass, 0 fail on 2026-10-17. Carried forward: D-057 (four feelings below the D-050 bar), Q-012 (slow first byte on four screens), and the Wall and Signals stubs, which M5 builds.
+Why: Scott's answer on 2026-10-17.
+Spec reference: docs/milestones.md M4, D-004.
+
 ---
 
 ## Open questions
