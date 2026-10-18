@@ -537,23 +537,87 @@ Decision: The Piece screen's link to the Wall is now "Hang it" (it was "See it o
 Why: A visitor expects "Hang it" to put a piece on a wall. "Rehang" was rejected because it reads as the same action.
 Spec reference: D-052, D-053.
 
+### D-062: Room type to wall scene (closes Q-006)
+Date: 2026-10-17
+Decided by: Scott
+Question: Q-006. Gap G7 says room types without a scene use the sofa, but does not state which room types map to the bed and desk scenes.
+Decision: Bedroom uses the bed scene, office uses the desk scene, and every other room type uses the sofa.
+Why: Gap G7 names the three scenes and says types without a scene use the sofa; a queen bed or a desk is not a true-scale reference for a nursery, kitchen or entry.
+Spec reference: Section 3.9, Gap G7.
+Note: the M5 prompt drafted this and the next five decisions as D-061 to D-066. D-061 was already used, so Scott approved D-062 to D-067 in the same order on 2026-10-17.
+
+### D-063: The slow first byte is examined in M5 (closes Q-012)
+Date: 2026-10-17
+Decided by: Scott
+Question: Q-012. The first byte of the Wall, Bag, Close and Signals takes 460 to 960ms, against about 100 to 180ms for the Room and Piece. Look into it, and when?
+Decision: Measure the first byte of the Wall, Bag, Close and Signals before and after this milestone's changes and find the cause. If the cause is a rendering mode the four routes share (for example dynamic rendering where static would do), fix it for all four in M5. If the fix is anything larger, report it to Scott and it moves to M6.
+Why: The Wall and Signals are rebuilt in this milestone, so checking now avoids building twice.
+Spec reference: quality-bar section 4.
+
+### D-064: The J2 rate limit counts live calls only
+Date: 2026-10-17
+Decided by: Scott
+Question: Gap G18 sets 20 J2 calls per IP per hour but does not say whether cache and word-map answers count.
+Decision: Only live calls count. Cache answers and word-map answers do not count toward 20 per IP per hour. A visitor over the limit gets the word map.
+Why: The limit exists to protect spend, and cache and word-map answers cost nothing.
+Spec reference: Gap G18.
+
+### D-065: The browser keeps its own fallback
+Date: 2026-10-17
+Decided by: Scott
+Question: What does the describe box send, and what happens when the J2 route fails or is slow?
+Decision: The describe box posts { "text": "..." } and nothing else to the J2 route. The box caps input at 200 characters, and the route rejects a longer or malformed body. If the route returns anything but a valid J2 output, or has not answered within 5 seconds (the 4-second server timeout plus 1 second of network), the client answers with the D-052 word-map interpreter it already has. The visitor never sees an error.
+Why: Quality-bar section 2 says the visitor never sees an error, and a failed network request would otherwise surface one.
+Spec reference: Section 4 J2, Res #7, D-052.
+
+### D-066: The J2 route reports its answer path in a header
+Date: 2026-10-17
+Decided by: Scott
+Question: How do tests and smoke checks see which path answered without changing the J2 output contract?
+Decision: The J2 route sets x-j2-source: cache | live | fallback on every response. The JSON body keeps the exact J2 output shape.
+Why: The smoke checks and the Playwright test need to see which path answered without changing the output contract.
+Spec reference: docs/ai-jobs.md J2 logging.
+
+### D-067: The wall photo never leaves the browser
+Date: 2026-10-17
+Decided by: Scott
+Question: What does "upload" mean for the Wall's photo mode, given that nothing may leave the browser?
+Decision: "Upload" means choosing a file in the browser. The image is shown from an object URL that is revoked when the visitor leaves the Wall, and it is never sent to the server or held in the session store.
+Why: Spec Res #12 says file upload only, and quality-bar section 9 allows no request carrying anything but the typed sentence.
+Spec reference: Section 5.4, J5, Res #12.
+
+### D-068: On Signals the contact block comes after the ask
+Date: 2026-10-17
+Decided by: Scott
+Question: Gap G26 orders Signals as findings, your session, the follow-up ask, then the contact block. Spec Section 5.7 and the M5 prompt say the screen ends with the follow-up ask. Which wins?
+Decision: Gap G26 as written: findings, your session, the follow-up ask, then the repeated contact block below it. The ask is the last section of content; the contact block is the sign-off under it.
+Why: Scott's answer on 2026-10-17 ("Below it").
+Spec reference: Gap G26, Section 5.7, RB102, Res #35.
+
+### D-069: The Wall hangs the Room's first work when no piece was chosen
+Date: 2026-10-17
+Decided by: Scott
+Question: The Wall shows the current selection, which the in-memory session store now holds. What does a visitor see on the Wall before opening any Piece?
+Decision: The Wall hangs the first work of the visitor's current Room ranking (a poster, Gap G22) at the D-054 defaults (18x24, framed print, black frame), or the J2 size when one was described. Opening a Piece sets the current selection; changing size, material or frame there updates it.
+Why: Scott's answer on 2026-10-17. Free navigation never lands on an empty screen.
+Spec reference: Section 5.4, Res #3, Gap G22, D-054.
+
+### D-070: A word-map room type sets the wall scene too
+Date: 2026-10-17
+Decided by: Scott
+Question: The word-map fallback returns the J2 output shape, including a room type (D-052). Does that room type set the default wall scene as a cache or live answer does?
+Decision: Yes. Every describe answer sets the default scene by D-062, whichever path answered.
+Why: Scott's answer on 2026-10-17. The visitor cannot tell the paths apart, so they behave the same.
+Spec reference: Section 3.9, Gap G7, D-052, D-062.
+
 ---
 
 ## Open questions
 
 Add new questions here as they come up, in the same format as the decisions above.
 
-### Q-006: Room type to wall scene mapping (Milestone 5)
-Raised: 2026-10-09
-Question: Gap G7 says room types without a scene use the sofa, but does not state which room types map to the bed and desk scenes.
-Options: (a) bedroom uses bed, office uses desk, all others use sofa; (b) Scott specifies.
-
 ### Q-007: Cost line dollar format (Milestone 7)
 Raised: 2026-10-09
 Question: The cost line reads "Built in N days for $X in AI and hosting." If X has cents, how is it written? Today costLineText prints the number as given, so 340.5 becomes "$340.5". A test pins this until it is decided.
 Options: (a) round to whole dollars; (b) always two decimals; (c) Scott enters X already formatted.
 
-### Q-012: Slow first byte on the Wall, Bag, Close and Signals (Milestone 6)
-Raised: 2026-10-17
-Question: The live smoke test passes, but the first byte of the Wall, Bag, Close and Signals takes 460 to 960ms, against about 100 to 180ms for the Room and Piece (runs on 2026-10-16 and 2026-10-17). Quality-bar section 4 (it feels fast) is not an M4 exit item. Look into it, and when?
-Options: (a) look in M6 polish; (b) look in M5, since the Wall is rebuilt there; (c) accept as is.
