@@ -650,6 +650,30 @@ Decision: A JSON null body with x-j2-source: fallback. The browser's fallback th
 Why: Scott's answer on 2026-10-17. The visitor sees what they see today and never an error.
 Spec reference: D-052, D-065, D-066.
 
+### D-076: The Wall offers the size choice
+Date: 2026-10-18
+Decided by: Scott
+Question: On the Wall there was no obvious way back to the Piece to choose a different size. Add a size choice, or a visible link back?
+Decision: The Wall shows the four print sizes, each with its price for the current material, above the frame choice. A size chosen here becomes the current selection, so the price, the hung size and the Piece screen all follow it.
+Why: Scott's phone review on 2026-10-18 asked for the size choice if it was low effort. The selection already carries the size, so it was.
+Spec reference: Res #41, Gap G20, spec Section 5.4.
+
+### D-077: Add to bag on the Wall opens the Bag
+Date: 2026-10-18
+Decided by: Scott
+Question: Add to bag on the Wall turned the button into a disabled "In your bag" and showed a "View your bag" link, so reaching the bag took two clicks.
+Decision: Add to bag adds the line and opens the Bag. Coming back to the Wall, the button stays active and reads "In your bag", and it opens the Bag without adding a second line. The "View your bag" link is removed from the Wall. The Piece screen is unchanged.
+Why: Scott's phone review on 2026-10-18.
+Spec reference: Gap G20.
+
+### D-078: One tap opens the photo chooser
+Date: 2026-10-18
+Decided by: Scott
+Question: "Use a photo of your wall" first removed the preset wall and then needed a second tap on the same words to choose a photo.
+Decision: The first tap opens the device's file chooser. Photo mode starts when a photo is chosen. Cancelling the chooser leaves the preset wall in place.
+Why: Scott's phone review on 2026-10-18.
+Spec reference: Res #12, D-067.
+
 ---
 
 ## Open questions

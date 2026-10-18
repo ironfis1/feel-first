@@ -131,6 +131,11 @@
   border-color: var(--c-text);
 }
 
+.price {
+  font-size: var(--t-meta);
+  color: var(--c-muted);
+}
+
 .swatch {
   width: 14px;
   height: 14px;
@@ -150,11 +155,6 @@
 .total {
   margin: 0;
   font-size: var(--t-lede);
-}
-
-.after {
-  min-height: 1.45em;
-  margin: 0;
 }
 
 /* Photo mode (D-067, D-072). */
@@ -179,7 +179,12 @@
   pointer-events: none;
 }
 
-.photoBar label:focus-within {
+.photoLink {
+  position: relative;
+}
+
+.photoBar label:focus-within,
+.photoLink:focus-within {
   outline: var(--focus-ring);
   outline-offset: var(--focus-offset);
 }

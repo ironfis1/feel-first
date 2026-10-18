@@ -2,10 +2,11 @@
 
 // Wall photo mode [spec Section 5.4, J5, Res #12]: the visitor chooses a photo of their own wall (file upload only),
 // drags a line across something they know the size of and enters its length, which sets pixels per inch. No wall
-// detection. The photo is shown from an object URL that is revoked when it is replaced or the visitor leaves; it is
-// never sent anywhere or held in the session store (D-067). The length range is D-072.
+// detection. The Wall owns the photo's object URL and revokes it when it is replaced or the visitor leaves; it is
+// never sent anywhere or held in the session store (D-067). A new photo remounts this screen, so the line and scale
+// start fresh. The length range is D-072.
 
-import { useEffect, useState, type KeyboardEvent, type PointerEvent } from "react";
+import { useState, type KeyboardEvent, type PointerEvent } from "react";
 import { photoCopy, type FrameFinish } from "@/config/feel";
 import type { WorkCard } from "@/lib/catalog";
 import { photoPixelsPerInch } from "@/lib/wall";
@@ -21,10 +22,9 @@ type Shape = { width: number; height: number };
 const startLine: Line = { a: { x: 0.35, y: 0.5 }, b: { x: 0.65, y: 0.5 } };
 const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
 
-type Props = { work: WorkCard; hung: Shape; print: Shape; frame: FrameFinish | null; onLeave: () => void };
+type Props = { url: string; work: WorkCard; hung: Shape; print: Shape; frame: FrameFinish | null; onChoose: (file: File | undefined) => void; onLeave: () => void };
 
-export function PhotoWall({ work, hung, print, frame, onLeave }: Props) {
-  const [url, setUrl] = useState<string | null>(null);
+export function PhotoWall({ url, work, hung, print, frame, onChoose, onLeave }: Props) {
   const [photoSize, setPhotoSize] = useState<Shape | null>(null);
   const [line, setLine] = useState<Line>(startLine);
   const [drawing, setDrawing] = useState(false);
@@ -32,9 +32,6 @@ export function PhotoWall({ work, hung, print, frame, onLeave }: Props) {
   // The last scale that passed, as a fraction of the stage width per inch, so it survives a resize [D-072].
   const [applied, setApplied] = useState<number | null>(null);
   const [stageRef, widths] = useWidths();
-
-  // The object URL lives only as long as this photo is on screen [D-067].
-  useEffect(() => () => void (url && URL.revokeObjectURL(url)), [url]);
 
   const stageW = widths.stage;
   const stageH = photoSize ? (stageW * photoSize.height) / photoSize.width : 0;
@@ -48,14 +45,6 @@ export function PhotoWall({ work, hung, print, frame, onLeave }: Props) {
   const result = check(line, length);
   const note = result && !result.ok ? (result.reason === "length" ? photoCopy.outOfRange : photoCopy.shortLine) : "";
   const ppi = applied === null ? null : applied * stageW;
-
-  const choose = (file: File | undefined) => {
-    if (!file) return;
-    setUrl(URL.createObjectURL(file));
-    setPhotoSize(null);
-    setLine(startLine);
-    setApplied(null);
-  };
 
   const at = (e: PointerEvent<HTMLDivElement>): Pt => {
     const box = e.currentTarget.getBoundingClientRect();
@@ -91,8 +80,8 @@ export function PhotoWall({ work, hung, print, frame, onLeave }: Props) {
     <div className={s.photoMode}>
       <div className={s.photoBar}>
         <label className={c.pill}>
-          {url ? photoCopy.another : photoCopy.choose}
-          <input className={s.file} type="file" accept="image/*" onChange={(e) => choose(e.target.files?.[0])} />
+          {photoCopy.another}
+          <input className={s.file} type="file" accept="image/*" onChange={(e) => onChoose(e.target.files?.[0])} />
         </label>
         <button className={c.text} onClick={onLeave}>
           {photoCopy.preset}
@@ -100,8 +89,7 @@ export function PhotoWall({ work, hung, print, frame, onLeave }: Props) {
       </div>
       <p className={s.note}>{photoCopy.stays}</p>
 
-      {url && (
-        <>
+      <>
           <div ref={stageRef} className={s.photoStage} style={photoSize ? { aspectRatio: `${photoSize.width} / ${photoSize.height}` } : undefined} data-ppi={ppi?.toFixed(4) ?? ""}>
             {/* eslint-disable-next-line @next/next/no-img-element -- the visitor's own photo from an object URL, never uploaded */}
             <img className={s.photo} src={url} alt="Your wall" onLoad={(e) => setPhotoSize({ width: e.currentTarget.naturalWidth, height: e.currentTarget.naturalHeight })} />
@@ -150,8 +138,7 @@ export function PhotoWall({ work, hung, print, frame, onLeave }: Props) {
           <p className={s.quiet} role="status">
             {note}
           </p>
-        </>
-      )}
+      </>
     </div>
   );
 }

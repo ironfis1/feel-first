@@ -4,10 +4,11 @@
 // a bed or a desk drawn in code, on one of five wall paints (D-071), or on the visitor's own wall photo with a
 // manual scale (D-067, D-072). The default scene follows the described room type (D-062, D-070). With no piece
 // chosen yet, the Room's first work hangs at the Piece defaults (D-069). The frame can be changed here (D-073);
-// a bag line is created only by Add to bag [Gap G20].
+// a bag line is created only by Add to bag [Gap G20], which then opens the Bag (D-077). The size can be changed here
+// too (D-076), and the photo button opens the file chooser at once (D-078).
 
-import Link from "next/link";
-import { useState, type CSSProperties, type ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import {
   frameFinishes,
   materials,
@@ -51,8 +52,12 @@ export function Wall({ works, positions }: { works: readonly WorkCard[]; positio
   const work = works.find((w) => w.id === selection.workId)!;
   const [scene, setScene] = useState<WallScene>(sceneFor(described?.roomType));
   const [color, setColor] = useState<WallColor>("plaster");
-  const [photo, setPhoto] = useState(false);
+  // The visitor's wall photo as an object URL, revoked when it is replaced or the visitor leaves [D-067].
+  const [photo, setPhoto] = useState<string | null>(null);
   const [stageRef, widths] = useWidths();
+  const router = useRouter();
+  useEffect(() => () => void (photo && URL.revokeObjectURL(photo)), [photo]);
+  const choosePhoto = (file: File | undefined) => file && setPhoto(URL.createObjectURL(file));
 
   const span = wallSpanIn(widths.window);
   const ppi = scenePixelsPerInch(widths.stage, span);
@@ -79,7 +84,7 @@ export function Wall({ works, positions }: { works: readonly WorkCard[]; positio
         </header>
 
         {photo ? (
-          <PhotoWall work={work} hung={hung} print={print} frame={frame} onLeave={() => setPhoto(false)} />
+          <PhotoWall key={photo} url={photo} work={work} hung={hung} print={print} frame={frame} onChoose={choosePhoto} onLeave={() => setPhoto(null)} />
         ) : (
           <div>
             <div
@@ -99,9 +104,10 @@ export function Wall({ works, positions }: { works: readonly WorkCard[]; positio
               )}
               <span className={s.light} aria-hidden />
             </div>
-            <button className={c.text} onClick={() => setPhoto(true)}>
+            <label className={`${c.text} ${s.photoLink}`}>
               {photoCopy.choose}
-            </button>
+              <input className={s.file} type="file" accept="image/*" onChange={(e) => choosePhoto(e.target.files?.[0])} />
+            </label>
           </div>
         )}
 
@@ -125,6 +131,13 @@ export function Wall({ works, positions }: { works: readonly WorkCard[]; positio
               </Choices>
             </>
           )}
+          <Choices label="Size">
+            {printSizes.map((p) => (
+              <button key={p.id} className={s.choice} aria-pressed={selection.size === p.id} onClick={() => session.select({ ...selection, size: p.id })}>
+                {p.widthIn} x {p.heightIn} in <span className={s.price}>{formatPrice(priceOf(p.id, selection.material))}</span>
+              </button>
+            ))}
+          </Choices>
           <Choices label="Frame">
             {[...frameFinishes, null].map((f: FrameFinish | null) => (
               <button key={f ?? "none"} className={s.choice} aria-pressed={frame === f} onClick={() => session.select(chooseFrame(selection, f))}>
@@ -137,17 +150,16 @@ export function Wall({ works, positions }: { works: readonly WorkCard[]; positio
 
         <div className={s.buy}>
           <p className={s.total}>{formatPrice(priceOf(selection.size, selection.material))}</p>
-          <button className={c.pill} onClick={() => session.addToBag(choice)} disabled={inBag}>
+          <button
+            className={c.pill}
+            onClick={() => {
+              if (!inBag) session.addToBag(choice);
+              router.push("/bag");
+            }}
+          >
             {inBag ? "In your bag" : "Add to bag"}
           </button>
         </div>
-        <p className={s.after} role="status">
-          {inBag && (
-            <Link className={c.link} href="/bag">
-              View your bag
-            </Link>
-          )}
-        </p>
       </div>
     </main>
   );
