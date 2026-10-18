@@ -25,13 +25,17 @@ type Props = { work: Work; lines: Readonly<Record<BucketKey, string>> | undefine
 
 export function Piece({ work, lines, positions }: Props) {
   const session = useSession();
-  const { point, described, bag, openPiece } = session;
-  const [size, setSize] = useState<PrintSizeId>(described?.size ? sizeWordToPrintSize[described.size] : pieceDefaults.size);
-  const [material, setMaterial] = useState<MaterialId>(pieceDefaults.material);
-  const [finish, setFinish] = useState<FrameFinish>(pieceDefaults.frame);
+  const { point, described, bag, openPiece, select } = session;
+  // Coming back from the Wall, the choices made there carry over [Res #41].
+  const kept = session.selection?.workId === work.id ? session.selection : null;
+  const [size, setSize] = useState<PrintSizeId>(kept?.size ?? (described?.size ? sizeWordToPrintSize[described.size] : pieceDefaults.size));
+  const [material, setMaterial] = useState<MaterialId>(kept?.material ?? pieceDefaults.material);
+  const [finish, setFinish] = useState<FrameFinish>(kept?.finish ?? pieceDefaults.frame);
 
   // The first Piece screen opened stops the time-to-first-piece clock [Res #11].
   useEffect(openPiece, [openPiece]);
+  // This piece, as chosen, is the current selection the Wall hangs [Res #41].
+  useEffect(() => select({ workId: work.id, size, material, finish }), [select, work.id, size, material, finish]);
 
   const mood = moodFor(point, positions);
   const why = lines?.[bucketOf(mood.valence, mood.arousal)];

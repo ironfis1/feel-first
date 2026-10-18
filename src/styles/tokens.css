@@ -29,6 +29,15 @@
   --finish-white: linear-gradient(135deg, #f7f6f2 0%, #e4e2dc 100%);
   --finish-brass: linear-gradient(135deg, #e2c77e 0%, #b8954a 45%, #d8b867 75%, #a5823d 100%);
 
+  /* Wall paints [Gap G14, D-009], proposed in M5 for approval. Names match config wallColors. The Wall's furniture
+     is a dark neutral mixed with the paint, so it sits in the same room on every color. */
+  --wall-plaster: #e4ddd0;
+  --wall-sage: #a3ad94;
+  --wall-ink-blue: #2e3d55;
+  --wall-clay: #b47d5e;
+  --wall-charcoal: #3b3a3e;
+  --c-furniture: #1b1a1d;
+
   /* The 12 feeling colors. The wheel is painted from these; the current feeling tints the light, wash and headings. */
   --feel-nostalgic: #c99256;
   --feel-joyful: #f4c64e;

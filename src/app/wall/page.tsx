@@ -1,12 +1,6 @@
-import { ScreenNav } from "@/components/ScreenNav";
-import c from "@/styles/controls.module.css";
+import { Wall } from "@/components/wall/Wall";
+import { getFeelingPositions, getWorkCards } from "@/lib/catalog";
 
-// Stub until Milestone 5, with the screen links so free navigation never dead-ends [D-056].
 export default function WallPage() {
-  return (
-    <main className={c.screen}>
-      <ScreenNav />
-      <h1>Wall</h1>
-    </main>
-  );
+  return <Wall works={getWorkCards()} positions={getFeelingPositions()} />;
 }

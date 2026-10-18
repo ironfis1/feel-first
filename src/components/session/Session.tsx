@@ -1,15 +1,21 @@
 "use client";
 
-// The visitor's session: wheel point, Drift demotions, Show more pages, metrics, the bag and the last described
-// room type and size. Held in client memory only; nothing is stored, sent or logged. A reload starts over [D-040].
+// The visitor's session: wheel point, Drift demotions, Show more pages, metrics, the bag, the last described
+// room type and size, and the current selection the Wall hangs. Held in client memory only; nothing is stored, sent or logged. A reload starts over [D-040].
 
 import { createContext, useContext, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
-import type { RoomType, SizeWord } from "@/config/feel";
+import type { FrameFinish, MaterialId, PrintSizeId, RoomType, SizeWord } from "@/config/feel";
 import { addLine, removeLine, type BagChoice, type BagLine } from "@/lib/bag";
 import { feelingAt, type WheelPoint } from "@/lib/feelings";
 import { freshMetrics, interacted, pieceOpened, rehung, type Metrics } from "@/lib/metrics";
 
 export type Described = { roomType: RoomType | null; size: SizeWord | null };
+
+/**
+ * The piece as last chosen on the Piece or the Wall [Res #41]. The finish is kept even for paper and canvas, so
+ * switching back to a framed print restores it. Changing it never adds a bag line [Gap G20].
+ */
+export type Selection = { workId: string; size: PrintSizeId; material: MaterialId; finish: FrameFinish };
 
 type State = {
   point: WheelPoint;
@@ -20,6 +26,7 @@ type State = {
   metrics: Metrics;
   bag: BagLine[];
   described: Described | null;
+  selection: Selection | null;
 };
 
 type Session = State & {
@@ -31,9 +38,10 @@ type Session = State & {
   addToBag: (c: BagChoice) => void;
   removeFromBag: (key: string) => void;
   openPiece: () => void;
+  select: (s: Selection) => void;
 };
 
-const initial: State = { point: { x: 0, y: 0 }, touched: false, drifted: [], pages: 1, metrics: freshMetrics, bag: [], described: null };
+const initial: State = { point: { x: 0, y: 0 }, touched: false, drifted: [], pages: 1, metrics: freshMetrics, bag: [], described: null, selection: null };
 
 const SessionContext = createContext<Session | null>(null);
 
@@ -77,6 +85,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       addToBag: (c: BagChoice) => setState((s) => ({ ...s, bag: addLine(s.bag, c) })),
       removeFromBag: (key: string) => setState((s) => ({ ...s, bag: removeLine(s.bag, key) })),
       openPiece: () => setState((s) => ({ ...s, metrics: pieceOpened(s.metrics, Date.now()) })),
+      select: (selection: Selection) => setState((s) => ({ ...s, selection })),
     }),
     [],
   );

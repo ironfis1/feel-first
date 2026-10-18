@@ -176,7 +176,7 @@ export const frameWidthIn = 1.25;
 /** Mat width per side in inches; framed prints only [Res #41, Gap G28]. */
 export const matWidthIn = 2;
 
-/** Wall color choices, by name only until Milestone 4 sets their values [Gap G14, D-009]. */
+/** Wall color choices [Gap G14, D-009]. Their paint values are tokens in src/styles/tokens.css (--wall-<name>). */
 export const wallColors = ["plaster", "sage", "ink blue", "clay", "charcoal"] as const;
 export type WallColor = (typeof wallColors)[number];
 
@@ -191,6 +191,22 @@ export const wallSceneReferenceWidthIn: Record<WallScene, number> = {
   bed: 60,
   desk: 60,
 };
+
+/** Room types with their own scene; every other room type, and no room type, uses the sofa [Gap G7, D-062, D-070]. */
+export const roomTypeScenes: Partial<Record<RoomType, WallScene>> = { bedroom: "bed", office: "desk" };
+
+/**
+ * The preset wall drawn in inches, floor to ceiling. Every scene shows the same span of wall, so switching scenes
+ * never rescales the piece; a window narrower than narrowBelowPx shows a narrower span so the piece is not tiny.
+ * Proposed in M5 for approval.
+ */
+export const wallView = { widthIn: 144, narrowWidthIn: 100, narrowBelowPx: 640, heightIn: 108 } as const;
+
+/** Height in inches of the top of each scene's furniture, which the hang clears [Res #12, Gap G30]. Proposed in M5. */
+export const wallSceneHeightIn: Record<WallScene, number> = { sofa: 34, bed: 44, desk: 30 };
+
+/** Where a piece hangs: its center at eye level, raised if needed to clear the furniture by the gap. Proposed in M5. */
+export const wallHang = { centerIn: 57, gapAboveIn: 8 } as const;
 
 // ---------------------------------------------------------------------------
 // Copy

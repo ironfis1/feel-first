@@ -169,6 +169,10 @@ export const configSchema = z
     wallScenes: z.array(z.string().min(1)).min(1),
     defaultWallScene: z.string(),
     wallSceneReferenceWidthIn: z.record(z.string(), positive),
+    roomTypeScenes: z.record(z.string(), z.string()),
+    wallView: z.object({ widthIn: positive, narrowWidthIn: positive, narrowBelowPx: positive, heightIn: positive }),
+    wallSceneHeightIn: z.record(z.string(), positive),
+    wallHang: z.object({ centerIn: positive, gapAboveIn: positive }),
     thresholdPrompt: z.string().min(1).refine(noEmDash, "no em dash"),
     costLine: z.object({ days: z.number().int().positive().nullable(), dollars: z.number().nonnegative().nullable() }),
     showCostLine: z.boolean(),
@@ -187,7 +191,14 @@ export const configSchema = z
     if (!config.wallScenes.includes(config.defaultWallScene)) {
       ctx.addIssue({ code: "custom", message: "default wall scene is not a wall scene", path: ["defaultWallScene"] });
     }
+    for (const [roomType, scene] of Object.entries(config.roomTypeScenes)) {
+      if (!config.roomTypes.includes(roomType)) ctx.addIssue({ code: "custom", message: `unknown room type ${roomType}`, path: ["roomTypeScenes", roomType] });
+      if (!config.wallScenes.includes(scene)) ctx.addIssue({ code: "custom", message: `unknown scene ${scene}`, path: ["roomTypeScenes", roomType] });
+    }
     for (const scene of config.wallScenes) {
+      if (!(scene in config.wallSceneHeightIn)) {
+        ctx.addIssue({ code: "custom", message: `no furniture height for ${scene}`, path: ["wallSceneHeightIn", scene] });
+      }
       if (!(scene in config.wallSceneReferenceWidthIn)) {
         ctx.addIssue({ code: "custom", message: `no reference width for ${scene}`, path: ["wallSceneReferenceWidthIn", scene] });
       }
