@@ -29,7 +29,7 @@
   --finish-white: linear-gradient(135deg, #f7f6f2 0%, #e4e2dc 100%);
   --finish-brass: linear-gradient(135deg, #e2c77e 0%, #b8954a 45%, #d8b867 75%, #a5823d 100%);
 
-  /* Wall paints [Gap G14, D-009], proposed in M5 for approval. Names match config wallColors. The Wall's furniture
+  /* Wall paints [Gap G14, D-009, D-071]. Names match config wallColors. The Wall's furniture
      is a dark neutral mixed with the paint, so it sits in the same room on every color. */
   --wall-plaster: #e4ddd0;
   --wall-sage: #a3ad94;

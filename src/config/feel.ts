@@ -197,16 +197,18 @@ export const roomTypeScenes: Partial<Record<RoomType, WallScene>> = { bedroom: "
 
 /**
  * The preset wall drawn in inches, floor to ceiling. Every scene shows the same span of wall, so switching scenes
- * never rescales the piece; a window narrower than narrowBelowPx shows a narrower span so the piece is not tiny.
- * Proposed in M5 for approval.
+ * never rescales the piece; a window narrower than narrowBelowPx shows a narrower span so the piece is not tiny [D-071].
  */
 export const wallView = { widthIn: 144, narrowWidthIn: 100, narrowBelowPx: 640, heightIn: 108 } as const;
 
-/** Height in inches of the top of each scene's furniture, which the hang clears [Res #12, Gap G30]. Proposed in M5. */
+/** Height in inches of the top of each scene's furniture, which the hang clears [Res #12, Gap G30, D-071]. */
 export const wallSceneHeightIn: Record<WallScene, number> = { sofa: 34, bed: 44, desk: 30 };
 
-/** Where a piece hangs: its center at eye level, raised if needed to clear the furniture by the gap. Proposed in M5. */
+/** Where a piece hangs: its center at eye level, raised if needed to clear the furniture by the gap [D-071]. */
 export const wallHang = { centerIn: 57, gapAboveIn: 8 } as const;
+
+/** Photo mode: the lengths a visitor may enter for the drawn line, and its shortest length on screen [Res #12, D-072]. */
+export const photoScale = { minLengthIn: 2, maxLengthIn: 200, minLinePx: 20 } as const;
 
 // ---------------------------------------------------------------------------
 // Copy
@@ -233,6 +235,18 @@ export const feelingSentences = {
 
 /** Shown under the describe box when no word of the text is in the word map [D-052]. */
 export const describeNoMatch = "Nothing in that moved the light. Try a word like rainy, calm or bright.";
+
+/** Wall photo mode, shown before and while the visitor sets the scale [Res #12, D-067, D-072]. */
+export const photoCopy = {
+  choose: "Use a photo of your wall",
+  another: "Choose another photo",
+  preset: "Use a preset wall",
+  stays: "Your photo stays on this device.",
+  howTo: "Drag a line across something on your wall you know the size of, such as a door or a light switch, then enter its length.",
+  lengthLabel: "Length of the line, in inches",
+  outOfRange: `Enter a length from ${photoScale.minLengthIn} to ${photoScale.maxLengthIn} inches.`,
+  shortLine: "Draw a longer line across the object.",
+} as const;
 
 /** Placeholder in the describe box: the demo video phrase, which every interpreter reads [D-037]. */
 export const describePlaceholder = "a slow sunday morning in the bedroom, something large";

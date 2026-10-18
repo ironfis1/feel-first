@@ -4,10 +4,12 @@ import {
   defaultWallScene,
   frameWidthIn,
   matWidthIn,
+  photoScale,
   roomTypeScenes,
   wallHang,
   wallSceneHeightIn,
   wallView,
+  type FrameFinish,
   type MaterialId,
   type PrintSizeId,
   type RoomType,
@@ -51,4 +53,25 @@ export function scenePixelsPerInch(stageWidthPx: number, spanIn: number): number
 /** Height of the bottom edge of the hung piece above the floor, in inches: centered at eye level, clear of the furniture. */
 export function hangBottomIn(scene: WallScene, hungHeightIn: number): number {
   return Math.max(wallHang.centerIn - hungHeightIn / 2, wallSceneHeightIn[scene] + wallHang.gapAboveIn);
+}
+
+/**
+ * A frame choice on the Wall [D-073]. A finish makes the print framed with that finish. "No frame" (null) turns a
+ * framed print into a paper print and leaves paper or canvas as they are. The finish is kept for a later return.
+ */
+export function chooseFrame<T extends { material: MaterialId; finish: FrameFinish }>(selection: T, finish: FrameFinish | null): T {
+  if (finish) return { ...selection, material: "framed", finish };
+  return selection.material === "framed" ? { ...selection, material: "paper" } : selection;
+}
+
+export type PhotoScale = { ok: true; pixelsPerInch: number } | { ok: false; reason: "length" | "line" };
+
+/**
+ * Photo-mode scale from the line the visitor drew and the length they entered [Res #12, D-072]: pixels per inch of
+ * the photo as shown. Rejects a length outside the accepted range, then a line too short to measure.
+ */
+export function photoPixelsPerInch(lineLengthPx: number, lengthIn: number): PhotoScale {
+  if (!Number.isFinite(lengthIn) || lengthIn < photoScale.minLengthIn || lengthIn > photoScale.maxLengthIn) return { ok: false, reason: "length" };
+  if (!(lineLengthPx >= photoScale.minLinePx)) return { ok: false, reason: "line" };
+  return { ok: true, pixelsPerInch: lineLengthPx / lengthIn };
 }

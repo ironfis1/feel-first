@@ -137,3 +137,151 @@
   border-radius: 50%;
   box-shadow: 0 0 0 1px var(--c-hair);
 }
+
+.buy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--c-hair);
+}
+
+.total {
+  margin: 0;
+  font-size: var(--t-lede);
+}
+
+.after {
+  min-height: 1.45em;
+  margin: 0;
+}
+
+/* Photo mode (D-067, D-072). */
+.photoMode {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.photoBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4);
+}
+
+/* The file input is reached through its label, which is styled as a pill and keeps the focus ring. */
+.file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.photoBar label:focus-within {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.note,
+.quiet {
+  margin: 0;
+  font-size: var(--t-small);
+  font-style: italic;
+  color: var(--c-muted);
+}
+
+.quiet {
+  min-height: 1.45em;
+}
+
+.photoStage {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.photoPiece {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.draw {
+  position: absolute;
+  inset: 0;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.measure {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.measure line {
+  stroke: var(--glow);
+  stroke-width: 3;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 2px rgb(0 0 0 / 0.8));
+}
+
+.handle {
+  position: absolute;
+  width: var(--hit);
+  height: var(--hit);
+  margin: calc(var(--hit) / -2) 0 0 calc(var(--hit) / -2);
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.handle::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  background: var(--glow);
+  box-shadow: 0 0 0 2px var(--c-night);
+}
+
+.length {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-3);
+}
+
+.lengthLabel {
+  font-size: var(--t-small);
+  font-style: italic;
+  color: var(--c-muted);
+}
+
+.lengthInput {
+  width: 7em;
+  min-height: var(--hit);
+  font: inherit;
+  font-size: var(--t-body);
+  color: var(--c-text);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--c-hair);
+}

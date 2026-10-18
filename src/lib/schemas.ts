@@ -173,6 +173,9 @@ export const configSchema = z
     wallView: z.object({ widthIn: positive, narrowWidthIn: positive, narrowBelowPx: positive, heightIn: positive }),
     wallSceneHeightIn: z.record(z.string(), positive),
     wallHang: z.object({ centerIn: positive, gapAboveIn: positive }),
+    photoScale: z
+      .object({ minLengthIn: positive, maxLengthIn: positive, minLinePx: positive })
+      .refine((p) => p.minLengthIn < p.maxLengthIn, "photo length range must ascend"),
     thresholdPrompt: z.string().min(1).refine(noEmDash, "no em dash"),
     costLine: z.object({ days: z.number().int().positive().nullable(), dollars: z.number().nonnegative().nullable() }),
     showCostLine: z.boolean(),
