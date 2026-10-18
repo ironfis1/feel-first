@@ -2,9 +2,10 @@
 
 // Piece [spec Section 5.3]: the full-size image from the source institution with a live framed preview (D-001,
 // Gap G29), the "why this found you" line, the fingerprint, size, material and frame choices with prices, the
-// credits (Gap G33), Add to bag, and the way on to the Wall.
+// credits (Gap G33), Add to bag (which opens the Bag, D-077), and the way on to the Wall.
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { fingerprintTagCount, frameFinishes, materials, pieceDefaults, printSizes, sizeWordToPrintSize, type FrameFinish, type MaterialId, type PrintSizeId } from "@/config/feel";
 import { lineKey } from "@/lib/bag";
@@ -31,6 +32,7 @@ export function Piece({ work, lines, positions }: Props) {
   const [size, setSize] = useState<PrintSizeId>(kept?.size ?? (described?.size ? sizeWordToPrintSize[described.size] : pieceDefaults.size));
   const [material, setMaterial] = useState<MaterialId>(kept?.material ?? pieceDefaults.material);
   const [finish, setFinish] = useState<FrameFinish>(kept?.finish ?? pieceDefaults.frame);
+  const router = useRouter();
 
   // The first Piece screen opened stops the time-to-first-piece clock [Res #11].
   useEffect(openPiece, [openPiece]);
@@ -112,17 +114,16 @@ export function Piece({ work, lines, positions }: Props) {
 
           <div className={s.buy}>
             <p className={s.total}>{formatPrice(priceOf(size, material))}</p>
-            <button className={c.pill} onClick={() => session.addToBag(choice)} disabled={inBag}>
+            <button
+              className={c.pill}
+              onClick={() => {
+                if (!inBag) session.addToBag(choice);
+                router.push("/bag");
+              }}
+            >
               {inBag ? "In your bag" : "Add to bag"}
             </button>
           </div>
-          <p className={s.after} role="status">
-            {inBag && (
-              <Link className={c.link} href="/bag">
-                View your bag
-              </Link>
-            )}
-          </p>
           <p>
             <Link className={c.link} href="/wall">
               Hang it

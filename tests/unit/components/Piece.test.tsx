@@ -14,9 +14,14 @@ import { formatPrice, framedOuterInches, priceOf } from "@/lib/pricing";
 // Medium tier (docs/test-tiers.md): Piece and Preview. Choices with prices [Gap G5, D-048], defaults [D-054],
 // a described size [Res #6], the why line by bucket [Res #9], Add to bag [Gap G20], the framed preview [Gap G29].
 
+const push = vi.fn();
+vi.mock("next/navigation", () => ({ useRouter: () => ({ push }) }));
 vi.mock("next/link", () => ({ default: ({ href, children, ...rest }: { href: string; children: ReactNode }) => <a href={href} {...rest}>{children}</a> }));
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  push.mockClear();
+});
 
 const positions = getFeelingPositions();
 const works = getAllWorks();
@@ -91,15 +96,16 @@ describe("Piece", () => {
     expect(screen.queryByRole("group", { name: "Frame" })).toBeNull();
   });
 
-  it("adds the chosen print to the bag once, then reads In your bag until the choice changes", () => {
+  it("adds the chosen print to the bag once and opens the Bag, then In your bag opens it without adding again", () => {
     mount();
     open();
     fireEvent.click(screen.getByRole("button", { name: /^Brass/ }));
     fireEvent.click(screen.getByRole("button", { name: "Add to bag" }));
     expect(session.bag).toMatchObject([{ workId: portrait.id, size: "18x24", material: "framed", frame: "brass", price: 294 }]);
-    const done = screen.getByRole("button", { name: "In your bag" }) as HTMLButtonElement;
-    expect(done.disabled).toBe(true);
-    expect(screen.getByRole("link", { name: "View your bag" }).getAttribute("href")).toBe("/bag");
+    expect(push).toHaveBeenLastCalledWith("/bag");
+    fireEvent.click(screen.getByRole("button", { name: "In your bag" }));
+    expect(session.bag).toHaveLength(1);
+    expect(push).toHaveBeenCalledTimes(2);
     fireEvent.click(screen.getByRole("button", { name: /^Paper print/ }));
     fireEvent.click(screen.getByRole("button", { name: "Add to bag" }));
     expect(session.bag[1]).toMatchObject({ material: "paper", frame: null, price: 69 });

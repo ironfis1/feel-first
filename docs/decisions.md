@@ -662,8 +662,8 @@ Spec reference: Res #41, Gap G20, spec Section 5.4.
 Date: 2026-10-18
 Decided by: Scott
 Question: Add to bag on the Wall turned the button into a disabled "In your bag" and showed a "View your bag" link, so reaching the bag took two clicks.
-Decision: Add to bag adds the line and opens the Bag. Coming back to the Wall, the button stays active and reads "In your bag", and it opens the Bag without adding a second line. The "View your bag" link is removed from the Wall. The Piece screen is unchanged.
-Why: Scott's phone review on 2026-10-18.
+Decision: Add to bag adds the line and opens the Bag. Coming back to the Wall, the button stays active and reads "In your bag", and it opens the Bag without adding a second line. The "View your bag" link is removed from the Wall. The Piece screen's Add to bag works the same way, and its "View your bag" link is removed too.
+Why: Scott's phone review on 2026-10-18, and his follow-up the same day asking for the Piece screen to match.
 Spec reference: Gap G20.
 
 ### D-078: One tap opens the photo chooser

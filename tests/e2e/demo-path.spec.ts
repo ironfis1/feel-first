@@ -35,12 +35,11 @@ test("the demo path runs end to end with no console error", async ({ page }) => 
   await room.getByRole("button", { name: /^Closer to / }).first().click();
   await room.getByRole("listitem").first().getByRole("link").click();
 
-  // Piece: choose a frame and add to the bag.
+  // Piece: choose a frame and add to the bag, which opens the Bag.
   await page.waitForURL("**/piece/**");
   await page.getByRole("button", { name: /^Natural oak/ }).click();
   await expect(page.getByRole("button", { name: /^Natural oak/ })).toHaveAttribute("aria-pressed", "true");
   await page.getByRole("button", { name: "Add to bag" }).click();
-  await page.getByRole("link", { name: "View your bag" }).click();
 
   // Bag: one line with the chosen frame, then on to Close.
   await page.waitForURL("**/bag");

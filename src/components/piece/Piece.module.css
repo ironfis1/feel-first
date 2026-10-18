@@ -200,10 +200,6 @@
   font-size: var(--t-lede);
 }
 
-.after {
-  min-height: 1.45em;
-}
-
 .credits {
   padding-top: var(--s-5);
   border-top: 1px solid var(--c-hair);
