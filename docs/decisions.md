@@ -529,6 +529,14 @@ Decision: Yes ("M4 is done"). Evidence: design settled (design-log, 2026-10-15);
 Why: Scott's answer on 2026-10-17.
 Spec reference: docs/milestones.md M4, D-004.
 
+### D-061: "Hang it" means the Wall; the describe button says "See matches"
+Date: 2026-10-17
+Decided by: Scott
+Question: User feedback says "Hang it" should take the work to the Wall, but the Room's describe button used that label. What should each control say?
+Decision: The Piece screen's link to the Wall is now "Hang it" (it was "See it on a wall"). The describe button on the Room is now "See matches". Scott offered "Show me", "Let me see" or "See matches", and Claude picked "See matches" because the button re-orders the whole Room to fit the description rather than showing one work.
+Why: A visitor expects "Hang it" to put a piece on a wall. "Rehang" was rejected because it reads as the same action.
+Spec reference: D-052, D-053.
+
 ---
 
 ## Open questions

@@ -121,7 +121,7 @@ export function Piece({ work, lines, positions }: Props) {
           </p>
           <p>
             <Link className={c.link} href="/wall">
-              See it on a wall
+              Hang it
             </Link>
           </p>
 

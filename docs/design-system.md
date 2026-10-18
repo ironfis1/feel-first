@@ -72,7 +72,7 @@ Every interactive element shows `outline: 2px solid var(--glow)` with a 3px offs
 All controls are at least 44px tall (`--hit`).
 
 - **Pill button** (primary actions: Step in, Show more, Add to bag): transparent, 1px `--c-hair` border, `--radius-pill`, 12px by 28px padding, `--t-label` uppercase tracked. Hover turns the border to `--glow`.
-- **Text button** (Closer, Drift, Hang it, Remove): no border, `--t-label` uppercase tracked, an underline in `--glow` appears on hover, 6px underline offset.
+- **Text button** (Closer, Drift, See matches, Remove): no border, `--t-label` uppercase tracked, an underline in `--glow` appears on hover, 6px underline offset.
 - **Text input** (describe a moment): no box, a single `--c-hair` underline, `--t-body` serif, placeholder in `--c-placeholder`, the submit text button on the same line.
 - **Choice groups** (size, material, frame): a row of pill buttons; the chosen one has a `--c-text` border and `aria-pressed="true"`; the price sits beside the label in `--t-meta`.
 - **Links** inherit color, underline on hover in `--glow`.

@@ -28,7 +28,7 @@ test("the demo path runs end to end with no console error", async ({ page }) => 
 
   // Describe a moment: the demo video phrase names the bedroom.
   await page.getByLabel("Or describe the moment").fill("a slow sunday morning in the bedroom, something large");
-  await page.getByRole("button", { name: "Hang it" }).click();
+  await page.getByRole("button", { name: "See matches" }).click();
   await expect(page.getByText(/for the bedroom$/).filter({ visible: true }).first()).toBeVisible();
 
   // Closer on a work, then open the first work.

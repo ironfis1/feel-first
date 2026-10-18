@@ -108,7 +108,7 @@ export function Room({ works, positions }: { works: readonly WorkCard[]; positio
                 }}
               />
               <button className={c.text} type="submit">
-                Hang it
+                See matches
               </button>
             </div>
             <p className={s.unheard} role="status">

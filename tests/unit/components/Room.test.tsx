@@ -48,7 +48,7 @@ const hung = () => within(screen.getByRole("list", { name: "The room" })).getAll
 const hungIds = () => hung().map((li) => li.querySelector("a")!.getAttribute("href")!.replace("/piece/", ""));
 const describeAs = (text: string) => {
   fireEvent.change(screen.getByLabelText("Or describe the moment"), { target: { value: text } });
-  fireEvent.click(screen.getByRole("button", { name: "Hang it" }));
+  fireEvent.click(screen.getByRole("button", { name: "See matches" }));
 };
 
 describe("Room", () => {

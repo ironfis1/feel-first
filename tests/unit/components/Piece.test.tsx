@@ -129,7 +129,7 @@ describe("Piece", () => {
     mount();
     open();
     expect(screen.getByText(portrait.tags.slice(0, 3).join(", "))).toBeTruthy();
-    expect(screen.getByRole("link", { name: "See it on a wall" }).getAttribute("href")).toBe("/wall");
+    expect(screen.getByRole("link", { name: "Hang it" }).getAttribute("href")).toBe("/wall");
     const credits = screen.getByText((_, el) => el?.tagName === "P" && el.textContent?.includes(portrait.source) === true && el.textContent.endsWith(".") === true);
     expect(credits.textContent).not.toMatch(/\.\./);
     expect(credits.textContent).toContain(portrait.title);
