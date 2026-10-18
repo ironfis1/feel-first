@@ -610,6 +610,46 @@ Decision: Yes. Every describe answer sets the default scene by D-062, whichever 
 Why: Scott's answer on 2026-10-17. The visitor cannot tell the paths apart, so they behave the same.
 Spec reference: Section 3.9, Gap G7, D-052, D-062.
 
+### D-071: Wall paints and preset wall layout
+Date: 2026-10-17
+Decided by: Scott
+Question: D-009 left the five wall colors as names, and the spec gives scale-reference widths but no other wall dimensions. What are the paint values and the layout of the preset wall?
+Decision: Paints in src/styles/tokens.css: plaster #e4ddd0, sage #a3ad94, ink blue #2e3d55, clay #b47d5e, charcoal #3b3a3e; the furniture is a dark neutral mixed with the paint. The preset wall shows a 144-inch span (100 inches below a 640px window), 108 inches floor to ceiling, the same span for every scene so switching scenes never rescales the piece. A piece hangs centered at 57 inches, raised if needed to clear the furniture by 8 inches. Furniture tops: sofa back 34 inches, headboard 44, desk 30. All layout values are in src/config/feel.ts.
+Why: Scott's approval on 2026-10-17 after the first Wall build.
+Spec reference: Section 5.4, Gap G14, Gap G30, D-009.
+
+### D-072: Photo-mode length range
+Date: 2026-10-17
+Decided by: Scott
+Question: Photo mode sets scale from a drawn line and an entered length. Which lengths are accepted, and what does the visitor see outside the range?
+Decision: 2 to 200 inches, and the drawn line must be at least 20 pixels long on screen. Outside the range the scale stays where it was and a quiet line under the field reads "Enter a length from 2 to 200 inches.", styled like the describe box's no-match line, with no error styling.
+Why: Scott's answer on 2026-10-17. The range runs from a light-switch plate to a whole wall.
+Spec reference: Section 5.4, J5, Res #12.
+
+### D-073: The Wall's frame choice includes "No frame"
+Date: 2026-10-17
+Decided by: Scott
+Question: The frame can be changed on the Wall [Res #41]. What does the Wall offer when the selection is a paper print or canvas?
+Decision: The Wall always offers the four finishes plus "No frame". Choosing a finish makes the selection a framed print with that finish; choosing "No frame" on a framed print makes it a paper print, and on paper or canvas leaves it as it is. The choice updates the current selection only; a bag line is created only by Add to bag.
+Why: Scott's answer on 2026-10-17.
+Spec reference: Section 5.4, Res #41, Gap G20, Gap G28.
+
+### D-074: Heard chips are left out for now
+Date: 2026-10-17
+Decided by: Scott
+Question: docs/ai-jobs.md J2 says the "heard" words are shown as chips, but the Room has never shown them. Add them in M5?
+Decision: Leave them out for now. J2 still returns heard words, and the route and cache keep them.
+Why: Scott's answer on 2026-10-17.
+Spec reference: docs/ai-jobs.md J2.
+
+### D-075: A word-map answer that hears nothing returns null
+Date: 2026-10-17
+Decided by: Scott
+Question: When the live call fails and the word map finds no mood word, there is no J2 output to return. What does the route send?
+Decision: A JSON null body with x-j2-source: fallback. The browser's fallback then shows the D-052 line suggesting a feeling word, as it does today. A malformed or oversized request gets a 400 with the same header and body.
+Why: Scott's answer on 2026-10-17. The visitor sees what they see today and never an error.
+Spec reference: D-052, D-065, D-066.
+
 ---
 
 ## Open questions
