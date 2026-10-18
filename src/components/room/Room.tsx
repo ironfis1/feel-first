@@ -1,18 +1,18 @@
 "use client";
 
 // Room [spec Section 5.2]: the J3 hang, poster first; Show more; the compact wheel; Closer and Drift; the room name
-// above the feeling and its sentence; the describe box, read by the word map in the browser until Milestone 5.
+// above the feeling and its sentence; the describe box, read by J2 through /api/j2 with the word map as the fallback.
 
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
-import { describeNoMatch, describePlaceholder, feelingSentences, roomPageSizePerLane } from "@/config/feel";
+import { describeMaxChars, describeNoMatch, describePlaceholder, feelingSentences, roomPageSizePerLane } from "@/config/feel";
 import { roomNameFor } from "@/lib/buckets";
 import type { WorkCard } from "@/lib/catalog";
+import { describeMoment } from "@/lib/describe";
 import { feelingAt, moodFor, wheelPointFor, type FeelingPositions, type WheelPoint } from "@/lib/feelings";
 import { hang } from "@/lib/j3";
 import { nudge, type Reaction } from "@/lib/j7";
-import { interpretWords } from "@/lib/wordmap";
 import { ScreenNav } from "../ScreenNav";
 import { useSession } from "../session/Session";
 import { FeelingWheel } from "../wheel/FeelingWheel";
@@ -60,9 +60,13 @@ export function Room({ works, positions }: { works: readonly WorkCard[]; positio
     session.countRehang();
   };
 
-  const submit = (e: FormEvent) => {
+  // Only the latest submission is applied, so a slow answer never overwrites a newer one.
+  const asked = useRef(0);
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const heard = interpretWords(text);
+    const ask = ++asked.current;
+    const heard = await describeMoment(text);
+    if (ask !== asked.current) return;
     setUnheard(!heard);
     // No mood word: the mood stays, the Room does not move, and nothing counts as a re-hang [D-052].
     if (!heard) return;
@@ -101,6 +105,7 @@ export function Room({ works, positions }: { works: readonly WorkCard[]; positio
                 className={s.describeInput}
                 placeholder={describePlaceholder}
                 autoComplete="off"
+                maxLength={describeMaxChars}
                 value={text}
                 onChange={(e) => {
                   setText(e.target.value);

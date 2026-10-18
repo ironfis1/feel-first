@@ -95,8 +95,14 @@ export const fingerprintTagCount = 3;
 /** Live J2 call timeout before the word-map fallback answers [Res #7, Gap G18]. */
 export const j2TimeoutMs = 4000;
 
-/** Best-effort per-instance J2 rate limit: 20 calls per IP per hour [Gap G18]. */
+/** Best-effort per-instance J2 rate limit: 20 live calls per IP per hour; cache and word-map answers do not count [Gap G18, D-064]. */
 export const j2RateLimit = { calls: 20, windowMs: 60 * 60 * 1000 } as const;
+
+/** How long the describe box waits for the J2 route before answering from the word map: the server timeout plus 1 second [D-065]. */
+export const j2ClientTimeoutMs = j2TimeoutMs + 1000;
+
+/** Most characters the describe box accepts and the J2 route reads [D-065]. */
+export const describeMaxChars = 200;
 
 /** Room types J2 may return [Gap G7]. */
 export const roomTypes = [

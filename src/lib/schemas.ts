@@ -144,6 +144,8 @@ export const configSchema = z
     fingerprintTagCount: z.number().int().min(1).max(3),
     j2TimeoutMs: z.number().int().positive(),
     j2RateLimit: z.object({ calls: z.number().int().positive(), windowMs: z.number().int().positive() }),
+    j2ClientTimeoutMs: z.number().int().positive(),
+    describeMaxChars: z.number().int().positive(),
     roomTypes: z.array(z.string().min(1)).min(1),
     sizeWordToPrintSize: z.object({ small: z.string(), medium: z.string(), large: z.string() }),
     printSizes: z
@@ -177,6 +179,10 @@ export const configSchema = z
       if (!sizeIds.has(sizeId)) {
         ctx.addIssue({ code: "custom", message: `size word ${word} maps to unknown size ${sizeId}`, path: ["sizeWordToPrintSize", word] });
       }
+    }
+    // The browser must outwait the server, or a slow live answer would be thrown away [D-065].
+    if (config.j2ClientTimeoutMs <= config.j2TimeoutMs) {
+      ctx.addIssue({ code: "custom", message: "client timeout must exceed the server timeout", path: ["j2ClientTimeoutMs"] });
     }
     if (!config.wallScenes.includes(config.defaultWallScene)) {
       ctx.addIssue({ code: "custom", message: "default wall scene is not a wall scene", path: ["defaultWallScene"] });

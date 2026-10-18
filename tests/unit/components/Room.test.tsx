@@ -10,13 +10,16 @@ import { moodFor } from "@/lib/feelings";
 import { hang } from "@/lib/j3";
 
 // High tier (docs/test-tiers.md): Room. Re-hang counting [Gap G13, D-041, D-052], Closer and Drift [Res #10],
-// the describe box on the word map, the room name and Show more [spec Section 5.2]. Vitest's catalog is the fixture.
+// the describe box with the word map answering, the room name and Show more [spec Section 5.2]. Vitest's catalog is the fixture.
 
 vi.mock("next/link", () => ({ default: ({ href, children, ...rest }: { href: string; children: ReactNode }) => <a href={href} {...rest}>{children}</a> }));
 // eslint-disable-next-line @next/next/no-img-element -- stand-in for next/image
 vi.mock("next/image", () => ({ default: ({ src, alt }: { src: string; alt: string }) => <img src={src} alt={alt} /> }));
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  vi.unstubAllGlobals();
+});
 
 beforeAll(() => {
   HTMLElement.prototype.setPointerCapture = () => {};
@@ -46,9 +49,13 @@ const mount = (cards = works) =>
 
 const hung = () => within(screen.getByRole("list", { name: "The room" })).getAllByRole("listitem");
 const hungIds = () => hung().map((li) => li.querySelector("a")!.getAttribute("href")!.replace("/piece/", ""));
-const describeAs = (text: string) => {
+// The J2 route is unreachable here, so every describe answer comes from the browser's word map [D-065].
+const describeAs = async (text: string) => {
+  vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new TypeError("offline")));
   fireEvent.change(screen.getByLabelText("Or describe the moment"), { target: { value: text } });
-  fireEvent.click(screen.getByRole("button", { name: "See matches" }));
+  await act(async () => {
+    fireEvent.click(screen.getByRole("button", { name: "See matches" }));
+  });
 };
 
 describe("Room", () => {
@@ -116,9 +123,9 @@ describe("Room", () => {
     expect(session.metrics.rehangs).toBe(1);
   });
 
-  it("a described moment moves the point, adds the room type to the room name, and counts one re-hang", () => {
+  it("a described moment moves the point, adds the room type to the room name, and counts one re-hang", async () => {
     mount();
-    describeAs("calm morning in the bedroom");
+    await describeAs("calm morning in the bedroom");
     expect(session.metrics.rehangs).toBe(1);
     expect(session.point).not.toEqual({ x: 0, y: 0 });
     expect(session.described).toEqual({ roomType: "bedroom", size: null });
@@ -126,10 +133,10 @@ describe("Room", () => {
     expect(screen.getByRole("status").textContent).toBe("");
   });
 
-  it("a moment with no mood word changes nothing, counts no re-hang, and says so until the text changes [D-052]", () => {
+  it("a moment with no mood word changes nothing, counts no re-hang, and says so until the text changes [D-052]", async () => {
     mount();
     const before = hungIds();
-    describeAs("sunday coffee");
+    await describeAs("sunday coffee");
     expect(screen.getByRole("status").textContent).toBe(describeNoMatch);
     expect(session.metrics.rehangs).toBe(0);
     expect(session.point).toEqual({ x: 0, y: 0 });
@@ -139,9 +146,9 @@ describe("Room", () => {
     expect(screen.getByRole("status").textContent).toBe("");
   });
 
-  it("adds no room type to the name when none was described", () => {
+  it("adds no room type to the name when none was described", async () => {
     mount();
-    describeAs("calm");
+    await describeAs("calm");
     expect(screen.queryByText(/ for the /)).toBeNull();
   });
 
