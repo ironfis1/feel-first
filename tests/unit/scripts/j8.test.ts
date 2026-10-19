@@ -6,7 +6,7 @@ import type { z } from "zod";
 import { claudeEffort, claudeModel } from "@/config/feel";
 import { type BucketKey, bucketKeys } from "@/lib/buckets";
 import { catalogFileSchema, findingKinds, signalsFileSchema, signalsSeedFileSchema } from "@/lib/schemas";
-import { bucketFigures, computeDrafts, type Draft, draftText, j8JsonSchema, j8Request, minGroupViews, parseJ8, segmentWords, signalsFile } from "../../../scripts/j8.ts";
+import { bucketFigures, computeDrafts, type Draft, draftText, j8JsonSchema, j8Request, minGroupViews, parseJ8, segmentWords, signalsFile, withThousands } from "../../../scripts/j8.ts";
 import { validWork } from "../../fixtures/works.ts";
 
 // High tier (docs/test-tiers.md): bucketFigures, computeDrafts, parseJ8, signalsFile. Medium: draftText, j8Request.
@@ -374,12 +374,18 @@ describe("parseJ8 against recorded responses (j8.jsonl)", () => {
   });
   const figures = figuresOf("rack-candidate");
 
-  it("accepts every recorded response and returns its text and action", () => {
+  it("accepts every recorded response and returns its text and action, with thousands separators", () => {
     expect(recorded.map((r) => r.custom_id).sort()).toEqual([...findingKinds].sort());
     for (const r of recorded) {
       const body = JSON.parse((r.result.message.content.find((b) => b.type === "text") as { text: string }).text);
-      expect(parseJ8(r.result.message, figuresOf(r.custom_id))).toEqual({ ok: true, value: { text: body.text, action: body.action } });
+      expect(parseJ8(r.result.message, figuresOf(r.custom_id))).toEqual({ ok: true, value: { text: withThousands(body.text), action: withThousands(body.action) } });
     }
+  });
+
+  it("separates thousands in whole numbers only", () => {
+    expect(withThousands("1279 views across 20000 sessions, 10.3 per 1000, 999 adds, 1,943 already, 1234.5 kept")).toBe(
+      "1,279 views across 20,000 sessions, 10.3 per 1,000, 999 adds, 1,943 already, 1234.5 kept",
+    );
   });
 
   it("matches the committed signals.json words", () => {

@@ -676,6 +676,22 @@ Spec reference: Res #12, D-067.
 
 ---
 
+### D-079: Signals screen strings
+Date: 2026-10-19
+Decided by: Scott
+Question: The M5 prompt asks for every new string on Signals to be approved before the screen is finished.
+Decision: Title "Signals". Lede "What sessions like yours would tell merchandising and licensing, from the site to the shelf." Label "Simulated data." with "20,000 sessions generated from a fixed seed. No real visitors." (the count from sessionCount). Finding headings, in file order: "Retail rack candidate", "Frame attach pattern", "Under-converting segment", "Licensing gap", tagged "For merchandising" (first three) and "For licensing" (fourth), with "Segment: <room name>", the finding text, then "Action" and the action, both verbatim. Panel heading "Your session" with "Only on this device. Nothing here is stored or sent."; a 3 x 3 grid of the nine segments by room name with the visitor's point and cell marked, axis labels heavy, bright, calm, charged; "Your segment: <room name>" and "Simulated sessions in this segment: <n>" from buckets; "Your bag" with lines as on the Bag, or "Nothing in your bag yet.". Ask heading "Next step" with "Run this same pipeline on a sample of Trends' licensed SKUs: tag each work by feeling (J1), write why each piece fits a mood (J4), and read the signals (J8)." Then the contact block as on Close (D-068).
+Why: Scott approved the draft on 2026-10-19.
+Spec reference: Section 5.7, Gap G26, Res #36, Res #45, Res #47.
+
+### D-080: J8 writes thousands separators
+Date: 2026-10-19
+Decided by: Scott
+Question: The J8 sentences wrote "20000 simulated sessions" while the simulated label reads "20,000".
+Decision: parseJ8 adds thousands separators to whole numbers of four or more digits in the text and action, in code. data/signals.json was rebuilt with the new --replay option from the recorded run data/runs/j8-2026-10-11T20-23-30-338Z.jsonl, with no new model call. Only the separators changed; every figure is the same and still traces to the seed.
+Why: Scott asked for the sentences to match the label on 2026-10-19.
+Spec reference: Section 3.11, Res #38, D-029.
+
 ## Open questions
 
 Add new questions here as they come up, in the same format as the decisions above.

@@ -63,7 +63,7 @@
       "kind": "rack-candidate",
       "bucket": "bright-calm",
       "action": "Build a retail rack of these place posters aimed at Morning Light shoppers.",
-      "text": "In the Morning Light segment, where shoppers want art that feels bright, gentle and at rest, the 12 place posters were picked at 5 percent of views, or 2.6 times the catalog average of 1.9 percent. That comes from 64 adds on 1279 views across 20000 simulated sessions.",
+      "text": "In the Morning Light segment, where shoppers want art that feels bright, gentle and at rest, the 12 place posters were picked at 5 percent of views, or 2.6 times the catalog average of 1.9 percent. That comes from 64 adds on 1,279 views across 20,000 simulated sessions.",
       "figures": {
         "lift": 2.6,
         "groupPickRatePct": 5,
@@ -78,7 +78,7 @@
       "kind": "attach-pattern",
       "bucket": "heavy-calm",
       "action": "Offer black frames as the default framing option on works shown to the Low Light segment.",
-      "text": "In the Low Light segment, where shoppers lean toward somber, quiet and still work, 57 percent of the 107 adds were framed, compared with 41.8 percent across all adds in the 20000 simulated sessions. Black was the leading finish, used on 47.5 percent of this segment's framed adds.",
+      "text": "In the Low Light segment, where shoppers lean toward somber, quiet and still work, 57 percent of the 107 adds were framed, compared with 41.8 percent across all adds in the 20,000 simulated sessions. Black was the leading finish, used on 47.5 percent of this segment's framed adds.",
       "figures": {
         "framedSharePct": 57,
         "catalogFramedSharePct": 41.8,
@@ -91,7 +91,7 @@
       "kind": "under-converting",
       "bucket": "heavy-calm",
       "action": "Review and refresh the works shown to Low Light sessions, testing stronger somber and quiet pieces to raise picks per work viewed.",
-      "text": "The Low Light segment, where shoppers start in a heavy and calm mood that is somber, quiet and still, adds works to the bag at a pick rate of 0.9 percent against a catalog average of 1.9 percent, or 0.49 times the catalog average. This is the lowest conversion of any mood segment, across 1943 of the 20000 simulated sessions.",
+      "text": "The Low Light segment, where shoppers start in a heavy and calm mood that is somber, quiet and still, adds works to the bag at a pick rate of 0.9 percent against a catalog average of 1.9 percent, or 0.49 times the catalog average. This is the lowest conversion of any mood segment, across 1,943 of the 20,000 simulated sessions.",
       "figures": {
         "pickRatePct": 0.9,
         "catalogPickRatePct": 1.9,
@@ -104,7 +104,7 @@
       "kind": "licensing-gap",
       "bucket": "bright-calm",
       "action": "Prioritize licensing new bright, gentle, calm works to deepen the Morning Light segment.",
-      "text": "The Morning Light segment, for bright and calm moods, has 32 catalog works for 3109 of the 20000 simulated sessions, which is 10.3 works per 1000 sessions against 30 per 1000 sessions across the whole catalog. It has the fewest works per expected session of any mood segment.",
+      "text": "The Morning Light segment, for bright and calm moods, has 32 catalog works for 3,109 of the 20,000 simulated sessions, which is 10.3 works per 1,000 sessions against 30 per 1,000 sessions across the whole catalog. It has the fewest works per expected session of any mood segment.",
       "figures": {
         "works": 32,
         "sessions": 3109,

@@ -5,9 +5,11 @@
 //   node scripts/j8.ts --figures            print the computed findings and figures (no model call)
 //   node scripts/j8.ts --write              send the 4 findings to Claude in one batch, then write data/signals.json
 //   node scripts/j8.ts --write --resume=ID  re-attach to a batch already submitted
+//   node scripts/j8.ts --replay=FILE        rebuild data/signals.json from a recorded run in data/runs (no model call)
 //
 // Every number in a finding's text and action must be one of its figures, and every figure is recomputed
 // from the seed file. AI output is never edited by hand: if a sentence is wrong, change the prompt and re-run.
+// The one change made in code is thousands separators in whole numbers, so 20000 reads 20,000 on screen.
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -237,6 +239,11 @@ export function j8Request(d: Draft, system: string): BatchRequest {
   };
 }
 
+/** Puts thousands separators into whole numbers of four or more digits, leaving decimals and numbers already separated alone. */
+export function withThousands(text: string): string {
+  return text.replace(/(?<![\d.,])\d{4,}(?!\d|[.,]\d)/g, (n) => Number(n).toLocaleString("en-US"));
+}
+
 /** Accepts a response only if it is complete JSON with a text and an action that both pass the J8 rules. */
 export function parseJ8(
   message: Pick<Message, "stop_reason" | "content">,
@@ -258,7 +265,7 @@ export function parseJ8(
     ...findingProblems(out.action, figures).map((p) => `action: ${p}`),
   ];
   if (problems.length) return { ok: false, reason: problems.join("; ") };
-  return { ok: true, value: { text: out.text.trim(), action: out.action.trim() } };
+  return { ok: true, value: { text: withThousands(out.text.trim()), action: withThousands(out.action.trim()) } };
 }
 
 /** data/signals.json from the computed drafts and Claude's words [D-029]. */
@@ -287,7 +294,23 @@ async function main() {
     for (const d of drafts) console.log(JSON.stringify(d));
     return;
   }
-  if (!args.includes("--write")) throw new Error("pass --figures or --write");
+  const replay = args.find((a) => a.startsWith("--replay="))?.slice("--replay=".length);
+  if (replay) {
+    // The last successful result recorded for each kind, parsed by the same rules as a live run.
+    const byKind = new Map(drafts.map((d) => [d.kind as string, d]));
+    const values = new Map<string, { text: string; action: string }>();
+    for (const line of (await readFile(path.resolve(root, replay), "utf8")).split("\n").filter(Boolean)) {
+      const item = JSON.parse(line) as { custom_id: string; result: { type: string; message?: Message } };
+      if (item.result.type !== "succeeded" || !item.result.message) continue;
+      const parsed = parseJ8(item.result.message, byKind.get(item.custom_id)!.figures);
+      if (parsed.ok) values.set(item.custom_id, parsed.value);
+    }
+    if (values.size !== drafts.length) throw new Error(`the recorded run holds ${values.size} accepted findings, not ${drafts.length}`);
+    await writeFile(path.join(root, "data/signals.json"), JSON.stringify(signalsFile(seedFile, catalog, drafts, values), null, 2) + "\n");
+    console.log(`data/signals.json rebuilt from ${replay}`);
+    return;
+  }
+  if (!args.includes("--write")) throw new Error("pass --figures, --write or --replay=FILE");
 
   const system = promptBetween(await readFile(path.join(root, "docs/ai-jobs.md"), "utf8"), "j8-prompt");
   const requests = drafts.map((d) => j8Request(d, system));
