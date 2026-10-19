@@ -451,7 +451,7 @@ const CHECKS = [
       const { j2TimeoutMs } = await import('../../src/config/feel.ts');
       const r = await postJ2({ text: 'rain on the studio skylight after a long week, something to calm me down' });
       if (r.error) return fail(r.error);
-      if (r.status !== 200 || r.source !== 'live') return fail(`${r.status}, x-j2-source ${r.source} (fallback means the live call failed, timed out or was rate limited)`);
+      if (r.status !== 200 || r.source !== 'live') return fail(`${r.status}, x-j2-source ${r.source} after ${r.ms}ms (near ${j2TimeoutMs}ms means the call timed out; much less means it failed or was rate limited)`);
       if (!Number.isFinite(r.body?.valence) || !Number.isFinite(r.body?.arousal)) return fail(`answered ${JSON.stringify(r.body)}`);
       return r.ms <= j2TimeoutMs ? pass(`live answer in ${r.ms}ms`) : warn(`live answer in ${r.ms}ms, over ${j2TimeoutMs}ms`);
     },
@@ -531,11 +531,15 @@ const CHECKS = [
           problems.push(`${src}: ${err.message}`);
         }
       }
-      const r = await postJ2({ text: 'calm' });
-      if (r.error) problems.push(`j2: ${r.error}`);
-      else if (leaks(JSON.stringify(r.body) + JSON.stringify(r.headers))) problems.push('j2 response');
+      // A cached phrase and a refused body: two J2 answer paths with no model call, so this check costs nothing.
+      const { describePlaceholder } = await import('../../src/config/feel.ts');
+      for (const body of [{ text: describePlaceholder }, { text: 'calm', mood: [0, 0] }]) {
+        const r = await postJ2(body);
+        if (r.error) problems.push(`j2: ${r.error}`);
+        else if (leaks(JSON.stringify(r.body) + JSON.stringify(r.headers))) problems.push(`j2 ${r.source} response`);
+      }
       if (!scripts.size) problems.push('no scripts found to check');
-      return problems.length ? fail(`key found or unchecked: ${problems.join(', ')}`) : pass(`${pages.length} pages, ${scripts.size} scripts and a J2 response clean${value ? '' : ' (name only; no key value here)'}`);
+      return problems.length ? fail(`key found or unchecked: ${problems.join(', ')}`) : pass(`${pages.length} pages, ${scripts.size} scripts and two J2 responses (cache, refused) clean${value ? '' : ' (name only; no key value here)'}`);
     },
   },
 
