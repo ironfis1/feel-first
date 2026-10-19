@@ -1,13 +1,14 @@
 // The only code that reads catalog data [Res #28]. Swapping in a database later changes this file alone.
-// It reads data/catalog.json with J1's emotional fields merged in (Milestone 3), and data/copy.json (J4).
-// Tests swap in data/fixtures/catalog.fixture.json.
+// It reads data/catalog.json with J1's emotional fields merged in (Milestone 3), data/copy.json (J4) and
+// data/signals.json (J8). Tests swap in data/fixtures/catalog.fixture.json.
 
 import type { z } from "zod";
 import data from "../../data/catalog.json";
 import copyData from "../../data/copy.json";
+import signalsData from "../../data/signals.json";
 import type { BucketKey } from "./buckets";
 import { feelingPositions, type FeelingPositions } from "./feelings";
-import { catalogFileSchema, copyFileSchema, emotionTags, lanes, orientations, subjects, workSchema } from "./schemas";
+import { catalogFileSchema, copyFileSchema, signalsFileSchema, emotionTags, lanes, orientations, subjects, workSchema } from "./schemas";
 
 export { emotionTags, lanes, subjects };
 
@@ -68,4 +69,14 @@ export type WorkCard = Pick<Work, "id" | "lane" | "title" | "artist" | "date" | 
 /** Every work as a card, in ascending catalog ID order. */
 export function getWorkCards(): WorkCard[] {
   return works.map(({ id, lane, title, artist, date, thumbUrl, width, height, valence, arousal }) => ({ id, lane, title, artist, date, thumbUrl, width, height, valence, arousal }));
+}
+
+export type Signals = z.infer<typeof signalsFileSchema>;
+export type Finding = Signals["findings"][number];
+
+const signals: Signals = signalsFileSchema.parse(signalsData);
+
+/** The precomputed J8 findings and the per-segment figures they cite [spec Section 3.11, Res #55]. */
+export function getSignals(): Signals {
+  return signals;
 }
