@@ -167,3 +167,44 @@ describe("configSchema room names and effort (M3)", () => {
     for (const level of ["low", "medium", "high"]) expect(accepted((c) => (c.claudeEffort.j1 = level))).toBe(true);
   });
 });
+
+describe("configSchema M5 additions (J2 client, Wall and photo mode)", () => {
+  it("requires the browser to outwait the server [D-065]", () => {
+    expect(issuesAfter((c) => (c.j2ClientTimeoutMs = c.j2TimeoutMs)).map((i) => i.path)).toEqual([["j2ClientTimeoutMs"]]);
+    expect(issuesAfter((c) => (c.j2ClientTimeoutMs = c.j2TimeoutMs - 1)).map((i) => i.path)).toEqual([["j2ClientTimeoutMs"]]);
+    expect(accepted((c) => (c.j2ClientTimeoutMs = c.j2TimeoutMs + 1))).toBe(true);
+  });
+
+  it("requires a whole, positive describe limit [D-065]", () => {
+    for (const bad of [0, -1, 200.5]) expect(accepted((c) => (c.describeMaxChars = bad))).toBe(false);
+  });
+
+  it("rejects a room type scene mapping with an unknown room type or scene [D-062]", () => {
+    expect(issuesAfter((c) => (c.roomTypeScenes.garage = "desk")).map((i) => i.path)).toEqual([["roomTypeScenes", "garage"]]);
+    expect(issuesAfter((c) => (c.roomTypeScenes.bedroom = "hammock")).map((i) => i.path)).toEqual([["roomTypeScenes", "bedroom"]]);
+  });
+
+  it("rejects a wall scene with no furniture height [D-071]", () => {
+    expect(issuesAfter((c) => delete c.wallSceneHeightIn.bed).map((i) => i.path)).toEqual([["wallSceneHeightIn", "bed"]]);
+  });
+
+  it("requires the photo length range to ascend [D-072]", () => {
+    expect(issuesAfter((c) => (c.photoScale.minLengthIn = c.photoScale.maxLengthIn)).map((i) => i.path)).toEqual([["photoScale"]]);
+    expect(accepted((c) => (c.photoScale = { ...c.photoScale, minLengthIn: 300 }))).toBe(false);
+  });
+
+  it.each([
+    ["wall span", (c: any, v: number) => (c.wallView.widthIn = v)],
+    ["narrow wall span", (c: any, v: number) => (c.wallView.narrowWidthIn = v)],
+    ["narrow breakpoint", (c: any, v: number) => (c.wallView.narrowBelowPx = v)],
+    ["wall height", (c: any, v: number) => (c.wallView.heightIn = v)],
+    ["furniture height", (c: any, v: number) => (c.wallSceneHeightIn.sofa = v)],
+    ["hang center", (c: any, v: number) => (c.wallHang.centerIn = v)],
+    ["gap above furniture", (c: any, v: number) => (c.wallHang.gapAboveIn = v)],
+    ["shortest photo length", (c: any, v: number) => (c.photoScale.minLengthIn = v)],
+    ["shortest photo line", (c: any, v: number) => (c.photoScale.minLinePx = v)],
+  ])("rejects a zero or negative %s [D-071, D-072]", (_label, set) => {
+    expect(accepted((c) => set(c, 0))).toBe(false);
+    expect(accepted((c) => set(c, -5))).toBe(false);
+  });
+});

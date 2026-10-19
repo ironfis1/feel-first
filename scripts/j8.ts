@@ -268,6 +268,25 @@ export function parseJ8(
   return { ok: true, value: { text: withThousands(out.text.trim()), action: withThousands(out.action.trim()) } };
 }
 
+/**
+ * Claude's words for each finding from a recorded run (one JSON line per result, as runBatch records them),
+ * parsed by the same rules as a live run. A later accepted result for a kind replaces an earlier one; failed
+ * results, rejected answers and unknown kinds are skipped. Throws unless every draft has words.
+ */
+export function wordsFromRun(jsonl: string, drafts: readonly Draft[]): Map<string, { text: string; action: string }> {
+  const byKind = new Map(drafts.map((d) => [d.kind as string, d]));
+  const values = new Map<string, { text: string; action: string }>();
+  for (const line of jsonl.split("\n").filter((l) => l.trim())) {
+    const item = JSON.parse(line) as { custom_id: string; result: { type: string; message?: Message } };
+    const draft = byKind.get(item.custom_id);
+    if (!draft || item.result.type !== "succeeded" || !item.result.message) continue;
+    const parsed = parseJ8(item.result.message, draft.figures);
+    if (parsed.ok) values.set(item.custom_id, parsed.value);
+  }
+  if (values.size !== drafts.length) throw new Error(`the recorded run holds ${values.size} accepted findings, not ${drafts.length}`);
+  return values;
+}
+
 /** data/signals.json from the computed drafts and Claude's words [D-029]. */
 export function signalsFile(
   seedFile: SeedFile,
@@ -296,16 +315,7 @@ async function main() {
   }
   const replay = args.find((a) => a.startsWith("--replay="))?.slice("--replay=".length);
   if (replay) {
-    // The last successful result recorded for each kind, parsed by the same rules as a live run.
-    const byKind = new Map(drafts.map((d) => [d.kind as string, d]));
-    const values = new Map<string, { text: string; action: string }>();
-    for (const line of (await readFile(path.resolve(root, replay), "utf8")).split("\n").filter(Boolean)) {
-      const item = JSON.parse(line) as { custom_id: string; result: { type: string; message?: Message } };
-      if (item.result.type !== "succeeded" || !item.result.message) continue;
-      const parsed = parseJ8(item.result.message, byKind.get(item.custom_id)!.figures);
-      if (parsed.ok) values.set(item.custom_id, parsed.value);
-    }
-    if (values.size !== drafts.length) throw new Error(`the recorded run holds ${values.size} accepted findings, not ${drafts.length}`);
+    const values = wordsFromRun(await readFile(path.resolve(root, replay), "utf8"), drafts);
     await writeFile(path.join(root, "data/signals.json"), JSON.stringify(signalsFile(seedFile, catalog, drafts, values), null, 2) + "\n");
     console.log(`data/signals.json rebuilt from ${replay}`);
     return;

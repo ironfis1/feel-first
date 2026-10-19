@@ -111,6 +111,33 @@ describe("Piece", () => {
     expect(session.bag[1]).toMatchObject({ material: "paper", frame: null, price: 69 });
   });
 
+  it("starts from the choices kept for this work on the Wall, and ignores a selection for another work [Res #41]", () => {
+    mount();
+    act(() => session.select({ workId: portrait.id, size: "30x40", material: "paper", finish: "brass" }));
+    open();
+    expect(pressed("Size")[0].textContent).toContain("30 x 40 in");
+    expect(pressed("Material")[0].textContent).toContain("Paper print");
+    fireEvent.click(screen.getByRole("button", { name: /^Framed print/ }));
+    expect(pressed("Frame")[0].textContent).toContain("Brass");
+    cleanup();
+    mount();
+    act(() => session.select({ workId: landscape.id, size: "30x40", material: "paper", finish: "brass" }));
+    open();
+    expect(pressed("Size")[0].textContent).toContain("18 x 24 in");
+    expect(session.selection).toEqual({ workId: portrait.id, size: "18x24", material: "framed", finish: "black" });
+  });
+
+  it("makes every choice the current selection, keeping the finish while on paper [Res #41]", () => {
+    mount();
+    open();
+    expect(session.selection).toEqual({ workId: portrait.id, size: "18x24", material: "framed", finish: "black" });
+    fireEvent.click(screen.getByRole("button", { name: /^White/ }));
+    fireEvent.click(screen.getByRole("button", { name: /^24 x 36 in/ }));
+    fireEvent.click(screen.getByRole("button", { name: /^Paper print/ }));
+    expect(session.selection).toEqual({ workId: portrait.id, size: "24x36", material: "paper", finish: "white" });
+    expect(session.bag).toEqual([]);
+  });
+
   it("shows the why line for the bucket of the visitor's mood, and none when the work has no copy", () => {
     mount();
     act(() => session.movePoint({ x: 0.9, y: 0.3 }));

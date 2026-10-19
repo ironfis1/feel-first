@@ -142,6 +142,22 @@ describe("SessionProvider", () => {
     vi.unstubAllGlobals();
   });
 
+  it("select stores the current selection, keeps it through other actions, and never touches the bag [Res #41, Gap G20]", () => {
+    mount();
+    expect(current.selection).toBeNull();
+    const pick = { workId: "w-0002", size: "30x40" as const, material: "paper" as const, finish: "brass" as const };
+    act(() => current.select(pick));
+    expect(current.selection).toEqual(pick);
+    expect(current.bag).toEqual([]);
+    act(() => current.movePoint({ x: 0.2, y: 0.2 }));
+    act(() => current.addToBag(choice));
+    act(() => current.countRehang());
+    expect(current.selection).toEqual(pick);
+    act(() => current.select({ ...pick, size: "12x16" }));
+    expect(current.selection?.size).toBe("12x16");
+    expect(current.bag).toHaveLength(1);
+  });
+
   it("throws when used outside the provider", () => {
     vi.spyOn(console, "error").mockImplementation(() => {});
     expect(() => render(<Probe />)).toThrow("useSession outside SessionProvider");

@@ -6,10 +6,11 @@ import type { z } from "zod";
 import { claudeEffort, claudeModel } from "@/config/feel";
 import { type BucketKey, bucketKeys } from "@/lib/buckets";
 import { catalogFileSchema, findingKinds, signalsFileSchema, signalsSeedFileSchema } from "@/lib/schemas";
-import { bucketFigures, computeDrafts, type Draft, draftText, j8JsonSchema, j8Request, minGroupViews, parseJ8, segmentWords, signalsFile, withThousands } from "../../../scripts/j8.ts";
+import { bucketFigures, computeDrafts, type Draft, draftText, j8JsonSchema, j8Request, minGroupViews, parseJ8, segmentWords, signalsFile, withThousands, wordsFromRun } from "../../../scripts/j8.ts";
 import { validWork } from "../../fixtures/works.ts";
 
-// High tier (docs/test-tiers.md): bucketFigures, computeDrafts, parseJ8, signalsFile. Medium: draftText, j8Request.
+// High tier (docs/test-tiers.md): bucketFigures, computeDrafts, parseJ8, signalsFile, withThousands (D-080).
+// Medium: draftText, j8Request, wordsFromRun (the --replay path, D-080).
 // The contract tests replay tests/fixtures/anthropic/j8.jsonl; no model is called.
 
 type Work = z.infer<typeof catalogFileSchema>[number];
@@ -382,10 +383,21 @@ describe("parseJ8 against recorded responses (j8.jsonl)", () => {
     }
   });
 
-  it("separates thousands in whole numbers only", () => {
-    expect(withThousands("1279 views across 20000 sessions, 10.3 per 1000, 999 adds, 1,943 already, 1234.5 kept")).toBe(
-      "1,279 views across 20,000 sessions, 10.3 per 1,000, 999 adds, 1,943 already, 1234.5 kept",
-    );
+  it("adds separators to the text and the action, after the figure check", () => {
+    // 1279 and 20000 are figures; the check reads the bare numbers, then the separators go in.
+    const out = parseJ8(answer(JSON.stringify({ text: "64 adds on 1279 views across 20000 sessions.", action: "Rack them for 20000 shoppers." })), figures);
+    expect(out).toEqual({ ok: true, value: { text: "64 adds on 1,279 views across 20,000 sessions.", action: "Rack them for 20,000 shoppers." } });
+  });
+
+  it("accepts a figure Claude already wrote with a separator, and still rejects one that is not a figure", () => {
+    expect(parseJ8(answer(JSON.stringify({ text: "Across 20,000 sessions.", action: "Stock more." })), figures)).toEqual({
+      ok: true,
+      value: { text: "Across 20,000 sessions.", action: "Stock more." },
+    });
+    expect(parseJ8(answer(JSON.stringify({ text: "Across 21,000 sessions.", action: "Stock more." })), figures)).toEqual({
+      ok: false,
+      reason: "text: numbers not in the figures: 21000",
+    });
   });
 
   it("matches the committed signals.json words", () => {
@@ -452,6 +464,67 @@ describe("parseJ8 against recorded responses (j8.jsonl)", () => {
       reason: "text: numbers not in the figures: 5.1",
     });
     expect(parseJ8(answer(JSON.stringify({ text: "Picked at 5 percent.", action: "Stock more." })), figures).ok).toBe(true);
+  });
+});
+
+describe("withThousands [D-080]", () => {
+  it.each([
+    ["20000", "20,000"],
+    ["1000", "1,000"],
+    ["1234567", "1,234,567"],
+    ["999", "999"],
+    ["42", "42"],
+    ["20,000", "20,000"],
+    ["1,943 of 20000", "1,943 of 20,000"],
+    ["1234.5", "1234.5"],
+    ["12.3456", "12.3456"],
+    ["0.4925", "0.4925"],
+    ["across 20000.", "across 20,000."],
+    ["20000, then 3109", "20,000, then 3,109"],
+    ["1279 views across 20000 sessions, 10.3 per 1000", "1,279 views across 20,000 sessions, 10.3 per 1,000"],
+    ["", ""],
+  ])("%j reads %j", (text, expected) => {
+    expect(withThousands(text)).toBe(expected);
+  });
+});
+
+describe("wordsFromRun, the --replay path [D-080]", () => {
+  const ok = (kind: string, text: string, action = "Stock more.") =>
+    JSON.stringify({
+      attempt: 1,
+      custom_id: kind,
+      result: { type: "succeeded", message: { stop_reason: "end_turn", content: [{ type: "text", text: JSON.stringify({ text, action }) }] } },
+    });
+  const failed = (kind: string) => JSON.stringify({ attempt: 1, custom_id: kind, result: { type: "errored" } });
+  const everyKind = realDrafts.map((d) => ok(d.kind, "A steady segment."));
+
+  it("returns each kind's words, parsed with separators added", () => {
+    const run = [...everyKind.slice(1), ok("rack-candidate", "Across 20000 sessions.")].join("\n");
+    const words = wordsFromRun(run, realDrafts);
+    expect([...words.keys()].sort()).toEqual([...findingKinds].sort());
+    expect(words.get("rack-candidate")).toEqual({ text: "Across 20,000 sessions.", action: "Stock more." });
+  });
+
+  it("lets a later accepted result for a kind replace an earlier one, and ignores a later rejected one", () => {
+    const run = [...everyKind, ok("licensing-gap", "A second try."), ok("licensing-gap", "A wrong 777 figure.")].join("\n");
+    expect(wordsFromRun(run, realDrafts).get("licensing-gap")?.text).toBe("A second try.");
+  });
+
+  it("skips failed results, unknown kinds and blank lines", () => {
+    const run = [failed("rack-candidate"), ok("not-a-kind", "Noise."), "", ...everyKind, "  "].join("\n");
+    expect(wordsFromRun(run, realDrafts).size).toBe(4);
+  });
+
+  it("throws when a kind has no accepted words", () => {
+    const run = [...everyKind.slice(1), failed("rack-candidate"), ok("rack-candidate", "A wrong 777 figure.")].join("\n");
+    expect(() => wordsFromRun(run, realDrafts)).toThrow("the recorded run holds 3 accepted findings, not 4");
+  });
+
+  it("rebuilds the committed signals.json from the recorded run", () => {
+    const run = readFileSync(repo("tests/fixtures/anthropic/j8.jsonl"), "utf8");
+    const committed = signalsFileSchema.parse(JSON.parse(readFileSync(repo("data/signals.json"), "utf8")));
+    const words = wordsFromRun(run, realDrafts);
+    for (const f of committed.findings) expect(words.get(f.kind)).toEqual({ text: f.text, action: f.action });
   });
 });
 

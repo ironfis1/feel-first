@@ -1,14 +1,18 @@
 import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import fixture from "../../../data/fixtures/catalog.fixture.json";
 import {
   emotionTags,
   getAllWorks,
+  getSignals,
   getWorkById,
   getWorksByLane,
   lanes,
   subjects,
 } from "@/lib/catalog";
-import { workSchema } from "@/lib/schemas";
+import { bucketKeys } from "@/lib/buckets";
+import { findingKinds, signalsFileSchema, workSchema } from "@/lib/schemas";
 
 // Contract tests for every function the catalog module exports (docs/testing.md functional gate).
 // They check the module's contract, not the data's contents. Vitest points data/catalog.json at the full fixture.
@@ -104,5 +108,18 @@ describe("getWorksByLane", () => {
   it("keeps ascending id order within each lane", () => {
     expect(ids(fineArt)).toEqual(ascending(ids(fineArt)));
     expect(ids(posters)).toEqual(ascending(ids(posters)));
+  });
+});
+
+describe("getSignals [spec Section 3.11, Res #55]", () => {
+  it("returns data/signals.json as validated by the signals schema", () => {
+    const file = JSON.parse(readFileSync(path.resolve(import.meta.dirname, "../../../data/signals.json"), "utf8"));
+    expect(signalsFileSchema.safeParse(getSignals()).success).toBe(true);
+    expect(getSignals()).toEqual(file);
+  });
+
+  it("holds the four findings in order and all nine segments", () => {
+    expect(getSignals().findings.map((f) => f.kind)).toEqual([...findingKinds]);
+    expect(Object.keys(getSignals().buckets).sort()).toEqual([...bucketKeys].sort());
   });
 });

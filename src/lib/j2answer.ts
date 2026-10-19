@@ -36,8 +36,8 @@ export function readBody(body: unknown): string | null {
 export class RateLimiter {
   private calls = new Map<string, number[]>();
   constructor(
-    private readonly limit = j2RateLimit.calls,
-    private readonly windowMs = j2RateLimit.windowMs,
+    private readonly limit: number = j2RateLimit.calls,
+    private readonly windowMs: number = j2RateLimit.windowMs,
   ) {}
 
   /** Records a live call for the IP and returns true, or returns false when the IP is at the limit. */
