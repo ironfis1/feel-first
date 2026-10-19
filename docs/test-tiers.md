@@ -64,6 +64,14 @@ Tooling note: Stryker's Vitest runner 10.0.0 did not activate runtime mutants un
 
 ## Sweep results
 
+### 2026-10-19 (M5)
+
+Kept about 136, flagged 4, all resolved:
+- j2answer "answers null from the fallback when no mood word is heard [D-075]" (flag 3, duplicate): deleted. The route test "a fallback that hears no mood word answers a JSON null" covers the same path with the header, and describe.test.ts covers the browser's null.
+- wall "draws each scene's furniture and every print, framed and unframed, at one shared scale" (flag 4, rebuilt the formula): the formula lines are removed and the ratio check kept. A new test checks one case worked by hand with literal values (sofa 583.333px, an 18 x 24 framed print 170.139px wide, paper 166.667px tall, on a 1000px stage).
+- Signals "reads the visitor's wheel point through the feeling positions it is given" (flag 4, mirrored moodFor and bucketOf): deleted. The nine per-segment tests already drive the marked cell through the positions prop with literal expected names.
+- Wall "changes the wall paint" (flag 6, would pass on a constant): now checks plaster before any click, then Ink blue, then Clay.
+
 ### 2026-10-16 (M4, D-059 name exemptions)
 
 Kept 5, flagged 1 in part. Deleted: the two word-count assertions in "leaves the other rules in force on a line with an exempt word" (flag 3, duplicate of the 30/31-word test; "Sunday" at sentence start never reaches the exemption). The triage's "Sunday Afternoon" example and lowercase "his" pin were not added: "March" in a figure title covers the calendar word on the sitter path, and the sitter match is case-sensitive by construction, so a lowercase pin could not fail.

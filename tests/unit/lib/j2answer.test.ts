@@ -207,8 +207,4 @@ describe("answerJ2: cache, rate limit, live, word map", () => {
     expect(take).toHaveBeenCalledWith("ip", 5000);
   });
 
-  it("answers null from the fallback when no mood word is heard [D-075]", async () => {
-    const text = "sunday coffee pot";
-    expect(await answerJ2(text, "ip", deps(vi.fn(async () => Promise.reject(new Error("down")))))).toEqual({ source: "fallback", body: null });
-  });
 });

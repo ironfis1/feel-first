@@ -160,11 +160,14 @@ describe("Wall: the preset wall at true scale [D-062, D-071]", () => {
     expect(stage().querySelector("svg")).toBeNull();
   });
 
-  it("changes the wall paint", () => {
+  it("starts on plaster and changes the wall paint to each choice", () => {
     mount();
     open();
+    expect(stage().style.getPropertyValue("--wall")).toBe("var(--wall-plaster)");
     fireEvent.click(screen.getByRole("button", { name: "Ink blue" }));
     expect(stage().style.getPropertyValue("--wall")).toBe("var(--wall-ink-blue)");
+    fireEvent.click(screen.getByRole("button", { name: "Clay" }));
+    expect(stage().style.getPropertyValue("--wall")).toBe("var(--wall-clay)");
   });
 });
 

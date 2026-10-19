@@ -5,9 +5,9 @@ import { afterEach, describe, expect, it } from "vitest";
 import { contactEmail, linkedInUrl, roomNames } from "@/config/feel";
 import { SessionProvider, useSession } from "@/components/session/Session";
 import { Signals } from "@/components/signals/Signals";
-import { bucketKeys, bucketOf, type BucketKey } from "@/lib/buckets";
+import { bucketKeys, type BucketKey } from "@/lib/buckets";
 import { getFeelingPositions, getSignals, getWorkCards } from "@/lib/catalog";
-import { moodFor, type FeelingPositions } from "@/lib/feelings";
+import type { FeelingPositions } from "@/lib/feelings";
 
 // High tier (docs/test-tiers.md): Signals [spec Section 5.7, Gap G26, Res #36]. Strings are D-079, the order is
 // D-068 (findings, your session, the ask, then contact). The session panel reads client memory only.
@@ -142,15 +142,6 @@ describe("Your session panel [Gap G26, Res #36]", () => {
     expect(marked()).toEqual([roomNames[key as BucketKey]]);
     expect(screen.getByText(`Your segment: ${roomNames[key as BucketKey]}`)).toBeTruthy();
     expect(screen.getByText(`Simulated sessions in this segment: ${signals.buckets[key as BucketKey].sessions.toLocaleString("en-US")}`)).toBeTruthy();
-  });
-
-  it("reads the visitor's wheel point through the feeling positions it is given", () => {
-    mount();
-    expect(marked()).toEqual(["Plain Daylight"]);
-    act(() => session.movePoint({ x: 0, y: 1 }));
-    const m = moodFor({ x: 0, y: 1 }, realPositions);
-    expect(bucketOf(m.valence, m.arousal)).not.toBe("mid-mid");
-    expect(marked()).toEqual([roomNames[bucketOf(m.valence, m.arousal)]]);
   });
 
   it("shows the empty bag note when nothing is in the bag", () => {

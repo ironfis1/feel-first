@@ -70,16 +70,19 @@ describe("wallSpanIn and scenePixelsPerInch [D-071]", () => {
     expect(scenePixelsPerInch(0, 144)).toBe(0);
   });
 
+  it("draws an 18 x 24 print and the sofa at their true sizes on a 1000px laptop stage", () => {
+    // Worked by hand: 1000px over 144in is 6.944px an inch. Framed adds 2 x (2in mat + 1.25in frame) = 6.5in.
+    const ppi = scenePixelsPerInch(1000, wallSpanIn(1440));
+    expect(wallSceneReferenceWidthIn.sofa * ppi).toBeCloseTo(583.333, 3);
+    expect(hungInches(portrait, "18x24", "framed").width * ppi).toBeCloseTo(170.139, 3);
+    expect(hungInches(portrait, "18x24", "paper").height * ppi).toBeCloseTo(166.667, 3);
+  });
+
   it("draws each scene's furniture and every print, framed and unframed, at one shared scale", () => {
     const ppi = scenePixelsPerInch(1000, wallSpanIn(1440));
     for (const scene of wallScenes) {
-      // The furniture is its true width on the same wall.
-      expect(wallSceneReferenceWidthIn[scene] * ppi).toBeCloseTo((1000 * wallSceneReferenceWidthIn[scene]) / 144, 9);
       for (const p of printSizes) {
         const framed = hungInches(portrait, p.id, "framed");
-        const paper = hungInches(portrait, p.id, "paper");
-        expect(framed.width * ppi).toBeCloseTo(((p.widthIn + border) * 1000) / 144, 9);
-        expect(paper.height * ppi).toBeCloseTo((p.heightIn * 1000) / 144, 9);
         // A 24-inch-wide framed print beside an 84-inch sofa keeps their real ratio on screen.
         expect((framed.width * ppi) / (wallSceneReferenceWidthIn[scene] * ppi)).toBeCloseTo((p.widthIn + border) / wallSceneReferenceWidthIn[scene], 9);
       }
