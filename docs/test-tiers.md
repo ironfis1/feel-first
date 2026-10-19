@@ -99,6 +99,309 @@ Kept 205, flagged 2, both deleted (flag 6): the Met and Rijksmuseum tests "match
 
 Kept 156, flagged 1. Deleted: workSchema "derives orientation from dimensions" (flag 3, duplicate). The orientation tests through the schema already cover all three branches. Mutation score unchanged by the deletion.
 
+## Triage 2026-10-19 (M5)
+
+| Unit | File | I | Si | Su | C | B | Total | Tier |
+|---|---|---|---|---|---|---|---|---|
+| readBody | src/lib/j2answer.ts | 2 | 2 | 3 | 2 | 3 | 12 | High |
+| RateLimiter (take) | src/lib/j2answer.ts | 2 | 3 | 2 | 3 | 2 | 12 | High |
+| live (private race) | src/lib/j2answer.ts | 3 | 2 | 3 | 3 | 3 | 14 | High |
+| answerJ2 | src/lib/j2answer.ts | 3 | 3 | 3 | 3 | 3 | 15 | High |
+| cache load (j2CacheFileSchema.parse) | src/lib/j2answer.ts | 2 | 2 | 3 | 1 | 3 | 11 | Medium |
+| POST handler | src/app/api/j2/route.ts | 3 | 1 | 3 | 2 | 3 | 12 | High |
+| clientIp | src/app/api/j2/route.ts | 2 | 3 | 2 | 2 | 2 | 11 | Medium |
+| reply | src/app/api/j2/route.ts | 2 | 1 | 3 | 1 | 3 | 10 | Medium |
+| callModel (lazy Anthropic client) | src/app/api/j2/route.ts | 3 | 1 | 3 | 1 | 3 | 11 | Medium |
+| describeMoment | src/lib/describe.ts | 3 | 2 | 3 | 3 | 3 | 14 | High |
+| Room submit, `asked` counter, maxLength | src/components/room/Room.tsx | 3 | 3 | 3 | 3 | 1 | 13 | High |
+| j2ClientTimeoutMs, describeMaxChars, roomTypeScenes, wallView, wallSceneHeightIn, wallHang, photoScale, photoCopy | src/config/feel.ts | 2 | 1 | 2 | 1 | 1 | 7 | Low |
+| configSchema additions and refinements | src/lib/schemas.ts | 2 | 2 | 3 | 2 | 3 | 12 | High |
+| sceneFor | src/lib/wall.ts | 2 | 2 | 2 | 2 | 1 | 9 | Medium |
+| printInches | src/lib/wall.ts | 3 | 3 | 3 | 2 | 2 | 13 | High |
+| hungInches | src/lib/wall.ts | 3 | 3 | 3 | 2 | 2 | 13 | High |
+| wallSpanIn | src/lib/wall.ts | 2 | 3 | 2 | 1 | 1 | 9 | Medium |
+| scenePixelsPerInch | src/lib/wall.ts | 3 | 3 | 3 | 1 | 2 | 12 | High |
+| hangBottomIn | src/lib/wall.ts | 2 | 3 | 2 | 2 | 1 | 10 | Medium |
+| chooseFrame | src/lib/wall.ts | 3 | 3 | 3 | 2 | 1 | 12 | High |
+| photoPixelsPerInch | src/lib/wall.ts | 3 | 3 | 2 | 2 | 2 | 12 | High |
+| Wall | src/components/wall/Wall.tsx | 3 | 3 | 3 | 3 | 1 | 13 | High |
+| PhotoWall | src/components/wall/PhotoWall.tsx | 2 | 3 | 2 | 3 | 1 | 11 | Medium |
+| useWidths | src/components/wall/Hung.tsx | 2 | 2 | 2 | 2 | 1 | 9 | Medium |
+| HungPrint | src/components/wall/Hung.tsx | 2 | 3 | 3 | 2 | 1 | 11 | Medium |
+| finishFill | src/components/wall/Hung.tsx | 1 | 1 | 2 | 1 | 1 | 6 | Low |
+| SceneObject | src/components/wall/Scenes.tsx | 2 | 2 | 2 | 1 | 1 | 8 | Medium |
+| Sofa, Bed, Desk shapes | src/components/wall/Scenes.tsx | 1 | 1 | 2 | 1 | 1 | 6 | Low |
+| select action, Selection state | src/components/session/Session.tsx | 3 | 2 | 3 | 1 | 1 | 10 | Medium |
+| Piece (kept selection, select effect, Add to bag opens Bag) | src/components/piece/Piece.tsx | 3 | 2 | 3 | 3 | 1 | 12 | High |
+| getSignals | src/lib/catalog.ts | 2 | 2 | 3 | 1 | 3 | 11 | Medium |
+| Signals | src/components/signals/Signals.tsx | 3 | 3 | 3 | 2 | 2 | 13 | High |
+| SignalsPage, WallPage | src/app/signals/page.tsx, src/app/wall/page.tsx | 1 | 1 | 2 | 1 | 1 | 6 | Low |
+| withThousands | scripts/j8.ts | 3 | 3 | 3 | 2 | 1 | 12 | High |
+| parseJ8 (applies withThousands) | scripts/j8.ts | 3 | 3 | 3 | 3 | 3 | 15 | High |
+| main() --replay path | scripts/j8.ts | 3 | 2 | 2 | 2 | 2 | 11 | Medium |
+
+### Evidence and required tests
+
+Scoring notes. Silence 3 is given where a wrong output still looks plausible: a scale, a figure, a rate limit that quietly lets spend through. The J2 route is a defined send and return with an outside party and with the browser, so Boundary 3 units carry the J2 functional gates listed in docs/testing.md and the M5 prompt. For `.tsx` files, Stryker should list only the logic line ranges named below.
+
+#### readBody (High)
+- Impact 2: a rejected body falls to the browser word map (route.ts line 31, describe.ts line 27), so the demo continues.
+- Silence 2: a too-loose check lets odd bodies reach the live call and spend money, with no visible sign.
+- Surface 3: the only gate on the route's input, on the describe path.
+- Complexity 2: five branches (j2answer.ts lines 24 to 28).
+- Boundary 3: the request contract `{ "text": 1 to 200 chars }` (D-065).
+- Must test: null, undefined, a string, an array and a number each return null; an object with an extra key returns null; an object with no `text` key returns null; `text` that is not a string returns null; empty and whitespace-only `text` return null; 200 characters returns the text; 201 characters returns null; the text is returned untrimmed.
+- Functional gate: J2 request schema, oversized and malformed cases.
+
+#### RateLimiter.take (High)
+- Impact 2: the limiter guards cost (Gap G18); at the limit the visitor still gets a word-map answer.
+- Silence 3: an off-by-one or a window that never expires still looks like normal answers while spend rises or live answers vanish.
+- Surface 2: one route.
+- Complexity 3: sliding window, pruning of every key on each call, time arithmetic (lines 45 to 53).
+- Boundary 2: it is internal and the route constructs it with config values.
+- Must test: the call at `limit` is allowed and call `limit + 1` is refused; a refused call is not recorded; a call exactly `windowMs` after the first has aged out (`now - t < windowMs` is strict); one millisecond earlier it still counts; two IPs are counted separately; an IP whose calls have all aged out is deleted, so the map does not grow; a constructor with custom limit and window.
+- Functional gate: the rate limit path.
+
+#### live (High)
+- Impact 3: it makes the one paid call; a hang or an exception would break the describe moment.
+- Silence 2: a failure lands on the word map and the visitor sees a plausible answer.
+- Surface 3: the demo path's live branch.
+- Complexity 3: a promise race with a timer, abort, and a synchronous throw wrapped in a promise (lines 58 to 82).
+- Boundary 3: the Anthropic Messages API, which is mocked.
+- Must test: a valid message returns the parsed output; a rejected model call returns null; a spend-limit error (a plain rejection) returns null; a model call that throws synchronously returns null; a malformed or truncated model response (`parseJ2` not ok) returns null; a call slower than `timeoutMs` returns null, aborts the signal, and passes the same signal to `callModel` (fake timers); the timer is cleared on success so none is left pending.
+- Functional gate: the live success, timeout and API error paths.
+
+#### answerJ2 (High)
+- Impact 3: this is J2 path selection (a named High example).
+- Silence 3: a wrong source label or wrong order is invisible to the visitor.
+- Surface 3: the Room's describe box on the demo path.
+- Complexity 3: cache, then limiter, then live, then word map (lines 90 to 96).
+- Boundary 3: the route's internal contract and the `x-j2-source` value.
+- Must test: a cached phrase answers with source "cache", does not consume the limiter, and does not call the model; the lookup uses `normalizePhrase` (case and spacing variants hit); a cache miss with a live success gives "live"; a miss with a live failure gives "fallback" with `interpretWords` output; a miss when the limiter refuses gives "fallback" and the model is not called; a text with no mood word gives `{ source: "fallback", body: null }`; `now` and `timeoutMs` overrides are honored; it never throws.
+- Functional gate: the cache hit, live call, timeout, API error and rate-limited paths, each asserting body shape and source.
+
+#### cache load (Medium)
+- Impact 2: a bad cache would fail the route at import.
+- Silence 2: a wrong but schema-valid cached phrase would answer wrongly.
+- Surface 3: the demo video uses cached phrases.
+- Complexity 1: a single parse (line 20).
+- Boundary 3: the data file contract `data/j2-cache.json`.
+- Must test: the shipped cache file parses under `j2CacheFileSchema`, and every key is already in `normalizePhrase` form (otherwise it can never hit); the demo placeholder phrase resolves to a "cache" answer.
+- Functional gate: data file validation (existing).
+
+#### POST handler (High)
+- Impact 3: the route is the live path.
+- Silence 1: an error status or a crash is visible.
+- Surface 3: the only server call on the demo path.
+- Complexity 2: unparseable JSON, a rejected body, then the answer (lines 28 to 34).
+- Boundary 3: a defined HTTP send and return.
+- Must test, with the SDK module mocked: invalid JSON gives status 400, body null and header `x-j2-source: fallback`; a malformed body, an oversized body (201 characters) and an extra-key body each give the same; a cache hit gives 200, a J2-valid body and source "cache"; a live success gives source "live"; a timeout gives source "fallback" with the word-map body; an API error, including a spend-limit error and a malformed model response, gives "fallback" with no error status; a request past the rate limit gives "fallback"; every response has `cache-control: no-store`; the key never appears in any response body or header.
+- Functional gate: J2 route, all five paths plus the oversized and malformed request cases. The built-bundle key check belongs to the build check.
+
+#### clientIp (Medium)
+- Impact 2: a wrong IP only skews the limiter (everyone shares "unknown", or one visitor can dodge it).
+- Silence 3: it fails quietly.
+- Surface 2: the route only.
+- Complexity 2: header precedence and picking the last forwarded entry (lines 19 to 20).
+- Boundary 2: it depends on the router's header contract.
+- Must test: `x-client-ip` wins over `x-forwarded-for`; with several forwarded entries the last one is used; entries are trimmed; neither header gives "unknown"; an empty forwarded header gives "unknown".
+- Functional gate: none (rate limit path covers it).
+
+#### reply (Medium)
+- Impact 2 / Silence 1: the header or status is wrong, and the client falls back.
+- Surface 3 / Complexity 1.
+- Boundary 3: the `x-j2-source` and `cache-control` contract.
+- Must test, through the POST tests: the header equals the source, the status is respected, and the log line contains only the source (never the text or IP).
+- Functional gate: J2 route response shape (covered under POST).
+
+#### callModel, lazy client (Medium)
+- Impact 3: it holds the key handling and the SDK call options.
+- Silence 1: a missing key throws at once, and the answer falls to the word map.
+- Surface 3 / Complexity 1 (`??=` on line 13).
+- Boundary 3: Anthropic SDK, mocked.
+- Must test: the client is constructed once across calls; `maxRetries: 0`, the signal, and `timeout: j2TimeoutMs` are passed; the request is built by `j2Request(text)`.
+- Functional gate: live call path with the SDK mocked.
+
+#### describeMoment (High)
+- Impact 3: it is the browser side of the describe moment and the D-064 and D-065 fallback.
+- Silence 2: any failure silently becomes a word-map answer.
+- Surface 3: the Room on the demo path.
+- Complexity 3: async, an abort timeout, and several failure exits (lines 11 to 27).
+- Boundary 3: a defined send of `{ text }` and a validated return.
+- Must test, with `fetchImpl` stubbed: empty and whitespace-only text return null without calling fetch; text over 200 characters is cut to 200 before sending; the request body is exactly `{ text }` as JSON by POST with a JSON content type; a valid J2 body is returned as parsed; a non-OK status (route error) answers from `interpretWords`; a non-J2 body (wrong shape, `null` from the route's 400) answers from `interpretWords`; a network error answers from `interpretWords`; unreadable JSON answers from `interpretWords`; a fetch slower than `timeoutMs` (stub honors the abort signal) answers from `interpretWords`; a text with no mood word gives null on every failing path; an unknown extra key in the body does not break `j2OutputSchema` handling.
+- Functional gate: client fallback (D-064): route error, non-J2 body and a request past 5 seconds each answer with no visible error.
+
+#### Room submit, asked counter, maxLength (High)
+- Impact 3: the describe box is the demo video's opening move.
+- Silence 3: an out-of-order answer would move the Room to the wrong mood with no sign.
+- Surface 3: on the demo path.
+- Complexity 3: async with a latest-only ref (Room.tsx lines 64 to 73).
+- Boundary 1: internal.
+- Must test (component test, `describeMoment` mocked): a single submit applies `session.describe` with the point and `{roomType, size}`; a null answer sets the unheard note, does not move the Room and does not count a re-hang (D-052); two submits where the first resolves last apply only the second; typing after an unheard note clears it; the input has `maxLength` 200; a submit with an empty box does not call the session.
+- Functional gate: none beyond the e2e demo path. Stryker range: the submit handler (lines 63 to 75).
+
+#### Config additions in feel.ts (Low)
+- Impact 2 / Silence 1 / Surface 2 / Complexity 1 / Boundary 1: constants. Per docs/testing.md they are covered by the schema check on config.
+- Evidence: j2ClientTimeoutMs = j2TimeoutMs + 1000 (line 102), roomTypeScenes (line 196), wallView (line 202), wallSceneHeightIn (line 205), wallHang (line 208), photoScale (line 211), photoCopy (line 240).
+- Must test: none (Low). Their behavior is tested through wall.ts and the schema.
+- Functional gate: none.
+
+#### configSchema additions and refinements (High)
+- Impact 2: a bad value breaks the config at test or build time.
+- Silence 2: a loose schema lets a wrong scale constant through.
+- Surface 3: the config feeds the Wall, Room and route.
+- Complexity 2: refinements (schemas.ts lines 176 to 178, 191 to 207).
+- Boundary 3: a data and config contract.
+- Must test: the real config passes; client timeout equal to or below the server timeout fails; a default scene outside `wallScenes` fails; a `roomTypeScenes` key not in `roomTypes` fails; a `roomTypeScenes` value not in `wallScenes` fails; a scene missing from `wallSceneHeightIn` fails; a scene missing from `wallSceneReferenceWidthIn` fails; `photoScale` with min length equal to or above max fails; a non-positive `wallView`, `wallHang` or `photoScale` value fails; `describeMaxChars` must be a positive integer.
+- Functional gate: config validation at test time.
+
+#### sceneFor (Medium)
+- Impact 2 / Silence 2: the wrong scene is plausible. Surface 2: the Wall's default. Complexity 2: lookup with a fallback (wall.ts line 22). Boundary 1.
+- Must test: every room type in `roomTypes` maps as in D-061 (bedroom is bed, office is desk, all others are the default); null and undefined give the default scene.
+- Functional gate: none.
+
+#### printInches (High)
+- Impact 3: every size on the Wall depends on it.
+- Silence 3: a swapped orientation looks like a plausible print.
+- Surface 3: Wall, photo mode, hungInches.
+- Complexity 2: long and short sides, orientation branch (lines 29 to 32).
+- Boundary 2: used by other modules.
+- Must test: each print size for a landscape work (width over height), a portrait work, and a square work (the `>` is strict, so a square gives portrait orientation: assert whichever D-061 or Piece does).
+- Functional gate: true-scale math.
+
+#### hungInches (High)
+- Impact 3: framed true size.
+- Silence 3: a missed border looks right.
+- Surface 3 / Complexity 2 / Boundary 2.
+- Must test: paper and canvas equal `printInches`; framed adds `2 * (matWidthIn + frameWidthIn)` to both sides, for each size and both orientations.
+- Functional gate: true-scale math, framed and unframed.
+
+#### wallSpanIn (Medium)
+- Impact 2 / Silence 3: the wrong span rescales everything without notice. Surface 2 / Complexity 1 / Boundary 1.
+- Must test: width 639 gives the narrow span; exactly 640 gives the wide span; 0 gives narrow.
+- Functional gate: none.
+
+#### scenePixelsPerInch (High)
+- Impact 3: the core true-scale claim.
+- Silence 3: a wrong scale looks plausible.
+- Surface 3 / Complexity 1 / Boundary 2.
+- Must test: stage 1440 over 144 in gives 10; stage 390 over 100 in gives 3.9; stage 0 gives 0, so the Wall renders nothing (guarded by `widths.stage > 0` in Wall.tsx line 97); the result for each scene at each print size, framed and unframed, combined with `hungInches`.
+- Functional gate: true-scale math, pixels per inch for each scene at each print size.
+
+#### hangBottomIn (Medium)
+- Impact 2 / Silence 3: a piece placed too low looks plausible. Surface 2 / Complexity 2: max of two formulas (line 55). Boundary 1.
+- Must test: a small print hangs centered on 57 in; a tall piece lowers its bottom edge but stays at the centered value; a piece that would overlap the furniture is raised to scene height plus 8 in, for each scene (sofa 34, bed 44, desk 30); the exact tie point.
+- Functional gate: none.
+
+#### chooseFrame (High)
+- Impact 3: it decides the framed state and price on the Wall (D-073).
+- Silence 3: the wrong material changes the price silently.
+- Surface 3: Wall and Selection.
+- Complexity 2: three branches (lines 63 to 64).
+- Boundary 1.
+- Must test: a finish on paper or canvas makes it framed with that finish; a different finish on framed swaps the finish; null on framed makes it paper and keeps the remembered finish; null on paper or canvas returns the selection unchanged (same reference); no other field changes.
+- Functional gate: frame change updates the selection and creates no bag line (with Wall).
+
+#### photoPixelsPerInch (High)
+- Impact 3: photo mode's scale.
+- Silence 3: an accepted wrong scale looks plausible.
+- Surface 2: off the main path.
+- Complexity 2: two bounds then division (lines 74 to 76).
+- Boundary 2: used by PhotoWall.
+- Must test: length exactly 2 and exactly 200 accepted; 1.99 and 200.01 rejected with "length"; NaN and Infinity rejected with "length"; line exactly 20 px accepted; 19.99 and NaN line rejected with "line"; length is checked before the line (both bad gives "length"); the result is `line / length`.
+- Functional gate: true-scale math for photo mode, including the agreed bounds.
+
+#### Wall (High)
+- Impact 3: the Wall is a demo screen with the Add to bag path.
+- Silence 3: a wrong selection fallback, size or frame changes the price and scale quietly.
+- Surface 3.
+- Complexity 3: fallback, derived state, an object URL lifecycle, and navigation (Wall.tsx lines 46 to 69, 153 to 158).
+- Boundary 1.
+- Must test (component test, `next/navigation` mocked): with no kept selection, the first J3 work for the mood hangs at the Piece defaults, or at the described size via `sizeWordToPrintSize` (D-069); with a kept selection, it is used; the default scene follows the described room type, and null gives the default (D-062); choosing a size updates the selection and the price without a bag line (D-076); choosing a frame updates the selection with no bag line, and "No frame" on a framed print gives paper (D-073); Add to bag creates exactly one line with the current size, material and frame, then pushes `/bag` (D-077); pressed again when already in the bag, it adds no second line and still opens the Bag; the object URL is created on file choice, revoked when replaced and on leaving or unmount (D-067, D-078); the stage renders nothing until measured.
+- Functional gate: frame change creates no bag line; Add to bag creates exactly one line. Stryker range: lines 46 to 69, 119 to 158.
+
+#### PhotoWall (Medium)
+- Impact 2: optional path (Res #12, D-072).
+- Silence 3: the scale is silently wrong if the applied-scale logic slips.
+- Surface 2 / Complexity 3: pointer drawing, keyboard nudge, applied scale kept as a fraction of the stage width (lines 33 to 77) / Boundary 1.
+- Must test: entering a valid length with the starting line applies a scale (`data-ppi` set); an out-of-range length shows `photoCopy.outOfRange`; a too-short line shows `photoCopy.shortLine`; a rejected entry keeps the last applied scale; an empty length shows no note; a keyboard nudge moves one end by 2 px, or 20 px with Shift, and clamps at the photo edge (0 and 1); a nudge re-applies the scale; Left, Right, Up and Down keys and an unrelated key (ignored and not prevented); the scale survives a stage resize (fraction times width).
+- Functional gate: none beyond true-scale math (photoPixelsPerInch).
+
+#### useWidths (Medium)
+- Impact 2 / Silence 2 / Surface 2 / Complexity 2 (callback ref, ResizeObserver, resize listener, cleanup) / Boundary 1.
+- Must test: widths are 0 before an element exists; after attaching they equal the element's client width and the window width; a resize updates them; cleanup disconnects; no `ResizeObserver` does not crash.
+- Functional gate: none.
+
+#### HungPrint (Medium)
+- Impact 2 / Silence 3: a wrong frame or mat width looks plausible. Surface 3 / Complexity 2 / Boundary 1.
+- Must test: unframed renders the art with no frame element; framed pads by `frameWidthIn * ppi` and `matWidthIn * ppi` and sizes the print at `print * ppi`; the finish drives `data-frame` and the fill.
+- Functional gate: none.
+
+#### finishFill, Sofa/Bed/Desk (Low)
+- Constants and markup (Hung.tsx line 10; Scenes.tsx lines 6 to 46). Must test: none (Low). The e2e run covers them.
+
+#### SceneObject (Medium)
+- Impact 2 / Silence 2 / Surface 2 / Complexity 1 / Boundary 1: sizes come from config (Scenes.tsx lines 52 to 56).
+- Must test: for each scene, width and height equal reference width and furniture height times ppi, and the viewBox is the true inch size.
+- Functional gate: none.
+
+#### select, Selection state (Medium)
+- Impact 3 / Silence 2: a lost selection reverts the Wall to defaults. Surface 3 / Complexity 1 (Session.tsx line 88) / Boundary 1.
+- Must test: `select` stores the selection; the selection survives other actions; `select` does not touch the bag.
+- Functional gate: none. SessionProvider stays High from the Part B triage.
+
+#### Piece (High)
+- Impact 3: the Piece is on the demo path and now hands the choice to the Wall.
+- Silence 2: a lost size or frame looks plausible.
+- Surface 3.
+- Complexity 3: initial state from the kept selection and an effect that writes the selection (Piece.tsx lines 31 to 40).
+- Boundary 1.
+- Must test: a kept selection for the same work seeds size, material and finish; a kept selection for a different work is ignored; without one, defaults or the described size apply; changing a choice calls `select` with the full tuple; a finish set while on paper is kept in the selection; Add to bag adds one line and pushes `/bag` (D-077); when already in the bag it adds none and still opens the Bag.
+- Functional gate: Add to bag creates exactly one line with the current size, material and frame.
+
+#### getSignals (Medium)
+- Impact 2: an accessor over a validated file. Silence 2. Surface 3: Signals page on the demo path. Complexity 1. Boundary 3: the signals data contract.
+- Must test: returns a value that satisfies `signalsFileSchema`, with four findings and nine buckets.
+- Functional gate: catalog contract test for `getSignals` against the schema, plus the data file schema check.
+
+#### Signals (High)
+- Impact 3: these are the Signals figures the CEO sees (sessions count, per-segment sessions, finding text).
+- Silence 3: a figure that is slightly off, or the wrong segment, looks plausible.
+- Surface 3: the last screen of the demo path.
+- Complexity 2: bucket lookup, grid position math (lines 31 to 33, 73 to 87).
+- Boundary 2: a data contract with `data/signals.json`.
+- Must test: four findings render, each with a heading, a team label, a segment name, text, and an action; the simulated label is present with the formatted session count; the "you" dot position matches `((valence + 1) / 2)` and `((1 - arousal) / 2)` at the corners, the centre and the exact -1/3 and 1/3 cut points; the highlighted cell is the one for the visitor's bucket, in all nine; the session count for the visitor's segment comes from `signals.buckets[mine]`; the grid has nine cells with charged at the top; bag lines show title, size, material and frame, with a missing work title not crashing; an empty bag shows the empty note; ask and contact (mailto and LinkedIn from config) are present.
+- Functional gate: Signals honesty. A test recomputes every figure shown on Signals (session count, per-segment sessions, and every number cited in the finding text and action) from `data/signals-seed.json` and fails on any mismatch, and asserts four findings, each with an action, and the simulated label. Seed 20261008 determinism (existing J8 seed gate) also applies. Stryker range: lines 29 to 33 and 73 to 87.
+
+#### SignalsPage, WallPage (Low)
+- Pure wiring of catalog accessors into components (signals/page.tsx line 5, wall/page.tsx line 5). Must test: none (Low). The e2e run covers them.
+
+#### withThousands (High)
+- Impact 3: it rewrites numbers in the Signals text.
+- Silence 3: a mangled number (a decimal or a year broken up) still reads plausibly.
+- Surface 3: all four findings on Signals.
+- Complexity 2: a regex with lookarounds (j8.ts line 244).
+- Boundary 1.
+- Must test: 20000 gives 20,000; 1000 gives 1,000; 999 unchanged; 3 digits unchanged; 1234567 gives 1,234,567; an already separated 20,000 unchanged; a decimal such as 1234.5 and 12.3456 unchanged; a trailing sentence period "20000." gives "20,000."; a number inside a word or a range; several numbers in one string; an empty string.
+- Functional gate: none (J8 contract below).
+
+#### parseJ8 (High)
+- Impact 3 / Silence 3 / Surface 3: the figures shown on Signals.
+- Complexity 3: stop reason, JSON parse, per-field rules, then separators (j8.ts lines 248 to 268).
+- Boundary 3: the Anthropic Batches response contract.
+- Must test, against recorded responses: a complete valid response returns trimmed text and action with thousands separators applied to both; a truncated stop reason is rejected; malformed JSON is rejected; non-string text or action is rejected; a number that is not one of the figures is rejected, and the check runs before the separators are added, so a separated number still passes.
+- Functional gate: J8 Batches contract tests against recorded responses, and the seed determinism test.
+
+#### main() --replay path (Medium)
+- Impact 3: it writes data/signals.json. Silence 2: a thrown error on a short count is loud, but a wrong mapping of custom_id would not be. Surface 2: a by-hand script. Complexity 2: file reading, filtering, and a last-success-wins map (lines 297 to 310). Boundary 2: it reads the recorded run files.
+- Must test: against a fixture JSONL, the last accepted result per kind wins; a failed or errored result is skipped; fewer than four accepted findings throws; the written file passes `signalsFileSchema`. Do not call the API.
+- Functional gate: replay of a recorded run (existing J8 gate).
+
+### Where the other asked gates live
+- The network assertions (the photo and the typed text going nowhere beyond `/api/j2`, no other origin contacted) belong to the Playwright e2e demo path, not to a unit. Of the units above, only the POST handler and `describeMoment` send anything, and their tests stub the transport.
+- The bundle key check (no `ANTHROPIC_API_KEY` value or name in the built client bundle) belongs to the build check. No unit carries it. The POST handler tests add the response-side check that no body or header holds the key.
+- The mutation run should list: j2answer.ts, describe.ts, wall.ts, the schemas.ts config refinements, and the named line ranges in Room.tsx, Wall.tsx, Piece.tsx and Signals.tsx, plus `withThousands` and `parseJ8` in scripts/j8.ts.
+
 ## Triage 2026-10-16 (M4, D-059 J4 name-check exemptions)
 
 | Unit | File | I | Si | Su | C | B | Total | Tier |
