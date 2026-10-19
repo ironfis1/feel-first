@@ -451,7 +451,9 @@ const CHECKS = [
       const { j2TimeoutMs } = await import('../../src/config/feel.ts');
       const r = await postJ2({ text: 'rain on the studio skylight after a long week, something to calm me down' });
       if (r.error) return fail(r.error);
-      if (r.status !== 200 || r.source !== 'live') return fail(`${r.status}, x-j2-source ${r.source} after ${r.ms}ms (near ${j2TimeoutMs}ms means the call timed out; much less means it failed or was rate limited)`);
+      // A fallback at or past the timeout is the accepted slow call (D-081); a faster one means the call failed.
+      if (r.status === 200 && r.source === 'fallback' && r.ms >= j2TimeoutMs) return warn(`fallback after ${r.ms}ms: the live call ran past the ${j2TimeoutMs}ms timeout (accepted, D-081)`);
+      if (r.status !== 200 || r.source !== 'live') return fail(`${r.status}, x-j2-source ${r.source} after ${r.ms}ms: the live call failed or was rate limited`);
       if (!Number.isFinite(r.body?.valence) || !Number.isFinite(r.body?.arousal)) return fail(`answered ${JSON.stringify(r.body)}`);
       return r.ms <= j2TimeoutMs ? pass(`live answer in ${r.ms}ms`) : warn(`live answer in ${r.ms}ms, over ${j2TimeoutMs}ms`);
     },

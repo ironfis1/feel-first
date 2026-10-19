@@ -692,6 +692,14 @@ Decision: parseJ8 adds thousands separators to whole numbers of four or more dig
 Why: Scott asked for the sentences to match the label on 2026-10-19.
 Spec reference: Section 3.11, Res #38, D-029.
 
+### D-081: J2 live calls over the timeout are an accepted limit
+Date: 2026-10-19
+Decided by: Scott
+Question: On production, live J2 calls took 2.35s, 2.95s, 3.14s and 4.26s (the first after a restart), and one smoke run fell back, so a novel phrase sometimes misses the 4-second timeout. Local calls took about 2.2s, so the time is mostly the model. Options were to measure first, move J2 alone to a faster model, or accept the occasional fallback.
+Decision: Accept it. The model (D-006), effort and the 4-second timeout (Gap G18) stay as they are. A call over the timeout answers from the word map, as designed, with no error shown. The live smoke check m5.j2-live reports a fallback that took at least the timeout as WARN, and a faster fallback (a failed or rate-limited call) as FAIL.
+Why: Scott chose to accept it on 2026-10-19. The video phrase answers from the cache, and the fallback never shows the visitor an error.
+Spec reference: Section 4 J2, Gap G18, quality-bar Section 2.
+
 ## Open questions
 
 Add new questions here as they come up, in the same format as the decisions above.
