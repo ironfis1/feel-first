@@ -176,7 +176,10 @@ describe("Wall: choices change the selection, never the bag [Gap G20, D-073, D-0
     mount();
     act(() => session.select({ workId: portrait.id, size: "18x24", material: "framed", finish: "black" }));
     open();
+    const pressed = () => screen.getAllByRole("button", { name: / in / }).filter((b) => b.getAttribute("aria-pressed") === "true").map((b) => b.textContent);
+    expect(pressed()).toEqual([`18 x 24 in ${formatPrice(priceOf("18x24", "framed"))}`]);
     fireEvent.click(screen.getByRole("button", { name: /^24 x 36 in/ }));
+    expect(pressed()).toEqual([`24 x 36 in ${formatPrice(priceOf("24x36", "framed"))}`]);
     expect(session.selection).toEqual({ workId: portrait.id, size: "24x36", material: "framed", finish: "black" });
     expect(total()).toBe(formatPrice(priceOf("24x36", "framed")));
     expect(spec()).toBe("24 x 36 in, framed print, black frame");
@@ -194,8 +197,10 @@ describe("Wall: choices change the selection, never the bag [Gap G20, D-073, D-0
     mount();
     act(() => session.select({ workId: portrait.id, size: "18x24", material: "canvas", finish: "black" }));
     open();
-    expect(screen.getByRole("button", { name: "No frame" }).getAttribute("aria-pressed")).toBe("true");
+    const frames = () => screen.getByRole("group", { name: "Frame" }).querySelectorAll('[aria-pressed="true"]');
+    expect([...frames()].map((b) => b.textContent)).toEqual(["No frame"]);
     fireEvent.click(screen.getByRole("button", { name: "Brass" }));
+    expect([...frames()].map((b) => b.textContent)).toEqual(["Brass"]);
     expect(session.selection).toMatchObject({ material: "framed", finish: "brass" });
     expect(spec()).toBe("18 x 24 in, framed print, brass frame");
     fireEvent.click(screen.getByRole("button", { name: "No frame" }));

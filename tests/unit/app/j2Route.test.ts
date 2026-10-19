@@ -154,6 +154,9 @@ describe("clientIp, through the rate limit", () => {
     await exhaust({ "x-client-ip": "a" });
     expect(await sourceFor({ "x-forwarded-for": "9.9.9.9,  a " })).toBe("fallback");
     expect(await sourceFor({ "x-forwarded-for": "a, 9.9.9.9" })).toBe("live");
+    // With three entries, the last is the one the router added, not the second.
+    expect(await sourceFor({ "x-forwarded-for": "8.8.8.8, 7.7.7.7, a" })).toBe("fallback");
+    expect(await sourceFor({ "x-forwarded-for": "8.8.8.8, a, 7.7.7.7" })).toBe("live");
   });
 
   it("counts a request with no IP header, or an empty forwarded header, as unknown", async () => {

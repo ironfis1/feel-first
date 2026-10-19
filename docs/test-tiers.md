@@ -4,6 +4,20 @@ The test-evaluator subagent's triage tables are saved here verbatim, newest firs
 
 ## Mutation results
 
+### 2026-10-19: M5 High-tier files
+
+Overall 94.49% on the M5 run (977 killed, 17 timed out, 58 survived, 1 without coverage). Break threshold 80. Per file: describe.ts 100, wall.ts 100, j8.ts 98.72, j2answer.ts 97.56, Signals.tsx 25-33 and 74-100 96.88, Piece.tsx 28-46 and 116-124 93.33, schemas.ts 92.88, Session.tsx 60-99 90.74, route.ts 12-34 88.89, Room.tsx 27-74 and 160 85.19, Wall.tsx 44-69 and 133-160 80.36. Mutate ranges were moved to follow the M5 line shifts (j8.ts 1-304, Session.tsx 60-99, Room.tsx 27-74 and 160).
+
+Tests were then added for the size and frame pressed states on the Wall and a three-entry x-forwarded-for header; the rerun gave Wall.tsx 89.29 and route.ts 92.59. Accepted survivors:
+- `if (!inBag) session.addToBag(choice)` to `if (true)` on the Wall (156) and the Piece (120): addLine already leaves the bag unchanged for a line already in it, so the guard only saves a no-op.
+- Wall.tsx 54 (initial paint ""), 143 (the No frame button's React key), 144 (the finish swatch): the paint is killed by the rewritten paint test from the sweep; the key and swatch are markup.
+- route.ts 19 (`?.at(-1).trim()`: split always returns at least one entry) and 20 (`"unknown"` to `""`: every request with no IP still shares one key).
+- j2answer.ts 26 (`keys[0] !== "text"` to false: a single other key has no text and is rejected on the next line) and 76 (`null` to `undefined` from the timeout: both read as no answer).
+- j8.ts 85 (tie comparator on unique bucket and group strings), 254 (`block.type !== "text"`: the find already picks a text block), 282 (`result.type !== "succeeded"`: only a succeeded result carries a message), 25 (the script root, used only by main()).
+- Room.tsx 67 (`--asked`: still a fresh number for each submission), and the M4-accepted Room survivors at 31, 39, 41, 46 and 66.
+- Signals.tsx 89 (the Your bag heading's class names): styling only.
+- Session.tsx and schemas.ts: the M4- and M3-accepted survivors (hook dependency arrays, the `display: contents` wrapper, issue codes and error wording).
+
 ### 2026-10-16: j4-rules.ts after D-059
 
 j4-rules.ts 84.58% (203 killed or timed out, 37 survived, 0 without coverage), down from 96.70. Break threshold 80. 31 of the survivors are single entries of the notNames list (lines 93 to 96) emptied to "": the triage tiers notNames Low and says not to test its contents entry by entry, and the tests cover each group through lineProblems (days, months, a holiday, pronouns). The other 6 are the accepted M3 survivors (lines 41, 46, 48, 49, 86).
