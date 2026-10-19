@@ -125,6 +125,17 @@ function catalogSample({ onePerSource = false } = {}) {
   return [...new Set(picks.filter(Boolean))];
 }
 
+/** POSTs a body to the J2 route and reads its answer path, status, body and time (D-066). */
+async function postJ2(body) {
+  try {
+    const { res, ttfbMs } = await get(`${baseUrl}/api/j2`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+    const headers = Object.fromEntries(res.headers);
+    return { status: res.status, source: res.headers.get('x-j2-source'), body: await res.json(), headers, ms: ttfbMs, error: null };
+  } catch (err) {
+    return { error: err.message };
+  }
+}
+
 const pass = (detail) => ({ status: 'PASS', detail });
 const fail = (detail) => ({ status: 'FAIL', detail });
 const warn = (detail) => ({ status: 'WARN', detail });
@@ -418,10 +429,117 @@ const CHECKS = [
     },
   },
 
+  // ---------- M5 live AI, Wall and Signals ----------
+  {
+    id: 'm5.j2-cache',
+    description: 'J2 answers a pre-warmed phrase from the cache',
+    async run() {
+      const { describePlaceholder } = await import('../../src/config/feel.ts');
+      const r = await postJ2({ text: describePlaceholder });
+      if (r.error) return fail(r.error);
+      if (r.status !== 200 || r.source !== 'cache') return fail(`${r.status}, x-j2-source ${r.source}`);
+      if (r.body?.roomType !== 'bedroom' || r.body?.size !== 'large') return fail(`answered ${JSON.stringify(r.body)}`);
+      return pass(`cache answered in ${r.ms}ms: bedroom, large`);
+    },
+  },
+  {
+    id: 'm5.j2-live',
+    costly: true,
+    description: 'J2 answers a novel phrase from a live call within 4 seconds',
+    async run() {
+      // One novel phrase, never in the cache. Costs a fraction of a cent and counts toward this IP's hourly limit.
+      const { j2TimeoutMs } = await import('../../src/config/feel.ts');
+      const r = await postJ2({ text: 'rain on the studio skylight after a long week, something to calm me down' });
+      if (r.error) return fail(r.error);
+      if (r.status !== 200 || r.source !== 'live') return fail(`${r.status}, x-j2-source ${r.source} (fallback means the live call failed, timed out or was rate limited)`);
+      if (!Number.isFinite(r.body?.valence) || !Number.isFinite(r.body?.arousal)) return fail(`answered ${JSON.stringify(r.body)}`);
+      return r.ms <= j2TimeoutMs ? pass(`live answer in ${r.ms}ms`) : warn(`live answer in ${r.ms}ms, over ${j2TimeoutMs}ms`);
+    },
+  },
+  {
+    id: 'm5.j2-bad-request',
+    description: 'J2 turns away an oversized or malformed body with 400 and the fallback header, no model call',
+    async run() {
+      const { describeMaxChars } = await import('../../src/config/feel.ts');
+      const problems = [];
+      const cases = [
+        ['oversized', { text: 'a'.repeat(describeMaxChars + 1) }],
+        ['extra key', { text: 'calm', mood: [0, 0] }],
+      ];
+      for (const [label, body] of cases) {
+        const r = await postJ2(body);
+        if (r.error) problems.push(`${label}: ${r.error}`);
+        else if (r.status !== 400 || r.source !== 'fallback' || r.body !== null) problems.push(`${label}: ${r.status}, ${r.source}, ${JSON.stringify(r.body)}`);
+      }
+      return problems.length ? fail(problems.join('; ')) : pass('oversized and extra-key bodies answered 400 with x-j2-source fallback');
+    },
+  },
+  {
+    id: 'm5.wall',
+    description: 'The Wall serves its scene stage, its scene, color, size, frame and photo choices, and Add to bag',
+    async run() {
+      const p = await page('wall');
+      if (p.status !== 200) return fail(`wall returned ${p.error ?? p.status}`);
+      const text = visibleText(p.html);
+      const missing = ['Scene', 'Wall color', 'Size', 'Frame', 'No frame', 'Use a photo of your wall', 'Add to bag'].filter((w) => !text.includes(w));
+      if (!/data-scene="(sofa|bed|desk)"/.test(p.html)) missing.push('the scene stage');
+      return missing.length ? fail(`missing ${missing.join(', ')}`) : pass('scene stage and every Wall choice present');
+    },
+  },
+  {
+    id: 'm5.signals',
+    description: 'Signals shows four findings, each action, the simulated label, the ask and the contact',
+    async run() {
+      const signals = JSON.parse(await readFile(path.join(here, '../../data/signals.json'), 'utf8'));
+      const { contactEmail } = await import('../../src/config/feel.ts');
+      const p = await page('signals');
+      if (p.status !== 200) return fail(`signals returned ${p.error ?? p.status}`);
+      const text = visibleText(p.html);
+      const want = ['Simulated data.', 'Next step', 'licensed SKUs', contactEmail, ...signals.findings.flatMap((f) => [f.text, f.action])];
+      const missing = want.filter((w) => !text.includes(w));
+      if (signals.findings.length !== 4) missing.push(`four findings (file has ${signals.findings.length})`);
+      return missing.length ? fail(`missing: ${missing.map((m) => m.slice(0, 40)).join(' | ')}`) : pass('four findings with their actions, the label, the ask and the contact');
+    },
+  },
+  {
+    id: 'm5.key-not-served',
+    description: 'No served page, script or J2 response holds the Anthropic key or its variable name',
+    async run() {
+      // The key value, when it is available here, is read from the environment or .env.local and never printed.
+      if (!process.env.ANTHROPIC_API_KEY) {
+        try {
+          process.loadEnvFile(path.join(here, '../../.env.local'));
+        } catch {
+          // No local key: the check still looks for the variable name.
+        }
+      }
+      const name = 'ANTHROPIC_API_KEY';
+      const value = process.env[name];
+      const leaks = (s) => s.includes(name) || Boolean(value && s.includes(value));
+      const pages = await allPages();
+      const problems = [];
+      const scripts = new Set();
+      for (const p of pages) {
+        if (leaks(p.html)) problems.push(`${p.routeName} page`);
+        for (const m of p.html.matchAll(/\/_next\/static\/[\w./-]+\.js/g)) scripts.add(m[0]);
+      }
+      for (const src of scripts) {
+        try {
+          const { res } = await get(new URL(src, baseUrl).href);
+          if (leaks(await res.text())) problems.push(src);
+        } catch (err) {
+          problems.push(`${src}: ${err.message}`);
+        }
+      }
+      const r = await postJ2({ text: 'calm' });
+      if (r.error) problems.push(`j2: ${r.error}`);
+      else if (leaks(JSON.stringify(r.body) + JSON.stringify(r.headers))) problems.push('j2 response');
+      if (!scripts.size) problems.push('no scripts found to check');
+      return problems.length ? fail(`key found or unchecked: ${problems.join(', ')}`) : pass(`${pages.length} pages, ${scripts.size} scripts and a J2 response clean${value ? '' : ' (name only; no key value here)'}`);
+    },
+  },
+
   // ---------- planned for later milestones ----------
-  { id: 'm5.j2-cache', pending: 'M5', description: 'J2 answers a pre-warmed phrase from the cache' },
-  { id: 'm5.j2-live', pending: 'M5', costly: true, description: 'J2 answers a novel phrase from a live call within 4 seconds' },
-  { id: 'm5.signals', pending: 'M5', description: 'Signals screen shows four findings and the simulated label' },
   { id: 'm7.cost-line', pending: 'M7', description: 'Cost line is visible with real N and X' },
 ];
 

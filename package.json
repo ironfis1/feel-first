@@ -7,6 +7,7 @@
     "dev": "next dev",
     "prebuild": "node scripts/validate-data.ts",
     "build": "next build",
+    "postbuild": "node scripts/check-bundle.mjs",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
