@@ -700,6 +700,14 @@ Decision: Accept it. The model (D-006), effort and the 4-second timeout (Gap G18
 Why: Scott chose to accept it on 2026-10-19. The video phrase answers from the cache, and the fallback never shows the visitor an error.
 Spec reference: Section 4 J2, Gap G18, quality-bar Section 2.
 
+### D-082: The J2 log line names the kind of failure
+Date: 2026-10-19
+Decided by: Scott
+Question: The route logged only "j2 fallback", so the first production fallbacks (a missing key, then a timeout) had to be diagnosed by timing requests by hand.
+Decision: A fallback logs its kind: "j2 fallback: refused body", "rate limited", "timeout", "rejected" (a response J2's parser turns down), or "api error" with the HTTP status when the error carries one (for example "api error 401"). Cache and live answers log the bare path as before. The log never holds the visitor's text, the IP, the error message or the key.
+Why: Scott approved it on 2026-10-19.
+Spec reference: Section 4 J2, D-066, CLAUDE.md (secrets and visitor data).
+
 ## Open questions
 
 Add new questions here as they come up, in the same format as the decisions above.

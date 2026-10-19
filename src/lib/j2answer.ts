@@ -1,6 +1,7 @@
 // The J2 route's answer order: cache, rate limit, live call, word map [spec Section 4 J2, docs/ai-jobs.md J2].
 // Server only. The route handler supplies the live call, so this file never touches the SDK or the key, and
-// tests drive every path with a stub. Nothing here logs; the route logs the answer path and nothing else.
+// tests drive every path with a stub. Nothing here logs; the route logs the answer path and, for a fallback,
+// the kind of failure (D-082). Neither ever holds the visitor's text or the key.
 
 import cacheData from "../../data/j2-cache.json";
 import { describeMaxChars, j2RateLimit, j2TimeoutMs } from "../config/feel.ts";
@@ -11,8 +12,14 @@ import { interpretWords } from "./wordmap.ts";
 /** Which path answered, reported in the x-j2-source header [D-066]. */
 export type J2Source = "cache" | "live" | "fallback";
 
-/** A route answer. The body is the J2 output, or null when the word map heard no mood word [D-052]. */
-export type J2Answer = { source: J2Source; body: J2Output | null };
+/** Why a submission fell back to the word map, for the server log only [D-082]. */
+export type FallbackReason = "rate limited" | "timeout" | "rejected" | "api error" | `api error ${number}`;
+
+/**
+ * A route answer. The body is the J2 output, or null when the word map heard no mood word [D-052].
+ * A fallback carries the reason the live call did not answer.
+ */
+export type J2Answer = { source: "cache" | "live"; body: J2Output | null } | { source: "fallback"; body: J2Output | null; reason: FallbackReason };
 
 /** The live call: one Messages API request for the text, abandoned when the signal aborts. */
 export type CallModel = (text: string, signal: AbortSignal) => Promise<J2Message>;
@@ -54,14 +61,20 @@ export class RateLimiter {
   }
 }
 
-/** The live answer, or null on an API error, a spend-limit error, a timeout or a response J2 rejects. */
-async function live(text: string, callModel: CallModel, timeoutMs: number): Promise<J2Output | null> {
+/** The HTTP status of an API error (401, 429, 529 and so on), never its message. */
+function apiError(err: unknown): FallbackReason {
+  const status = (err as { status?: unknown } | null)?.status;
+  return typeof status === "number" && Number.isInteger(status) ? `api error ${status}` : "api error";
+}
+
+/** The live answer, or why there is none: an API or spend-limit error, a timeout, or a response J2 rejects. */
+async function live(text: string, callModel: CallModel, timeoutMs: number): Promise<{ value: J2Output } | { reason: FallbackReason }> {
   const controller = new AbortController();
   let timer: ReturnType<typeof setTimeout> | undefined;
-  const timedOut = new Promise<null>((resolve) => {
+  const timedOut = new Promise<{ reason: FallbackReason }>((resolve) => {
     timer = setTimeout(() => {
       controller.abort();
-      resolve(null);
+      resolve({ reason: "timeout" });
     }, timeoutMs);
   });
   try {
@@ -71,9 +84,9 @@ async function live(text: string, callModel: CallModel, timeoutMs: number): Prom
       .then(
         (message) => {
           const parsed = parseJ2(message, text);
-          return parsed.ok ? parsed.value : null;
+          return parsed.ok ? { value: parsed.value } : { reason: "rejected" as const };
         },
-        () => null,
+        (err: unknown) => ({ reason: apiError(err) }),
       );
     return await Promise.race([answered, timedOut]);
   } finally {
@@ -89,9 +102,8 @@ export async function answerJ2(
 ): Promise<J2Answer> {
   const cached = cache[normalizePhrase(text)];
   if (cached) return { source: "cache", body: cached };
-  if (deps.limiter.take(ip, deps.now ?? Date.now())) {
-    const answer = await live(text, deps.callModel, deps.timeoutMs ?? j2TimeoutMs);
-    if (answer) return { source: "live", body: answer };
-  }
-  return { source: "fallback", body: interpretWords(text) };
+  if (!deps.limiter.take(ip, deps.now ?? Date.now())) return { source: "fallback", body: interpretWords(text), reason: "rate limited" };
+  const answer = await live(text, deps.callModel, deps.timeoutMs ?? j2TimeoutMs);
+  if ("value" in answer) return { source: "live", body: answer.value };
+  return { source: "fallback", body: interpretWords(text), reason: answer.reason };
 }

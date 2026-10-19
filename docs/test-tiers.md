@@ -18,6 +18,11 @@ Tests were then added for the size and frame pressed states on the Wall and a th
 - Signals.tsx 89 (the Your bag heading's class names): styling only.
 - Session.tsx and schemas.ts: the M4- and M3-accepted survivors (hook dependency arrays, the `display: contents` wrapper, issue codes and error wording).
 
+After D-082 (the fallback reason in the log), rerun on j2answer.ts and route.ts 12-38: j2answer.ts 97.00, route.ts 90.91. New accepted survivors:
+- j2answer.ts 67 (`typeof status === "number" && Number.isInteger(status)`, the typeof check to true or `&&` to `||`): Number.isInteger is false for every non-number, so the typeof check only documents the type.
+- route.ts 34 (`answer.source === "fallback" ? answer.reason : undefined` to always `answer.reason`): a cache or live answer has no reason, so both log the bare path.
+- route.ts 20 and 21 and j2answer.ts 33: the survivors already accepted above, at their shifted lines.
+
 ### 2026-10-16: j4-rules.ts after D-059
 
 j4-rules.ts 84.58% (203 killed or timed out, 37 survived, 0 without coverage), down from 96.70. Break threshold 80. 31 of the survivors are single entries of the notNames list (lines 93 to 96) emptied to "": the triage tiers notNames Low and says not to test its contents entry by entry, and the tests cover each group through lineProblems (days, months, a holiday, pronouns). The other 6 are the accepted M3 survivors (lines 41, 46, 48, 49, 86).

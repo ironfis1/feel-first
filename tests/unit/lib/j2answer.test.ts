@@ -130,17 +130,24 @@ describe("answerJ2: cache, rate limit, live, word map", () => {
     expect(signal.aborted).toBe(false);
   });
 
-  it("an API error, a spend-limit error and a synchronous throw land on the word map", async () => {
+  it("an API error, a spend-limit error and a synchronous throw land on the word map, with the status only [D-082]", async () => {
     const spendLimit = Object.assign(new Error("400 Your credit balance is too low"), { status: 400 });
-    const failures: CallModel[] = [
-      vi.fn(async () => Promise.reject(new Error("529 overloaded"))),
-      vi.fn(async () => Promise.reject(spendLimit)),
-      vi.fn(() => {
-        throw new Error("thrown at once");
-      }),
+    const unauthorized = Object.assign(new Error("401 invalid x-api-key"), { status: 401 });
+    const failures: [CallModel, string][] = [
+      [vi.fn(async () => Promise.reject(new Error("529 overloaded"))), "api error"],
+      [vi.fn(async () => Promise.reject(spendLimit)), "api error 400"],
+      [vi.fn(async () => Promise.reject(unauthorized)), "api error 401"],
+      [vi.fn(async () => Promise.reject(Object.assign(new Error("odd"), { status: "401" }))), "api error"],
+      [vi.fn(async () => Promise.reject(null)), "api error"],
+      [
+        vi.fn(() => {
+          throw new Error("thrown at once");
+        }),
+        "api error",
+      ],
     ];
-    for (const callModel of failures) {
-      expect(await answerJ2(novel, "ip", deps(callModel))).toEqual({ source: "fallback", body: interpretWords(novel) });
+    for (const [callModel, reason] of failures) {
+      expect(await answerJ2(novel, "ip", deps(callModel))).toEqual({ source: "fallback", body: interpretWords(novel), reason });
     }
   });
 
@@ -153,7 +160,7 @@ describe("answerJ2: cache, rate limit, live, word map", () => {
       { stop_reason: "end_turn", content: [] },
     ];
     for (const m of bad) {
-      expect(await answerJ2(novel, "ip", deps(vi.fn(async () => m)))).toEqual({ source: "fallback", body: interpretWords(novel) });
+      expect(await answerJ2(novel, "ip", deps(vi.fn(async () => m)))).toEqual({ source: "fallback", body: interpretWords(novel), reason: "rejected" });
     }
   });
 
@@ -168,7 +175,7 @@ describe("answerJ2: cache, rate limit, live, word map", () => {
     await vi.advanceTimersByTimeAsync(49);
     expect(given?.aborted).toBe(false);
     await vi.advanceTimersByTimeAsync(1);
-    expect(await pending).toEqual({ source: "fallback", body: interpretWords(novel) });
+    expect(await pending).toEqual({ source: "fallback", body: interpretWords(novel), reason: "timeout" });
     expect(given?.aborted).toBe(true);
   });
 
@@ -194,7 +201,7 @@ describe("answerJ2: cache, rate limit, live, word map", () => {
     const callModel = answers();
     const limiter = new RateLimiter(1, 1000);
     expect((await answerJ2(novel, "ip", { callModel, limiter, now: 0 })).source).toBe("live");
-    expect(await answerJ2(novel, "ip", { callModel, limiter, now: 10 })).toEqual({ source: "fallback", body: interpretWords(novel) });
+    expect(await answerJ2(novel, "ip", { callModel, limiter, now: 10 })).toEqual({ source: "fallback", body: interpretWords(novel), reason: "rate limited" });
     expect(callModel).toHaveBeenCalledTimes(1);
   });
 

@@ -40,7 +40,7 @@
     "src/components/room/Room.tsx:27-74",
     "src/components/room/Room.tsx:160-160",
     "src/lib/j2answer.ts",
-    "src/app/api/j2/route.ts:12-34",
+    "src/app/api/j2/route.ts:12-38",
     "src/lib/describe.ts",
     "src/lib/wall.ts",
     "src/components/wall/Wall.tsx:44-69",

@@ -168,11 +168,13 @@ describe("clientIp, through the rate limit", () => {
 });
 
 describe("reply: the log line", () => {
-  it("logs only the answer path, never the text or the IP", async () => {
+  it("logs the answer path and a fallback's kind of failure, never the text, the IP or the error message [D-082]", async () => {
     create.mockResolvedValue(modelReply(liveBody));
     await post({ text: novel }, { "x-client-ip": "203.0.113.7" });
     await post({ text: describePlaceholder });
     await post({ text: "a".repeat(201) });
-    expect(log.mock.calls).toEqual([["j2 live"], ["j2 cache"], ["j2 fallback"]]);
+    create.mockRejectedValue(Object.assign(new Error("401 invalid x-api-key sk-ant-secret"), { status: 401 }));
+    await post({ text: novel }, { "x-client-ip": "203.0.113.7" });
+    expect(log.mock.calls).toEqual([["j2 live"], ["j2 cache"], ["j2 fallback: refused body"], ["j2 fallback: api error 401"]]);
   });
 });
