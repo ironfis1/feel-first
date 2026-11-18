@@ -708,6 +708,14 @@ Decision: A fallback logs its kind: "j2 fallback: refused body", "rate limited",
 Why: Scott approved it on 2026-10-19.
 Spec reference: Section 4 J2, D-066, CLAUDE.md (secrets and visitor data).
 
+### D-083: Security headers on every route
+Date: 2026-11-18
+Decided by: Scott
+Question: The security-check scanner (its check C06-2) needs the final 200 for https://art.reasinger.net/ to carry Strict-Transport-Security with max-age at least 15552000, an enforcing Content-Security-Policy with frame-ancestors 'self', X-Content-Type-Options nosniff and Referrer-Policy, with no version number in Server or X-Powered-By. The spec does not cover response headers.
+Decision: next.config.ts sends four headers on every route through headers(): Strict-Transport-Security max-age=31536000 (no includeSubDomains, no preload), an enforcing Content-Security-Policy, X-Content-Type-Options nosniff and Referrer-Policy strict-origin-when-cross-origin. poweredByHeader is false. The CSP is static. A nonce would force dynamic rendering and undo cacheComponents and partialPrefetching, so there is none. script-src allows 'unsafe-inline' for the inline scripts Next writes into prerendered pages. This is the known weakness. style-src allows 'unsafe-inline' for React style attributes. img-src lists the five source-institution image origins (D-001) plus 'self' and blob: for photo mode. 'unsafe-eval' is added only under next dev.
+Why: Scott's security headers handoff of 2026-11-18. Other reasinger.net subdomains are hosted elsewhere, so HSTS stays on this host only.
+Spec reference: none (response headers are outside the spec); D-001 (full-size images linked from the source institutions); CLAUDE.md (no analytics or tracking scripts).
+
 ## Open questions
 
 Add new questions here as they come up, in the same format as the decisions above.
