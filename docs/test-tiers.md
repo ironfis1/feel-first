@@ -126,6 +126,91 @@ Kept 205, flagged 2, both deleted (flag 6): the Met and Rijksmuseum tests "match
 
 Kept 156, flagged 1. Deleted: workSchema "derives orientation from dimensions" (flag 3, duplicate). The orientation tests through the schema already cover all three branches. Mutation score unchanged by the deletion.
 
+## Triage 2026-11-18 (security-headers)
+
+| Unit | File | I | Si | Su | C | B | Total | Tier |
+|---|---|---|---|---|---|---|---|---|
+| imageOrigins | next.config.ts | 3 | 3 | 2 | 1 | 3 | 12 | High |
+| contentSecurityPolicy(dev) | next.config.ts | 3 | 2 | 3 | 2 | 3 | 13 | High |
+| securityHeaders(dev) | next.config.ts | 2 | 3 | 3 | 1 | 3 | 12 | High |
+| nextConfig.poweredByHeader | next.config.ts | 1 | 2 | 3 | 1 | 3 | 10 | Medium |
+| nextConfig.headers() | next.config.ts | 2 | 3 | 3 | 2 | 3 | 13 | High |
+
+### Evidence and required tests
+
+#### imageOrigins (High)
+- Impact 3: the list feeds `img-src` (line 22). A catalog origin missing from it makes the browser block the full-size image on the Piece screen, which is a demo-path screen.
+- Silence 3: a blocked image only shows in the browser console and as a missing image. No build, server or unit failure occurs. `data/catalog.json` has 600 `imageUrl` entries across 5 origins (artic.edu, images.metmuseum.org, iiif.micr.io, d2pn8kiwq2w21t.cloudfront.net, tile.loc.gov). A new ingest source would be blocked without anyone being told. The comment at lines 3-4 says a unit test is meant to guard this, but no test references `imageOrigins` (Grep found only next.config.ts).
+- Surface 2: used only by the CSP, but the effect lands on the Piece screen.
+- Complexity 1: a constant array.
+- Boundary 3: it must match the `imageUrl` data contract in catalog.json (D-001).
+- Must test:
+  - Every `imageUrl` in `data/catalog.json` has an origin in `imageOrigins`, compared by exact scheme plus host, with no path or trailing slash.
+  - Every entry in `imageOrigins` is https and has no wildcard.
+  - Entries are origins only, with no path and no duplicates.
+  - Every origin in the list is used by at least one catalog entry, so the list stays tight.
+  - An `imageUrl` whose host is a subdomain or a lookalike of an allowed origin (for example `artic.edu.evil.com`) is not accepted.
+- Functional gate: catalog data contract gate. The data-file zod validation includes a check that `imageUrl` origins are a subset of `imageOrigins`, in tests and at build time.
+
+#### contentSecurityPolicy(dev) (High)
+- Impact 3: the policy is enforcing (D-083). A bad directive breaks scripts, styles or images on every route. A missing directive fails the C06-2 enforcing-CSP and frame-ancestors checks.
+- Silence 2: a broken policy shows in the browser console. Weakening it, such as an accidental `unsafe-eval` in production (line 20) or dropping `frame-ancestors`, looks fine on screen.
+- Surface 3: applied to every route through `headers()` (line 52).
+- Complexity 2: the `dev` ternary on line 20, a join over directives, and interpolation of `imageOrigins` on line 22.
+- Boundary 3: the output is a defined send to browsers and to the external security scanner (C06-2).
+- Must test:
+  - `contentSecurityPolicy(false)` has no `unsafe-eval` anywhere.
+  - `contentSecurityPolicy(true)` has `'unsafe-eval'` only in `script-src`.
+  - `frame-ancestors 'self'` is present in both modes.
+  - `default-src 'self'`, `object-src 'none'`, `base-uri 'self'` and `form-action 'self'` are present.
+  - `img-src` contains `'self'`, `blob:` and every `imageOrigins` entry, separated by single spaces.
+  - Directives are separated by "; " with no empty directive and no trailing semicolon.
+  - Each directive name appears exactly once, because duplicate directives are ignored by browsers.
+  - There is no wildcard `*` source and no `http:` source.
+  - `connect-src` is `'self'` only, which is a regression guard against adding outside APIs (the Anthropic key stays server-side).
+- Functional gate: security-header contract. This is the scanner-facing check (C06-2): enforcing CSP with frame-ancestors, run against the built output. It can be added to the live smoke as a check on art.reasinger.net.
+
+#### securityHeaders(dev) (High)
+- Impact 2: wrong headers fail the external scan and weaken the site. The demo itself continues.
+- Silence 3: a removed or mistyped header or value (`max-age`, `nosniff`, key spelling) has no visible effect. Only the scanner or a header inspection shows it. The lines 36-39 values can be wrong while the site looks fine.
+- Surface 3: the same header set goes on every route.
+- Complexity 1: a literal array that passes `dev` through.
+- Boundary 3: the output is a defined send to the scanner (C06-2).
+- Must test:
+  - Exactly four headers with the exact keys: Strict-Transport-Security, Content-Security-Policy, X-Content-Type-Options and Referrer-Policy.
+  - HSTS `max-age` is at least 15552000 (the value is 31536000).
+  - HSTS has no `includeSubDomains` and no `preload`, because other reasinger.net subdomains are hosted elsewhere.
+  - `X-Content-Type-Options` is exactly `nosniff`.
+  - `Referrer-Policy` is a non-empty, accepted value.
+  - The CSP value equals `contentSecurityPolicy(dev)` for both `dev` values.
+  - No header is duplicated.
+- Functional gate: the same security-header contract as above. It adds a post-deploy smoke check that fetches `/` on production and asserts all four headers.
+
+#### nextConfig.poweredByHeader (Medium)
+- Impact 1: removing `X-Powered-By` is hardening only, and the site works either way.
+- Silence 2: if the line is lost, Next sends `X-Powered-By: Next.js`. Nothing on screen changes, and only the scanner's no-version-in-header check notices (the version number leaks only if a version is appended, so this is borderline).
+- Surface 3: it affects every response (line 49).
+- Complexity 1: a boolean flag.
+- Boundary 3: the effect is on the response sent to the scanner (C06-2).
+- Must test:
+  - The default export has `poweredByHeader === false`.
+  - `Server` and `X-Powered-By` carry no version in the live smoke (fold into the header smoke check).
+- Functional gate: the same live security-header smoke check. A unit assertion on the config is the cheap part.
+
+#### nextConfig.headers() (High)
+- Impact 2: it wires the headers onto routes. If the wiring is wrong, every header silently disappears.
+- Silence 3: a wrong `source` pattern or a wrong dev flag leaves the site working with no headers. This is the line 52 failure mode: `source: "/:path*"` covers all paths including `/`, but a typo narrows it silently. Using `NODE_ENV === "development"` also means a mistake there would put `unsafe-eval` into production.
+- Surface 3: every route.
+- Complexity 2: an async function, a route matcher and an environment branch.
+- Boundary 3: a defined send to browsers and the scanner.
+- Must test:
+  - `headers()` resolves to one entry with `source` equal to `/:path*`.
+  - Its headers equal `securityHeaders(false)` when `NODE_ENV` is `production`.
+  - Its headers equal `securityHeaders(true)` when `NODE_ENV` is `development`.
+  - The CSP is without `unsafe-eval` when `NODE_ENV` is `test`, because only `development` enables it.
+  - The matcher covers `/`, a nested path, and an API route such as the J2 route.
+- Functional gate: the same security-header contract. After the build, headers are fetched from the production server on `/`, a Piece route and an API route, and all four are asserted. The live smoke covers the `/` check on art.reasinger.net.
+
 ## Triage 2026-10-19 (M5)
 
 | Unit | File | I | Si | Su | C | B | Total | Tier |
