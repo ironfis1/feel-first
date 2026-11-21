@@ -716,6 +716,14 @@ Decision: next.config.ts sends five headers on every route through headers(): St
 Why: Scott's security headers handoff of 2026-11-18. Other reasinger.net subdomains are hosted elsewhere, so HSTS stays on this host only.
 Spec reference: none (response headers are outside the spec); D-001 (full-size images linked from the source institutions); CLAUDE.md (no analytics or tracking scripts).
 
+### D-084: Security upgrade of next and zod, and zod without eval
+Date: 2026-11-21
+Decided by: Scott
+Question: npm audit reported a critical advisory for next 16.4.0 (fixed in 16.4.6), including remote code execution in the image optimizer, and a high advisory for zod below 4.6.6. Separately, zod's compiled fast path probes for eval with Function(""), which the enforcing CSP (D-083) blocks, so /room raised one CSP violation event in the browser.
+Decision: next goes to 16.4.6, the latest 16.4.x patch, pinned exactly in package.json and the lockfile. zod goes to 4.6.7. The upgrade is made with npm; the `next upgrade --agent=security` command is not used. App code imports z from src/lib/zod.ts, which sets z.config({ jitless: true }) before any schema is built, so zod never probes for eval. Scripts in scripts/ run in Node, outside any CSP, and still import zod directly.
+Why: Scott's security upgrade handoff of 2026-11-21. Closing a critical advisory on the deployed app comes before any other M6 work.
+Spec reference: none (dependency versions and response headers are outside the spec); D-083 (the CSP that forbids eval).
+
 ## Open questions
 
 Add new questions here as they come up, in the same format as the decisions above.

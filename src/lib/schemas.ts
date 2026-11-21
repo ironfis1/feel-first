@@ -1,7 +1,7 @@
 // zod schemas for the data contracts (docs/testing.md, D-014).
 // Data files are validated against these when they load, so a bad file fails the build.
 
-import { z } from "zod";
+import { z } from "./zod.ts";
 import { frameFinishes, materials, printSizes, roomTypes, sizeWordToPrintSize } from "../config/feel.ts";
 import { bucketKeys, type BucketKey } from "./buckets.ts";
 import { inventedHeard, j2OutputSchema, normalizePhrase } from "./j2.ts";
