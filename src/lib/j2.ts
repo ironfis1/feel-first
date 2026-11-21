@@ -3,7 +3,7 @@
 // answers here, so cached answers and live answers can never drift apart.
 // This module never reads the API key and never sends anything itself.
 
-import { z } from "zod";
+import { z } from "./zod.ts";
 import { claudeEffort, claudeModel, roomTypes, sizeWordToPrintSize } from "../config/feel.ts";
 
 const sizeWords = Object.keys(sizeWordToPrintSize) as (keyof typeof sizeWordToPrintSize)[];

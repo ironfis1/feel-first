@@ -2935,3 +2935,44 @@ Caller note, applying to every row: Grep over `src` today shows only three real 
 - Impact 1, Silence 1, Surface 3 (`layout.tsx` line 4 imports globals for every page), Complexity 1, Boundary 1. Pure styling; the policy says no unit tests, end-to-end covers it. Check at 390px and 1440px for the `overflow-x: hidden` base (lines 8-14), which could mask horizontal overflow bugs; that is a visual check, not a unit test.
 - Must test: none (Low).
 - Functional gate: none
+
+## Triage 2026-11-21 (security-upgrade, D-083 and D-084)
+
+| Unit | File | I | Si | Su | C | B | Total | Tier |
+|---|---|---|---|---|---|---|---|---|
+| zod re-export with jitless config | src/lib/zod.ts | 2 | 2 | 3 | 1 | 2 | 10 | Medium |
+| z import path change (j2.ts, schemas.ts) | src/lib/j2.ts, src/lib/schemas.ts | 1 | 2 | 3 | 1 | 2 | 9 | Medium (covered by existing tests, no new unit) |
+| next 16.4.0 to 16.4.6, zod ^4.6.5 to ^4.6.7 | package.json, package-lock.json | n/a | n/a | n/a | n/a | n/a | n/a | Not a code unit, no tier |
+
+### Evidence and required tests
+
+#### zod re-export with jitless config, src/lib/zod.ts (Medium)
+- Impact 2: if the config line is lost or the import order breaks, the app still works, but the browser raises a CSP violation event on /room (comment lines 1-3, D-083). That is a scanner and console problem, and the demo continues.
+- Silence 2: the failure is only visible in the console or a CSP report. Nothing on screen changes and no unit test fails today. Validation results are identical with or without jitless, so no figure can go wrong.
+- Surface 3: it is the single source of z for app code. Grep shows src/lib/j2.ts:6 and src/lib/schemas.ts:4 import from it. Those schemas validate J2 output and the data files, which are on the demo path. The other app files (catalog.ts, wordmap.ts) use type-only imports, which are correct and unaffected.
+- Complexity 1: one call and a re-export (lines 6-10).
+- Boundary 2: an internal module used by other modules. It has no outside party and no data contract of its own.
+- Must test:
+  - After importing `src/lib/zod.ts`, the global zod config reports `jitless === true`. Read it with `z.config()` or the equivalent getter in zod 4.6.7.
+  - With `globalThis.Function` replaced by a spy that records or throws on an empty-string body (the zod eval probe, `Function("")`), importing `src/lib/schemas.ts` and parsing one valid and one invalid object does not trigger the probe. Restore the spy afterwards.
+  - `z` exported from `src/lib/zod.ts` is the same object as `z` from "zod", so type-only imports elsewhere stay compatible.
+  - A static check that no file under `src/` has a value (non type-only) `import ... from "zod"` except `src/lib/zod.ts`. This stops a new module from building schemas before the config is set, which is the silent regression here. `scripts/` is exempt per the comment on line 4.
+- Functional gate: none (no outside party). The CSP security-header contract from the 2026-11-18 triage still applies. A browser-level check that /room raises no `securitypolicyviolation` event under the enforcing CSP belongs in the existing Playwright demo-path run, not in a new unit.
+
+#### z import path change, src/lib/j2.ts and src/lib/schemas.ts (Medium, no new unit)
+- Impact 1: the only change is the import specifier. Behavior is the same, because jitless changes zod's parsing strategy, not its results.
+- Silence 2: a wrong specifier would crash the build or tests, which is obvious. The residual risk is a subtle difference in parse behavior under jitless, which would be quiet in J2 validation.
+- Surface 3: j2.ts is the J2 route path and schemas.ts feeds the data validation and the J2 request and response schemas, both on the demo path.
+- Complexity 1: no logic changed.
+- Boundary 2: internal imports. The existing J2 route and data-file functional gates are unchanged.
+- Must test: no new tests. Both files keep the tiers from their earlier triage (the schemas are High per the testing.md worked examples). The task is to run the existing suite, including `tests/unit/lib/j2Schemas.test.ts` and the J2 path tests, unchanged against the new import and confirm they pass. Because the Stryker mutate list includes these files, the 80% score must still hold on the rerun. Do not add tests for the import itself.
+- Functional gate: none new. The existing J2 route gate and data-file zod validation run unchanged.
+
+#### Dependency change, package.json and package-lock.json (no tier)
+- This is configuration, not a code unit, so it is not scored. Patch bumps (next 16.4.0 to 16.4.6 pinned exactly, zod ^4.6.5 to ^4.6.7) need no tests of their own.
+- Verification only, with no new tests:
+  - Run the full `npm test` and `npm run test:e2e`.
+  - Run a production build, since Next could change header or CSP behavior across patches.
+  - Confirm the 2026-11-18 security-header contract still passes: the four headers, enforcing CSP with frame-ancestors, and no X-Powered-By.
+  - After deploy, Scott runs `npm run smoke:live`. The existing header smoke check is the gate for the Next bump.
+  - Confirm the committed lockfile resolves to exactly next 16.4.6 and zod 4.6.7.
